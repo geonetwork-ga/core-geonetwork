@@ -147,6 +147,7 @@
     "suggestions": "Suggestions",
     "thumbnailMaker": "Générer un aperçu",
     "thumbnailMaker-help": "Toutes les couches WMS renseignées dans la fiche ont été ajoutées à la carte. Sélectionner une mise en page (Thumbnail est recommandé), une échelle puis zoomer vers une zone d'intérêt afin de générer l'aperçu.",
+    "to-mcp-dataparameterterm": "MCP Term",
     "to-iso19139-keyword": "texte",
     "to-iso19139-keyword-as-xlink": "lien",
     "to-iso19139-keyword-as-xlink-help": "Useful for creating a link between the record and the thesaurus. An xlink:href attribute is added to the gmd:descriptiveKeywords element.",
