@@ -86,7 +86,7 @@
               getXML: function(thesaurus, 
                   keywordUris, transformation) {
                 // http://localhost:8080/geonetwork/srv/eng/
-                // xml.keyword.get?thesaurus=external.place.regions&id=&
+                // thesaurus.keyword?thesaurus=external.place.regions&id=&
                 // multiple=false&transformation=to-iso19139-keyword&
                 var defer = $q.defer();
                 var url = gnUrlUtils.append('thesaurus.keyword',

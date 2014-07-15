@@ -43,6 +43,23 @@
            }
            return nsDeclaration.join('');
          };
+				 // getNamespacesForElement relies on prefixes being unique - not
+				 // so hot sometimes, better to check the snippet because it
+				 // usually has the namespaces we want
+         var getNamespacesForElementUsingSnippet = function(elementName, data) {
+           var ns = elementName.split(':');
+           var nsDeclaration = [];
+           if (ns.length === 2) {
+					 	var search = 'xmlns:'+ns[0]+'=';
+					 	var nsLoc = data.indexOf(search);
+						if (nsLoc != -1) {
+							var regex = new RegExp(search+'\"(.*?)\"');
+							var theNs = data.match(regex);
+							if (theNs) return theNs[0];
+						}
+						return getNamespacesForElement(elementName); // use prefix!?
+           }
+				 };
          return {
            /**
             * Create a referenceSystemInfo XML snippet replacing
@@ -72,7 +89,7 @@
                snippet = snippet.replace(xmlDeclaration, '');
              }
 
-             var nsDeclaration = getNamespacesForElement(elementName);
+             var nsDeclaration = getNamespacesForElementUsingSnippet(elementName, snippet);
 
              var tokens = [
                '<', elementName,

@@ -549,7 +549,11 @@
               <excludes>
                 <exclude>schematrons/**</exclude>
                 <exclude>iso19139.fra/**</exclude>
-                <exclude>iso19139.mcp-2.0/**</exclude>
+                <!-- <exclude>iso19139.mcp-1.4/**</exclude>
+                <exclude>iso19139.mcp/**</exclude> -->
+                <exclude>iso19139.mcp-1.4/**</exclude>
+                <exclude>iso19139.mcp/**</exclude>
+                <!-- <exclude>iso19139.mcp-2.0/**</exclude> -->
                 <exclude>iso19139.xyz/**</exclude>
                 <exclude>iso19139.geobru/**</exclude>
                 <exclude>iso19139.sdn-cdi/**</exclude>

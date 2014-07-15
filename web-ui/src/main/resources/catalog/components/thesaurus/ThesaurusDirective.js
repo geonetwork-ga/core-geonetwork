@@ -26,6 +26,7 @@
              mode: '@gnThesaurusSelector',
              elementName: '@',
              elementRef: '@',
+						 transformation: '@',
              domId: '@'
            },
            templateUrl: '../../catalog/components/thesaurus/' +
@@ -50,7 +51,7 @@
 
              scope.addThesaurus = function(thesaurusIdentifier) {
                gnThesaurusService
-                .getXML(thesaurusIdentifier).then(
+                .getXML(thesaurusIdentifier,'', scope.transformation).then(
                function(data) {
                  // Add the fragment to the form
                  scope.snippet = gnEditorXMLService.
@@ -122,8 +123,6 @@
              scope.selected = [];
              scope.initialKeywords = scope.keywords ?  scope.keywords.split('`') : [];
              scope.transformationLists = scope.transformations.indexOf(',') !== -1 ?  scope.transformations.split(',') : [scope.transformations];
-
-
 
              // Check initial keywords are available in the thesaurus
 
