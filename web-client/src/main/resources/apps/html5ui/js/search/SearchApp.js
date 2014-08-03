@@ -423,7 +423,11 @@ GeoNetwork.searchApp = function() {
                             catalogue.startRecord, true);
                     app.searchApp.firstSearch = true;
                     showSearch();
+										hideAdvancedSearch();
                 },
+								resetCb: function() {
+            			Ext.getCmp('sortByToolBar').setValue("relevance");
+								},
                 listeners : {
                     onreset : function() {
                         if (Ext.getCmp('facets-panel')) {
