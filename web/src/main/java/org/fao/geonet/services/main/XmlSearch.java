@@ -106,11 +106,12 @@ public class XmlSearch implements Service
 				// never return more than 1000 hits - too many otherwise will blow
 				// the memory on the server for large catalogs if the searcher
 				// doesn't specify a from-to
-				if (Util.getParamText(params, "to") == null) {
+				//if (Util.getParamText(params, "to") == null) {
 					elData.addContent(new Element("from").setText("1"));
-					String maxHits = Math.min(searcher.getSize(),1000) +"";
-					elData.addContent(new Element("to").setText(maxHits));
-				}
+                                        elData.addContent(new Element("to").setText(searcher.getSize() +""));
+				//	String maxHits = Math.min(searcher.getSize(),1000) +"";
+				//	elData.addContent(new Element("to").setText(maxHits));
+				//}
 		
 				Element result = searcher.present(context, elData, _config);
 				
