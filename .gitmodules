@@ -26,3 +26,6 @@
 	path = schemas/iso19139.mcp-2.0
 	url = https://github.com/metadata101/iso19139.mcp-2.0.git
 	branch = master
+[submodule "schemas/iso19115-3"]
+	path = schemas/iso19115-3
+	url = https://github.com/geonetwork-ga/iso19115-3.git
