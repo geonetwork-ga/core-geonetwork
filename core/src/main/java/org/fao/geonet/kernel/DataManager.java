@@ -39,9 +39,11 @@ import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
+import jeeves.server.dispatchers.guiservices.XmlFile;
 import jeeves.transaction.TransactionManager;
 import jeeves.transaction.TransactionTask;
 import jeeves.xlink.Processor;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jetty.util.ConcurrentHashSet;
 import org.fao.geonet.ApplicationContextHolder;
@@ -1159,6 +1161,50 @@ public class DataManager implements ApplicationEventPublisherAware {
         return xsdErrors;
     }
 
+		
+    //--------------------------------------------------------------------------
+    //---
+    //--- GA ID API - extract or get a new one from the database sequence
+    //---
+    //--------------------------------------------------------------------------
+
+    /**
+     * Extract GAID from the metadata record using the schema
+     * XSL for GaID extraction ({@link Geonet.File.EXTRACT_GAID})
+     *
+     * @param schema
+     * @param md
+     * @return empty string if no gaid or no Geonet.File.EXTRACT_GAID
+     * @throws Exception
+     */
+    private String extractGAID(String schema, Element md) throws Exception {
+        Path styleSheet = getSchemaDir(schema).resolve(Geonet.File.EXTRACT_GAID);
+        String gaid       = "";
+				if (Files.exists(styleSheet)) {
+					gaid = Xml.transform(md, styleSheet).getText().trim();
+				} else {
+					Log.error(Geonet.DATA_MANAGER,"extract ga-id "+styleSheet+" doesn't exist");
+				}
+				
+        if (Log.isDebugEnabled(Geonet.DATA_MANAGER)) Log.debug(Geonet.DATA_MANAGER, "Extracted GAID '"+ gaid +"' for schema '"+ schema +"'");
+
+        //--- needed to detach md from the document
+        md.detach();
+
+        return gaid;
+    }
+
+    /**
+     * Get GAID from the database sequence table 
+     *
+     * @param dbms
+     * @return gaid next sequence number from database table 
+     * @throws Exception
+     */
+    /* TODO Update to use hibernate to access sequence no in database
+		private String getGAID(Dbms dbms) throws Exception {
+        return dbms.sequence();
+    }*/
 
     //--------------------------------------------------------------------------
     //---
@@ -2975,6 +3021,34 @@ public class DataManager implements ApplicationEventPublisherAware {
                 final Path resourceDir = Lib.resource.getDir(context, Params.Access.PRIVATE, metadataIdString);
                 env.addContent(new Element("datadir").setText(resourceDir.toString()));
             }
+
+						// add schema information to env
+						Element schemas = new Element("schemas");
+    				for (String aSchema : getSchemaManager().getSchemas()) {
+      				try {
+        				Map<String, XmlFile> schemaInfo = getSchemaManager().getSchemaInfo(aSchema);
+       						 
+        				for (Map.Entry<String, XmlFile> entry : schemaInfo.entrySet()) {
+          				XmlFile xf = entry.getValue(); 
+          				String fname = entry.getKey(); 
+          				Element response = xf.exec(new Element("junk"), context);
+          				response.setName(FilenameUtils.removeExtension(fname));
+          				Element schemaElem = new Element(aSchema);
+          				schemaElem.addContent(response);
+          				schemas.addContent(schemaElem);
+        				}
+      				} catch (Exception e) {
+        				context.error("Failed to load schema info for "+aSchema+": "+e.getMessage());
+        				e.printStackTrace();
+      				}
+    				}
+						env.addContent(schemas);
+
+						// add ga-id to env if there isn't one there already
+						String gaid = extractGAID(schema, md);
+						if (gaid.length() == 0) {
+							//env.addContent(new Element("gaid").setText(getGAID(dbms)));
+						}
 
             // add original metadata to result
             Element result = new Element("root");
