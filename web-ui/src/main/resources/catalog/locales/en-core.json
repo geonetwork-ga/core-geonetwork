@@ -23,6 +23,8 @@
     "_groupPublished": "Published in that group",
     "_indexingError": "Indexing error",
     "_source": "Catalog",
+    "previousKeywords": "Previous",
+    "topConcepts": "Top Concept(s)",
     "add": "Add",
     "address": "Address",
     "cookieWarning": "This webpage uses cookies. If you continue navigating this page, we will assume you accept this.",
