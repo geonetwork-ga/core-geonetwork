@@ -19,12 +19,12 @@
       ['$rootScope', '$timeout', '$q', '$http',
         'gnEditor', 'gnSchemaManagerService',
         'gnEditorXMLService', 'gnHttp', 'gnConfig',
-        'gnCurrentEdit', 'gnConfigService', 'gnElementsMap',
+        'gnCurrentEdit', 'gnConfigService',
         'gnGlobalSettings',
         function($rootScope, $timeout, $q, $http,
                  gnEditor, gnSchemaManagerService,
                  gnEditorXMLService, gnHttp, gnConfig,
-                 gnCurrentEdit, gnConfigService, gnElementsMap,
+                 gnCurrentEdit, gnConfigService,
                  gnGlobalSettings) {
 
           return {
@@ -199,8 +199,7 @@
                   };
 
                   gnSchemaManagerService
-                      .getCodelist(gnCurrentEdit.schema + '|' +
-                          gnElementsMap['roleCode'][gnCurrentEdit.schema])
+                      .getCodelist(gnCurrentEdit.schema + '|' + 'roleCode')
                       .then(function(data) {
                         scope.roles = data[0].entry;
                       });
