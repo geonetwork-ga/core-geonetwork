@@ -4,7 +4,6 @@
 @import (less) "../lib/style/datetimepicker.css";
 @import (less) "../lib/jquery.ext/jquery.fileupload-ui.css";
 @import "gn.less";
-
 body {
   
 }
@@ -71,6 +70,13 @@ input[type=text], input[type=number], select {
   margin-top: 45px;
 }
 
+
+#gn-directory-container {
+  .gn-facet-dropdown {
+    min-width: 300px;
+  }
+}
+
 .gn-editor-board {
   .table.gn-results-editor td {
     padding: 2px;
@@ -83,6 +89,19 @@ input[type=text], input[type=number], select {
     .gn-record-details {
       padding-left: 38px;
     }
+  }
+}
+
+.gn-autocomplete-list {
+  position: absolute;
+  margin-top: 35px;
+  width: inherit;
+  z-index: 999;
+
+  /**/
+  .tt-suggestion:hover {
+    color: #fff;
+    background-color: #0097cf;
   }
 }
 
@@ -160,6 +179,8 @@ form.gn-editor {
     margin-top: 35px;
     width: inherit;
     z-index: 999;
+    max-height: 80vh;
+    overflow: auto;
 
     /**/
     .tt-suggestion:hover {
@@ -227,6 +248,17 @@ form.gn-editor {
       > select {
         border-bottom-right-radius: 0px;
         border-top-right-radius: 0px;
+      }
+    }
+    &.gn-time-with-ind-position {
+      > select.gn-indeterminate-position {
+        width: 20%;
+      }
+      > input[type=date] {
+        width: 40%;
+      }
+      > input[type=time] {
+        width: 40%;
       }
     }
   }
@@ -337,8 +369,21 @@ form.gn-tab-inspire {
 }
 
 /* Onlinesrc styles */
-.onlinesrc-container {
-  width: 680px;
+.gn-onlinesrc-panel {
+  .list-group-item {
+    padding-left: 4px;
+    padding-right: 4px;
+    .row > div {
+      padding-left: 1px;
+      padding-right: 1px;
+
+      .onlinesrc-remove {
+        padding: 0px;
+      }
+    }
+  }
+}
+.onlinesrc-container, [gn-directory-entry-list-selector] {
   .list-group {
     max-height:50%;
     overflow: auto;
@@ -351,6 +396,15 @@ form.gn-tab-inspire {
     max-height: 50vh;
     li.active {
         background-color: #428bca;
+    }
+  }
+}
+
+table.gn-data-store {
+  td {
+    word-break: break-all;
+    .btn {
+      padding: 1px 1px;
     }
   }
 }
@@ -404,5 +458,31 @@ form.gn-tab-inspire {
   }
   .no-data a {
     color: @gray-light;
+  }
+}
+
+.gn-batch-editor {
+  .gn-resultview li.list-group-item {
+    margin-bottom: 0px;
+    padding: 4px;
+  }
+  li.gn-batch-editor-info {
+    margin-top: 11px;
+  }
+  [data-ng-search-form] .gn-top-search .gn-form-any {
+    max-width: 80vw;
+  }
+}
+
+form.gn-tab-xml {
+  div[data-gn-toggle] {
+    display:none;
+  }
+}
+.skos-btn-icons {
+  text-decoration: none !important;
+  color: @gray;
+  &:hover {
+    color: @brand-success;
   }
 }

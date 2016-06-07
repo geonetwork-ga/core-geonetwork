@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 (function() {
   goog.provide('gn_usergroup_controller');
 
@@ -27,7 +50,7 @@
 
       $scope.pageMenu = {
         folder: 'usergroup/',
-        defaultTab: 'groups',
+        defaultTab: 'users',
         tabs:
             [{
               type: 'groups',
@@ -98,6 +121,16 @@
                   });
                 } else {
                   u.enableallowedcategories = false;
+                }
+                //FIXME this should be already on the previous list
+                if (u.defaultcategory) {
+                  $http.get('admin.group.get?_content_type=json&id=' + u.id).
+                      success(function(data) {
+                        if (data && data[0] && data[0].defaultcategory &&
+                            data[0].defaultcategory[0]) {
+                          u.defaultcategory = data[0].defaultcategory[0];
+                        }
+                      });
                 }
               });
               $scope.isLoadingGroups = false;
@@ -300,12 +333,6 @@
         }
         $scope.userUpdated = true;
         if ($scope.userIsAdmin) {
-          // Unselect all groups option
-          for (var i = 0; i < $scope.profiles.length; i++) {
-            if ($scope.profiles[i] !== 'Administrator') {
-              $('#groups_' + $scope.profiles[i])[0].selectedIndex = -1;
-            }
-          }
           $scope.userSelected.profile = 'Administrator';
         } else {
           // Define the highest profile for user
@@ -321,15 +348,14 @@
             }
           }
           $scope.userSelected.profile = newprofile;
-
-          // If user is reviewer in one group, he is also editor for that group
-          var editorGroups = $('#groups_Editor')[0];
-          var reviewerGroups = $('#groups_Reviewer')[0];
-          if (reviewerGroups.selectedIndex > -1) {
-            for (var j = 0; j < reviewerGroups.options.length; j++) {
-              if (reviewerGroups.options[j].selected) {
-                editorGroups.options[j].selected = true;
-              }
+        }
+        // If user is reviewer in one group, he is also editor for that group
+        var editorGroups = $('#groups_Editor')[0];
+        var reviewerGroups = $('#groups_Reviewer')[0];
+        if (reviewerGroups.selectedIndex > -1) {
+          for (var j = 0; j < reviewerGroups.options.length; j++) {
+            if (reviewerGroups.options[j].selected) {
+              editorGroups.options[j].selected = true;
             }
           }
         }
@@ -502,3 +528,4 @@
     }]);
 
 })();
+

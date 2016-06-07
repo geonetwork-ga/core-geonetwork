@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 (function() {
   goog.provide('gn_wps_service');
 
@@ -44,8 +67,12 @@
     'gnOwsCapabilities',
     'gnUrlUtils',
     'gnGlobalSettings',
+    'gnMap',
     '$q',
-    function($http, gnOwsCapabilities, gnUrlUtils, gnGlobalSettings, $q) {
+    function($http, gnOwsCapabilities, gnUrlUtils, gnGlobalSettings,
+             gnMap, $q) {
+
+      this.WMS_MIMETYPE = 'application/x-ogc-wms';
 
       this.proxyUrl = function(url) {
         return gnGlobalSettings.proxyUrl + encodeURIComponent(url);
@@ -73,22 +100,14 @@
 
         //send request and decode result
         if (gnUrlUtils.isValid(url)) {
-          var defer = $q.defer();
-
           var proxyUrl = this.proxyUrl(url);
-          $http.get(proxyUrl, {
+          return $http.get(proxyUrl, {
             cache: true
           }).then(
-              function(data) {
-                var response = unmarshaller.unmarshalString(data.data).value;
-                defer.resolve(response);
-              },
-              function(data) {
-                defer.reject(data);
+              function(response) {
+                return unmarshaller.unmarshalString(response.data).value;
               }
           );
-
-          return defer.promise;
         }
       };
 
@@ -165,9 +184,8 @@
                 }
               };
 
-              for (i = 0, ii = description.dataInputs.input.length;
-                   i < ii; ++i) {
-                input = description.dataInputs.input[i];
+              for (var i = 0; i < description.dataInputs.input.length; ++i) {
+                var input = description.dataInputs.input[i];
                 if (inputs[input.identifier.value] !== undefined) {
                   setInputData(input, inputs[input.identifier.value]);
                 }
@@ -182,8 +200,6 @@
               };
 
               var body = marshaller.marshalString(request);
-              body = body.replace(/dimensions/,
-                  'xmlns:ows="http://www.opengis.net/ows/1.1" ows:dimensions');
 
               $http.post(url, body, {
                 headers: {'Content-Type': 'application/xml'}
@@ -234,6 +250,37 @@
         );
 
         return defer.promise;
+      };
+
+      /**
+       * Try to see if the execute response is a reference with a WMS mimetype.
+       * If yes, the href is a WMS getCapabilities, we load it and add all
+       * the layers on the map.
+       * Those new layers has the property `fromWps` to true, to identify them
+       * in the layer manager.
+       *
+       * @param {object} response excecuteProcess response object.
+       * @param {ol.Map} map
+       * @param {ol.layer.Base} parentLayer
+       */
+      this.extractWmsLayerFromResponse = function(response, map, parentLayer) {
+
+        try {
+          var ref = response.processOutputs.output[0].reference;
+          if (ref.mimeType == this.WMS_MIMETYPE) {
+            gnMap.addWmsAllLayersFromCap(map, ref.href, true).
+                then(function(layers) {
+                  layers.map(function(l) {
+                    l.set('fromWps', true);
+                    l.set('wpsParent', parentLayer);
+                    map.addLayer(l);
+                  });
+                });
+          }
+        }
+        catch (e) {
+          // no WMS found
+        }
       };
     }
   ]);

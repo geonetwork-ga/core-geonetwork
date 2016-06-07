@@ -1,14 +1,39 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Maps;
+
 import groovy.lang.Binding;
 import groovy.lang.GroovyClassLoader;
 import groovy.util.GroovyScriptEngine;
 import groovy.util.ResourceException;
 import groovy.util.ScriptException;
+
 import org.codehaus.groovy.control.CompilationFailedException;
 import org.fao.geonet.kernel.GeonetworkDataDirectory;
 import org.fao.geonet.kernel.SchemaManager;
@@ -48,12 +73,12 @@ import static org.fao.geonet.services.metadata.format.FormatterConstants.SCHEMA_
 @Component
 public class GroovyFormatter implements FormatterImpl {
 
+    private final Cache<Path, Transformer> transformers = CacheBuilder.newBuilder().
+        concurrencyLevel(1).
+        maximumSize(40).
+        initialCapacity(40).build();
     @Autowired
     private TemplateCache templateCache;
-    private final Cache<Path, Transformer> transformers = CacheBuilder.newBuilder().
-            concurrencyLevel(1).
-            maximumSize(40).
-            initialCapacity(40).build();
     private GroovyClassLoader baseClassLoader;
     private Map<String, GroovyClassLoader> schemaClassLoaders = Maps.newHashMap();
 
@@ -66,6 +91,7 @@ public class GroovyFormatter implements FormatterImpl {
             }
         });
     }
+
     public String format(FormatterParams fparams) throws Exception {
         EnvironmentProxy.clearContext();
         final Transformer transformer = createTransformer(fparams);
@@ -89,7 +115,7 @@ public class GroovyFormatter implements FormatterImpl {
             GroovyClassLoader cl = getParentClassLoader(fparams, fparams.schema, baseShared, schemaShared);
 
             URL[] roots = new URL[]{
-                    IO.toURL(fparams.formatDir)
+                IO.toURL(fparams.formatDir)
             };
             GroovyScriptEngine groovyScriptEngine = new GroovyScriptEngine(roots, cl);
 
@@ -118,7 +144,7 @@ public class GroovyFormatter implements FormatterImpl {
     }
 
     private GroovyClassLoader getParentClassLoader(FormatterParams fparams, String schema, Path baseShared, Path schemaShared) throws IOException,
-            ResourceException, ScriptException {
+        ResourceException, ScriptException {
         GroovyClassLoader cl = this.schemaClassLoaders.get(schema);
         if (fparams.isDevMode() || cl == null) {
             final GroovyClassLoader parent;
@@ -153,7 +179,7 @@ public class GroovyFormatter implements FormatterImpl {
             return;
         }
         final Map<Path, Throwable> compileErrors = Maps.newHashMap();
-        Files.walkFileTree(baseShared, new SimpleFileVisitor<Path>(){
+        Files.walkFileTree(baseShared, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
                 try (DirectoryStream<Path> paths = Files.newDirectoryStream(dir, "*.groovy")) {
@@ -163,7 +189,7 @@ public class GroovyFormatter implements FormatterImpl {
                                 gse.loadScriptByName(path.toUri().toString());
                             } catch (CompilationFailedException e) {
                                 compileErrors.put(path, null);
-                            } catch (ScriptException  | ResourceException e) {
+                            } catch (ScriptException | ResourceException e) {
                                 throw new RuntimeException(e);
                             }
 

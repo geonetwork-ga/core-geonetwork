@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy;
 
 import groovy.lang.Closure;
@@ -20,13 +43,42 @@ public abstract class Handler extends Selectable implements Comparable<Handler> 
         this.handlerFunction = handlerFunction;
     }
 
+    /**
+     * Process the result of the handler function.
+     */
+    public static void processResult(Object result, StringBuilder resultantXml) throws IOException {
+        if (result == null) {
+            return;
+        }
+
+        resultantXml.append(result);
+    }
+
+    protected static void createPath(GPathResult element, StringBuilder path) {
+        createPath(element, path, 0);
+    }
+
+    protected static void createPath(GPathResult element, StringBuilder path, int depth) {
+        if (element != null) {
+            if (depth > 10) {
+                path.append("... >");
+            } else {
+                if (element.parent() != element) {
+                    createPath(element.parent(), path, depth + 1);
+                    path.append(">");
+                }
+            }
+            path.append(element.name());
+        }
+    }
+
     @Override
     public int compareTo(Handler o) {
         return Integer.compare(o.priority, this.priority);
     }
 
     public HandlerResult handle(TransformationContext context, List<GPathResult> elem, StringBuilder resultantXml)
-            throws IOException {
+        throws IOException {
         Logging.debug("Executing handler '%2$s' on element %1$s.", elem, this);
         Object elParam = null;
         if (group) {
@@ -49,7 +101,7 @@ public abstract class Handler extends Selectable implements Comparable<Handler> 
                 break;
             default:
                 throw new IllegalStateException("Too many arguments in handler '" + this + "' there are: " +
-                                                maximumNumberOfParameters);
+                    maximumNumberOfParameters);
         }
 
         processResult(result, resultantXml);
@@ -62,35 +114,6 @@ public abstract class Handler extends Selectable implements Comparable<Handler> 
 
     public void setGroup(boolean group) {
         this.group = group;
-    }
-
-    /**
-     * Process the result of the handler function.
-     */
-    public static void processResult(Object result, StringBuilder resultantXml) throws IOException {
-        if (result == null) {
-            return;
-        }
-
-        resultantXml.append(result);
-    }
-
-    protected static void createPath(GPathResult element, StringBuilder path) {
-        createPath(element, path, 0);
-    }
-
-    protected static void createPath(GPathResult element, StringBuilder path, int depth) {
-        if(element != null) {
-            if (depth > 10) {
-                path.append("... >");
-            } else {
-                if (element.parent() != element) {
-                    createPath(element.parent(), path, depth + 1);
-                    path.append(">");
-                }
-            }
-            path.append(element.name());
-        }
     }
 
     @Override

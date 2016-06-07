@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 (function() {
   goog.provide('gn_admintools_controller');
 
@@ -47,7 +70,7 @@
     'gnUtilityService', 'gnSearchSettings', 'gnGlobalSettings',
     function($scope, $http, $rootScope, $translate, $compile,
         $q, $timeout, $routeParams, $location,
-            gnSearchManagerService, 
+            gnSearchManagerService,
             gnUtilityService, gnSearchSettings, gnGlobalSettings) {
       $scope.modelOptions =
           angular.copy(gnGlobalSettings.modelOptions);
@@ -91,11 +114,6 @@
        * number of records processed, or not, process not found, ...
        */
       $scope.processReport = null;
-
-      /**
-       * True if no process found, or privileges issues.
-       */
-      $scope.processReportWarning = false;
 
       /**
        * The list of records to be processed
@@ -185,7 +203,7 @@
             });
 
         $http.get('admin.ownership.groups?_content_type=json&id=' + id)
-          .success(function(data) {
+            .success(function(data) {
               // If user does not have group and only one
               // target group, a simple object is returned
               // and it should be a target group ? FIXME
@@ -234,7 +252,7 @@
 
       function loadProcessConfig() {
         $http.get($scope.base + 'config/batch-process-cfg.json')
-        .success(function(data) {
+            .success(function(data) {
               $scope.batchProcesses = data.config;
 
               $timeout(initProcessByRoute);
@@ -275,14 +293,15 @@
 
       function checkLastBatchProcessReport() {
         // Check if processing
-        return $http.get('md.processing.batch.report?_content_type=json').
+        return $http.get('../api/processes').
             success(function(data, status) {
-              if (data != 'null') {
-                $scope.processReport = data;
-                $scope.numberOfRecordsProcessed = data['@processedRecords'];
-              }
+              // TODO: Assume one process is running
+              // Should use the process ID to register and retrieve a process
+              $scope.processReport = data[0];
+              $scope.numberOfRecordsProcessed =
+                 $scope.processReport.numberOfRecordsProcessed;
               if ($scope.processReport &&
-                      $scope.processReport['@running'] == 'true') {
+                      $scope.processReport.running) {
                 $timeout(checkLastBatchProcessReport, processCheckInterval);
               }
             });
@@ -296,50 +315,33 @@
 
         var formParams = $(formId).serialize();
         if (testMode != undefined) {
-          formParams += '&test=' + testMode;
+          formParams += '&isTesting=' + testMode;
         }
 
-        var service = '';
-        if (process != undefined) {
-          service = process;
-        } else {
-          service = 'md.processing.batch?_content_type=json';
-        }
+        var service = '../api/processes/' +
+                      (process != undefined ?
+                        process : $scope.data.selectedProcess.key);
 
         $scope.processing = true;
         $scope.processReport = null;
-        $http.get(service + '&' +
+        $http.post(service + '?' +
             formParams)
-          .success(function(data) {
+            .success(function(data) {
               $scope.processReport = data;
-              $scope.processReportWarning = data.notFound != 0 ||
-                  data.notOwner != 0 ||
-                  data.notProcessFound != 0 ||
-                  data.metadataErrorReport.metadataErrorReport.length != 0;
               $rootScope.$broadcast('StatusUpdated', {
                 msg: $translate('processFinished'),
                 timeout: 2,
                 type: 'success'});
               $scope.processing = false;
 
-              angular.forEach($scope.processReport.changed, function(c) {
-                if (c.change && !angular.isArray(c.change)) {
-                  c.change = [c.change];
-                  delete c.changedval;
-                  delete c.fieldid;
-                  delete c.originalval;
-                }
-              });
-
-
               // Turn off batch report checking for search and replace mode
               // AFA as report is not properly set in session
               // https://github.com/geonetwork/core-geonetwork/issues/828
-              if (service.indexOf('md.searchandreplace') === -1) {
-                checkLastBatchProcessReport();
-              }
+              // if (service.indexOf('search-and-replace') === -1) {
+              //   checkLastBatchProcessReport();
+              // }
             })
-          .error(function(data) {
+            .error(function(data) {
               $rootScope.$broadcast('StatusUpdated', {
                 title: $translate('processError'),
                 error: data,
@@ -348,11 +350,11 @@
               $scope.processing = false;
             });
 
-        gnUtilityService.scrollTo('#gn-batch-process-report');
+        // gnUtilityService.scrollTo('#gn-batch-process-report');
         // FIXME
-        if (service.indexOf('md.searchandreplace') === -1) {
-          $timeout(checkLastBatchProcessReport, processCheckInterval);
-        }
+        // if (service.indexOf('search-and-replace') === -1) {
+        //   $timeout(checkLastBatchProcessReport, processCheckInterval);
+        // }
       };
 
       loadGroups();
@@ -362,7 +364,7 @@
 
       // TODO: Should only do that if batch process is the current page
       loadProcessConfig();
-      checkLastBatchProcessReport();
+      // checkLastBatchProcessReport();
 
       var initProcessByRoute = function() {
         if ($routeParams.tab === 'batch') {
@@ -498,6 +500,19 @@
                 error: data,
                 timeout: 0,
                 type: 'danger'});
+            });
+      };
+
+      $scope.clearJsCache = function() {
+        return $http.get('../../static/wroAPI/reloadModel')
+            .success(function(data) {
+              $http.get('../../static/wroAPI/reloadCache')
+                .success(function(data) {
+                  $rootScope.$broadcast('StatusUpdated', {
+                    msg: $translate('jsCacheCleared'),
+                    timeout: 2,
+                    type: 'success'});
+                })
             });
       };
 

@@ -1,6 +1,43 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.kernel.search.index;
 
-import com.google.common.annotations.VisibleForTesting;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.DirectoryStream;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
+import javax.annotation.Nonnull;
+
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.NRTCachingDirectory;
@@ -11,30 +48,14 @@ import org.fao.geonet.kernel.search.LuceneConfig;
 import org.fao.geonet.utils.IO;
 import org.fao.geonet.utils.Log;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.DirectoryStream;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-import javax.annotation.Nonnull;
+import com.google.common.annotations.VisibleForTesting;
 
 /**
- * Create filesystem based Directory objects.
- * <p>
- *     Because windows locks files the reset methods will sometime create new index directories.  That is the
- *     reason for all the strange checking for new names and the {@link #DELETE_DIR_FLAG_FILE} file names.
- * </p>
+ * Create filesystem based Directory objects. <p> Because windows locks files the reset methods will
+ * sometime create new index directories.  That is the reason for all the strange checking for new
+ * names and the {@link #DELETE_DIR_FLAG_FILE} file names. </p>
  *
- * User: Jesse
- * Date: 10/18/13
- * Time: 11:25 AM
+ * User: Jesse Date: 10/18/13 Time: 11:25 AM
  */
 public class FSDirectoryFactory implements DirectoryFactory {
 
@@ -63,10 +84,10 @@ public class FSDirectoryFactory implements DirectoryFactory {
         GeonetworkDataDirectory dataDir = ApplicationContextHolder.get().getBean(GeonetworkDataDirectory.class);
 
         Path indexDir = null;
-        try (DirectoryStream<Path> paths = Files.newDirectoryStream(dataDir.getLuceneDir()) ){
+        try (DirectoryStream<Path> paths = Files.newDirectoryStream(dataDir.getLuceneDir())) {
             Iterator<Path> pathIter = paths.iterator();
             while (pathIter.hasNext()) {
-                Path file =  pathIter.next();
+                Path file = pathIter.next();
                 if (file.getFileName().toString().equals(baseName) && !Files.exists(file.resolve(DELETE_DIR_FLAG_FILE))) {
                     if (indexDir == null || indexDir.getFileName().compareTo(file.getFileName()) < 0) {
                         indexDir = file;
@@ -117,7 +138,7 @@ public class FSDirectoryFactory implements DirectoryFactory {
     private void cleanOldDirectoriesIfPossible() throws IOException {
         GeonetworkDataDirectory dataDir = ApplicationContextHolder.get().getBean(GeonetworkDataDirectory.class);
 
-        try(DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dataDir.getLuceneDir())) {
+        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(dataDir.getLuceneDir())) {
             for (Path path : directoryStream) {
                 Path deleteFlagFile = path.resolve(DELETE_DIR_FLAG_FILE);
                 if (Files.exists(deleteFlagFile)) {
@@ -141,7 +162,7 @@ public class FSDirectoryFactory implements DirectoryFactory {
         int i = 0;
         while (Files.exists(newFile) || Files.exists(newFile.resolve(DELETE_DIR_FLAG_FILE))) {
             i++;
-            newFile = dataDir.getLuceneDir().resolve(baseName + "_"+i);
+            newFile = dataDir.getLuceneDir().resolve(baseName + "_" + i);
         }
         return newFile;
     }
@@ -169,14 +190,14 @@ public class FSDirectoryFactory implements DirectoryFactory {
                     Files.delete(file);
                     return FileVisitResult.CONTINUE;
                 } catch (IOException e) {
-                    Log.debug(Geonet.LUCENE_TRACKING, "Unable to reset lucene index file: "+file);
+                    Log.debug(Geonet.LUCENE_TRACKING, "Unable to reset lucene index file: " + file);
                     // probably is a locked file.
                     try {
                         try (OutputStream out = Files.newOutputStream(file)) {
                             Log.debug(Geonet.LUCENE_TRACKING, "Zero'd out " + file + " with outputstream: " + out);
                         }
                     } catch (IOException e2) {
-                        Log.debug(Geonet.LUCENE_TRACKING, "Unable to zero-out file because of open file: "+file);
+                        Log.debug(Geonet.LUCENE_TRACKING, "Unable to zero-out file because of open file: " + file);
                         allReset.set(false);
                     }
                     return FileVisitResult.TERMINATE;
@@ -191,7 +212,7 @@ public class FSDirectoryFactory implements DirectoryFactory {
     @Override
     public Set<String> listIndices() throws IOException {
         init();
-        Set<String> indices = new HashSet<>();
+        Set<String> indices = new LinkedHashSet<>();
         if (Files.exists(this.indexFile)) {
             try (DirectoryStream<Path> dirStream = Files.newDirectoryStream(this.indexFile)) {
                 for (Path file : dirStream) {
@@ -211,12 +232,13 @@ public class FSDirectoryFactory implements DirectoryFactory {
 
         double maxMergeSizeMD = luceneConfig.getMergeFactor();
         double maxCachedMB = luceneConfig.getRAMBufferSize();
-        return new NRTCachingDirectory(fsDir, maxMergeSizeMD,maxCachedMB);
+        return new NRTCachingDirectory(fsDir, maxMergeSizeMD, maxCachedMB);
     }
 
     public Path getIndexDir() {
         return indexFile;
     }
+
     public Path getTaxonomyDir() {
         return taxonomyFile;
     }

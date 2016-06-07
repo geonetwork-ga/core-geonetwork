@@ -1,10 +1,35 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+
 import jeeves.server.context.ServiceContext;
+
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexableField;
 import org.apache.lucene.index.Term;
@@ -82,7 +107,8 @@ public class EnvironmentImpl implements Environment {
     }
 
     /**
-     * Return the value of the first parameter with the provided name.  Null is returned if there is no parameter with the given name.
+     * Return the value of the first parameter with the provided name.  Null is returned if there is
+     * no parameter with the given name.
      */
     public ParamValue param(String paramName) {
         final Collection<ParamValue> paramValues = this.params.get(paramName);
@@ -111,6 +137,7 @@ public class EnvironmentImpl implements Environment {
         }
         return paramValues.iterator().next();
     }
+
     /**
      * Return ALL values of parameter with the provided name.
      */
@@ -216,7 +243,7 @@ public class EnvironmentImpl implements Environment {
     public boolean canEdit() throws Exception {
         final AccessManager bean = serviceContext.getBean(AccessManager.class);
         return bean.isOwner(serviceContext, this.metadataInfo.getSourceInfo())
-               || bean.hasEditPermission(serviceContext, String.valueOf(this.metadataInfo.getId()));
+            || bean.hasEditPermission(serviceContext, String.valueOf(this.metadataInfo.getId()));
     }
 
     @Override

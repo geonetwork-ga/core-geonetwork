@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format;
 
 import org.fao.geonet.kernel.SchemaManager;
@@ -16,22 +39,15 @@ import static org.fao.geonet.services.metadata.format.SchemaLocalizations.loadSc
 /**
  * Strategy for formatting using an xslt based formatter.
  *
- * <p>
- *     Note: to include files from the formatter dir you can use
- *     <xsl:include href="sharedFormatterDir/xslt/render-layout.xsl"/>
- *     and it will be replaced with the path to the formatter dir
- *     using the URI resolver.
- * </p>
+ * <p> Note: to include files from the formatter dir you can use <xsl:include
+ * href="sharedFormatterDir/xslt/render-layout.xsl"/> and it will be replaced with the path to the
+ * formatter dir using the URI resolver. </p>
  *
- * <p>
- *     Note: For a formatter to retrieve a request parameter
- *     an xsl:param should be defined with the name of the URL parameter
- *     eg. <xsl:param name="view"/>
- * </p>
+ * <p> Note: For a formatter to retrieve a request parameter an xsl:param should be defined with the
+ * name of the URL parameter eg. <xsl:param name="view"/> </p>
  *
  * @author Jesse on 10/15/2014.
- * @author Francois on 06/01/2015: Add request parameters transfert to XSLT
- *  and metadata info.
+ * @author Francois on 06/01/2015: Add request parameters transfert to XSLT and metadata info.
  */
 @Component
 public class XsltFormatter implements FormatterImpl {
@@ -57,7 +73,7 @@ public class XsltFormatter implements FormatterImpl {
         // metadataInfo contains the XML in data which is not needed
         info.removeChild("data");
         root.addContent(new Element("info")
-                .addContent(info));
+            .addContent(info));
 
         root.addContent(fparams.format.getPluginLocResources(fparams.context, fparams.formatDir, lang));
         if (fparams.config.loadStrings()) {
@@ -73,7 +89,7 @@ public class XsltFormatter implements FormatterImpl {
         if (!"none".equalsIgnoreCase(schemasToLoad)) {
             SchemaManager schemaManager = fparams.context.getBean(SchemaManager.class);
             Collection<SchemaLocalization> localization = loadSchemaLocalizations(fparams.context.getApplicationContext(),
-                    schemaManager).values();
+                schemaManager).values();
 
             for (SchemaLocalization schemaLocalization : localization) {
                 String currentSchema = schemaLocalization.schema.trim();
@@ -105,10 +121,6 @@ public class XsltFormatter implements FormatterImpl {
             requestParameters.put(key, fparams.webRequest.getParameterMap().get(key));
         }
         Element transformed = Xml.transform(root, fparams.viewFile, requestParameters);
-
-        Element response = new Element("metadata");
-        response.addContent(transformed);
-        return Xml.getString(response);
+        return Xml.getString(transformed);
     }
-
 }

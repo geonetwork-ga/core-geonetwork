@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!--
+  ~ Copyright (C) 2001-2016 Food and Agriculture Organization of the
+  ~ United Nations (FAO-UN), United Nations World Food Programme (WFP)
+  ~ and United Nations Environment Programme (UNEP)
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+  ~
+  ~ Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+  ~ Rome - Italy. email: geonetwork@osgeo.org
+  -->
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.geonetwork-opensource</groupId>
@@ -9,7 +33,8 @@
   <name>GeoNetwork opensource</name>
   <description>GeoNetwork opensource is a standards based, Free and
     Open Source catalog application to manage spatially referenced
-    resources through the web.</description>
+    resources through the web.
+  </description>
   <url>http://geonetwork-opensource.org</url>
   <scm>
     <connection>
@@ -28,35 +53,36 @@
       <post>geonetwork-users@lists.sourceforge.net</post>
       <subscribe>https://lists.sourceforge.net/lists/listinfo/geonetwork-users</subscribe>
       <unsubscribe>https://lists.sourceforge.net/lists/options/geonetwork-users</unsubscribe>
-      <archive>http://n2.nabble.com/GeoNetwork-users-f2013074.html</archive>
+      <archive>http://osgeo-org.1560.x6.nabble.com/GeoNetwork-users-f3860293.html</archive>
     </mailingList>
     <mailingList>
       <name>Utilisateurs (fr)</name>
       <post>geonetwork-users-fr@lists.sourceforge.net</post>
       <subscribe>https://lists.sourceforge.net/lists/listinfo/geonetwork-users-fr</subscribe>
       <unsubscribe>https://lists.sourceforge.net/lists/options/geonetwork-users-fr</unsubscribe>
-      <archive>http://n2.nabble.com/GeoNetwork-users-francophone-f3246912.html</archive>
+      <archive>http://osgeo-org.1560.x6.nabble.com/GeoNetwork-users-francophone-f3880536.html
+      </archive>
     </mailingList>
     <mailingList>
       <name>Usuarios (es)</name>
       <post>geonetwork-usuarios-es@lists.sourceforge.net</post>
       <subscribe>https://lists.sourceforge.net/lists/listinfo/geonetwork-usuarios-es</subscribe>
       <unsubscribe>https://lists.sourceforge.net/lists/options/geonetwork-usuarios-es</unsubscribe>
-      <archive>http://n2.nabble.com/GeoNetwork-users-espa-ol-f3246989.html</archive>
+      <archive>http://osgeo-org.1560.x6.nabble.com/GeoNetwork-users-espa-ol-f3860136.html</archive>
     </mailingList>
     <mailingList>
       <name>Dev</name>
       <post>geonetwork-devel@lists.sourceforge.net</post>
       <subscribe>https://lists.sourceforge.net/lists/listinfo/geonetwork-devel</subscribe>
       <unsubscribe>https://lists.sourceforge.net/lists/options/geonetwork-devel</unsubscribe>
-      <archive>http://n2.nabble.com/GeoNetwork-developer-f2014756.html</archive>
+      <archive>http://osgeo-org.1560.x6.nabble.com/GeoNetwork-developer-f3874395.html</archive>
     </mailingList>
     <mailingList>
       <name>Commits</name>
       <post>geonetwork-commit@lists.sourceforge.net</post>
       <subscribe>https://lists.sourceforge.net/lists/listinfo/geonetwork-commit</subscribe>
       <unsubscribe>https://lists.sourceforge.net/lists/options/geonetwork-commit</unsubscribe>
-      <archive>http://n2.nabble.com/GeoNetwork-commit-f2020497.html</archive>
+      <archive>http://osgeo-org.1560.x6.nabble.com/GeoNetwork-commit-f3865040.html</archive>
     </mailingList>
   </mailingLists>
 
@@ -92,16 +118,16 @@
     <!-- =========================================================== -->
     <pluginManagement>
       <plugins>
-          <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>jslint-maven-plugin</artifactId>
-              <version>1.0.1</version>
-          </plugin>
-		<plugin>
-			<groupId>org.bsc.maven</groupId>
-			<artifactId>maven-processor-plugin</artifactId>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>jslint-maven-plugin</artifactId>
+          <version>1.0.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.bsc.maven</groupId>
+          <artifactId>maven-processor-plugin</artifactId>
           <version>2.2.3</version>
-		</plugin>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
@@ -127,16 +153,16 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>1.2</version>
         </plugin>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-release-plugin</artifactId>
-              <version>2.0</version>
-          </plugin>
-          <plugin>
-              <groupId>org.mortbay.jetty</groupId>
-              <artifactId>jetty-maven-plugin</artifactId>
-              <version>${jetty.version}</version>
-          </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.mortbay.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>${jetty.version}</version>
+        </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>findbugs-maven-plugin</artifactId>
@@ -146,20 +172,21 @@
             <threshold>Default</threshold>
             <xmlOutput>true</xmlOutput>
             <xmlOutput>true</xmlOutput>
-            <excludeFilterFile>${rootProjectDir}/code_quality/findbugs-excludes.xml</excludeFilterFile>
+            <excludeFilterFile>${rootProjectDir}/code_quality/findbugs-excludes.xml
+            </excludeFilterFile>
             <debug>false</debug>
             <includeTests>false</includeTests>
           </configuration>
-<!--
-         <executions>
-            <execution>
-              <goals>
-                <goal>check</goal>
-              </goals>
-              <phase>test</phase>
-            </execution>
-          </executions>
--->
+          <!--
+                   <executions>
+                      <execution>
+                        <goals>
+                          <goal>check</goal>
+                        </goals>
+                        <phase>test</phase>
+                      </execution>
+                    </executions>
+          -->
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -191,75 +218,18 @@
         </plugin>
       </plugins>
     </pluginManagement>
-
     <plugins>
-<!--      <plugin>
-          <groupId>org.codehaus.groovy.maven</groupId>
-          <artifactId>gmaven-plugin</artifactId>
-          <version>1.0</version>
-          <executions>
-              <execution>
-                  <id>Check memory settings</id>
-                  <goals>
-                      <goal>execute</goal>
-                  </goals>
-                  <phase>initialize</phase>
-                  <configuration>
-                      <source><![CDATA[
-                          def converters = [
-                                  "k": 1/10124,
-                                  "m": 1.0,
-                                  "g": 1024.0
-                          ]
-                          def parseInt = {value ->
-                              def intVal = Integer.parseInt(value.substring(0, value.length() - 1));
-                              def unit = value.substring(value.length() - 1).toLowerCase()
-                              def converter = converters[unit]
-                              if (converter == null) {
-                                  throw new AssertionError("unit: $unit is not a recognized unit.  One of k,m,g is required in : $value")
-                              }
-                              return intVal * converter
-                          }
-
-                          final String MAX_PREFIX = "-Xmx"
-                          final String PERMGEN_PREFIX = "-XX:MaxPermSize="
-                          def arguments = java.lang.management.ManagementFactory.getRuntimeMXBean().getInputArguments()
-                          def mx = -1;
-                          def permgen = -1;
-                          arguments.each{param ->
-                              if (param.startsWith(MAX_PREFIX)) {
-                                  mx = parseInt (param.substring(MAX_PREFIX.length()))
-                              } else if (param.startsWith(PERMGEN_PREFIX)) {
-                                  permgen = parseInt (param.substring(PERMGEN_PREFIX.length()))
-                              }
-                          }
-
-                          log.info("\n\tMax Heap Memory: "+mx+" MB\n\tMax PermGen Size: "+permgen+" MB")
-                          if (permgen < 0 || mx < 0) {
-                              def mavenOpts = "MAVEN_OPTS=\"${MAX_PREFIX}512M ${PERMGEN_PREFIX}256M\""
-                              def errorMsg = "\n\nIn order for the build to complete both the $MAX_PREFIX parameter and the "+
-                                      "$PERMGEN_PREFIX must be set.  The e2e tests require this because the start Geonetwork and run " +
-                                      "tests against it which takes a lot of memory.\n\nCmd/Powershell:"+
-                                      "\n\n\t \$Env:${mavenOpts}\n\nBash/SH:\n\n\texport ${mavenOpts}"
-                              log.error(errorMsg);
-                              throw new AssertionError(errorMsg);
-                          }
-                          ]]></source>
-                  </configuration>
-              </execution>
-          </executions>
-      </plugin>-->
-      <!--     Compilation.                                        -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.5.1</version>
         <configuration>
-          <source>1.7</source>  <!-- The -source argument for the Java compiler. -->
-          <target>1.7</target>  <!-- The -target argument for the Java compiler. -->
+          <source>1.8</source>
+          <target>1.8</target>
           <debug>true</debug>   <!-- Whether to include debugging information.   -->
           <encoding>UTF-8</encoding> <!-- The -encoding argument for the Java compiler. -->
-          <compilerArgument>-proc:none</compilerArgument> <!-- disable automatic annotation processing accoring to: http://docs.jboss.org/hibernate/jpamodelgen/1.0/reference/en-US/html_single/#d0e261 -->
+          <compilerArgument>-proc:none
+          </compilerArgument> <!-- disable automatic annotation processing accoring to: http://docs.jboss.org/hibernate/jpamodelgen/1.0/reference/en-US/html_single/#d0e261 -->
         </configuration>
       </plugin>
 
@@ -292,8 +262,7 @@
           <configuration>
             <home>${project.build.directory}/test-server</home>
             <properties>
-              <!-- Cargo VMARGS are not working. FIXME -->
-              <cargo.jvmargs>-Xms48m -Xmx512m -Xss2M -XX:MaxPermSize=128m</cargo.jvmargs>
+              <cargo.jvmargs>-Xms48m -Xmx512m -Xss2M</cargo.jvmargs>
               <cargo.servlet.port>8080</cargo.servlet.port>
             </properties>
             <deployables>
@@ -327,40 +296,40 @@
           <outputDirectory>${project.build.directory}/release</outputDirectory>
         </configuration>
       </plugin>
-        <!-- run integration tests after unit tests -->
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.18.1</version>
-            <configuration>
-                <argLine>-Dfile.encoding=UTF-8  -Xmx512M -XX:MaxPermSize=256M</argLine>
-                <!--<rerunFailingTestsCount>5</rerunFailingTestsCount>-->
-                <runOrder>alphabetical</runOrder>
-                <redirectTestOutputToFile>true</redirectTestOutputToFile>
-                <forkCount>4</forkCount>
-                <excludes>
-                    <exclude>**/*PerformanceTest.java</exclude>
-                </excludes>
-            </configuration>
-        </plugin>
-        <plugin>
-            <groupId>org.zeroturnaround</groupId>
-            <artifactId>jrebel-maven-plugin</artifactId>
-            <version>1.1.5</version>
-            <configuration>
-                <addResourcesDirToRebelXml>false</addResourcesDirToRebelXml>
-                <alwaysGenerate>true</alwaysGenerate>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>generate-rebel-xml</id>
-                    <phase>process-resources</phase>
-                    <goals>
-                        <goal>generate</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+      <!-- run integration tests after unit tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.18.1</version>
+        <configuration>
+          <argLine>-Dfile.encoding=UTF-8 -Xmx512M</argLine>
+          <!--<rerunFailingTestsCount>5</rerunFailingTestsCount>-->
+          <runOrder>alphabetical</runOrder>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
+          <forkCount>4</forkCount>
+          <excludes>
+            <exclude>**/*PerformanceTest.java</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.zeroturnaround</groupId>
+        <artifactId>jrebel-maven-plugin</artifactId>
+        <version>1.1.5</version>
+        <configuration>
+          <addResourcesDirToRebelXml>false</addResourcesDirToRebelXml>
+          <alwaysGenerate>true</alwaysGenerate>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-rebel-xml</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 
@@ -405,17 +374,17 @@
         <artifactId>jts</artifactId>
         <version>1.13</version>
       </dependency>
-        <dependency>
-            <groupId>com.github.lookfirst</groupId>
-            <artifactId>sardine</artifactId>
-            <version>5.1-GEONETWORK</version>
-        </dependency>
+      <dependency>
+        <groupId>com.github.lookfirst</groupId>
+        <artifactId>sardine</artifactId>
+        <version>5.1-GEONETWORK</version>
+      </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.3.7</version>
-        </dependency>
+      <dependency>
+        <groupId>org.codehaus.groovy</groupId>
+        <artifactId>groovy-all</artifactId>
+        <version>2.3.7</version>
+      </dependency>
 
       <!-- universal character set detector -->
       <dependency>
@@ -515,12 +484,12 @@
       <dependency>
         <groupId>commons-fileupload</groupId>
         <artifactId>commons-fileupload</artifactId>
-        <version>1.3</version>
+        <version>1.3.1</version>
       </dependency>
       <dependency>
         <groupId>commons-collections</groupId>
         <artifactId>commons-collections</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
@@ -547,11 +516,11 @@
         <artifactId>batik-ext</artifactId>
         <version>1.6</version>
       </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
-        </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.5</version>
+      </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-log4j12</artifactId>
@@ -560,20 +529,20 @@
       <dependency>
         <groupId>log4j</groupId>
         <artifactId>log4j</artifactId>
-        <version>1.2.13</version>
+        <version>1.2.17</version>
       </dependency>
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
-        <version>4.3.1</version>
+        <version>4.3.2</version>
       </dependency>
       <dependency>
         <groupId>xerces</groupId>
         <artifactId>xercesImpl</artifactId>
         <version>2.11.0</version>
       </dependency>
-			<!-- Patched XML Resolver 1.2 from apache xml-commons - fixes problems
-			     with windows URLs -->
+      <!-- Patched XML Resolver 1.2 from apache xml-commons - fixes problems
+                 with windows URLs -->
       <dependency>
         <groupId>xml-resolver</groupId>
         <artifactId>xml-resolver-patched</artifactId>
@@ -627,11 +596,11 @@
         <version>2.5.3</version>
       </dependency>
 			-->
-			<dependency>
-				<groupId>org.eclipse.core</groupId>
-				<artifactId>org.eclipse.core.runtime</artifactId>
-				<version>3.7.0</version>
-			</dependency>
+      <dependency>
+        <groupId>org.eclipse.core</groupId>
+        <artifactId>org.eclipse.core.runtime</artifactId>
+        <version>3.7.0</version>
+      </dependency>
 
       <!-- Z39.50, SRU  stuff (ie: Spring, CQL, ...)  -->
       <dependency>
@@ -680,6 +649,13 @@
         <groupId>org.geotools</groupId>
         <artifactId>gt-xml</artifactId>
         <version>${geotools.version}</version>
+        <exclusions>
+          <exclusion>
+					<!-- org.apache.xml:xml-commons-resolver:jar:1.2 -->
+            <groupId>org.apache.xml</groupId>
+            <artifactId>xml-commons-resolver</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.geotools.xsd</groupId>
@@ -704,6 +680,21 @@
       <dependency>
         <groupId>org.geotools</groupId>
         <artifactId>gt-wfs</artifactId>
+        <version>${geotools.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.geotools</groupId>
+          <artifactId>gt-wms</artifactId>
+          <version>${geotools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-main</artifactId>
+        <version>${geotools.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.geotools</groupId>
+        <artifactId>gt-brewer</artifactId>
         <version>${geotools.version}</version>
       </dependency>
       <dependency>
@@ -838,7 +829,7 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>4.10</version>
-          <scope>test</scope>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
@@ -847,18 +838,24 @@
         <scope>test</scope>
       </dependency>
 
-      <!-- should we had this as scope test?-->
       <dependency>
-        <groupId>xmlunit</groupId>
-        <artifactId>xmlunit</artifactId>
-        <version>1.2</version>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-core</artifactId>
+        <version>${xmlunit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.xmlunit</groupId>
+        <artifactId>xmlunit-matchers</artifactId>
+        <version>${xmlunit.version}</version>
+        <scope>test</scope>
       </dependency>
 
       <!-- db -->
       <!--<dependency>-->
-        <!--<groupId>postgresql</groupId>-->
-        <!--<artifactId>postgresql</artifactId>-->
-        <!--<version>9.1-901.jdbc3</version>-->
+      <!--<groupId>postgresql</groupId>-->
+      <!--<artifactId>postgresql</artifactId>-->
+      <!--<version>9.1-901.jdbc3</version>-->
       <!--</dependency>-->
       <dependency>
         <groupId>org.postgis</groupId>
@@ -874,7 +871,7 @@
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>5.1.26</version>
+        <version>5.1.38</version>
       </dependency>
       <!-- Not permitted under oracle licensing rules
       <dependency>
@@ -907,16 +904,16 @@
         <artifactId>spring-context</artifactId>
         <version>${spring.version}</version>
       </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context-support</artifactId>
@@ -926,24 +923,24 @@
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-core</artifactId>
         <version>${spring.security.version}</version>
-		<exclusions>
-		  <exclusion>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-expression</artifactId>
-		  </exclusion>
-		</exclusions>
-       </dependency>
-       <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-webmvc</artifactId>
-         <version>${spring.version}</version>
-       </dependency>
-       <dependency>
-         <groupId>org.springframework</groupId>
-         <artifactId>spring-web</artifactId>
-         <version>${spring.version}</version>
-       </dependency>
-       <dependency>
+        <exclusions>
+          <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-expression</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
         <groupId>org.springframework.security</groupId>
         <artifactId>spring-security-cas</artifactId>
         <version>${spring.security.version}</version>
@@ -963,62 +960,66 @@
         <artifactId>spring-security-web</artifactId>
         <version>${spring.security.version}</version>
       </dependency>
-	  <dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-test</artifactId>
-		<version>${spring.version}</version>
-		<scope>test</scope>
-	  </dependency>
-	  <dependency>
-		<groupId>org.springframework</groupId>
-		<artifactId>spring-aspects</artifactId>
-		<version>${spring.version}</version>
-	  </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aspects</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>2.3.1</version>
+      </dependency>
+      <!-- Persistence dependencies -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>4.3.6.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-ehcache</artifactId>
+        <version>4.3.6.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-jpa</artifactId>
+        <version>1.4.1.RELEASE</version>
+      </dependency>
 
-	  <!-- Persistence dependencies -->
-    <dependency>
-	  <groupId>org.hibernate</groupId>
-	  <artifactId>hibernate-entitymanager</artifactId>
-	  <version>4.3.6.Final</version>
-    </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>4.3.6.Final</version>
-        </dependency>
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-	  <version>1.4.1.RELEASE</version>
-    </dependency>
-
-	<dependency>
+      <dependency>
         <groupId>com.google.code.findbugs</groupId>
         <artifactId>jsr305</artifactId>
         <version>2.0.1</version>
       </dependency>
       <dependency>
-          <groupId>net.sf.json-lib</groupId>
-          <artifactId>json-lib</artifactId>
-          <version>2.4</version>
-          <classifier>jdk15</classifier>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>2.4</version>
+        <classifier>jdk15</classifier>
       </dependency>
       <dependency>
-          <groupId>xom</groupId>
-          <artifactId>xom</artifactId>
-          <version>1.1</version>
+        <groupId>xom</groupId>
+        <artifactId>xom</artifactId>
+        <version>1.1</version>
       </dependency>
-        <dependency>
-            <groupId>org.xhtmlrenderer</groupId>
-            <artifactId>flying-saucer-pdf-itext5</artifactId>
-            <version>${flying-saucer}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.itextpdf</groupId>
-                    <artifactId>itextpdf</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+      <dependency>
+        <groupId>org.xhtmlrenderer</groupId>
+        <artifactId>flying-saucer-pdf-itext5</artifactId>
+        <version>${flying-saucer}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
 
       <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -1058,12 +1059,12 @@
       <!-- The version number is specified above. -->
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>com.google.jimfs</groupId>
-          <artifactId>jimfs</artifactId>
-          <version>1.0</version>
-          <scope>test</scope>
-      </dependency>
+    <dependency>
+      <groupId>com.google.jimfs</groupId>
+      <artifactId>jimfs</artifactId>
+      <version>1.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <!-- ================================================================== -->
@@ -1087,16 +1088,16 @@
       <name>Boundless repository</name>
       <url>http://repo.boundlessgeo.com/main/</url>
     </repository>
-     <repository>
+    <repository>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
       <id>k-int</id>
       <name>Developer k-int repository</name>
-      <url>http://developer.k-int.com/maven2/</url>
+      <url>http://maven.k-int.com/content/repositories/releases/</url>
     </repository>
 
-    
+
     <repository>
       <snapshots>
         <enabled>true</enabled>
@@ -1108,11 +1109,22 @@
       <name>GeoNetwork remote repository</name>
       <url>https://raw.githubusercontent.com/geonetwork/core-maven-repo/master</url>
     </repository>
-    
+
     <repository>
       <id>mvnrepository.com</id>
       <name>Repository that has juniversalchardet</name>
       <url>http://mvnrepository.com/artifact</url>
+    </repository>
+    <repository>
+      <id>maven.geo-solutions.it</id>
+      <name>geo-solutions</name>
+      <url>http://maven.geo-solutions.it</url>
+    </repository>
+
+    <repository>
+      <id>maven2</id>
+      <name>Repository maven2</name>
+      <url>http://repo.maven.apache.org/maven2</url>
     </repository>
 
     <!-- seasar repo, has jsonic - used by langdetect -->
@@ -1130,6 +1142,16 @@
       <name>oss.sonatype.org - github-releases</name>
       <id>oss.sonatype.org-github-releases</id>
       <url>https://oss.sonatype.org/content/repositories/github-releases</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>sonatype-public-repository</id>
+      <url>https://oss.sonatype.org/content/groups/public</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
     </pluginRepository>
   </pluginRepositories>
 
@@ -1151,9 +1173,18 @@
     <module>services</module>
     <module>wro4j</module>
     <module>inspire-atom</module>
+    <module>solr</module>
+    <module>workers</module>
+    <module>messaging</module>
   </modules>
 
   <profiles>
+    <profile>
+      <id>with-doc</id>
+      <modules>
+        <module>docs</module>
+      </modules>
+    </profile>
     <profile>
       <id>all</id>
       <activation>
@@ -1165,17 +1196,9 @@
         <module>schemas-test</module>
         <module>web-ui</module>
         <module>web-ui-docs</module>
-        <module>web-client</module>
         <module>web</module>
         <module>e2e-tests</module>
         <module>geoserver</module>
-      </modules>
-    </profile>
-    <!-- Python and Latex are required to build the documentation. -->
-    <profile>
-      <id>with-doc</id>
-      <modules>
-        <module>docs</module>
       </modules>
     </profile>
     <profile>
@@ -1196,10 +1219,20 @@
 
   <properties>
     <jetty.version>8.1.9.v20130131</jetty.version>
-    <geotools.version>8.6</geotools.version>
+    <geotools.version>15.0</geotools.version>
     <lucene.version>4.9.0</lucene.version>
-    <spring.version>3.2.5.RELEASE</spring.version>
-    <spring.security.version>3.1.4.RELEASE</spring.security.version>
+
+    <solr.version>6.0.1</solr.version>
+    <solr.version.md5>fc9a4a6ee127dff21135dd4941c92c15</solr.version.md5>
+    <solr.port>8984</solr.port>
+    <solr.url>http://localhost:${solr.port}/solr</solr.url>
+    <solr.collection>catalog_srv</solr.collection>
+
+    <jms.url>tcp://localhost:61616</jms.url>
+    <activemq.version>5.6.0</activemq.version>
+
+    <spring.version>4.2.4.RELEASE</spring.version>
+    <spring.security.version>3.2.0.RELEASE</spring.security.version>
     <metrics.version>2.1.1</metrics.version>
     <maven.build.timestamp.format>yyyy-MM-dd'T'HH'\:'mm'\:'ssZ</maven.build.timestamp.format>
     <build.timestamp>${maven.build.timestamp}</build.timestamp>
@@ -1207,7 +1240,12 @@
     <wro.version>1.7.7</wro.version>
     <node.version>v0.10.24</node.version>
     <npm.version>1.3.23</npm.version>
+    <xmlunit.version>2.1.1</xmlunit.version>
     <print-lib.version>2.1.1</print-lib.version>
     <flying-saucer>9.0.7</flying-saucer>
+    <camel.version>2.14.0</camel.version>
+    <log4j.version>1.2.17</log4j.version>
+    <slf4j.version>1.7.7</slf4j.version>
+    <xbean.version>3.18</xbean.version>
   </properties>
 </project>

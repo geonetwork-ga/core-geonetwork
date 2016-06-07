@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 (function() {
   goog.provide('gn_utility_directive');
 
@@ -99,6 +122,29 @@
           scope.setRegion = function(regionType) {
             scope.regionType = regionType;
           };
+        }
+      };
+    }]);
+
+  module.directive('gnBatchReport', [
+    function() {
+      return {
+        restrict: 'A',
+        replace: true,
+        scope: {
+          processReport: '=gnBatchReport'
+        },
+        templateUrl: '../../catalog/components/utility/' +
+            'partials/batchreport.html',
+        link: function(scope, element, attrs) {
+          scope.$watch('processReport', function(n, o) {
+            if (n && n != o) {
+              scope.processReportWarning = n.notFound != 0 ||
+                  n.notOwner != 0 ||
+                  n.notProcessFound != 0 ||
+                  n.metadataErrorReport.metadataErrorReport.length != 0;
+            }
+          });
         }
       };
     }]);
@@ -259,6 +305,74 @@
 
   /**
    * @ngdoc directive
+   * @name gn_utility.directive:gnMetadataPicker
+   * @function
+   *
+   * @description
+   * Use the search service
+   * to retrieve the list of entry available and provide autocompletion
+   * for the input field with that directive attached.
+   *
+   */
+  module.directive('gnMetadataPicker',
+      ['gnUrlUtils', 'gnSearchManagerService',
+       function(gnUrlUtils, gnSearchManagerService) {
+         return {
+           restrict: 'A',
+           link: function(scope, element, attrs) {
+             element.attr('placeholder', '...');
+             var displayField = attrs['displayField'] || 'defaultTitle';
+             var valueField = attrs['valueField'] || displayField;
+             var params = angular.fromJson(element.attr('params') || '{}');
+
+             var url = gnUrlUtils.append('q?_content_type=json',
+             gnUrlUtils.toKeyValue(angular.extend({
+               _isTemplate: 'n',
+               any: '*QUERY*',
+               sortBy: 'title',
+               fast: 'index'
+             }, params)
+             )
+             );
+             var parseResponse = function(data) {
+               var records = gnSearchManagerService.format(data);
+               return records.metadata;
+             };
+             var source = new Bloodhound({
+               datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+               queryTokenizer: Bloodhound.tokenizers.whitespace,
+               limit: 200,
+               remote: {
+                 wildcard: 'QUERY',
+                 url: url,
+                 filter: parseResponse
+               }
+             });
+             source.initialize();
+             $(element).typeahead({
+               minLength: 0,
+               highlight: true
+             }, {
+               name: 'metadata',
+               displayKey: function(data) {
+                 if (valueField === 'uuid') {
+                   return data['geonet:info'].uuid;
+                 } else {
+                   return data[valueField];
+                 }
+               },
+               source: source.ttAdapter(),
+               templates: {
+                 suggestion: function(datum) {
+                   return '<p>' + datum[displayField] + '</p>';
+                 }
+               }
+             });
+           }
+         };
+       }]);
+
+  /**
    * @name gn_utility.directive:gnClickToggle
    * @function
    *
@@ -277,16 +391,16 @@
       return {
         restrict: 'A',
         template: '<button title="{{\'gnToggle\' | translate}}">' +
-        '<i class="fa fa-fw fa-angle-double-left"/>&nbsp;' +
-        '</button>',
+            '<i class="fa fa-fw fa-angle-double-left"/>&nbsp;' +
+            '</button>',
         link: function linkFn(scope, element, attr) {
           var selector = attr['gnSectionToggle'] ||
-                'form > fieldset > legend[data-gn-slide-toggle]',
-            event = attr['event'] || 'click';
-          element.on('click', function () {
-            $(selector).each(function (idx, elem) {
+              'form > fieldset > legend[data-gn-slide-toggle]',
+              event = attr['event'] || 'click';
+          element.on('click', function() {
+            $(selector).each(function(idx, elem) {
               $(elem).trigger(event);
-            })
+            });
           });
         }
       };
@@ -422,7 +536,6 @@
       return {
         restrict: 'A',
         link: function(scope, element, attrs) {
-
           element.on('click', function(e) {
             /**
              * Toggle collapse-expand fieldsets
@@ -445,6 +558,9 @@
               }
             });
           });
+          if (attrs['gnSlideToggle'] == 'true') {
+            element.click();
+          }
         }
       };
     }]);
@@ -507,6 +623,22 @@
         }
       };
     }]);
+
+  module.directive('gnFocusOn', ['$timeout', function($timeout) {
+    return {
+      restrict: 'A',
+      link: function($scope, $element, $attr) {
+        $scope.$watch($attr.gnFocusOn, function(o, n) {
+          if (o != n) {
+            $timeout(function() {
+              o ? $element.focus() :
+                  $element.blur();
+            });
+          }
+        });
+      }
+    };
+  }]);
 
   /**
    * Use to initialize bootstrap datepicker
@@ -754,16 +886,19 @@
     };
   }]);
 
-  module.directive('gnCollapse', ['$compile', function($compile) {
+
+  module.directive('gnCollapsible', ['$parse', function($parse) {
     return {
       restrict: 'A',
-      scope: true,
+      scope: false,
       link: function(scope, element, attrs) {
-        var next = element.next();
+        var getter = $parse(attrs['gnCollapsible']);
+        var setter = getter.assign;
+
         element.on('click', function(e) {
           scope.$apply(function() {
-            scope.collapsed = !scope.collapsed;
-            next.slideToggle();
+            var collapsed = getter(scope);
+            setter(scope, !collapsed);
           });
         });
       }
@@ -836,6 +971,9 @@
       }
     }
   });
+  module.filter('encodeURIComponent', function() {
+    return window.encodeURIComponent;
+  });
   module.directive('gnJsonText', function() {
     return {
       restrict: 'A',
@@ -863,29 +1001,29 @@
       }
     };
   });
-  module.directive('gnImgModal', function() {
+  module.directive('gnImgModal', ['$filter', function($filter) {
     return {
       restrict: 'A',
       link: function(scope, element, attr, ngModel) {
 
         element.bind('click', function() {
-          var md = scope.$eval(attr['gnImgModal']);
-          var imgs = md.getThumbnails();
-          var img = imgs.big || imgs.small;
-
+          var img = scope.$eval(attr['gnImgModal']);
           if (img) {
+            var label = (img.label || (
+                $filter('gnLocalized')(img.title, scope.lang)) || '');
+            var labelDiv =
+                '<div class="gn-img-background">' +
+                '  <div class="gn-img-thumbnail-caption">' + label + '</div>' +
+                '</div>';
             var modalElt = angular.element('' +
                 '<div class="modal fade in">' +
-                '<div class="modal-dialog in">' +
-                '  <button type=button class="btn btn-default ' +
-                'gn-btn-modal-img">&times</button>' +
-                '    <img src="' + img + '">' +
+                '<div class="modal-dialog gn-img-modal in">' +
+                '  <button type=button class="btn btn-link gn-btn-modal-img">' +
+                '<i class="fa fa-times text-danger"/></button>' +
+                '  <img src="' + (img.url || img.id) + '"/>' +
+                (label != '' ? labelDiv : '') +
                 '</div>' +
                 '</div>');
-            modalElt.find('img').on('load', function() {
-              var w = this.clientWidth;
-              modalElt.find('.modal-dialog').css('width', w + 'px');
-            });
 
             $(document.body).append(modalElt);
             modalElt.modal();
@@ -899,5 +1037,67 @@
         });
       }
     };
-  });
+  }]);
+
+  module.directive('gnPopoverDropdown', ['$timeout', function($timeout) {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        // Container is one ul with class list-group
+        // Avoid to set style on embedded drop down menu
+        var content = element.find('ul.list-group').css('display', 'none');
+        var button = element.find('> .btn');
+
+        $timeout(function() {
+          var className = (attrs['fixedHeight'] != 'false') ?
+              'popover-dropdown popover-dropdown-' + content.find('li').length :
+              '';
+          button.popover({
+            animation: false,
+            container: '[gn-main-viewer]',
+            placement: attrs['placement'] || 'bottom',
+            content: ' ',
+            template:
+                '<div class="popover ' + className + '">' +
+                '  <div class="arrow"></div>' +
+                '  <h3 class="popover-title"></h3>' +
+                '  <div class="popover-content"></div>' +
+                '</div>'
+          });
+        }, 1);
+
+        button.on('shown.bs.popover', function() {
+          var $tip = button.data('bs.popover').$tip;
+          content.css('display', 'inline').appendTo(
+              $tip.find('.popover-content')
+          );
+        });
+        button.on('hidden.bs.popover', function() {
+          content.css('display', 'none').appendTo(element);
+        });
+
+        // can’t use dismiss boostrap option: incompatible with opacity slider
+        $('body').on('mousedown click', function(e) {
+          if ((button.data('bs.popover') && button.data('bs.popover').$tip) &&
+              (button[0] != e.target) &&
+              (!$.contains(button[0], e.target)) &&
+              (
+              $(e.target).parents('.popover')[0] !=
+              button.data('bs.popover').$tip[0])
+          ) {
+            $timeout(function() {
+              button.popover('hide');
+            }, 30);
+          }
+        });
+
+        if (attrs['gnPopoverDismiss']) {
+          $(attrs['gnPopoverDismiss']).on('scroll', function() {
+            button.popover('hide');
+          });
+        }
+
+      }
+    };
+  }]);
 })();

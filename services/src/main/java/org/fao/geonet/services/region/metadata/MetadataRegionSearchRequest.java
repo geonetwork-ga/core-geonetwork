@@ -1,11 +1,37 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.region.metadata;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
+
 import com.vividsolutions.jts.geom.Envelope;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+
 import jeeves.server.context.ServiceContext;
+
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
@@ -33,12 +59,13 @@ import java.util.List;
 public class MetadataRegionSearchRequest extends Request {
 
     public static final String PREFIX = "metadata:";
+    private static final FindByNodeName EXTENT_FINDER = new FindByNodeName("EX_BoundingPolygon", "EX_GeographicBoundingBox", "polygon");
+    private final Parser parser;
+    ServiceContext context;
     private List<? extends MetadataRegionFinder> regionFinders = Lists.newArrayList(
-            new FindRegionByXPath(), new FindRegionByGmlId(), new FindRegionByEditRef());
+        new FindRegionByXPath(), new FindRegionByGmlId(), new FindRegionByEditRef());
     private String id;
     private String label;
-    ServiceContext context;
-    private final Parser parser;
     private GeometryFactory factory;
 
     public MetadataRegionSearchRequest(ServiceContext context, Parser parser, GeometryFactory factory) {
@@ -49,7 +76,7 @@ public class MetadataRegionSearchRequest extends Request {
 
     @Override
     public Request label(String labelParam) {
-        this.label=labelParam;
+        this.label = labelParam;
         return this;
     }
 
@@ -65,23 +92,23 @@ public class MetadataRegionSearchRequest extends Request {
 
     @Override
     public Collection<Region> execute() throws Exception {
-        if(label==null && id==null || (id!=null && !id.startsWith(PREFIX)) ) {
+        if (label == null && id == null || (id != null && !id.startsWith(PREFIX))) {
             return Collections.emptySet();
         }
         List<Region> regions = new ArrayList<Region>();
-        if(label != null) {
+        if (label != null) {
             loadAll(regions, Id.create(label));
-        } else if(id != null) {
-            String [] parts = id.split(":", 3);
+        } else if (id != null) {
+            String[] parts = id.split(":", 3);
             String mdId = parts[1];
             String id;
-            if(parts.length > 2) {
+            if (parts.length > 2) {
                 id = parts[2];
                 loadOnly(regions, Id.create(mdId), id);
             } else {
                 loadAll(regions, Id.create(mdId));
             }
-            if(regions.size()>1) {
+            if (regions.size() > 1) {
                 regions = Collections.singletonList(regions.get(0));
             }
         }
@@ -133,7 +160,7 @@ public class MetadataRegionSearchRequest extends Request {
 
     Iterator<?> descentOrSelf(Element metadata) {
         Iterator<?> extents;
-        if(EXTENT_FINDER.matches(metadata)) {
+        if (EXTENT_FINDER.matches(metadata)) {
             extents = Collections.singletonList(metadata).iterator();
         } else {
             extents = metadata.getDescendants(EXTENT_FINDER);
@@ -223,29 +250,32 @@ public class MetadataRegionSearchRequest extends Request {
             this.id = id;
             this.prefix = prefix;
         }
-        /**
-         * Convert ID to the id for looking up the metadata in the database
-         */
-        public abstract String getMdId(SearchManager searchManager, DataManager dataManager) throws Exception;
-        /**
-         * Strip the identifier from the id and return the id
-         */
-        abstract String getId();
-        
+
         static Id create(String id) {
-            if(id.toLowerCase().startsWith(MdId.PREFIX)) {
+            if (id.toLowerCase().startsWith(MdId.PREFIX)) {
                 return new MdId(id);
-            } else if(id.toLowerCase().startsWith(Uuid.PREFIX)) {
+            } else if (id.toLowerCase().startsWith(Uuid.PREFIX)) {
                 return new Uuid(id);
             } else {
                 return new FileId(id);
             }
         }
 
+        /**
+         * Convert ID to the id for looking up the metadata in the database
+         */
+        public abstract String getMdId(SearchManager searchManager, DataManager dataManager) throws Exception;
+
+        /**
+         * Strip the identifier from the id and return the id
+         */
+        abstract String getId();
+
         public String getIdentifiedId() {
-            return prefix+id;
+            return prefix + id;
         }
     }
+
     public static class FileId extends Id {
 
         private static final String PREFIX = "@fileId";
@@ -257,7 +287,7 @@ public class MetadataRegionSearchRequest extends Request {
         @Override
         public String getMdId(SearchManager searchManager, DataManager dataManager) throws Exception {
             String mdId = Utils.lookupMetadataIdFromFileId(id, searchManager);
-            
+
             if (mdId == null) {
                 mdId = dataManager.getMetadataId(id);
             }
@@ -269,9 +299,11 @@ public class MetadataRegionSearchRequest extends Request {
             return id;
         }
     }
+
     public static class MdId extends Id {
 
         private static final String PREFIX = "@id";
+
         public MdId(String id) {
             super(PREFIX, id.substring(PREFIX.length()));
         }
@@ -285,11 +317,13 @@ public class MetadataRegionSearchRequest extends Request {
         public String getId() {
             return id;
         }
-        
+
     }
+
     public static class Uuid extends Id {
 
         private static final String PREFIX = "@uuid";
+
         public Uuid(String id) {
             super(PREFIX, id.substring(PREFIX.length()));
         }
@@ -303,10 +337,9 @@ public class MetadataRegionSearchRequest extends Request {
         public String getId() {
             return null;
         }
-        
+
     }
 
-    private static final FindByNodeName EXTENT_FINDER = new FindByNodeName("EX_BoundingPolygon", "EX_GeographicBoundingBox", "polygon");
     private static final class FindByNodeName implements Filter {
         private static final long serialVersionUID = 1L;
         private String[] names;
@@ -314,6 +347,7 @@ public class MetadataRegionSearchRequest extends Request {
         public FindByNodeName(String... names) {
             this.names = names;
         }
+
         @Override
         public boolean matches(Object obj) {
             if (obj instanceof Element) {

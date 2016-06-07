@@ -1,8 +1,33 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy.template;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
 import groovy.util.slurpersupport.GPathResult;
+
 import org.apache.commons.io.IOUtils;
 import org.fao.geonet.Constants;
 import org.springframework.beans.BeanUtils;
@@ -20,6 +45,7 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -110,22 +136,22 @@ public class TRenderContext implements Appendable, Closeable {
         try {
             if (value == null) {
                 throw new TemplateException(
-                        "There is no object in the model map with the id '" + expr + "' in the model map.  The model selection " +
+                    "There is no object in the model map with the id '" + expr + "' in the model map.  The model selection " +
                         "expression is: " + expr.trim() + "." + property.trim() + "'.\nThe current options are: \n" + getAllModelKeys());
             }
             return getProperty(value, property);
         } catch (NullPropertyException e) {
             throw new TemplateException("The value of the property '" + e + "' is null. The full selection expression is: " +
-                                        "'" + expr.trim() + "." + property.trim() + "'");
+                "'" + expr.trim() + "." + property.trim() + "'");
         } catch (EmptyPropertyException e) {
             throw new TemplateException("Model expression: '" + expr.trim() + "." + property.trim() + "' contains an empty section.");
         } catch (InvocationTargetException | IllegalAccessException e) {
             throw new TemplateException(
-                    "Error accessing the properties in the property path of: '" +
+                "Error accessing the properties in the property path of: '" +
                     expr.trim() + "." + property + "'.  " + e, e);
         } catch (NoSuchPropertyException e) {
             throw new TemplateException(
-                    "One of the properties in the property path: '" + expr.trim() + "." + property + "' does not exist on " +
+                "One of the properties in the property path: '" + expr.trim() + "." + property + "' does not exist on " +
                     "the object selected at that point. The property missing is: " + e);
         }
     }
@@ -171,7 +197,7 @@ public class TRenderContext implements Appendable, Closeable {
                 return list.get(Integer.parseInt(prop));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException(
-                        "When accessing a list the property must be a number.  Property:" + prop + ".  List: " + list);
+                    "When accessing a list the property must be a number.  Property:" + prop + ".  List: " + list);
             }
         } else {
             final PropertyDescriptor propertyDescriptor = BeanUtils.getPropertyDescriptor(value.getClass(), prop.trim());
@@ -198,7 +224,7 @@ public class TRenderContext implements Appendable, Closeable {
 
     public Map<String, Object> getModel(boolean mergeParentModels) {
         Map<String, Object> fullModel;
-        if(mergeParentModels && this.parent != null) {
+        if (mergeParentModels && this.parent != null) {
             fullModel = this.parent.getModel(true);
             fullModel.putAll(this.model);
         } else {

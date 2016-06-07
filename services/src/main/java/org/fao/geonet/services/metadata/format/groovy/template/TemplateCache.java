@@ -1,8 +1,32 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy.template;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+
 import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.SystemInfo;
 import org.fao.geonet.kernel.SchemaManager;
@@ -21,8 +45,8 @@ import java.util.Set;
 import static org.fao.geonet.services.metadata.format.FormatterConstants.SCHEMA_PLUGIN_FORMATTER_DIR;
 
 /**
- * A Cache for the template files that are loaded by FileResult objects.  This is intended to reduce the number of files that
- * need to be loaded.
+ * A Cache for the template files that are loaded by FileResult objects.  This is intended to reduce
+ * the number of files that need to be loaded.
  *
  * @author Jesse on 10/20/2014.
  */
@@ -31,17 +55,17 @@ public class TemplateCache {
 
 
     @VisibleForTesting
-    @Autowired
-    TemplateParser xmlTemplateParser;
-
-    @VisibleForTesting
     final Map<Path, TNode> canonicalFileNameToText = Maps.newHashMap();
     private final Set<Path> filesKnownToNotExist = Sets.newHashSet();
+    @VisibleForTesting
+    @Autowired
+    TemplateParser xmlTemplateParser;
 
     public synchronized FileResult createFileResult(Path formatterDir, Path schemaDir, Path rootFormatterDir, String path,
                                                     Map<String, Object> model) throws IOException {
         return new Request().createFileResult(formatterDir, schemaDir, rootFormatterDir, path, model);
     }
+
     private class Request {
 
         private final SystemInfo systemInfo;
@@ -104,10 +128,10 @@ public class TemplateCache {
             }
             if (!exists(file)) {
                 throw new IllegalArgumentException("There is no file: " + path + " in any of: \n" +
-                                                   "\t * " + formatterDir + "\n" +
-                                                   "\t * " + schemaDir + "\n" +
-                                                   "\t * if parent exists: " + fromParentSchema + "\n" +
-                                                   "\t * " + rootFormatterDir);
+                    "\t * " + formatterDir + "\n" +
+                    "\t * " + schemaDir + "\n" +
+                    "\t * if parent exists: " + fromParentSchema + "\n" +
+                    "\t * " + rootFormatterDir);
             }
 
             template = xmlTemplateParser.parse(file);

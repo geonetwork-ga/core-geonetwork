@@ -27,11 +27,14 @@ import jeeves.constants.Jeeves;
 import jeeves.server.ServiceConfig;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
+
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.domain.Profile;
+import org.fao.geonet.domain.ReservedGroup;
+import org.fao.geonet.domain.ReservedOperation;
 import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.SelectionManager;
@@ -52,13 +55,13 @@ import static org.fao.geonet.kernel.SelectionManager.SELECTION_METADATA;
  * Stores all operations allowed for a metadata.
  */
 public class BatchUpdatePrivileges extends NotInReadOnlyModeService {
-	//--------------------------------------------------------------------------
-	//---
-	//--- Init
-	//---
-	//--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
+    //---
+    //--- Init
+    //---
+    //--------------------------------------------------------------------------
 
-	public void init(Path appPath, ServiceConfig params) throws Exception {
+    public void init(Path appPath, ServiceConfig params) throws Exception {
         super.init(appPath, params);
     }
 
@@ -116,11 +119,17 @@ public class BatchUpdatePrivileges extends NotInReadOnlyModeService {
                         String name = el.getName();
 
                         if (name.startsWith("_") &&
-                                !Params.CONTENT_TYPE.equals(name)) {
+                            !Params.CONTENT_TYPE.equals(name)) {
                             StringTokenizer st = new StringTokenizer(name, "_");
 
                             String groupId = st.nextToken();
                             String operId = st.nextToken();
+
+                            // Never set editing for reserved group
+                            if (Integer.parseInt(operId) == ReservedOperation.editing.getId() &&
+                                ReservedGroup.isReserved(Integer.valueOf(groupId))) {
+                                continue;
+                            }
 
                             dm.setOperation(context, "" + info.getId(), groupId, operId);
                         }
@@ -138,8 +147,8 @@ public class BatchUpdatePrivileges extends NotInReadOnlyModeService {
         // -- for the moment just return the sizes - we could return the ids
         // -- at a later stage for some sort of result display
         return new Element(Jeeves.Elem.RESPONSE)
-                .addContent(new Element("done").setText(metadata.size() + ""))
-                .addContent(new Element("notOwner").setText(notOwner.size() + ""))
-                .addContent(new Element("notFound").setText(notFound.size() + ""));
+            .addContent(new Element("done").setText(metadata.size() + ""))
+            .addContent(new Element("notOwner").setText(notOwner.size() + ""))
+            .addContent(new Element("notFound").setText(notFound.size() + ""));
     }
 }

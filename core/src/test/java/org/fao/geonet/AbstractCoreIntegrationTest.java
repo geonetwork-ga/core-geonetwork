@@ -1,11 +1,36 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import jeeves.constants.ConfigFile;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 import jeeves.server.sources.ServiceRequest;
+
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.MetadataType;
@@ -48,6 +73,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -55,26 +81,52 @@ import static java.lang.Math.round;
 import static org.junit.Assert.assertTrue;
 
 /**
- * A helper class for testing services.  This super-class loads in the spring beans for Spring-data repositories and mocks for
- * some of the system that is required by services.
+ * A helper class for testing services.  This super-class loads in the spring beans for Spring-data
+ * repositories and mocks for some of the system that is required by services.
  * <p/>
- * User: Jesse
- * Date: 10/12/13
- * Time: 8:31 PM
+ * User: Jesse Date: 10/12/13 Time: 8:31 PM
  */
 @ContextConfiguration(
     inheritLocations = true,
     locations = {"classpath:core-repository-test-context.xml", "classpath:web-test-context.xml"}
-    )
-    public abstract class AbstractCoreIntegrationTest extends AbstractSpringDataTest {
-        @Autowired
-        protected ConfigurableApplicationContext _applicationContext;
+)
+public abstract class AbstractCoreIntegrationTest extends AbstractSpringDataTest {
+    @Autowired
+    protected ConfigurableApplicationContext _applicationContext;
     @PersistenceContext
     protected EntityManager _entityManager;
     @Autowired
     protected GeonetTestFixture testFixture;
     @Autowired
     protected UserRepository _userRepo;
+
+    protected static Element createServiceConfigParam(String name, String value) {
+        return new Element("param")
+            .setAttribute(ConfigFile.Param.Attr.NAME, name)
+            .setAttribute(ConfigFile.Param.Attr.VALUE, value);
+    }
+
+    /**
+     * Look up the webapp directory.
+     */
+    public static Path getWebappDir(Class<?> cl) {
+        Path here = getClassFile(cl).toPath();
+        while (!Files.exists(here.resolve("pom.xml")) && !Files.exists(here.getParent().resolve("web/src/main/webapp/"))) {
+//            System.out.println("Did not find pom file in: "+here);
+            here = here.getParent();
+        }
+
+        return here.getParent().resolve("web/src/main/webapp/");
+    }
+
+    public static File getClassFile(Class<?> cl) {
+        final String testClassName = cl.getSimpleName();
+        try {
+            return new File(URLDecoder.decode(cl.getResource(testClassName + ".class").getFile(), Constants.ENCODING));
+        } catch (UnsupportedEncodingException e) {
+            throw new Error(e);
+        }
+    }
 
     @Before
     public final void setup() throws Exception {
@@ -111,15 +163,10 @@ import static org.junit.Assert.assertTrue;
         return Lists.newArrayList(createServiceConfigParam("preferredSchema", "iso19139"));
     }
 
-    protected static Element createServiceConfigParam(String name, String value) {
-        return new Element("param")
-                .setAttribute(ConfigFile.Param.Attr.NAME, name)
-                .setAttribute(ConfigFile.Param.Attr.VALUE, value);
-    }
-
     /**
-     * Get the node id of the geonetwork node under test.  This hook is here primarily for the GeonetworkDataDirectory tests
-     * but also useful for any other tests that want to test multi node support.
+     * Get the node id of the geonetwork node under test.  This hook is here primarily for the
+     * GeonetworkDataDirectory tests but also useful for any other tests that want to test multi
+     * node support.
      *
      * @return the node id to put into the ApplicationContext.
      */
@@ -135,7 +182,6 @@ import static org.junit.Assert.assertTrue;
         final Constructor<?> constructor = GeonetContext.class.getDeclaredConstructors()[0];
         constructor.setAccessible(true);
         GeonetContext gc = new GeonetContext(_applicationContext, false, null);
-
         contexts.put(Geonet.CONTEXT_NAME, gc);
         final ServiceContext context = new ServiceContext("mockService", _applicationContext, contexts, _entityManager);
         context.setAsThreadLocal();
@@ -183,30 +229,6 @@ import static org.junit.Assert.assertTrue;
         return file.resolve("xsl/conversion");
     }
 
-    /**
-     * Look up the webapp directory.
-     *
-     * @return
-     */
-    public static Path getWebappDir(Class<?> cl) {
-        Path here = getClassFile(cl).toPath();
-        while (!Files.exists(here.resolve("pom.xml")) && !Files.exists(here.getParent().resolve("web/src/main/webapp/"))) {
-//            System.out.println("Did not find pom file in: "+here);
-            here = here.getParent();
-        }
-
-        return here.getParent().resolve("web/src/main/webapp/");
-    }
-
-    public static File getClassFile(Class<?> cl) {
-        final String testClassName = cl.getSimpleName();
-        try {
-            return new File(URLDecoder.decode(cl.getResource(testClassName + ".class").getFile(), Constants.ENCODING));
-        } catch (UnsupportedEncodingException e) {
-            throw new Error(e);
-        }
-    }
-
     public User loginAsAdmin(ServiceContext context) {
         final User admin = _userRepo.findAllByProfile(Profile.Administrator).get(0);
         UserSession userSession = new UserSession();
@@ -217,14 +239,14 @@ import static org.junit.Assert.assertTrue;
 
     public MockHttpSession loginAsAdmin() {
         final User user = _userRepo.findAllByProfile(Profile.Administrator)
-                .get(0);
+            .get(0);
         MockHttpSession session = new MockHttpSession();
 
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                user, null, user.getAuthorities());
+            user, null, user.getAuthorities());
         auth.setDetails(user);
         SecurityContextHolder.getContext().setAuthentication(auth);
-          
+
         return session;
     }
 
@@ -232,22 +254,20 @@ import static org.junit.Assert.assertTrue;
         MockHttpSession session = new MockHttpSession();
 
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                user, null, user.getAuthorities());
+            user, null, user.getAuthorities());
         auth.setDetails(user);
         SecurityContextHolder.getContext().setAuthentication(auth);
-          
+
         return session;
     }
+
     public Element getSampleMetadataXml() throws IOException, JDOMException {
         final URL resource = AbstractCoreIntegrationTest.class.getResource("kernel/valid-metadata.iso19139.xml");
         return Xml.loadStream(resource.openStream());
     }
 
     /**
-     *
-     * @param uuidAction  Either: Params.GENERATE_UUID, Params.NOTHING, or Params.OVERWRITE
-     * @return
-     * @throws Exception
+     * @param uuidAction Either: Params.GENERATE_UUID, Params.NOTHING, or Params.OVERWRITE
      */
     public int importMetadataXML(ServiceContext context, String uuid, InputStream xmlInputStream, MetadataType metadataType,
                                  int groupId, String uuidAction) throws Exception {
@@ -266,10 +286,10 @@ import static org.junit.Assert.assertTrue;
         ArrayList<String> id = new ArrayList<String>(1);
         String createDate = new ISODate().getDateAndTime();
         Importer.importRecord(uuid,
-                uuidAction, Lists.newArrayList(metadata), schema, 0,
-                source.getUuid(), source.getName(), Maps.<String, String>newHashMap(), context,
-                id, createDate, createDate,
-                "" + groupId, metadataType);
+            uuidAction, Lists.newArrayList(metadata), schema, 0,
+            source.getUuid(), source.getName(), Maps.<String, String>newHashMap(), context,
+            id, createDate, createDate,
+            "" + groupId, metadataType);
 
         dataManager.indexMetadata(id.get(0), true);
         return Integer.parseInt(id.get(0));
@@ -293,7 +313,7 @@ import static org.junit.Assert.assertTrue;
         long end = System.nanoTime();
 
         final long duration = end - start;
-        System.out.println("Executed " + executions + " in "+ (TimeUnit.NANOSECONDS.toSeconds(duration * 1000) / 1000)+" seconds.");
+        System.out.println("Executed " + executions + " in " + (TimeUnit.NANOSECONDS.toSeconds(duration * 1000) / 1000) + " seconds.");
         System.out.println("   Average of " + round(((double) TimeUnit.NANOSECONDS.toMillis(duration)) / executions) + "ms per execution;");
         System.out.println("   Average of " + round(executions / TimeUnit.NANOSECONDS.toSeconds(duration)) + " executions per second;");
     }

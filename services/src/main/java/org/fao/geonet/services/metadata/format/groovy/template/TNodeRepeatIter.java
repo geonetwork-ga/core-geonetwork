@@ -1,9 +1,34 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy.template;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
+
 import groovy.util.slurpersupport.GPathResult;
+
 import org.fao.geonet.SystemInfo;
 import org.xml.sax.Attributes;
 
@@ -32,6 +57,15 @@ public class TNodeRepeatIter extends TNode {
         this.key = key;
         this.rowContextKey = rowContextKey;
         this.onlyChildren = onlyChildren;
+    }
+
+    static void addIndexInfo(Map<String, Object> newModelMap, int index, int total) {
+        newModelMap.put(INDEX_KEY, index);
+        newModelMap.put(FIRST_KEY, index == 0);
+        newModelMap.put(LAST_KEY, (total - 1) == index);
+        newModelMap.put(ODD_KEY, Math.abs(index % 2) == 1);
+        newModelMap.put(EVEN_KEY, Math.abs(total % 2) == 0);
+        newModelMap.put(MIDDLE_KEY, (total / 2) == index);
     }
 
     @SuppressWarnings("unchecked")
@@ -94,15 +128,6 @@ public class TNodeRepeatIter extends TNode {
         if (i == 0 && this.info.isDevMode()) {
             context.append("<!-- fmt-repeat: ").append(rowContextKey).append(" in ").append(this.key).append(" is empty -->");
         }
-    }
-
-    static void addIndexInfo(Map<String, Object> newModelMap, int index, int total) {
-        newModelMap.put(INDEX_KEY, index);
-        newModelMap.put(FIRST_KEY, index == 0);
-        newModelMap.put(LAST_KEY, (total - 1) == index);
-        newModelMap.put(ODD_KEY, Math.abs(index % 2) == 1);
-        newModelMap.put(EVEN_KEY, Math.abs(total % 2) == 0);
-        newModelMap.put(MIDDLE_KEY, (total / 2) == index);
     }
 
     @Override

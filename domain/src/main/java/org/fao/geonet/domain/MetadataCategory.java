@@ -1,12 +1,38 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.domain;
 
 import org.fao.geonet.entitylistener.MetadataCategoryEntityListenerManager;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Map;
 
 /**
- * A Metadata category. This is separate from any category listed in the metadata xml itself and is geonetwork specific.
+ * A Metadata category. This is separate from any category listed in the metadata xml itself and is
+ * geonetwork specific.
  *
  * @author Jesse
  */
@@ -15,8 +41,8 @@ import java.util.Map;
 @Cacheable
 @Table(name = "Categories")
 @EntityListeners(MetadataCategoryEntityListenerManager.class)
-@SequenceGenerator(name=MetadataCategory.ID_SEQ_NAME, initialValue=100, allocationSize=1)
-public class MetadataCategory extends Localized {
+@SequenceGenerator(name = MetadataCategory.ID_SEQ_NAME, initialValue = 100, allocationSize = 1)
+public class MetadataCategory extends Localized implements Serializable {
     static final String ID_SEQ_NAME = "metadata_category_id_seq";
     private int _id;
     private String _name;
@@ -27,15 +53,15 @@ public class MetadataCategory extends Localized {
      * @return the id
      */
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = ID_SEQ_NAME)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = ID_SEQ_NAME)
     public int getId() {
         return _id;
     }
 
     /**
-     * Set the id of the category. This is typically set by the JPA entity manager and should only be set by the developer when they
-     * want to
-     * merge new data with an existing entity or want to perform query by example. But even then it is not generally recommended.
+     * Set the id of the category. This is typically set by the JPA entity manager and should only
+     * be set by the developer when they want to merge new data with an existing entity or want to
+     * perform query by example. But even then it is not generally recommended.
      *
      * @param id the id.
      */

@@ -1,10 +1,35 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy;
 
 import com.google.common.io.Closer;
+
 import groovy.lang.Closure;
 import groovy.util.IndentPrinter;
 import groovy.util.slurpersupport.GPathResult;
 import groovy.xml.MarkupBuilder;
+
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.schema.SchemaPlugin;
@@ -23,7 +48,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Contains several functions and properties which can be used when implementing view.groovy formatter files (or the helper classes).
+ * Contains several functions and properties which can be used when implementing view.groovy
+ * formatter files (or the helper classes).
  *
  * @author Jesse on 10/16/2014.
  */
@@ -42,7 +68,8 @@ public class Functions extends SchemaLocalizations {
     }
 
     /**
-     * Creates a groovy.xml.MarkupBuilder object and executes the closure with the MarkupBuilder as its parameter.
+     * Creates a groovy.xml.MarkupBuilder object and executes the closure with the MarkupBuilder as
+     * its parameter.
      *
      * The xml created with the MarkupBuilder is returned as a string.
      *
@@ -66,22 +93,26 @@ public class Functions extends SchemaLocalizations {
     }
 
     /**
-     * Obtain strings from the formatter, the formatter's schema shared translations or web/src/main/webapp/loc/???/formatter.xml .
+     * Obtain strings from the formatter, the formatter's schema shared translations or
+     * web/src/main/webapp/loc/???/formatter.xml .
      *
      * @param key the key to use for looking up the translation
      */
     public String translate(String key) throws Exception {
         return translate(key, null);
     }
+
     /**
-     * Obtain strings from the formatter, the formatter's schema shared translations or web/src/main/webapp/loc/???/formatter.xml.
+     * Obtain strings from the formatter, the formatter's schema shared translations or
+     * web/src/main/webapp/loc/???/formatter.xml.
      *
-     * @param key the key to use for looking up the translation
-     * @param file the name of the xml file to get the strings from (without the .xml).  This may be null in which case all files will
-     *             be searched. if null then for the shared translations the formatter.xml file will be used
-     *            (web/src/main/webapp/loc/???/formatter.xml) and all the formatter translation files will be searched.
-     *             If this is non-null then the formatter translation file will be used if found in the file and the method will
-     *             fallback to searching web/src/main/webapp/loc/???/&amp;file>.xml
+     * @param key  the key to use for looking up the translation
+     * @param file the name of the xml file to get the strings from (without the .xml).  This may be
+     *             null in which case all files will be searched. if null then for the shared
+     *             translations the formatter.xml file will be used (web/src/main/webapp/loc/???/formatter.xml)
+     *             and all the formatter translation files will be searched. If this is non-null
+     *             then the formatter translation file will be used if found in the file and the
+     *             method will fallback to searching web/src/main/webapp/loc/???/&amp;file>.xml
      */
     public String translate(String key, String file) throws Exception {
         String value = translateFromFormatterResources(key, file);
@@ -159,7 +190,7 @@ public class Functions extends SchemaLocalizations {
     }
 
     private Element getFormatterTranslations(Path dir) throws Exception {
-       return fparams.format.getPluginLocResources(fparams.context, dir);
+        return fparams.format.getPluginLocResources(fparams.context, dir);
     }
 
     public String getXPathFrom(GPathResult path) {

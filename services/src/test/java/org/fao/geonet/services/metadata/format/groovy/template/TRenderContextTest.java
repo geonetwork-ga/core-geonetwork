@@ -1,8 +1,33 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy.template;
 
 import com.google.common.collect.Maps;
+
 import groovy.util.XmlSlurper;
 import groovy.util.slurpersupport.GPathResult;
+
 import org.fao.geonet.services.metadata.format.groovy.util.NavBarItem;
 import org.junit.Test;
 
@@ -66,7 +91,7 @@ public class TRenderContextTest {
         String itemKey = "item";
         final XmlSlurper xmlSlurper = new XmlSlurper(false, false);
         final String xml =
-                "<gmd:MD_Metadata xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"><gmd:fileIdentifier><gco:CharacterString "
+            "<gmd:MD_Metadata xmlns:gmd=\"http://www.isotc211.org/2005/gmd\"><gmd:fileIdentifier><gco:CharacterString "
                 + "xmlns:gco=\"http://www.isotc211.org/2005/gco\">da165110-88fd-11da-a88f-000d939bc5d8</gco:CharacterString>"
                 + "</gmd:fileIdentifier></gmd:MD_Metadata>";
 

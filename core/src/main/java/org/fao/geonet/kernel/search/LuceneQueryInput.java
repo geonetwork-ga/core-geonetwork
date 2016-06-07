@@ -23,19 +23,19 @@
 
 package org.fao.geonet.kernel.search;
 
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.kernel.setting.SettingInfo;
 import org.jdom.Element;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 /**
- * Input to {@link LuceneQueryBuilder}, consisting of user-provided parameters plus system-provided parameters.
+ * Input to {@link LuceneQueryBuilder}, consisting of user-provided parameters plus system-provided
+ * parameters.
  *
  * @author heikki doeleman
- * 
  */
 public class LuceneQueryInput extends UserQueryInput {
 
@@ -48,17 +48,9 @@ public class LuceneQueryInput extends UserQueryInput {
 
     private SettingInfo.SearchRequestLanguage requestedLanguageOnly;
 
-    public SettingInfo.SearchRequestLanguage isRequestedLanguageOnly() {
-        return requestedLanguageOnly;
-    }
-
-    public void setRequestedLanguageOnly(SettingInfo.SearchRequestLanguage requestedLanguageOnly) {
-        this.requestedLanguageOnly = requestedLanguageOnly;
-    }
-
     /**
      * Creates this from a JDOM element.
-     * 
+     *
      * @param jdom input
      */
     public LuceneQueryInput(Element jdom) {
@@ -68,18 +60,18 @@ public class LuceneQueryInput extends UserQueryInput {
         setOwner(jdom.getChildText(SearchParameter.OWNER));
 
         @SuppressWarnings("unchecked")
-        List<Element> groupsE = (List<Element>)jdom.getChildren(SearchParameter.GROUP);
-        if(groupsE != null) {
-            Set<String> groups = new HashSet<String>();
-            for(Element groupE : groupsE) {
+        List<Element> groupsE = (List<Element>) jdom.getChildren(SearchParameter.GROUP);
+        if (groupsE != null) {
+            Set<String> groups = new LinkedHashSet<String>();
+            for (Element groupE : groupsE) {
                 groups.add(groupE.getText());
             }
             setGroups(groups);
         }
         @SuppressWarnings("unchecked")
-        List<Element> groupOwnersE = (List<Element>)jdom.getChildren(SearchParameter.GROUPOWNER);
-        Set<String> groupOwners = new HashSet<String>();
-        for(Element groupOwnerE : groupOwnersE) {
+        List<Element> groupOwnersE = (List<Element>) jdom.getChildren(SearchParameter.GROUPOWNER);
+        Set<String> groupOwners = new LinkedHashSet<String>();
+        for (Element groupOwnerE : groupOwnersE) {
             groupOwners.add(groupOwnerE.getText());
         }
         setGroupOwners(groupOwners);
@@ -94,36 +86,42 @@ public class LuceneQueryInput extends UserQueryInput {
         setAdmin(isAdminE != null);
 
         Element isEditable = jdom.getChild(SearchParameter.EDITABLE);
-        if(isEditable != null && StringUtils.isNotEmpty(isEditable.getText())) {
+        if (isEditable != null && StringUtils.isNotEmpty(isEditable.getText())) {
             setEditable(isEditable.getText());
-        }
-        else {
+        } else {
             setEditable("false");
         }
 
     }
 
+    public SettingInfo.SearchRequestLanguage isRequestedLanguageOnly() {
+        return requestedLanguageOnly;
+    }
+
+    public void setRequestedLanguageOnly(SettingInfo.SearchRequestLanguage requestedLanguageOnly) {
+        this.requestedLanguageOnly = requestedLanguageOnly;
+    }
+
     /**
-     *
      * @return a string representation of the object.
      */
     @Override
     public String toString() {
         StringBuffer groupsToString = new StringBuffer();
-        for(String group : groups) {
+        for (String group : groups) {
             groupsToString.append(" group: " + group);
         }
         StringBuffer groupOwnersToString = new StringBuffer();
-        for(String groupOwner : groupOwners) {
+        for (String groupOwner : groupOwners) {
             groupOwnersToString.append(" groupOwner: " + groupOwner);
         }
         return new StringBuilder().append("owner:").append(owner)
-                .append(groupsToString)
-                .append(groupOwnersToString)
-                .append(" isReviewer:").append(isReviewer)
-                .append(" isUserAdmin:").append(isUserAdmin)
-                .append(" isAdmin:").append(isAdmin)
-                .append(" ").append(super.toString()).toString();
+            .append(groupsToString)
+            .append(groupOwnersToString)
+            .append(" isReviewer:").append(isReviewer)
+            .append(" isUserAdmin:").append(isUserAdmin)
+            .append(" isAdmin:").append(isAdmin)
+            .append(" ").append(super.toString()).toString();
     }
 
     public Set<String> getGroups() {
@@ -131,8 +129,8 @@ public class LuceneQueryInput extends UserQueryInput {
     }
 
     public void setGroups(Set<String> groups) {
-        if(this.groups == null) {
-            this.groups = new HashSet<String>();
+        if (this.groups == null) {
+            this.groups = new LinkedHashSet<String>();
         }
         this.groups = groups;
     }
@@ -174,8 +172,8 @@ public class LuceneQueryInput extends UserQueryInput {
     }
 
     public void setGroupOwners(Set<String> groupOwners) {
-        if(this.groupOwners == null) {
-            this.groupOwners = new HashSet<String>();
+        if (this.groupOwners == null) {
+            this.groupOwners = new LinkedHashSet<String>();
         }
         this.groupOwners = groupOwners;
     }

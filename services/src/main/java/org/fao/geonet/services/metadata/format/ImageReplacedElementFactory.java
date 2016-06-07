@@ -1,8 +1,33 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format;
 
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
+
 import com.itextpdf.text.Image;
+
 import org.apache.commons.io.IOUtils;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.utils.Log;
@@ -21,6 +46,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Set;
+
 import javax.imageio.ImageIO;
 
 public class ImageReplacedElementFactory implements ReplacedElementFactory {
@@ -33,9 +59,24 @@ public class ImageReplacedElementFactory implements ReplacedElementFactory {
         this.baseURL = baseURL;
     }
 
+    private static Set<String> getSupportedExts() {
+        if (imgFormatExts == null) {
+            synchronized (ImageReplacedElementFactory.class) {
+                if (imgFormatExts == null) {
+                    imgFormatExts = Sets.newHashSet();
+                    for (String ext : ImageIO.getReaderFileSuffixes()) {
+                        imgFormatExts.add(ext.toLowerCase());
+                    }
+                }
+            }
+        }
+
+        return imgFormatExts;
+    }
+
     @Override
     public ReplacedElement createReplacedElement(LayoutContext layoutContext, BlockBox box,
-            UserAgentCallback userAgentCallback, int cssWidth, int cssHeight) {
+                                                 UserAgentCallback userAgentCallback, int cssWidth, int cssHeight) {
         org.w3c.dom.Element element = box.getElement();
         if (element == null) {
             return null;
@@ -49,8 +90,8 @@ public class ImageReplacedElementFactory implements ReplacedElementFactory {
                 String[] parts = src.split("\\?|&");
                 builder.append(parts[0]);
                 builder.append('?');
-                for (int i = 1; i < parts.length ; i++) {
-                    if(i>1) {
+                for (int i = 1; i < parts.length; i++) {
+                    if (i > 1) {
                         builder.append('&');
                     }
                     String[] param = parts[i].split("=");
@@ -80,21 +121,6 @@ public class ImageReplacedElementFactory implements ReplacedElementFactory {
         return ext.trim().isEmpty() || getSupportedExts().contains(ext);
     }
 
-    private static Set<String> getSupportedExts() {
-        if (imgFormatExts == null) {
-            synchronized (ImageReplacedElementFactory.class) {
-                if (imgFormatExts == null) {
-                    imgFormatExts = Sets.newHashSet();
-                    for (String ext : ImageIO.getReaderFileSuffixes()) {
-                        imgFormatExts.add(ext.toLowerCase());
-                    }
-                }
-            }
-        }
-
-        return imgFormatExts;
-    }
-
     private ReplacedElement loadImage(LayoutContext layoutContext, BlockBox box, UserAgentCallback userAgentCallback,
                                       int cssWidth, int cssHeight, String url, float scaleFactor) {
         InputStream input = null;
@@ -106,7 +132,7 @@ public class ImageReplacedElementFactory implements ReplacedElementFactory {
             image.scaleAbsolute(image.getPlainWidth() * scaleFactor, image.getPlainHeight() * scaleFactor);
             FSImage fsImage = new ITextFSImage(image);
 
-            if(cssHeight > -1 && cssWidth > -1) {
+            if (cssHeight > -1 && cssWidth > -1) {
                 fsImage.scale(cssWidth, cssHeight);
             }
             int maxWidth = (int) (900 * scaleFactor);

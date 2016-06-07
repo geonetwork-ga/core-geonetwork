@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy.template;
 
 import org.fao.geonet.ApplicationContextHolder;
@@ -30,7 +53,7 @@ public class TemplateCacheTest {
         templateCache.xmlTemplateParser = AbstractTemplateParserTest.createTestParser(SystemInfo.STAGE_TESTING);
         final Path functionFile = IO.toPath(FormatIntegrationTest.class.getResource("functions.xsl").toURI());
         final FileResult fileResult = templateCache.createFileResult(functionFile.getParent(), functionFile.getParent(),
-                functionFile.getParent(), functionFile.getFileName().toString(), Collections.<String, Object>emptyMap());
+            functionFile.getParent(), functionFile.getFileName().toString(), Collections.<String, Object>emptyMap());
 
         assertNotNull(fileResult);
         assertNotNull(templateCache.canonicalFileNameToText.get(functionFile.toRealPath()));
@@ -61,21 +84,21 @@ public class TemplateCacheTest {
 
             final Map<String, Object> emptyMap = Collections.emptyMap();
             FileResult fileResult = templateCache.createFileResult(file0.getParent(), schemaAndRootDir,
-                    schemaAndRootDir, file0.getFileName().toString(), emptyMap);
+                schemaAndRootDir, file0.getFileName().toString(), emptyMap);
             assertEquals(new String(Files.readAllBytes(file0), Constants.CHARSET).length(), fileResult.toString().length());
 
             fileResult = templateCache.createFileResult(file0.getParent(), schemaAndRootDir,
-                    schemaAndRootDir, file1.getFileName().toString(), emptyMap);
+                schemaAndRootDir, file1.getFileName().toString(), emptyMap);
             assertEquals(new String(Files.readAllBytes(file1), Constants.CHARSET).length(), fileResult.toString().length());
 
 
             fileResult = templateCache.createFileResult(file0.getParent(), schemaAndRootDir,
-                    schemaAndRootDir, file2.getFileName().toString(), emptyMap);
+                schemaAndRootDir, file2.getFileName().toString(), emptyMap);
             assertEquals(new String(Files.readAllBytes(file2), Constants.CHARSET).length(), fileResult.toString().length());
 
 
             fileResult = templateCache.createFileResult(file0.getParent(), schemaAndRootDir,
-                    schemaAndRootDir, file3.getFileName().toString(), emptyMap);
+                schemaAndRootDir, file3.getFileName().toString(), emptyMap);
             assertEquals(new String(Files.readAllBytes(file3), Constants.CHARSET).length(), fileResult.toString().length());
 
         }

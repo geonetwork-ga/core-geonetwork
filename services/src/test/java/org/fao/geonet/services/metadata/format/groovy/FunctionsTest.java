@@ -1,10 +1,36 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy;
 
 import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
+
 import groovy.util.slurpersupport.GPathResult;
+
 import jeeves.server.context.ServiceContext;
 import jeeves.server.dispatchers.guiservices.XmlCacheManager;
+
 import org.fao.geonet.AbstractCoreIntegrationTest;
 import org.fao.geonet.Constants;
 import org.fao.geonet.domain.IsoLanguage;
@@ -37,6 +63,12 @@ public class FunctionsTest {
     private Functions functions;
     private Path schemaDir;
 
+    private static IsoLanguage isoLang(String engTranslation) {
+        final IsoLanguage isoLanguage = new IsoLanguage();
+        isoLanguage.getLabelTranslations().put("eng", engTranslation);
+        return isoLanguage;
+    }
+
     @Before
     public void setUp() throws Exception {
 
@@ -47,7 +79,7 @@ public class FunctionsTest {
         Mockito.when(repository.findAllByShortCode("de")).thenReturn(Arrays.asList(isoLang("German")));
 
         this.schemaDir = IO.toPath(FunctionsTest.class.getResource("translation-test/schema-dir/formatter/config.properties").toURI())
-                .getParent().getParent();
+            .getParent().getParent();
         SchemaManager schemaManager = Mockito.mock(SchemaManager.class);
         Mockito.when(schemaManager.getSchemaDir("parent-schema")).thenReturn(schemaDir.getParent().resolve("parent-schema"));
 
@@ -92,20 +124,13 @@ public class FunctionsTest {
         Mockito.when(env.getLang3()).thenReturn("eng");
         Mockito.when(env.getLang2()).thenReturn("#EN");
 
-        functions = new Functions(fparams, env){
+        functions = new Functions(fparams, env) {
             @Override
             protected ConfigFile getConfigFile(SchemaManager schemaManager, String schema) throws IOException {
                 return Mockito.mock(ConfigFile.class);
             }
         };
     }
-
-    private static IsoLanguage isoLang(String engTranslation) {
-        final IsoLanguage isoLanguage = new IsoLanguage();
-        isoLanguage.getLabelTranslations().put("eng", engTranslation);
-        return isoLanguage;
-    }
-
 
     @Test
     public void testTranslate() throws Exception {

@@ -4,7 +4,8 @@
       <!-- TODO: Status are disabled based on profiles and
       previous values. See https://github.com/geonetwork/core-geonetwork/blob/develop/web/src/main/webapp/xsl/metadata-status.xsl#L15 -->
       <div class="radio"
-           data-ng-repeat="s in status | orderBy: 'displayorder'" data-ng-class="{disabled : cantStatus(s.id)}">
+           data-ng-repeat="s in status | orderBy: 'displayorder'"
+           data-ng-class="{disabled : cantStatus(s.id)}">
         <label>
           <input type="radio"
                  name="status"
@@ -23,11 +24,17 @@
                   data-ng-model="changeMessage"></textarea>
       </div>
 
-      <button class="btn btn-default"
-              data-gn-click-and-spin="updateStatus()">
-        <i class="fa fa-bell"></i>&nbsp;
-        <span data-translate="">updateStatus</span>
-      </button>
+
+      <div class="btn-toolbar">
+        <button class="btn btn-default"
+                data-gn-click-and-spin="updateStatus()">
+          <i class="fa fa-bell"></i>&nbsp;
+          <span data-translate="">updateStatus</span>
+        </button>
+
+        <div data-gn-need-help="user-guide/workflow/life-cycle.html"
+             data-icon-only="true"></div>
+      </div>
     </div>
   </div>
 </form>

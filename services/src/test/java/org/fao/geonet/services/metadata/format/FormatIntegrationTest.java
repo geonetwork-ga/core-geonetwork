@@ -1,8 +1,33 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format;
 
 import com.google.common.collect.Lists;
+
 import jeeves.config.springutil.JeevesDelegatingFilterProxy;
 import jeeves.server.context.ServiceContext;
+
 import org.apache.http.HttpStatus;
 import org.apache.log4j.Level;
 import org.fao.geonet.AbstractCoreIntegrationTest;
@@ -34,9 +59,11 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -52,6 +79,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+
 import javax.annotation.Nonnull;
 import javax.servlet.ServletContext;
 
@@ -68,6 +96,10 @@ import static org.junit.Assert.fail;
 @ContextConfiguration(inheritLocations = true, locations = "classpath:formatter-test-context.xml")
 public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
 
+    @Autowired
+    protected MockRequestFactoryGeonet requestFactory;
+    @Autowired
+    protected SystemInfo systemInfo;
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
@@ -86,11 +118,6 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
     private DataManager dataManager;
     @Autowired
     private MetadataRepository metadataRepository;
-    @Autowired
-    protected MockRequestFactoryGeonet requestFactory;
-    @Autowired
-    protected SystemInfo systemInfo;
-
     private ServiceContext serviceContext;
     private int id;
     private String schema;
@@ -113,7 +140,7 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
         metadata.getHarvestInfo().setHarvested(false);
 
         this.id = dataManager.insertMetadata(serviceContext, metadata, sampleMetadataXml, false, false, false, UpdateDatestamp.NO,
-                false, false).getId();
+            false, false).getId();
 
         dataManager.indexMetadata(Lists.newArrayList("" + this.id));
 
@@ -148,8 +175,8 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
             request.setMethod("GET");
             response = new MockHttpServletResponse();
 
-            request.addHeader("If-Modified-Since", Long.valueOf(lastModified));
-            formatService.exec("eng", "html", "" + id, null, formatterName, "true", false, _100,new ServletWebRequest(request, response));
+            request.addHeader("If-Modified-Since", lastModified);
+            formatService.exec("eng", "html", "" + id, null, formatterName, "true", false, _100, new ServletWebRequest(request, response));
             assertEquals(HttpStatus.SC_NOT_MODIFIED, response.getStatus());
             final ISODate newChangeDate = new ISODate();
             metadataRepository.update(id, new Updater<Metadata>() {
@@ -165,9 +192,9 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
             request.setMethod("GET");
             response = new MockHttpServletResponse();
 
-            request.addHeader("If-Modified-Since", Long.valueOf(lastModified));
+            request.addHeader("If-Modified-Since", lastModified);
             formatService.exec("eng", "html", "" + id, null, formatterName, "true", false, _100, new ServletWebRequest(request, response));
-             assertEquals(HttpStatus.SC_OK, response.getStatus());
+            assertEquals(HttpStatus.SC_OK, response.getStatus());
         } finally {
             systemInfo.setStagingProfile(stage);
         }
@@ -184,7 +211,7 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
 
 
         final String formatterName = "groovy-illegal-env-access-formatter";
-        final URL testFormatterViewFile = FormatIntegrationTest.class.getResource(formatterName+"/view.groovy");
+        final URL testFormatterViewFile = FormatIntegrationTest.class.getResource(formatterName + "/view.groovy");
         final Path testFormatter = IO.toPath(testFormatterViewFile.toURI()).getParent();
         final Path formatterDir = this.dataDirectory.getFormatterDir();
         IO.copyDirectoryOrFile(testFormatter, formatterDir.resolve(formatterName), false);
@@ -252,7 +279,7 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
             try {
                 response = new MockHttpServletResponse();
                 formatService.exec("eng", "testpdf", "" + id, null, formatter.getId(), "true", false, _100,
-                        new ServletWebRequest(request, response));
+                    new ServletWebRequest(request, response));
 //                Files.write(Paths.get("e:/tmp/view.pdf"), response.getContentAsByteArray());
 //                System.exit(0);
             } catch (Throwable t) {
@@ -268,15 +295,13 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
         MockHttpServletRequest request = new MockHttpServletRequest(context, "GET", "http://localhost:8080/geonetwork/srv/eng/md.formatter");
         request.setPathInfo("/eng/md.formatter");
 
-        WebApplicationContext webAppContext = new GenericWebApplicationContext((DefaultListableBeanFactory) _applicationContext.getBeanFactory());
-
         final String applicationContextAttributeKey = "srv";
-        request.getServletContext().setAttribute(applicationContextAttributeKey, webAppContext);
+        request.getServletContext().setAttribute(applicationContextAttributeKey, _applicationContext);
         ServletRequestAttributes requestAttributes = new ServletRequestAttributes(request);
 
         RequestContextHolder.setRequestAttributes(requestAttributes);
         final String formatterName = "xsl-test-formatter";
-        final URL testFormatterViewFile = FormatIntegrationTest.class.getResource(formatterName+"/view.xsl");
+        final URL testFormatterViewFile = FormatIntegrationTest.class.getResource(formatterName + "/view.xsl");
         final Path testFormatter = IO.toPath(testFormatterViewFile.toURI()).getParent();
         final Path formatterDir = this.dataDirectory.getFormatterDir();
         Files.deleteIfExists(formatterDir.resolve("functions.xsl"));
@@ -300,7 +325,7 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         formatService.execXml("eng", "xml", "partial_view", Xml.getString(element), null, "iso19139", _100, null,
-                new ServletWebRequest(request, response));
+            new ServletWebRequest(request, response));
 
         final String view = response.getContentAsString();
         assertTrue(view.contains("KML (1)"));
@@ -312,18 +337,18 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
         final URL resource = AbstractCoreIntegrationTest.class.getResource("kernel/valid-getrecordbyidresponse.iso19139.xml");
         final Element sampleMetadataXml = Xml.loadStream(resource.openStream());
         final Element element = Xml.selectElement(sampleMetadataXml, "*//csw:GetRecordByIdResponse",
-                Lists.newArrayList(Namespace.getNamespace("csw", "http://www.opengis.net/cat/csw/2.0.2")));
+            Lists.newArrayList(Namespace.getNamespace("csw", "http://www.opengis.net/cat/csw/2.0.2")));
 
         MockHttpServletRequest request = new MockHttpServletRequest();
         MockHttpServletResponse response = new MockHttpServletResponse();
         formatService.execXml("eng", "xml", "partial_view", Xml.getString(sampleMetadataXml), null, "iso19139", _100, "gmd:MD_Metadata",
-                new ServletWebRequest(request, response));
+            new ServletWebRequest(request, response));
 
         final String view = response.getContentAsString();
         assertTrue(view.contains("KML (1)"));
     }
 
-    @Test @DirtiesContext
+    @Test
     public void testXmlFormatUrl() throws Exception {
         final Element sampleMetadataXml = getSampleMetadataXml();
         final Element element = Xml.selectElement(sampleMetadataXml, "*//gmd:MD_Format", Lists.newArrayList(ISO19139Namespaces.GMD));
@@ -342,7 +367,7 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
         assertTrue(view.contains("Format"));
     }
 
-    @Test @DirtiesContext
+    @Test
     public void testXmlFormatRelativeUrl() throws Exception {
         final Element sampleMetadataXml = getSampleMetadataXml();
         final Element element = Xml.selectElement(sampleMetadataXml, "*//gmd:MD_Format", Lists.newArrayList(ISO19139Namespaces.GMD));
@@ -430,7 +455,7 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
 
     private String configureGroovyTestFormatter() throws URISyntaxException, IOException {
         final String formatterName = "groovy-test-formatter";
-        final URL testFormatterViewFile = FormatIntegrationTest.class.getResource(formatterName+"/view.groovy");
+        final URL testFormatterViewFile = FormatIntegrationTest.class.getResource(formatterName + "/view.groovy");
         final Path testFormatter = IO.toPath(testFormatterViewFile.toURI()).getParent();
         final Path formatterDir = this.dataDirectory.getFormatterDir();
         IO.copyDirectoryOrFile(testFormatter, formatterDir.resolve(formatterName), false);
@@ -443,8 +468,8 @@ public class FormatIntegrationTest extends AbstractServiceIntegrationTest {
 
         final Path dublinCoreSchemaDir = this.schemaManager.getSchemaDir("dublin-core").resolve("formatter/groovy");
         Files.createDirectories(dublinCoreSchemaDir);
-        IO.copyDirectoryOrFile(IO.toPath(FormatIntegrationTest.class.getResource(formatterName+"/dublin-core-groovy").toURI()),
-                dublinCoreSchemaDir.resolve("DCFunctions.groovy"), false);
+        IO.copyDirectoryOrFile(IO.toPath(FormatIntegrationTest.class.getResource(formatterName + "/dublin-core-groovy").toURI()),
+            dublinCoreSchemaDir.resolve("DCFunctions.groovy"), false);
         return formatterName;
     }
 

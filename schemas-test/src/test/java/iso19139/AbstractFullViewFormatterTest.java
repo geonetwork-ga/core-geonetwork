@@ -1,7 +1,32 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package iso19139;
 
 import com.google.common.collect.Lists;
+
 import jeeves.server.context.ServiceContext;
+
 import org.fao.geonet.guiservices.metadata.GetRelated;
 import org.fao.geonet.languages.IsoLanguagesMapper;
 import org.fao.geonet.services.metadata.format.AbstractFormatterTest;
@@ -103,14 +128,15 @@ public abstract class AbstractFullViewFormatterTest extends AbstractFormatterTes
         private FormatType formatType;
         private Functions functions;
         private String view;
-        private String requestLanguage = "eng";;
+        private String requestLanguage = "eng";
+        ;
 
         public Format(FormatType formatType) throws Exception {
             this.formatType = formatType;
             GetRelated related = Mockito.mock(GetRelated.class);
             Element relatedXml = Xml.loadFile(AbstractFullViewFormatterTest.class.getResource("relations.xml"));
             Mockito.when(related.getRelated(Mockito.<ServiceContext>any(), Mockito.anyInt(), Mockito.anyString(), Mockito.anyString(),
-                    Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean())).thenReturn(relatedXml);
+                Mockito.anyInt(), Mockito.anyInt(), Mockito.anyBoolean())).thenReturn(relatedXml);
             _applicationContext.getBeanFactory().registerSingleton("getRelated", related);
 
 
@@ -137,7 +163,7 @@ public abstract class AbstractFullViewFormatterTest extends AbstractFormatterTes
 
 //            formatService.exec("eng", FormatType.html.name(), "" + id, null, formatterId, "true", false, request, response);
             formatService.exec(getRequestLanguage(), formatType.name(), "" + id, null, formatterId, "true", false, _100,
-                    new ServletWebRequest(request, response));
+                new ServletWebRequest(request, response));
             view = response.getContentAsString();
 //            Files.write(view, new File("e:/tmp/view.html"), Constants.CHARSET);
 

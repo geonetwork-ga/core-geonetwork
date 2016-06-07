@@ -1,11 +1,27 @@
-package org.fao.geonet.utils;
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
 
-import org.apache.jcs.access.exception.CacheException;
-import org.apache.xerces.dom.DOMInputImpl;
-import org.apache.xerces.util.XMLCatalogResolver;
-import org.fao.geonet.JeevesJCS;
-import org.jdom.Element;
-import org.w3c.dom.ls.LSInput;
+package org.fao.geonet.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -14,27 +30,33 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.FileSystemNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import org.apache.jcs.access.exception.CacheException;
+import org.apache.xerces.dom.DOMInputImpl;
+import org.apache.xerces.util.XMLCatalogResolver;
+import org.fao.geonet.JeevesJCS;
+import org.jdom.Element;
+import org.w3c.dom.ls.LSInput;
+
 /* Resolves system and public ids as well as URIs using oasis catalog
    as per XMLCatalogResolver, but goes further and retrieves any
-	 external references since we need to use config'd proxy details on 
+	 external references since we need to use config'd proxy details on
 	 any http connection we make and Xerces doesn't do this (why?)
 	 hence this extension.  */
 
 public class XmlResolver extends XMLCatalogResolver {
 
-    private ProxyParams proxyParams;
-
     public static final String XMLRESOLVER_JCS = "XmlResolver";
+    private ProxyParams proxyParams;
 
 
     //--------------------------------------------------------------------------
 
     /**
-     * <p>Constructs a catalog resolver with the given
-     * list of entry files.</p>
+     * <p>Constructs a catalog resolver with the given list of entry files.</p>
      *
      * @param catalogs    an ordered array list of absolute URIs
      * @param proxyParams proxy parameters when connecting to external sites
@@ -47,30 +69,34 @@ public class XmlResolver extends XMLCatalogResolver {
     //--------------------------------------------------------------------------
 
     /**
-     * <p>Resolves any public and system ids as well as URIs
-     * from the catalog - also retrieves any external references
-     * using Jeeves XmlRequest so that config'd proxy details can
-     * be used on the http connection.</p>
+     * <p>Resolves any public and system ids as well as URIs from the catalog - also retrieves any
+     * external references using Jeeves XmlRequest so that config'd proxy details can be used on the
+     * http connection.</p>
      *
      * @param type         the type of the resource being resolved (usually XML schema)
-     * @param namespaceURI the namespace of the resource being resolved,
-     *                     or <code>null</code> if none was supplied
-     * @param publicId     the public identifier of the resource being resolved,
-     *                     or <code>null</code> if none was supplied
-     * @param systemId     the system identifier of the resource being resolved,
-     *                     or <code>null</code> if none was supplied
-     * @param baseURI      the absolute base URI of the resource being parsed,
-     *                     or <code>null</code> if there is no base URI
+     * @param namespaceURI the namespace of the resource being resolved, or <code>null</code> if
+     *                     none was supplied
+     * @param publicId     the public identifier of the resource being resolved, or
+     *                     <code>null</code> if none was supplied
+     * @param systemId     the system identifier of the resource being resolved, or
+     *                     <code>null</code> if none was supplied
+     * @param baseURI      the absolute base URI of the resource being parsed, or <code>null</code>
+     *                     if there is no base URI
      */
     public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 
         if (Log.isDebugEnabled(Log.XML_RESOLVER))
             Log.debug(Log.XML_RESOLVER, "Jeeves XmlResolver: Before resolution: Type: " + type + " NamespaceURI :" + namespaceURI + " " +
-                                        "PublicId :" + publicId + " SystemId :" + systemId + " BaseURI:" + baseURI);
+                "PublicId :" + publicId + " SystemId :" + systemId + " BaseURI:" + baseURI);
+        LSInput result = null;
 
-        LSInput result = tryToResolveOnFs(publicId, systemId, baseURI);
-        if (result != null) {
-            return result;
+        try {
+            result = tryToResolveOnFs(publicId, systemId, baseURI);
+            if (result != null) {
+                return result;
+            }
+        } catch (FileSystemNotFoundException e) {
+            //Do nothing, just continue
         }
 
         result = super.resolveResource(type, namespaceURI, publicId, systemId, baseURI);
@@ -83,7 +109,7 @@ public class XmlResolver extends XMLCatalogResolver {
 
         if (Log.isDebugEnabled(Log.XML_RESOLVER))
             Log.debug(Log.XML_RESOLVER, "Jeeves XmlResolver: After resolution: PublicId :" + publicId + " SystemId :" + systemId + " " +
-                                        "BaseURI:" + baseURI);
+                "BaseURI:" + baseURI);
 
         URL externalRef = null;
         try {
@@ -97,7 +123,7 @@ public class XmlResolver extends XMLCatalogResolver {
                     URL ref = new URL(baseURI);
                     String thePath = new File(ref.getPath()).getParent().replace('\\', '/');
                     externalRef = new URI(ref.getProtocol(), null, ref.getHost(), ref.getPort(), thePath + "/" + systemId, null,
-                            null).toURL();
+                        null).toURL();
                 }
             }
         } catch (MalformedURLException e) { // leave this to someone else?
@@ -158,7 +184,7 @@ public class XmlResolver extends XMLCatalogResolver {
             try {
                 Path basePath = IO.toPath(new URI(baseURI));
                 Path parent = basePath.getParent();
-                if(parent == null)  {
+                if (parent == null) {
                     throw new RuntimeException(basePath.toUri() + " does not have parent");
                 }
                 final Path resolved = parent.resolve(systemId);

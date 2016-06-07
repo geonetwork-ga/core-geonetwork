@@ -1,6 +1,30 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.groovy.template;
 
 import com.google.common.annotations.VisibleForTesting;
+
 import org.fao.geonet.Constants;
 import org.fao.geonet.SystemInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +40,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Stack;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -23,9 +48,9 @@ import javax.xml.parsers.SAXParserFactory;
 /**
  * This class parses a XML Template file into a tree data structure representing the template.
  * <p/>
- * Nodes in the tree can have custom behaviour that is determined according to the attributes on the template XML.  For example
- * a node might be an nonEmpty node where the node will only be rendered if the attribute is nonEmpty
- * (non-empty/non-null string or collection)
+ * Nodes in the tree can have custom behaviour that is determined according to the attributes on the
+ * template XML.  For example a node might be an nonEmpty node where the node will only be rendered
+ * if the attribute is nonEmpty (non-empty/non-null string or collection)
  *
  * @author Jesse on 11/29/2014.
  */
@@ -47,7 +72,7 @@ public class TemplateParser {
         } catch (IOException e) {
             throw new TemplateException(e);
         } catch (TemplateException e) {
-            if (e.getCause()!=null) {
+            if (e.getCause() != null) {
                 throw new TemplateException("Error when parsing " + path + ":" + e.getCause().getMessage(), e.getCause());
             } else {
                 throw new TemplateException("Error when parsing " + path + ":" + e.getMessage(), e);
@@ -101,7 +126,7 @@ public class TemplateParser {
                     if (factory.applicable(localName, qName, attributes)) {
                         if (found != null) {
                             throw new TemplateException(
-                                    "More than one directive attribute was found on " + qName + "\nFound: " +
+                                "More than one directive attribute was found on " + qName + "\nFound: " +
                                     found.getClass().getSimpleName() + " and " + factory.getClass().getSimpleName());
                         }
                         setCurrentNode(factory.create(localName, qName, attributes));

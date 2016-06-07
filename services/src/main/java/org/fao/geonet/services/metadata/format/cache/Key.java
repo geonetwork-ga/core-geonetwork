@@ -1,3 +1,26 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet.services.metadata.format.cache;
 
 import org.fao.geonet.services.metadata.format.FormatType;
@@ -18,12 +41,13 @@ public class Key {
 
     /**
      * Constructor.
-     * @param mdId the id of the metadata
-     * @param lang the current ui language
-     * @param formatType the content type of the output
-     * @param formatterId the formatter used to create the output
-     * @param hideWithheld if true then elements in the metadata with the attribute gco:nilreason="withheld" are being hidden
-     * @param width
+     *
+     * @param mdId         the id of the metadata
+     * @param lang         the current ui language
+     * @param formatType   the content type of the output
+     * @param formatterId  the formatter used to create the output
+     * @param hideWithheld if true then elements in the metadata with the attribute
+     *                     gco:nilreason="withheld" are being hidden
      */
     public Key(int mdId, String lang, FormatType formatType, String formatterId, boolean hideWithheld, FormatterWidth width) {
         this.mdId = mdId;
@@ -65,12 +89,12 @@ public class Key {
     @Override
     public String toString() {
         return "Key{" +
-               "mdId=" + mdId +
-               ", lang='" + lang + '\'' +
-               ", width=" + width +
-               ", formatType=" + formatType +
-               ", formatterId='" + formatterId + '\'' +
-               ", hideWithheld=" + hideWithheld +
-               '}';
+            "mdId=" + mdId +
+            ", lang='" + lang + '\'' +
+            ", width=" + width +
+            ", formatType=" + formatType +
+            ", formatterId='" + formatterId + '\'' +
+            ", hideWithheld=" + hideWithheld +
+            '}';
     }
 }

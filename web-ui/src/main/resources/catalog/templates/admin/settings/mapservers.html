@@ -113,12 +113,12 @@
 
                 <div class="col-sm-9">
                   <input type="password" class="form-control"
-                         required=""
+                         required="required"
+                         autocomplete="off"
                          data-ng-model="mapserverSelected.password"/>
                 </div>
               </div>
             </fieldset>
-
 
             <div class="form-group">
               <label class="control-label col-sm-3" data-translate="">workspace</label>
@@ -136,6 +136,14 @@
               </div>
               <div class="col-sm-9 col-sm-offset-3">
                 <p class="help-block" data-translate="">workspace-help</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-3" data-translate="">pushStyleInWorkspace</label>
+              <div class="col-sm-9">
+                <input type="checkbox" name="pushstyleinworkspace"
+                       data-ng-checked="mapserverSelected.pushStyleInWorkspace == 'true'"/>
               </div>
             </div>
 
@@ -186,14 +194,13 @@
   </div>
 
 
-
   <div class="modal fade" id="passwordResetModal" tabindex="-1" role="dialog"
        aria-labelledby="{{'passwordReset' | translate}}" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-              >&times;</button>
+          >&times;</button>
           <h4 class="modal-title" data-translate=""
               data-translate-values="{ user: '{{mapserverSelected.name}}'}">
             resetPasswordTitle</h4>
@@ -216,7 +223,8 @@
 
               <div class="col-sm-9">
                 <input type="password" class="form-control"
-                       required=""
+                       required="required"
+                       autocomplete="off"
                        data-ng-model="resetPassword"/>
               </div>
             </div>
@@ -226,7 +234,7 @@
           <button type="button" class="btn" data-dismiss="modal">
             <i class="fa fa-ban-circle"></i>&nbsp;
             <span data-translate=""
-                >cancel</span></button>
+            >cancel</span></button>
           <button type="button" class="btn btn-primary"
                   data-ng-click="saveNewPassword()">
             <i class="fa fa-lock"></i>&nbsp;

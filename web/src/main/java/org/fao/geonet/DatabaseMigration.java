@@ -1,8 +1,34 @@
+/*
+ * Copyright (C) 2001-2016 Food and Agriculture Organization of the
+ * United Nations (FAO-UN), United Nations World Food Programme (WFP)
+ * and United Nations Environment Programme (UNEP)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ *
+ * Contact: Jeroen Ticheler - FAO - Viale delle Terme di Caracalla 2,
+ * Rome - Italy. email: geonetwork@osgeo.org
+ */
+
 package org.fao.geonet;
 
 import com.google.common.util.concurrent.Callables;
+
 import com.vividsolutions.jts.util.Assert;
+
 import jeeves.server.sources.http.ServletPathFinder;
+
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Pair;
 import org.fao.geonet.lib.DatabaseType;
@@ -12,6 +38,7 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.ByteArrayOutputStream;
@@ -26,6 +53,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
+
 import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
@@ -33,9 +61,7 @@ import javax.sql.DataSource;
  * Postprocessor that runs after the jdbcDataSource bean has been initialized and migrates the
  * database as soon as it is.
  * <p/>
- * User: Jesse
- * Date: 9/2/13
- * Time: 8:01 PM
+ * User: Jesse Date: 9/2/13 Time: 8:01 PM
  */
 public class DatabaseMigration implements BeanPostProcessor {
     private static final int VERSION_NUMBER_ID_BEFORE_2_11 = 15;
@@ -49,7 +75,9 @@ public class DatabaseMigration implements BeanPostProcessor {
 
     private Callable<LinkedHashMap<String, List<String>>> _migration;
 
-    private Logger _logger = Log.createLogger(Geonet.GEONETWORK);
+    private String initAfter;
+
+    private Logger _logger = Log.createLogger(Geonet.GEONETWORK + ".databasemigration");
     private boolean foundErrors;
 
     @Override
@@ -59,36 +87,48 @@ public class DatabaseMigration implements BeanPostProcessor {
 
     @Override
     public final Object postProcessAfterInitialization(final Object bean, final String beanName) {
-        if (bean instanceof DataSource) {
-            try {
-                String version;
-                String subVersion;
-                ServletContext servletContext;
-                Path path;
-
-
+        try {
+            if (Class.forName(initAfter).isInstance(bean)) {
+                _logger.debug(String.format("DB Migration / Running '%s' after initialization of '%s'.", bean.getClass(), initAfter));
                 try {
-                    servletContext = _applicationContext.getBean(ServletContext.class);
-                } catch (NoSuchBeanDefinitionException e) {
-                    if (_applicationContext instanceof WebApplicationContext) {
-                        WebApplicationContext context = (WebApplicationContext) _applicationContext;
-                        servletContext = context.getServletContext();
-                    } else {
-                        _logger.warning("No servletContext found.  Database migration aborted.");
-                        return bean;
+                    String version;
+                    String subVersion;
+                    ServletContext servletContext;
+                    Path path;
+
+
+                    try {
+                        servletContext = _applicationContext.getBean(ServletContext.class);
+                    } catch (NoSuchBeanDefinitionException e) {
+                        if (_applicationContext instanceof WebApplicationContext) {
+                            WebApplicationContext context = (WebApplicationContext) _applicationContext;
+                            servletContext = context.getServletContext();
+                        } else {
+                            _logger.warning("No servletContext found.  Database migration aborted.");
+                            return bean;
+                        }
                     }
+
+                    version = this.systemInfo.getVersion();
+                    subVersion = this.systemInfo.getSubVersion();
+                    ServletPathFinder pathFinder = new ServletPathFinder(servletContext);
+
+                    path = pathFinder.getAppPath();
+                    DataSource ds = null;
+                    if (bean instanceof JpaTransactionManager) {
+                        ds = ((JpaTransactionManager) bean).getDataSource();
+                    } else {
+                        ds = ((DataSource) bean);
+                    }
+                    migrateDatabase(servletContext, path, ds, version, subVersion);
+                } catch (Throwable e) {
+                    throw new RuntimeException(e);
                 }
-
-                version = this.systemInfo.getVersion();
-                subVersion = this.systemInfo.getSubVersion();
-                ServletPathFinder pathFinder = new ServletPathFinder(servletContext);
-
-                path = pathFinder.getAppPath();
-                migrateDatabase(servletContext, path, (DataSource) bean, version, subVersion);
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
+                return bean;
             }
-            return bean;
+        } catch (ClassNotFoundException e) {
+            _logger.error(String.format("DB Migration / '%s' is an invalid value for initAfter. Class not found. Error is %s", initAfter, e.getMessage()));
+            e.printStackTrace();
         }
         return bean;
     }
@@ -139,7 +179,7 @@ public class DatabaseMigration implements BeanPostProcessor {
         _logger.info("      Database version:" + dbVersion + " subversion:" + dbSubVersion);
         if (dbVersion == null || webappVersion == null) {
             _logger.warning("      Database does not contain any version information. Check that the database is a GeoNetwork "
-                            + "database with data.  Migration step aborted.");
+                + "database with data. The database is probably empty, no migration required.");
             return true;
         }
 
@@ -197,20 +237,20 @@ public class DatabaseMigration implements BeanPostProcessor {
                 }
                 if (anyMigrationAction && !anyMigrationError) {
                     _logger.info("      Successfull migration.\n"
-                                 + "      Catalogue administrator still need to update the catalogue\n"
-                                 + "      logo and data directory in order to complete the migration process.\n"
-                                 + "      Lucene index rebuild is also recommended after migration."
+                        + "      Catalogue administrator still need to update the catalogue\n"
+                        + "      logo and data directory in order to complete the migration process.\n"
+                        + "      Lucene index rebuild is also recommended after migration."
                     );
                 }
 
                 if (!anyMigrationAction) {
                     _logger.warning("      No migration task found between webapp and database version.\n"
-                                    + "      The system may be unstable or may failed to start if you try to run \n"
-                                    + "      the current GeoNetwork " + webappVersion + " with an older database (ie. " + dbVersion
-                                    + "\n"
-                                    + "      ). Try to run the migration task manually on the current database\n"
-                                    + "      before starting the application or start with a new empty database.\n"
-                                    + "      Sample SQL scripts for migration could be found in WEB-INF/sql/migrate folder.\n"
+                        + "      The system may be unstable or may failed to start if you try to run \n"
+                        + "      the current GeoNetwork " + webappVersion + " with an older database (ie. " + dbVersion
+                        + "\n"
+                        + "      ). Try to run the migration task manually on the current database\n"
+                        + "      before starting the application or start with a new empty database.\n"
+                        + "      Sample SQL scripts for migration could be found in WEB-INF/sql/migrate folder.\n"
                     );
 
                 }
@@ -270,8 +310,6 @@ public class DatabaseMigration implements BeanPostProcessor {
 
     /**
      * Return database version and subversion number.
-     *
-     * @return
      */
     private Pair<String, String> getDatabaseVersion(Statement statement) throws SQLException {
         String version = null;
@@ -288,7 +326,7 @@ public class DatabaseMigration implements BeanPostProcessor {
             }
         } catch (SQLException e) {
             _logger.info("     Error getting database version: " + e.getMessage() +
-                         ". Probably due to an old version. Trying with new Settings structure.");
+                ". Probably due to an old version. Trying with new Settings structure.");
         }
 
         return Pair.read(version, subversion);
@@ -327,11 +365,11 @@ public class DatabaseMigration implements BeanPostProcessor {
     }
 
     /**
-     * Parses a version number removing extra "-*" element and returning an integer. "2.7.0-SNAPSHOT" is returned as 270.
+     * Parses a version number removing extra "-*" element and returning an integer.
+     * "2.7.0-SNAPSHOT" is returned as 270.
      *
      * @param number The version number to parse
      * @return The version number as an integer
-     * @throws Exception
      */
     private Version parseVersionNumber(String number) throws Exception {
         // Remove extra "-SNAPSHOT" info which may be in version number
@@ -340,10 +378,10 @@ public class DatabaseMigration implements BeanPostProcessor {
             number = number.substring(0, number.indexOf("-"));
         }
         switch (numDots(number)) {
-            case 0 :
+            case 0:
                 number += ".0.0";
                 break;
-            case 1 :
+            case 1:
                 number += ".0";
                 break;
             default:
@@ -377,6 +415,14 @@ public class DatabaseMigration implements BeanPostProcessor {
         return foundErrors;
     }
 
+    public String getInitAfter() {
+        return initAfter;
+    }
+
+    public void setInitAfter(String initAfter) {
+        this.initAfter = initAfter;
+    }
+
     public static class Version implements Comparable<Version> {
         private final int major, minor, micro;
 
@@ -387,7 +433,7 @@ public class DatabaseMigration implements BeanPostProcessor {
         }
 
         public Version() {
-            this("0","0","0");
+            this("0", "0", "0");
         }
 
         @Override
