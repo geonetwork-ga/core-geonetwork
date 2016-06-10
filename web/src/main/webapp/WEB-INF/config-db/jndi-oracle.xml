@@ -37,6 +37,6 @@
   </bean>
 
   <bean id="jpaVendorAdapterDatabaseParam" class="java.lang.String">
-    <constructor-arg value="POSTGRESQL"/>
+    <constructor-arg value="ORACLE"/>
   </bean>
 </beans>
