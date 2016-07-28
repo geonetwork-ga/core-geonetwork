@@ -298,6 +298,21 @@ Ext
                         return urlParts[1]
                           + '/srv/' + urlParts[2] + '/search' + "#!" + link;
                     },
+                    /** Geoscience PID link  **/
+                    getPIDLink : function(record){
+                        var url = "";
+                        var value = record.get('eCatId');
+                        if (value && (value instanceof Array) && value[0].value && value[0].value !== ''){
+                            var eCatId = value[0].value;
+                            if(record.get('type') == 'service'){
+                                url = "http://pid.geoscience.gov.au/service/"+eCatId;
+                            }else{
+                                url = "http://pid.geoscience.gov.au/dataset/"+eCatId;
+                            }
+                        }
+                        return url;
+                    },
+
                     /**
                      * api: method[getLink] :param base: ``String`` The base
                      * URL, optional. :return: ``String`` The permalink.

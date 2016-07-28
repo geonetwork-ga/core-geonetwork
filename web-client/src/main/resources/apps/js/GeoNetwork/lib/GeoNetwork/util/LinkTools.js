@@ -66,9 +66,9 @@ GeoNetwork.util.LinkTools = {
 						 view.catalogue = catalogue;
 
              // Add permanent link (can copy for bookmark)
-             var menu = new Ext.menu.Menu(),
-                 bHref = view.catalogue.services.rootUrl + 'search?&uuid=' + escape(uuid);
- 
+             var bHref = Ext.state.Manager.getProvider().getPIDLink(record);
+             var menu = new Ext.menu.Menu(), bHref;
+
              var permalinkMenu = new Ext.menu.TextItem({text: '<input value="' + bHref + '"/></br><a href="' + bHref + '">Link</a>'});
              menu.add('<b class="menu-title">' 
                        + OpenLayers.i18n('permalinkInfo') + '</b>',

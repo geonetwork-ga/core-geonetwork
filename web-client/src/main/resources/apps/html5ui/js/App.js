@@ -358,7 +358,7 @@ GeoNetwork.app = function() {
             width : button_width,
             height : button_height,
             handler : function() {
-                var url = Ext.state.Manager.getProvider().getPrettyLink();
+                var url = Ext.state.Manager.getProvider().getPIDLink(record);
                 Ext.get("permalink-div").update(url);
                 toggle("permalink-div");
             },
