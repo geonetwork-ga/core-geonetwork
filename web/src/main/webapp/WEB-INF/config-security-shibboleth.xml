@@ -27,17 +27,18 @@
         <property name="surnameKey"    value="Shib-Person-surname"/>
         <property name="usernameKey"   value="REMOTE_USER"/>
         <property name="profileKey"    value="Shib-EP-Entitlement"/>
+        <property name="emailKey"      value="Shib-Person-email"/>
         <property name="groupKey"      value=""/>
 
-        <property name="updateGroup"   value="no"/>
-        <property name="updateProfile" value="False"/>
+        <property name="updateGroup"   value="false"/>
+        <property name="updateProfile" value="false"/>
     </bean>
 
     <!-- replace the default entry point -->
 	<bean id="shibAuthenticationEntryPoint"
 		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<!--<property name="loginFormUrl" value="/login.jsp" />-->
-		<property name="loginFormUrl" value="/srv/ita/shib.user.login" />
+		<property name="loginFormUrl" value="/srv/eng/login.form" />
 	</bean>
 
     <alias name="shibAuthenticationEntryPoint" alias="authenticationEntryPoint" />
