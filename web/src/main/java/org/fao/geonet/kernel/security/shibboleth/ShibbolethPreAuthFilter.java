@@ -43,7 +43,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
-
 import org.springframework.web.filter.GenericFilterBean;
 
 /**
@@ -101,19 +100,13 @@ public class ShibbolethPreAuthFilter extends GenericFilterBean implements Applic
                     Log.debug(Geonet.LOG_AUTH, "Trying to authenticate via Shibboleth...");
                 }
 
-//                if (! currentUser.getName().equals(minimal.getUsername()) ) {
-//                    Log.info(Geonet.LOG_AUTH, "Pre-authenticated principal has changed from "
-//                            + currentUser.getName()+" to "
-//                            + minimal.getUsername() + " and will be reauthenticated");
-//                }
-
                 ResourceManager resourceManager = applicationContext.getBean(ResourceManager.class);
                 ProfileManager profileManager = applicationContext.getBean(ProfileManager.class);
                 SerialFactory serialFactory = applicationContext.getBean(SerialFactory.class);
                 GeonetworkUser user = ShibbolethUserUtils.setupUser(request, resourceManager, profileManager, serialFactory, configuration);
+                String target = "http://"+hreq.getServerName()+"/geonetwork";
 
                 if(user != null) {
-
                     if (Log.isDebugEnabled(Geonet.LOG_AUTH)) {
                         Log.debug(Geonet.LOG_AUTH, "Shibboleth user found " + user.getUsername() + " with authorities: " + user.getAuthorities());
                     }
@@ -121,11 +114,11 @@ public class ShibbolethPreAuthFilter extends GenericFilterBean implements Applic
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities() ) ;
                     auth.setDetails(user);
                     SecurityContextHolder.getContext().setAuthentication(auth);
-
                     Log.info(Geonet.LOG_AUTH, "User '"+user.getUsername()+"' properly authenticated via Shibboleth");
 
                     HttpServletResponse hresp = (HttpServletResponse)response;
 
+                    /*
                     if(requestCache != null) {
                         String redirect = null;
 
@@ -148,7 +141,9 @@ public class ShibbolethPreAuthFilter extends GenericFilterBean implements Applic
                             return; // no further chain processing allowed
                         }
                     }
-
+                    */
+                    hresp.sendRedirect(target);
+                    return; // no further chain processing allowed
 
                 } else {
                     Log.warning(Geonet.LOG_AUTH, "Error in GN shibboleth precedures handling user '" + username);
@@ -160,7 +155,6 @@ public class ShibbolethPreAuthFilter extends GenericFilterBean implements Applic
 
 		chain.doFilter(request, response);
 	}
-
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
