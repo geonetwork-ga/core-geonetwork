@@ -1166,7 +1166,8 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
         // in case of bad startup
         exception = response.responseText.indexOf('Exception') !== -1;
         
-        if (response.status === 200 && authenticated) {
+        if (response.status === 200){
+         if(authenticated) {
             this.identifiedUser = {
                 id: this.getNodeText(me.getElementsByTagName('id')[0]),
                 username: this.getNodeText(me.getElementsByTagName('username')[0]),
@@ -1178,6 +1179,9 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
             };
             this.onAfterLogin();
             return true;
+         }else{
+           return false;
+         }
         } else if (response.status === 404) {
             this.showError(OpenLayers.i18n('connectIssue'), 
                 OpenLayers.i18n('connectIssueMsg') + this.services.rootUrl + '.');
