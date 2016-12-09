@@ -1,34 +1,6 @@
 (function() {
   goog.provide('gn_editor_controller');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   goog.require('gn_directory_controller');
   goog.require('gn_editorboard_controller');
   goog.require('gn_fields');
@@ -157,6 +129,11 @@
           }).then(function(data) {
             $scope.metadataFound = data.count !== '0';
             $scope.metadataNotFoundId = $routeParams.id;
+
+            if(data.metadata[0].templateType){
+              $scope.template = data.metadata[0].templateType;
+            }
+            $scope.eCatId = data.metadata[0].eCatId;
 
             $scope.mdSchema = data.metadata[0]['geonet:info'].schema;
             $scope.groupOwner = data.metadata[0].groupOwner;
@@ -434,7 +411,9 @@
             $scope.add(ref, name, insertRef, position, attribute);
           });
 
-
+      $scope.createBucket = function() {
+          // shell for create bucket function
+      };
 
       $scope.validate = function() {
         $('#showvalidationerrors')[0].value = 'true';

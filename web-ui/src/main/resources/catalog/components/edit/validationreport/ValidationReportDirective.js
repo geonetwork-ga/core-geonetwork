@@ -45,7 +45,13 @@
                       scope.numberOfRules += pat.rules.length;
                     });
                   });
-
+                  if( (((scope || {} ).gnCurrentEdit || {}).compileScope || {}).template == 'groundwater' ){
+                    if(!scope.hasErrors){
+                      $("#uploadData").show();
+                    }else{
+                      $("#uploadData").hide();
+                    }
+                  }
                   scope.ruleTypes = scope.ruleTypes.concat(optional);
                   scope.loading = false;
                 });

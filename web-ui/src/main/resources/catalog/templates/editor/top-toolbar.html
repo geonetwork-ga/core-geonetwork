@@ -40,6 +40,13 @@
       <i class="fa fa-lock"/>
       <span data-translate="">share</span>
     </button>-->
+
+    <a href="" class="btn navbar-btn btn-default" data-ng-click="createBucket()" data-target="#bucketcreated-popup" data-toggle="modal"
+       title="create data container" style="display:none;" id="uploadData">
+      <i class="fa fa-upload"/>
+      <span data-translate="">Upload Data</span>
+    </a>
+
     <button type="button" class="btn btn-danger navbar-btn gn-tooltip" data-ng-click="cancel()" 
       data-ng-mouseover="getCancelStatus()" title="{{cancelStatus}}">
       <i class="fa fa-undo"/>

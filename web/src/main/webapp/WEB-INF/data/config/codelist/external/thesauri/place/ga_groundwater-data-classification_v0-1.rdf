@@ -1,0 +1,2031 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:cycAnnot="http://sw.cyc.com/CycAnnotations_v1#"
+	xmlns:owl="http://www.w3.org/2002/07/owl#"
+	xmlns:csw="http://semantic-web.at/ontologies/csw.owl#"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+	xmlns:freebase="http://rdf.freebase.com/ns/"
+	xmlns:fn="http://www.w3.org/2005/xpath-functions#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+	xmlns:dbpedia="http://dbpedia.org/resource/"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:cyc="http://sw.cyc.com/concept/"
+	xmlns:tags="http://www.holygoat.co.uk/owl/redwood/0.1/tags/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:opencyc="http://sw.opencyc.org/concept/"
+	xmlns:ctag="http://commontag.org/ns#"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xmlns:sesame="http://www.openrdf.org/schema/sesame#"
+	xmlns:foaf="http://xmlns.com/foaf/0.1/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#type"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#object">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#object"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#first">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#first"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+	<rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#value">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#value"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#List">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#domain">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#domain"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#Resource">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#range">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#range"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subPropertyOf">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subPropertyOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#subClassOf">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#subClassOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#Class">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#member">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#member"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#seeAlso">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#isDefinedBy">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#isDefinedBy"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#comment">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#label">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:domain rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#Literal">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#Container">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2000/01/rdf-schema#Datatype">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Datatype"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<rdfs:label xml:lang="en">GA Groundwater Data Classification</rdfs:label>
+	<dcterms:contributor xml:lang="en">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:13:54Z</dcterms:created>
+	<dcterms:creator xml:lang="en">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:description xml:lang="en">GA Groundwater Data Classification</dcterms:description>
+	<dcterms:publisher xml:lang="en">Geoscience Australia</dcterms:publisher>
+	<dcterms:subject xml:lang="en">GA Groundwater Data Classification</dcterms:subject>
+	<dcterms:title xml:lang="en">GA Groundwater Data Classification</dcterms:title>
+	<dc:title xml:lang="en">GA Groundwater Data Classification</dc:title>  
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochemistry"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochronology"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleontology"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petrography"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:hasTopConcept rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources"/>
+	<dcterms:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2016-08-02</dcterms:issued>
+	<owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">v0.1</owl:versionInfo>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/contributor">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/contributor"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/created">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/created"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/creator">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/creator"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/description">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/description"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/publisher">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/publisher"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/subject">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/subject"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/title">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/title"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#ConceptScheme">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#hasTopConcept">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#hasTopConcept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:26:29Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:44:17Z</dcterms:modified>
+	<skos:definition xml:lang="en">Atmospheric science.</skos:definition>
+	<skos:prefLabel xml:lang="en">Climate</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Classification"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Evapotranspiration"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Models_2"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Rainfall"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Solar-Radiation"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Temperature"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Vapour-Pressure"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:10:41Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:55:26Z</dcterms:modified>
+	<skos:definition xml:lang="en">Data collected by remote sensing systems.</skos:definition>
+	<skos:prefLabel xml:lang="en">Earth Observation</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Aerial-Photography"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Lidar"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Optical"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Photos"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radar"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Thermal"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:29:09Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:01:35Z</dcterms:modified>
+	<skos:definition xml:lang="en">Relations between organisms and their surroundings.</skos:definition>
+	<skos:prefLabel xml:lang="en">Ecology</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Groundwater-Dependent-Ecosystems"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Species-And-Communities"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Springs_2"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Vegetation"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Wetlands"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochemistry">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:15:08Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:05:15Z</dcterms:modified>
+	<skos:definition xml:lang="en">The composition of terrestrial rocks and waters.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geochemistry</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydro"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Inorganic"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Organic"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Stable-Isotopes"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochronology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:15:14Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:09:46Z</dcterms:modified>
+	<skos:definition xml:lang="en">The age of rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geochronology</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Chemical-Dating"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:15:26Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:28:51Z</dcterms:modified>
+	<skos:definition xml:lang="en">Human geography.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geography</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Administrative-Boundaries"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Land-Use_2"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Manufacturing"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Transportation"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Urban"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Utilities"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:21:57Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:47:54Z</dcterms:modified>
+	<skos:definition xml:lang="en">The study of the Earth.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geology</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Basement-Geology"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Lithology"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Metamorphism"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Outcrop-Geology"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleogeography"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Provinces"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Regolith"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Structure"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:14:42Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:56:52Z</dcterms:modified>
+	<skos:definition xml:lang="en">The physics of the earth.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geophysics</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Controlled-Source-Electromagnetics"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydroacoustic"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Infrasound"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Seismic"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Gravity"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Magnetics"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Nuclear-Magnetic-Resonance"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radiometrics"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resistivity"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Rock-Properties"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Spectral"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Thermodynamics"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:12:06Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:34:45Z</dcterms:modified>
+	<skos:definition xml:lang="en">The study of the distribution and movement of underground water.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrogeology</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Chemistry"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Extraction"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Flow-Systems"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ground-Water-Surface-Water-Interactions"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrodynamics"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrostratigraphy"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Models"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Properties"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Springs"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:15:43Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:59:44Z</dcterms:modified>
+	<skos:definition xml:lang="en">The study of water.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrology</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Catchments"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Floods"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Gauges"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrochemistry-"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrodynamics_2"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrophysics"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Offtakes"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Storages_2"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Streams"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleontology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:23:19Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:10:09Z</dcterms:modified>
+	<skos:definition xml:lang="en">The study of past life.</skos:definition>
+	<skos:prefLabel xml:lang="en">Paleontology</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Biostratigraphy"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleoclimatology"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleoenvironments"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Taxonomy"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petrography">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:24:11Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:13:14Z</dcterms:modified>
+	<skos:definition xml:lang="en">The composition and description of rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Petrography</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Microstructure"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petrology"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:09:09Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:19:23Z</dcterms:modified>
+	<skos:definition xml:lang="en">Physical (natural) geography.</skos:definition>
+	<skos:prefLabel xml:lang="en">Physiography</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bathymetry"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Coastal"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Elevation"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geomorphology"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Land-Cover"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Soils"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:24:44Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:26:16Z</dcterms:modified>
+	<skos:definition xml:lang="en">Natural substances which can be exploited.</skos:definition>
+	<skos:prefLabel xml:lang="en">Resources</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Energy"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Mineral"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Mines"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Tenements"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Water"/>
+	<skos:topConceptOf rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/GA-Groundwater-Data-Classification"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/AEM">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:18:37Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:58:34Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Controlled-Source-Electromagnetics"/>
+	<skos:definition xml:lang="en">Airborne Electromagnetics.</skos:definition>
+	<skos:prefLabel xml:lang="en">AEM</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/modified">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/modified"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#Concept">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#broader">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#broader"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Controlled-Source-Electromagnetics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:16:38Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:58:19Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Electromagnetic techniques employing controlled sources.</skos:definition>
+	<skos:prefLabel xml:lang="en">Controlled Source Electromagnetics</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/AEM"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ground-EM"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#definition">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#definition"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#prefLabel">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#prefLabel"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Active-source">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:19:08Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:01:11Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydroacoustic"/>
+	<skos:definition xml:lang="en">Techniques involving intentional creation of signal.</skos:definition>
+	<skos:prefLabel xml:lang="en">Active source</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydroacoustic">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:16:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:00:05Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">The study of sound in water.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydroacoustic</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Active-source"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Passive-source"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Active-source_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:19:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:01:26Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Infrasound"/>
+	<skos:definition xml:lang="en">Techniques involving intentional creation of signal.</skos:definition>
+	<skos:prefLabel xml:lang="en">Active source</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Infrasound">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:02Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:03:39Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Sound waves with frequencies below the lower limit of human audibility.</skos:definition>
+	<skos:prefLabel xml:lang="en">Infrasound</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Active-source_2"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Passive-source"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Active-source_3">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:20:05Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:01:36Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Seismic"/>
+	<skos:definition xml:lang="en">Techniques involving intentional creation of signal.</skos:definition>
+	<skos:prefLabel xml:lang="en">Active source</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Seismic">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:29Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:08:41Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">The study of sound propagation through rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Seismic</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Active-source_3"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Passive-source_2"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Administrative-Boundaries">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:22:17Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:29:39Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:definition xml:lang="en">Legally documented and attributed jurisdictional boundaries.</skos:definition>
+	<skos:prefLabel xml:lang="en">Administrative Boundaries</skos:prefLabel>
+	<skos:scopeNote xml:lang="en">For example: State boundaries, Catchment Management Authority (CMA) bundaries.</skos:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#scopeNote">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#scopeNote"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Aerial-Photography">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:10:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:57:00Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:definition xml:lang="en">Photographs of the ground taken from an elevated camera.</skos:definition>
+	<skos:prefLabel xml:lang="en">Aerial Photography</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ar/Ar">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:16:59Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:15:30Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:definition xml:lang="en">40Ar / 39Ar radiometric dating.</skos:definition>
+	<skos:prefLabel xml:lang="en">Ar/Ar</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:16:41Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:14:39Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochronology"/>
+	<skos:definition xml:lang="en">Age determinations using radioactive isotopes.</skos:definition>
+	<skos:prefLabel xml:lang="en">Radio Isotopes</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ar/Ar"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/K/Ar"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Rb/Sr"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/SHRIMP"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Sm/Nd"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/U/Pb"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Basement-Geology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:12Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:48:36Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">Rocks below sedimentary rocks or basins.</skos:definition>
+	<skos:prefLabel xml:lang="en">Basement Geology</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bathymetry">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:10:15Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:15:46Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:definition xml:lang="en">Depths of water bodies.</skos:definition>
+	<skos:prefLabel xml:lang="en">Bathymetry</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Biostratigraphy">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:23:29Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:11:09Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleontology"/>
+	<skos:definition xml:lang="en">The use of fossils to determine relative ages of rock.</skos:definition>
+	<skos:prefLabel xml:lang="en">Biostratigraphy</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:12:28Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:13:14Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">Water-related drill holes.</skos:definition>
+	<skos:prefLabel xml:lang="en">Bores</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Coal-Seam-Methane-Holes"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Construction"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geothermal-Holes"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Logs"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Measurements"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Mineral-Holes"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petroleum-Wells"/>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Stratigraphic-Holes"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#narrower">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#narrower"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Coal-Seam-Methane-Holes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:13:13Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:13:44Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">Holes for coal seam methane investigations or extraction.</skos:definition>
+	<skos:prefLabel xml:lang="en">Coal Seam Methane Holes</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Construction">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:13:01Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:17:36Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">The elements installed in a borehole.</skos:definition>
+	<skos:prefLabel xml:lang="en">Construction</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geothermal-Holes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:13:24Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:28:16Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">Holes drilled during investigation of heat in the Earth.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geothermal Holes</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Logs">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:12:48Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:29:18Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">The records made of material penetrated by a borehole.</skos:definition>
+	<skos:prefLabel xml:lang="en">Logs</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Measurements">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:12:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:29:38Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">Bore measurements.</skos:definition>
+	<skos:prefLabel xml:lang="en">Measurements</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Mineral-Holes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:13:34Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:30:09Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">Holes drilled for mineral investigations.</skos:definition>
+	<skos:prefLabel xml:lang="en">Mineral Holes</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petroleum-Wells">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:13:43Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:30:22Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">Holes drilled for petroleum investigations.</skos:definition>
+	<skos:prefLabel xml:lang="en">Petroleum Wells</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Stratigraphic-Holes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:13:57Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:30:50Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Bores"/>
+	<skos:definition xml:lang="en">Holes drilled for stratigraphic investigations.</skos:definition>
+	<skos:prefLabel xml:lang="en">Stratigraphic Holes</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Catchments">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:15:53Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:25:20Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">Areas where rainwater collects.</skos:definition>
+	<skos:prefLabel xml:lang="en">Catchments</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Chemical-Dating">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:15:59Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:11:06Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochronology"/>
+	<skos:definition xml:lang="en">Age determinations made with knowledge of time-based chemical changes.</skos:definition>
+	<skos:prefLabel xml:lang="en">Chemical Dating</skos:prefLabel>
+	<skos:narrower rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/EMPA"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/EMPA">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:20:58Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:13:56Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Chemical-Dating"/>
+	<skos:definition xml:lang="en">Electron Microprobe Analysis dating.</skos:definition>
+	<skos:prefLabel xml:lang="en">EMPA</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Chemistry">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:14:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:31:16Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">The chemistry of water encountered in bores.</skos:definition>
+	<skos:prefLabel xml:lang="en">Chemistry</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Classification">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:28:51Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:49:02Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">Zones of climatic similarity.</skos:definition>
+	<skos:prefLabel xml:lang="en">Classification</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Evapotranspiration">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:26:41Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:50:47Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">The transfer of water from the land to the atmosphere by evaporation and transpiration.</skos:definition>
+	<skos:prefLabel xml:lang="en">Evapotranspiration</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Models_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:27:34Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:51:27Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">Quantitative depictions of climate.</skos:definition>
+	<skos:prefLabel xml:lang="en">Models</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Rainfall">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:27:44Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:52:28Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">Precipitation.</skos:definition>
+	<skos:prefLabel xml:lang="en">Rainfall</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Solar-Radiation">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:28:18Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:52:37Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">Sunlight.</skos:definition>
+	<skos:prefLabel xml:lang="en">Solar Radiation</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Temperature">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:28:24Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:53:36Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">Temperature.</skos:definition>
+	<skos:prefLabel xml:lang="en">Temperature</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Vapour-Pressure">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:28:36Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:53:48Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Climate"/>
+	<skos:definition xml:lang="en">Vapour pressure.</skos:definition>
+	<skos:prefLabel xml:lang="en">Vapour Pressure</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#topConceptOf">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#topConceptOf"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Coastal">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:09:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:16:35Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:definition xml:lang="en">The study of the interface between the ocean and the land.</skos:definition>
+	<skos:prefLabel xml:lang="en">Coastal</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ground-EM">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:18:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:58:57Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Controlled-Source-Electromagnetics"/>
+	<skos:definition xml:lang="en">Ground-based electromagnetics.</skos:definition>
+	<skos:prefLabel xml:lang="en">Ground EM</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Lidar">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:11:16Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:57:45Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:definition xml:lang="en">Light detection and ranging data.</skos:definition>
+	<skos:prefLabel xml:lang="en">Lidar</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Optical">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:11:22Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:59:22Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:definition xml:lang="en">Light in the visible part of the electromagnetic spectrum.</skos:definition>
+	<skos:prefLabel xml:lang="en">Optical</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Photos">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:11:02Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T04:59:47Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:definition xml:lang="en">Non-aerial photographs.</skos:definition>
+	<skos:prefLabel xml:lang="en">Photos</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radar">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:11:29Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:00:22Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:definition xml:lang="en">Radio detection and ranging.</skos:definition>
+	<skos:prefLabel xml:lang="en">Radar</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Thermal">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:11:36Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:00:43Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Earth-Observation"/>
+	<skos:definition xml:lang="en">Relating to heat.</skos:definition>
+	<skos:prefLabel xml:lang="en">Thermal</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Groundwater-Dependent-Ecosystems">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:29:22Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:02:14Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology"/>
+	<skos:definition xml:lang="en">Ecosystems requiring access to groundwater.</skos:definition>
+	<skos:prefLabel xml:lang="en">Groundwater Dependent Ecosystems</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Species-And-Communities">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:29:35Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:02:59Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology"/>
+	<skos:definition xml:lang="en">Individual species and their relations to each other.</skos:definition>
+	<skos:prefLabel xml:lang="en">Species And Communities</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Springs_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:29:42Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:03:27Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology"/>
+	<skos:definition xml:lang="en">Organisms in and around springs.</skos:definition>
+	<skos:prefLabel xml:lang="en">Springs</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Vegetation">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:29:49Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:03:46Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology"/>
+	<skos:definition xml:lang="en">Plants.</skos:definition>
+	<skos:prefLabel xml:lang="en">Vegetation</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Wetlands">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:29:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:04:06Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ecology"/>
+	<skos:definition xml:lang="en">Saturated lands.</skos:definition>
+	<skos:prefLabel xml:lang="en">Wetlands</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Elevation">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:10:24Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:17:16Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:definition xml:lang="en">Heights of land surfaces.</skos:definition>
+	<skos:prefLabel xml:lang="en">Elevation</skos:prefLabel>
+	<skos:scopeNote xml:lang="en">Elevation surfaces, for example derived from SRTM or Lidar sources.</skos:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Energy">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:24:57Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:26:48Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources"/>
+	<skos:definition xml:lang="en">Resources used for energy production.</skos:definition>
+	<skos:prefLabel xml:lang="en">Energy</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Extraction">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:14:40Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:33:20Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">Records and analysis of water extracted from bores.</skos:definition>
+	<skos:prefLabel xml:lang="en">Extraction</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Floods">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:30:05Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:31:47Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">Inundation of normally dry land.</skos:definition>
+	<skos:prefLabel xml:lang="en">Floods</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Flow-Systems">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:12:21Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:34:15Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">Investigations regarding groundwater flow.</skos:definition>
+	<skos:prefLabel xml:lang="en">Flow Systems</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Gauges">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:16:04Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:32:05Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">Stream measurements.</skos:definition>
+	<skos:prefLabel xml:lang="en">Gauges</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydro">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:15:39Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:06:57Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochemistry"/>
+	<skos:definition xml:lang="en">Chemical components occurring in waters.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydro</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Inorganic">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:15:50Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:07:31Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochemistry"/>
+	<skos:definition xml:lang="en">Inorganic geochemistry.</skos:definition>
+	<skos:prefLabel xml:lang="en">Inorganic</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Organic">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:15:59Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:07:45Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochemistry"/>
+	<skos:definition xml:lang="en">Organic geochemistry.</skos:definition>
+	<skos:prefLabel xml:lang="en">Organic</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Stable-Isotopes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:16:10Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:09:03Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geochemistry"/>
+	<skos:definition xml:lang="en">Isotopes that do not decay into other elements.</skos:definition>
+	<skos:prefLabel xml:lang="en">Stable Isotopes</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Land-Use_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:19:40Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:19:55Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:definition xml:lang="en">How people use the landscape.</skos:definition>
+	<skos:prefLabel xml:lang="en">Land Use</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Manufacturing">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:22:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:30:40Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:definition xml:lang="en">Large scale mechanical production.</skos:definition>
+	<skos:prefLabel xml:lang="en">Manufacturing</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Transportation">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:22:31Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:31:30Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:definition xml:lang="en">The movement of people and goods between locations.</skos:definition>
+	<skos:prefLabel xml:lang="en">Transportation</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Urban">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:22:25Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:32:19Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:definition xml:lang="en">Geography of cities and building concentrations.</skos:definition>
+	<skos:prefLabel xml:lang="en">Urban</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Utilities">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:22:36Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:46:49Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geography"/>
+	<skos:definition xml:lang="en">Electricity, sewerage, water, communications and similar services.</skos:definition>
+	<skos:prefLabel xml:lang="en">Utilities</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Lithology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:23:05Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:49:08Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">The physical characteristics of rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Lithology</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Metamorphism">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:27Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:49:39Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">The study of rocks altered by heat and pressure.</skos:definition>
+	<skos:prefLabel xml:lang="en">Metamorphism</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Outcrop-Geology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:35Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:50:18Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">Exposed rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Outcrop Geology</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleogeography">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:45Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:50:49Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">The study of past geographical features.</skos:definition>
+	<skos:prefLabel xml:lang="en">Paleogeography</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Provinces">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:52Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:54:05Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">A large region with common geological attributes.</skos:definition>
+	<skos:prefLabel xml:lang="en">Provinces</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Regolith">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:58Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:55:08Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">The material covering bedrock.</skos:definition>
+	<skos:prefLabel xml:lang="en">Regolith</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Structure">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:22:20Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:56:21Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geology"/>
+	<skos:definition xml:lang="en">The study of permanent deformation and failure of rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Structure</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geomorphology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:10:02Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:17:57Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:definition xml:lang="en">The study of land forms and processes.</skos:definition>
+	<skos:prefLabel xml:lang="en">Geomorphology</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Gravity">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:16:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:59:37Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Measurements of acceleration due to Earth masses.</skos:definition>
+	<skos:prefLabel xml:lang="en">Gravity</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Magnetics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:11Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:04:34Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Techniques investigating magnetic properties of rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Magnetics</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Nuclear-Magnetic-Resonance">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:18:08Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:05:32Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Nuclear magnetic resonance.</skos:definition>
+	<skos:prefLabel xml:lang="en">Nuclear Magnetic Resonance</skos:prefLabel>
+	<skos:altLabel xml:lang="en">NMR</skos:altLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radiometrics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:19Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:06:14Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Gamma-ray spectrometry.</skos:definition>
+	<skos:prefLabel xml:lang="en">Radiometrics</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resistivity">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:18:15Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:07:16Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Methods measuring variation in ground electrical resistivity.</skos:definition>
+	<skos:prefLabel xml:lang="en">Resistivity</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Rock-Properties">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:57Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:08:15Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Bulk physical properties of rocks, including density, seismic velocity, magnetisation, and so on.</skos:definition>
+	<skos:prefLabel xml:lang="en">Rock Properties</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Spectral">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:39Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:10:29Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">Measurements of rocks across the electromagnetic spectrum.</skos:definition>
+	<skos:prefLabel xml:lang="en">Spectral</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Thermodynamics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:17:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:11:16Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Geophysics"/>
+	<skos:definition xml:lang="en">The study of rocks and heat.</skos:definition>
+	<skos:prefLabel xml:lang="en">Thermodynamics</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Ground-Water-Surface-Water-Interactions">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:35:01Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:35:21Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">The interactions between groundwater and surface water.</skos:definition>
+	<skos:prefLabel xml:lang="en">Ground Water Surface Water Interactions</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Passive-source">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:19:16Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:02:19Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydroacoustic"/>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Infrasound"/>
+	<skos:definition xml:lang="en">Techniques involving detection of environmental signals.</skos:definition>
+	<skos:prefLabel xml:lang="en">Passive source</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrochemistry-">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:17:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:32:59Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">The chemical composition of natural waters.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrochemistry </skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrodynamics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:14:52Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:36:27Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">Investigations into groundwater fluid forces.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrodynamics</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrodynamics_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:18:00Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:34:00Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">The motion and forces of waters.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrodynamics</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrostratigraphy">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:14:57Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:37:28Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">The study of mappable hydrogeologic units.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrostratigraphy</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Models">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:14:27Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:38:58Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">Systematic descriptions of hydrogeology phenomena.</skos:definition>
+	<skos:prefLabel xml:lang="en">Models</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Properties">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:15:29Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:39:23Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">Physical characteristics of hydrogeologic units.</skos:definition>
+	<skos:prefLabel xml:lang="en">Properties</skos:prefLabel>
+	<skos:scopeNote xml:lang="en">Properties of hydrogeological units, such as permeability, porosity, thickness.</skos:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Springs">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:14:33Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:39:47Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrogeology"/>
+	<skos:definition xml:lang="en">The hydrogeology of springs.</skos:definition>
+	<skos:prefLabel xml:lang="en">Springs</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrophysics">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:18:07Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:35:38Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">The geophysics of waters.</skos:definition>
+	<skos:prefLabel xml:lang="en">Hydrophysics</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Offtakes">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:16:19Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:37:28Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">Surface water extraction points.</skos:definition>
+	<skos:prefLabel xml:lang="en">Offtakes</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Storages_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:16:32Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:59:09Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">Containments.</skos:definition>
+	<skos:prefLabel xml:lang="en">Storages</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Streams">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:16:41Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-04T23:59:24Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Hydrology"/>
+	<skos:definition xml:lang="en">Watercourses.</skos:definition>
+	<skos:prefLabel xml:lang="en">Streams</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/K/Ar">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T01:17:09Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:16:09Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:definition xml:lang="en">K / Ar radiometric dating.</skos:definition>
+	<skos:prefLabel xml:lang="en">K/Ar</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Land-Cover">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:09:34Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:18:58Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:definition xml:lang="en">The physical material at the surface of the earth.</skos:definition>
+	<skos:prefLabel xml:lang="en">Land Cover</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Microstructure">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:24:21Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:13:51Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petrography"/>
+	<skos:definition xml:lang="en">The fine structure of rocks as studied with a microscope.</skos:definition>
+	<skos:prefLabel xml:lang="en">Microstructure</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Mineral">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:25:03Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:35:10Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources"/>
+	<skos:definition xml:lang="en">Mineral concentrations with reasonable prospects for economic extraction.</skos:definition>
+	<skos:prefLabel xml:lang="en">Mineral</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Mines">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:25:19Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:36:02Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources"/>
+	<skos:definition xml:lang="en">Places where mineral resources are extracted from the ground.</skos:definition>
+	<skos:prefLabel xml:lang="en">Mines</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2004/02/skos/core#altLabel">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2004/02/skos/core#altLabel"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleoclimatology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:23:38Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:11:27Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleontology"/>
+	<skos:definition xml:lang="en">The study of past climates.</skos:definition>
+	<skos:prefLabel xml:lang="en">Paleoclimatology</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleoenvironments">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:23:46Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:11:43Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleontology"/>
+	<skos:definition xml:lang="en">The study of past environments.</skos:definition>
+	<skos:prefLabel xml:lang="en">Paleoenvironments</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Taxonomy">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:23:54Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:12:25Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Paleontology"/>
+	<skos:definition xml:lang="en">Classification of past life.</skos:definition>
+	<skos:prefLabel xml:lang="en">Taxonomy</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Passive-source_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:20:13Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T06:02:34Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Seismic"/>
+	<skos:definition xml:lang="en">Techniques involving detection of environmental signals.</skos:definition>
+	<skos:prefLabel xml:lang="en">Passive source</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petrology">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:24:30Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:14:29Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Petrography"/>
+	<skos:definition xml:lang="en">The study of the origin, composition, distribution and structure of rocks.</skos:definition>
+	<skos:prefLabel xml:lang="en">Petrology</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Soils">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:10:09Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:23:14Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Physiography"/>
+	<skos:definition xml:lang="en">The materials in which plants grow.</skos:definition>
+	<skos:prefLabel xml:lang="en">Soils</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Rb/Sr">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:21:19Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:16:43Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:definition xml:lang="en">Rb / Sr radiometric dating.</skos:definition>
+	<skos:prefLabel xml:lang="en">Rb/Sr</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/SHRIMP">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:21:27Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:17:16Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:definition xml:lang="en">Radiometric dating using a Super High Resolution Ion Microprobe apparatus.</skos:definition>
+	<skos:prefLabel xml:lang="en">SHRIMP</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Sm/Nd">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:21:34Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:17:29Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:definition xml:lang="en">Sm / Nd  radiometric dating.</skos:definition>
+	<skos:prefLabel xml:lang="en">Sm/Nd</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/U/Pb">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T02:21:43Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-01T05:17:41Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Radio-Isotopes"/>
+	<skos:definition xml:lang="en">U / Pb  radiometric dating.</skos:definition>
+	<skos:prefLabel xml:lang="en">U/Pb</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Tenements">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:25:41Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:37:29Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources"/>
+	<skos:definition xml:lang="en">Resources claims, leases, or licences.</skos:definition>
+	<skos:prefLabel xml:lang="en">Tenements</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Water">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<dcterms:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:contributor>
+	<dcterms:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-06-27T05:25:57Z</dcterms:created>
+	<dcterms:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GA_Peljo.Matti</dcterms:creator>
+	<dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-05T04:38:30Z</dcterms:modified>
+	<skos:broader rdf:resource="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Resources"/>
+	<skos:definition xml:lang="en">Sources of water that are useful or potentially useful.</skos:definition>
+	<skos:prefLabel xml:lang="en">Water</skos:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Chemistry_2">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Chemistry</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#deprecated">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#deprecated"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Flooding">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Flooding</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Groune-Water-Surface-Water-Interactions">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Groune Water Surface Water Interactions</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Land-Use">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Land Use</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Storages">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Storages</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Surface-Water-Chemistry">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Surface Water Chemistry</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://pid.geoscience.gov.au/def/voc/GroundwaterDataClassification/Water-Bores">
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:label xml:lang="en">Water Bores</rdfs:label>
+	<owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://purl.org/dc/terms/issued">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/issued"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#versionInfo">
+	<rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+	<rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+	<rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#versionInfo"/>
+</rdf:Description>
+
+</rdf:RDF>
