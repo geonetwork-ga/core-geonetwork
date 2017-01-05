@@ -423,6 +423,11 @@
         <version>4.3.1</version>
       </dependency>
       <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>4.5.2</version>
+      </dependency>
+      <dependency>
         <groupId>batik</groupId>
         <artifactId>batik-ext</artifactId>
         <version>1.6</version>
