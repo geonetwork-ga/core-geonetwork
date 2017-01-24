@@ -104,7 +104,7 @@ public class ShibbolethPreAuthFilter extends GenericFilterBean implements Applic
                 ProfileManager profileManager = applicationContext.getBean(ProfileManager.class);
                 SerialFactory serialFactory = applicationContext.getBean(SerialFactory.class);
                 GeonetworkUser user = ShibbolethUserUtils.setupUser(request, resourceManager, profileManager, serialFactory, configuration);
-                String target = "http://"+hreq.getServerName()+"/geonetwork";
+                String target = "https://"+hreq.getServerName()+"/geonetwork";
 
                 if(user != null) {
                     if (Log.isDebugEnabled(Geonet.LOG_AUTH)) {
