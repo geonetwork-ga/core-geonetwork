@@ -87,3 +87,15 @@
        	<a class="btn btn-warning" ng-click="closeAndForget()">Yes</a>
 			</div>
 </div>
+
+<div data-gn-modal="" class="onlinesrc-popup gn-popup"
+	data-gn-popup-options="{title:'Upload Data'}"
+	id="bucketcreated-popup">
+      <strong><span data-ng-class="hcpError ? 'text-danger' : ''">{{HCPResponse}}</span></strong>
+      <span>{{HCPAccess}}</span>
+      <span style="display:none;" id="HCPMessage"><p>Data associated to this record can be added through a browser <a href="{{ HCPAddress }}" target="_blank">here</a> or through
+        windows explorer: <br/> {{ HCPPath }}</p></span>
+			<div class="modal-footer">
+        <a class="btn" data-dismiss="modal">Close</a>
+      </div>
+</div>

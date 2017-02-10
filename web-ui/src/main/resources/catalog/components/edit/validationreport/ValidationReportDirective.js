@@ -46,10 +46,10 @@
                     });
                   });
                   if( (((scope || {} ).gnCurrentEdit || {}).compileScope || {}).template == 'groundwater' ){
-                    if(!scope.hasErrors){
-                      $("#uploadData").show();
-                    }else{
+                    if(scope.hasErrors || gnCurrentEdit.isHCPLinked){
                       $("#uploadData").hide();
+                    }else{
+                      $("#uploadData").show();
                     }
                   }
                   scope.ruleTypes = scope.ruleTypes.concat(optional);

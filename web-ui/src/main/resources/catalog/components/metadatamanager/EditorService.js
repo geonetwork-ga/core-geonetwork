@@ -498,7 +498,56 @@
              var t = ['_X', elementRef,
                       '_', elementName.replace(':', 'COLON')];
              return t.join('');
-           }
+           },
+          createBucket: function(eCatId){
+            var defer = $q.defer();
+            var scope = this;
+
+            $http.get(
+              'md.create.hcp.bucket',
+              {params:
+                {
+                  id: eCatId,
+                  parent:  gnCurrentEdit.template
+                }}).success(function(data) {
+                var xmlDoc = jQuery.parseXML(data);
+                var $xml = $( xmlDoc );
+                var httpStatus = $xml.find( "status" )[0].innerHTML;
+                var hcpResponse = {
+                  status: httpStatus,
+                  webPath: $xml.find( "webPath" )[0].innerHTML,
+                  exPath: $xml.find( "path" )[0].innerHTML
+                };
+
+                var params = {
+                          id: gnCurrentEdit.id,
+                          name: 'HCP data location',
+                          process: 'onlinesrc-withformat-add',
+                          protocol: 'WWW:LINK-1.0-http--link',
+                          url: hcpResponse.webPath,
+                          format: 'GIS data',
+                          version: '1.0'
+                        };
+
+                if(httpStatus == 409 || httpStatus == 201 ){
+                  if(gnCurrentEdit.isHCPLinked){
+                    scope.refreshEditorForm();
+                    defer.resolve(hcpResponse);
+                  }else{
+                    gnHttp.callService('processMd', params).then(function(data) {
+                      var snippet = $(data.data);
+                      scope.refreshEditorForm(snippet);
+                      defer.resolve(hcpResponse);
+                    });
+                  }
+                }else{
+                  defer.resolve(hcpResponse);
+                }
+              }).error(function(error) {
+               defer.reject(error);
+             });
+             return defer.promise;
+          }
          };
        }]);
 })();

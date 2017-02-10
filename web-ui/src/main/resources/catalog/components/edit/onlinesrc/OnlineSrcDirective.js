@@ -77,6 +77,7 @@
                 gnOnlinesrc.getAllResources()
                 .then(function(data) {
                       scope.relations = data;
+                      gnCurrentEdit.relations = data;
                     });
               };
               scope.isCategoryEnable = function(category) {
@@ -421,7 +422,6 @@
                   scope.loadWMSCapabilities();
                 }
               });
-
             }
           };
         }])

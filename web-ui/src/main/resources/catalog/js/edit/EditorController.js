@@ -245,6 +245,18 @@
         return gnCurrentEdit.isTemplate === 'y';
       };
 
+      /*
+       * 
+       */
+      $scope.setHCPLinked = function(){
+        gnCurrentEdit.isHCPLinked = false;
+        angular.forEach(gnCurrentEdit.relations.onlinesrc, function(relation){
+          if(relation.title === 'HCP data location'){
+            gnCurrentEdit.isHCPLinked = true;
+            }
+        });
+      }
+
       /**
        * Display or not attributes editor.
        *
@@ -412,7 +424,34 @@
           });
 
       $scope.createBucket = function() {
-          // shell for create bucket function
+        $scope.HCPResponse = "Processing...";
+        $scope.setHCPLinked();
+        $("#HCPMessage").hide();
+
+        gnEditor.createBucket($scope.eCatId)
+          .then(function(form) {
+              $scope.save(true);
+
+              // Explorer path
+              $scope.HCPPath = form.exPath;
+
+              // Web path
+              $scope.HCPAddress = form.webPath;
+              // Status user feedback
+              $scope.hcpError = true;
+              if(form.status == 201){
+                $scope.hcpError = false;
+                $scope.HCPResponse = "Directory successfully created.";
+                $("#HCPMessage").show();
+              }else if(form.status == 409){
+                $scope.HCPResponse = "Directory for this metadata record already exists";
+                $("#HCPMessage").show();
+              }else{
+                $scope.HCPResponse = "Error " + form.status + " returned trying to create directory";
+              }
+            }, function(error) {
+              console.log("EditorController - after createBucket - error");
+          });
       };
 
       $scope.validate = function() {
