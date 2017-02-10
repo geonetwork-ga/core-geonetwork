@@ -172,6 +172,16 @@
       <error sheet="../xslt/common/error.xsl"/>
     </service>
 
+    <service name="md.create.hcp.bucket">
+      <documentation>
+        <![CDATA[
+        Create a new bucket on the HCP.
+        ]]>
+      </documentation>
+      <class name=".services.metadata.CreateHCPBucket"/>
+      <error sheet="../xslt/common/error.xsl"/>
+    </service>
+
     <service name="md.edit.cancel">
       <documentation><![CDATA[
         Cancel editing session.
