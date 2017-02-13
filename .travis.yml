@@ -1,0 +1,23 @@
+language: java
+
+# whitelist
+branches:
+  only:
+    - prod
+    - test
+    - /^dev-.*$/ # any dev branch
+
+script:
+  - if [[ $TRAVIS_BRANCH =~ ^dev-.*$ ]];then
+    export BRANCH="dev";
+    else
+    export BRANCH=$TRAVIS_BRANCH;
+    fi
+  - mvn install -DskipTests=true
+
+addons:
+  artifacts:
+    s3_region: "ap-southeast-2"
+    paths:
+      - $TRAVIS_BUILD_DIR/web/target/geonetwork.war
+    target_paths: $BRANCH
