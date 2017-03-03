@@ -829,7 +829,7 @@ public class GetRecords extends AbstractOperation implements CatalogService {
         Set<String> typeNames = null;
         String typeNames$ = query.getAttributeValue("typeNames");
         if(typeNames$ != null) {
-            Scanner commaSeparatedScanner = new Scanner(typeNames$).useDelimiter(",");
+            Scanner commaSeparatedScanner = new Scanner(typeNames$).useDelimiter(" ");
             while(commaSeparatedScanner.hasNext()) {
                 String typeName = commaSeparatedScanner.next().trim();
                 // These two are explicitly not allowed as search targets in CSW 2.0.2, so we throw an exception if the
