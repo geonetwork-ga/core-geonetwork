@@ -33,6 +33,7 @@ import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.kernel.security.GeonetworkUser;
 import org.fao.geonet.lib.Lib;
 import org.jdom.Element;
+import java.util.Objects;
 
 /**
  *
@@ -53,16 +54,19 @@ public class ShibbolethUserUtils {
         private String name;
         private String surname;
         private String profile;
+        private String email;
 
         static MinimalUser create(ServletRequest request, ShibbolethUserConfiguration config) {
 
-            // Read in the data from the headers
+            // Read in the data from the environment vars
             HttpServletRequest req = (HttpServletRequest)request;
 
-            String username = getHeader(req, config.getUsernameKey(), "");
-            String surname = getHeader(req, config.getSurnameKey(), "");
-            String firstname = getHeader(req, config.getFirstnameKey(), "");
-            String profile = getHeader(req, config.getProfileKey(), "");
+            String username = Objects.toString(req.getAttribute(config.getUsernameKey()), "");
+            String surname = Objects.toString(req.getAttribute(config.getSurnameKey()), "");
+            String firstname = Objects.toString(req.getAttribute(config.getFirstnameKey()), "");
+            String email = Objects.toString(req.getAttribute(config.getFirstnameKey()), "");
+            String profile = config.getProfileKey();
+
 
             if(username.trim().length() > 0) {
 
@@ -109,6 +113,14 @@ public class ShibbolethUserUtils {
         public void setProfile(String profile) {
             this.profile = profile;
         }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
     }
 
     /**
@@ -117,7 +129,7 @@ public class ShibbolethUserUtils {
     static GeonetworkUser setupUser(ServletRequest request, ResourceManager resourceManager, ProfileManager profileManager, SerialFactory serialFactory, ShibbolethUserConfiguration config)
         throws Exception
 	{
-//        ServiceContext context = null;
+    //        ServiceContext context = null;
 
 		// Get the header keys to lookup from the settings
 //		SettingManager sm = gc.getSettingManager();
@@ -129,14 +141,17 @@ public class ShibbolethUserUtils {
 //        String groupKey = sm.getValue(prefix + "/attrib/group");
 //        String defGroup =  sm.getValue(prefix +"/defaultGroup");
 
-		// Read in the data from the headers
+
+		// Read in the data from the environment vars
         HttpServletRequest req = (HttpServletRequest)request;
 
-		String username = getHeader(req, config.getUsernameKey(), "");
-		String surname = getHeader(req, config.getSurnameKey(), "");
-		String firstname = getHeader(req, config.getFirstnameKey(), "");
-		String profile = getHeader(req, config.getProfileKey(), "");
-        String group    = getHeader(req, config.getGroupKey(), "");
+        String username = Objects.toString(req.getAttribute(config.getUsernameKey()), "");
+        String surname = Objects.toString(req.getAttribute(config.getSurnameKey()), "");
+        String firstname = Objects.toString(req.getAttribute(config.getFirstnameKey()), "");
+        String email = Objects.toString(req.getAttribute(config.getEmailKey()), "");
+        String profile = config.getProfileKey();
+        String group = config.getGroupKey();
+
 
         if(username != null && username.trim().length() > 0) { // ....add other cnstraints to be sure it's a real shibbolet login and not fake
 
@@ -158,7 +173,7 @@ public class ShibbolethUserUtils {
             }
 
             // Create or update the user
-            updateUser(dbms, serialFactory, username, surname, firstname, profile, group, config.isUpdateProfile());
+            updateUser(dbms, serialFactory, username, surname, firstname, profile, group, config.isUpdateProfile(), email);
 
             // try and load the user from db
 
@@ -198,8 +213,9 @@ public class ShibbolethUserUtils {
 	private static void updateUser(Dbms dbms, SerialFactory serialFactory,
             String username, String surname, String firstname,
             String profile, String group,
-            boolean updateProfile) throws SQLException
+            boolean updateProfile, String email) throws SQLException
 	{
+
         boolean groupProvided = ((group != null) && (!(group.equals(""))));
         int groupId = -1;
 
@@ -239,10 +255,10 @@ public class ShibbolethUserUtils {
 		{
 			int userId = serialFactory.getSerial(dbms, "Users");
 
-			String query = 	"INSERT INTO Users(id, username, name, surname, profile, password, authtype) "+
-						"VALUES(?,?,?,?,?,?,?)";
+			String query = 	"INSERT INTO Users(id, username, name, surname, profile, password, authtype, email) "+
+						"VALUES(?,?,?,?,?,?,?,?)";
 
-			dbms.execute(query, userId, username, firstname, surname, profile, VIA_SHIBBOLETH, SHIBBOLETH_FLAG);
+			dbms.execute(query, userId, username, firstname, surname, profile, VIA_SHIBBOLETH, SHIBBOLETH_FLAG, email);
 
             if (groupProvided) {
                 String query2 = "SELECT count(*) as numr FROM UserGroups WHERE groupId=? and userId=?";
@@ -251,9 +267,9 @@ public class ShibbolethUserUtils {
                 String count = ((Element) list.get(0)).getChildText("numr");
 
                  if (count.equals("0")) {
-                     query = "INSERT INTO UserGroups(userId, groupId) "+
-                             "VALUES(?,?)";
-                     dbms.execute(query, userId, groupId);
+                     query = "INSERT INTO UserGroups(userId, groupId, profile) "+
+                             "VALUES(?,?,?)";
+                     dbms.execute(query, userId, groupId, profile);
 
                  }
             }
@@ -274,7 +290,4 @@ public class ShibbolethUserUtils {
 
 		return value;
     }
-
-
-
 }

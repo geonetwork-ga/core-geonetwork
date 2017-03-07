@@ -527,7 +527,6 @@ GeoNetwork.app = function() {
             this.mapApp.init(options, layers);
             this.searchApp = new GeoNetwork.searchApp();
             this.searchApp.init();
-
             if (urlParameters.create !== undefined && catalogue.isIdentified()) {
                 var actionCtn = Ext.getCmp('resultsPanel').getTopToolbar();
                 actionCtn.createMetadataAction.handler.apply(actionCtn);
@@ -576,6 +575,8 @@ Ext.onReady(function() {
             Ext.QuickTips.init();
             app = new GeoNetwork.app();
             app.init();
+            catalogue.isLoggedIn();
+
             GeoNetwork.Util.updateHeadInfo({
                 title : catalogue.getInfo().name
             });
