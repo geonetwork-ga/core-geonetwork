@@ -153,6 +153,7 @@
 				<div id="container">
 					<div id="header">
 					  <div id="logo"></div>
+            <div id="search-title" style="width: 500px">Data and Publications Search</div>
 						<header class="wrapper clearfix">
 							<div style="width: 100%; margin: 0 auto;">
 								<nav id="nav">
@@ -182,6 +183,7 @@
 									</ul>
 								</nav>
 							</div>
+              <div id="ga-line"></div>
 						</header>
 					</div>
 					

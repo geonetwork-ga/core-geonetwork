@@ -160,18 +160,37 @@ body {
 #header {
   border-bottom:10px solid #F6D4B1;
   padding:17px 0 0;
-  background-image:url('../apps/html5ui/images/map_header.png');
+  background-position-x: 20px;
+  background-position-y: -10px;
   box-shadow:none;
   height: 90px;
 }
 
 #logo {
-  background-position: center top;
   background-repeat: no-repeat;
-  background-image:url('../apps/html5ui/images/banner_logo.png');
-  width: 100%;
+  background-image:url('../apps/html5ui/images/ga.header.logo.png');
+  background-position-x: 20px;
+  background-position-y: -5px;
+  float: left;
+  width: 200px;
   height: 55px;
   z-index: 1000;
+  padding-right: 50px;
+}
+
+#search-title {
+  height: 35px;
+  width: 500px;  
+  padding-top: 20px;
+  font: bold 1.6em/1.4em Helvetica,Arial,Verdana,sans-serif;
+}
+
+#ga-line {
+  margin-top: 31px;
+  width: 100%;
+  height: 10px;
+  background-image:url('../apps/html5ui/images/ga-line.jpg');
+  background-size: contain;  
 }
 
 .main aside {
@@ -254,7 +273,7 @@ nav a {
 }
 
 nav a.selected {
-  background:#F6D4B1;
+  background:#72c7e7;
 }
 
 /* ==============
