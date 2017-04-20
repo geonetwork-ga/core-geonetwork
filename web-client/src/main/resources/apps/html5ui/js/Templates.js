@@ -474,7 +474,7 @@ GeoNetwork.HTML5UI.Templates.FULL = new Ext.XTemplate(
 								</p>',
 								'<p class="abstract">\
 								<tpl if="!(this.eCatIdEmpty(values.eCatId))">\
-									<b>eCatId: </b> {[this.getECatId(values.eCatId)]}\
+									<b>eCatId: </b> {[values.eCatId]}\
 								</tpl>\
 								</p>',
             '</td>\
@@ -519,11 +519,8 @@ GeoNetwork.HTML5UI.Templates.FULL = new Ext.XTemplate(
 						return (this.getStatusText(value) === 'Unknown');
 				},
 				eCatIdEmpty: function(value) {
-						if (value && (value instanceof Array) && value[0].value && value[0].value !== '') return false;
+						if (value && value !== '') return false;
 						return true;
-				},
-				getECatId: function(value) {
-						return value[0].value;
 				},
 				getStatusText: function(value) {
 						if (!(value instanceof Array)) return this.StatusValues[0].text;

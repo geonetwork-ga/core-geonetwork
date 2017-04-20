@@ -25,12 +25,15 @@
 				<meta name="description" content="" ></meta>
                 <meta name="viewport" content="width=device-width"></meta>
 				<meta name="og:title" content="{$siteName}"/>
+        <meta name="dc.language" content="en-au" />
 				
 				<link rel="icon" type="image/gif" href="../../images/logos/favicon.gif" />
 				<link rel="alternate" type="application/rss+xml" title="{$siteName} - RSS" href="{$rssUrl}"/>
 				<link rel="search" href="{$serviceUrl}/portal.opensearch" type="application/opensearchdescription+xml" title="{$siteName}"/>
 
     		<link rel="stylesheet" href="{concat($baseUrl, '/static/geonetwork-client_css.css')}"></link> 
+        <link rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
+        <link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
 
 				<script type="text/javascript">
 					var _gaq = _gaq || [];
