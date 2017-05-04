@@ -493,7 +493,7 @@ div.help ul li {
 }
 
 #metadata-info * {
-	font-size: 12px;
+	font-size: 14px; /* Updated by Joseph from 12px to 14px */
 }
 
 #metadata-info .relation {
