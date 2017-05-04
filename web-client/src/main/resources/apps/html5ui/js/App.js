@@ -511,6 +511,7 @@ GeoNetwork.app = function() {
                 delete cookie.state.user;
             } else {
                 catalogue.identifiedUser = cookie.get('user');
+                catalogue.isLoggedIn();
             }
 
             // set a permalink provider which will be the main state provider.
