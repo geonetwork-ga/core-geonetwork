@@ -71,7 +71,8 @@
 
 			<div class="grey">
 					<a href="javascript:window.print();" id="printer-button"><i class="fa fa-print"></i><xsl:value-of select="/root/gui/strings/print-button"/></a>
-					<a id="rss-button" href="/geonetwork/srv/eng/rss.latest"><i class="fa fa-rss-square"></i><xsl:value-of select="/root/gui/strings/rss-button"/></a>
+					<!-- ======================= Commented by Joseph - To remove rss button ============== -->
+					<!--<a id="rss-button" href="/geonetwork/srv/eng/rss.latest"><i class="fa fa-rss-square"></i><xsl:value-of select="/root/gui/strings/rss-button"/></a>-->
 					<span id="login-stuff">
 						<a id="user-button">
 							<xsl:choose>

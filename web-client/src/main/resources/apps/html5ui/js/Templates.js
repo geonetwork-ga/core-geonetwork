@@ -264,7 +264,9 @@ GeoNetwork.HTML5UI.Templates.COPYTOCLIPBOARD =
  * Thumbnails
  */
 GeoNetwork.HTML5UI.Templates.THUMB =
-    '<div style="height:150px" class="thumbnail">\
+    /** ============== Commented and updated by Joseph - Start ============= **/
+	/*
+	'<div style="height:150px" class="thumbnail">\
         <tpl if="thumbnail">\
             <a href="javascript:catalogue.metadataShow(\'{uuid}\');return false;">\
                 <img src="{thumbnail}" alt="Thumbnail"/>\
@@ -276,6 +278,15 @@ GeoNetwork.HTML5UI.Templates.THUMB =
 			</div>\
         </tpl>\
     </div>';
+	*/
+	'<tpl if="thumbnail">\
+		<div style="height:150px" class="thumbnail">\
+            <a href="javascript:catalogue.metadataShow(\'{uuid}\');return false;">\
+                <img src="{thumbnail}" alt="Thumbnail"/>\
+            </a>\
+		</div>\
+	</tpl>';
+	/** ============== Commented and updated by Joseph - End ============= **/
 
 GeoNetwork.HTML5UI.Templates.CHANGE_DATE = 
     '<tpl if="edit==\'false\' || isharvested==\'y\'">\
@@ -286,20 +297,28 @@ GeoNetwork.HTML5UI.Templates.CHANGE_DATE =
  * Shows contact info.
  */
 GeoNetwork.HTML5UI.Templates.CONTACT_INFO =
-    '<div class="md-contact">\
-<tpl for="contact">\
- <tpl if="applies==\'resource\'">\
-     <div title="{role} - {applies}">\
-         <tpl if="values.logo !== undefined && values.logo !== \'\'">\
-             <img src="{logo}" class="orgLogo"/>\
-         </tpl>{name}\
-     </div>\
- </tpl>\
-</tpl>\
-<tpl if="edit==\'true\' && isharvested!=\'y\'">\
- <div class="md-mn md-mn-user" title="{[OpenLayers.i18n("ownerName")]}">{ownername} -  {[OpenLayers.i18n("lastUpdate")]}{[values.changedate.split(\'T\')[0]]}</div>\
+    /** ============== Updated by Joseph ============= **/
+	/** If thumbnail is not present border-top is drawn for contact info **/
+
+	'<tpl if="!thumbnail">\
+		<div class="md-contact" style="border-top: 1px solid #e5e5e5;margin-top: 5px;">\
+	</tpl>\
+	<tpl if="thumbnail">\
+		<div class="md-contact">\
+	</tpl>\
+		<tpl for="contact">\
+		 <tpl if="applies==\'resource\'">\
+			 <div title="{role} - {applies}">\
+				 <tpl if="values.logo !== undefined && values.logo !== \'\'">\
+					 <img src="{logo}" class="orgLogo"/>\
+				 </tpl>{name}\
+			 </div>\
+		 </tpl>\
+		</tpl>\
+		<tpl if="edit==\'true\' && isharvested!=\'y\'">\
+			<div class="md-mn md-mn-user" title="{[OpenLayers.i18n("ownerName")]}">{ownername} -  {[OpenLayers.i18n("lastUpdate")]}{[values.changedate.split(\'T\')[0]]}</div>\
         </tpl>' +
-    GeoNetwork.HTML5UI.Templates.CHANGE_DATE + 
+		GeoNetwork.HTML5UI.Templates.CHANGE_DATE + 
     '</div>';
 
 GeoNetwork.HTML5UI.Templates.CONTACT_INFO_TOOLTIP =
@@ -479,7 +498,7 @@ GeoNetwork.HTML5UI.Templates.FULL = new Ext.XTemplate(
 								</p>',
             '</td>\
             <td class="thumb">',
-                GeoNetwork.HTML5UI.Templates.RATING_TPL,
+                /*GeoNetwork.HTML5UI.Templates.RATING_TPL,*/ /** Commented by Joseph - Remove Rating **/
                 GeoNetwork.HTML5UI.Templates.THUMB,
                 GeoNetwork.HTML5UI.Templates.CONTACT_INFO,
             '</td>',

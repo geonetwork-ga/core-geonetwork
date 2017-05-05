@@ -779,6 +779,7 @@ div#resultsPanel .x-toolbar-right {
 #resultsPanel .md-full .thumbnail {
 	min-height: 140px;
 	width: 192px;
+	margin-top: 5px; /* Joseph added */
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
 	background: #fff;
@@ -790,6 +791,7 @@ div#resultsPanel .x-toolbar-right {
 #resultsPanel .md-full .md-contact {
 	border-right: 1px solid #e5e5e5;
 	padding: 5px;
+	width:190px;/* Joseph added */
 	background: #fff;
 	border-left: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;

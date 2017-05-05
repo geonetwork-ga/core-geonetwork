@@ -290,8 +290,11 @@ GeoNetwork.app = function() {
         hide("share-capabilities");
         hide("permalink-div");
 
-        // Adding social capabilities
-        Ext.getCmp("metadata-panel").getTopToolbar().addButton({
+		// Adding social capabilities
+
+		/** Commented by Joseph - To remove social share button **/
+        
+		/*Ext.getCmp("metadata-panel").getTopToolbar().addButton({
             id : 'viewpanel-share',
             width : button_width,
             height : button_height,
@@ -304,7 +307,7 @@ GeoNetwork.app = function() {
             tooltip : OpenLayers.i18n('Social Share'),
             enableToggle : true,
 						iconCls: GeoNetwork.Settings.viewPanelButtonCSS('viewpanel-share')
-        });
+        });*/
 
         GeoNetwork.Util.removeMetaTags({
             'og:title' : true,
