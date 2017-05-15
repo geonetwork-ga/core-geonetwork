@@ -145,7 +145,7 @@ GeoNetwork.MetadataResultsToolbar = Ext.extend(Ext.Toolbar, {
         var sortOption = this.getSortByCombo();
         cmp.push(OpenLayers.i18n('sortBy'), sortOption);
         cmp.push(['|']);
-        cmp.push(this.createTemplateMenu());
+        //cmp.push(this.createTemplateMenu());//Commented by Joseph - To remove different views (Full, Thumbnail, Simple) and default as Full
         cmp.push(this.createSelectionToolBar());
         cmp.push(this.createOtherActionMenu());
         
