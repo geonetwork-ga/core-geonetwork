@@ -170,7 +170,9 @@ GeoNetwork.searchApp = function() {
                 hidden : true
             });
 
-            var onlineData_ = new Ext.form.Checkbox({
+            /* Joseph Commented Start - To remove "Web Services" checkbox */
+            
+            /* var onlineData_ = new Ext.form.Checkbox({
                 name : 'O_dynamic',
                 id : 'o_dynamic',
                 boxLabel : OpenLayers.i18n('Online data'),
@@ -182,7 +184,7 @@ GeoNetwork.searchApp = function() {
                 Ext.getCmp('advanced-search-options-content-form').fireEvent(
                         'search');
             });
-
+			*/ 
             var dataForDownload = new Ext.form.Checkbox({
                 name : 'O_download',
                 id : 'E_download',

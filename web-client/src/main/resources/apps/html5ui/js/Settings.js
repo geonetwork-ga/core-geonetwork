@@ -104,8 +104,8 @@ GeoNetwork.Settings.protocolToCSS = function(type, useDownload) {
         'ACCESS MAP VIEWER': 'fabutton fa fa-plus-circle md-mn-wms',
         'application/vnd.google-earth.kml+xml': 'fabutton fa fa-globe md-mn-kml',
         'WWW:DOWNLOAD-1.0-http--download': 'fabutton fa fa-arrow-circle-down  md-mn-download',
-        'text/html': 'fabutton fa fa-arrow-circle-right  md-mn-www',
-        'text/plain': 'fabutton fa fa-arrow-circle-right  md-mn-www',
+        'text/html': 'fabutton fa fa-download  md-mn-www', //Updated by Joseph - Changed to download icon (previously fa-arrow-circle-right)
+        'text/plain': 'fabutton fa fa-download  md-mn-www',//Updated by Joseph - Changed to download icon (previously fa-arrow-circle-right)
         'bookmark': 'fabutton fa fa-star  md-mn-bookmark'
       };
 
