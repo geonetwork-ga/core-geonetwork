@@ -506,9 +506,10 @@ GeoNetwork.HTML5UI.Templates.FULL = new Ext.XTemplate(
         '</tr>',
     '</table>',
     '<table><tr>',
-            '<td>',
-            GeoNetwork.HTML5UI.Templates.COPYTOCLIPBOARD,
-            '</td>',
+   //Commented by Joseph - To remove copy to clipboard (make consistent across browsers)
+   //         '<td>',
+   //         GeoNetwork.HTML5UI.Templates.COPYTOCLIPBOARD,
+   //         '</td>',
             '<td class="icon" colspan="2">',
             GeoNetwork.HTML5UI.Templates.LINKCONTAINER,
             GeoNetwork.HTML5UI.Templates.VALID,
