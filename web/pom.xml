@@ -35,12 +35,6 @@
         <version>1.11.128</version>
         <type>pom</type>
         <scope>import</scope>
-        <exclusions>
-   			<exclusion>
-   				<groupId>joda-time</groupId>
-          		<artifactId>joda-time</artifactId>
-   			</exclusion>
-   		</exclusions>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -60,12 +54,38 @@
           <version>3.2.0</version>
       </dependency>
 
-	<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
 	<dependency>
    		<groupId>com.amazonaws</groupId>
    		<artifactId>aws-java-sdk-s3</artifactId>
 	</dependency>
 
+	<!-- 3rd Party libraries dependencies to AWS - Start -->
+	
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>1.8.2</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.8.2</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.freemarker</groupId>
+	    <artifactId>freemarker</artifactId>
+	    <version>2.3.9</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>javax.mail-api</artifactId>
+	    <version>1.4.6</version>
+	</dependency>
+	<!-- 3rd Party libraries dependencies to AWS - End -->
+	
     <dependency>
       <groupId>xalan</groupId>
       <artifactId>xalan</artifactId>
@@ -283,6 +303,7 @@
     <dependency>
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
+       <version>2.8.1</version>
     </dependency>
     <dependency>
       <groupId>jaxen</groupId>
