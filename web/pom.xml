@@ -26,9 +26,22 @@
     </license>
   </licenses>
 
+   <!--  To select individual SDK modules (eg:aws-java-sdk-s3), use the AWS SDK for Java BOM for Maven -->
+   <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk-bom</artifactId>
+        <version>1.11.128</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <!-- FIXME set common dependencies to the root pom.xml  -->
   <dependencies>
+
 	  <dependency>
       	<groupId>net.sf.ehcache</groupId>
       	<artifactId>ehcache-core</artifactId>
@@ -45,7 +58,6 @@
 	<dependency>
    		<groupId>com.amazonaws</groupId>
    		<artifactId>aws-java-sdk-s3</artifactId>
-   		<version>1.11.128</version>
 	</dependency>
 
     <dependency>
