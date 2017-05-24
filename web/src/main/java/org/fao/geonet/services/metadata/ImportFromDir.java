@@ -197,9 +197,6 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			}
 			response.addContent(ex);
 		}
-
-		//Joseph Added - Remove temp directory after importing files from AWS S3 bucket
-		FileUtils.deleteDirectory(new File("temp/"));
 		
 		return response;
 	}
