@@ -122,7 +122,9 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 	//Joseph Added
 	private String bucketName = "";
 	private ListObjectsV2Result v2Result;
-	private boolean isDirectory = true; 
+	private ListObjectsV2Request v2Request;
+	private boolean isDirectory = true;
+	private int fileLength = 0;
 	//--------------------------------------------------------------------------
 	//---
 	//--- Init
@@ -255,6 +257,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 				try {
 					File f;
 					if(!isDirectory){//Import AWS files 
+						
 						S3ObjectSummary objectSummary = v2Result.getObjectSummaries().get(i);
 						filePath = s3Client.getUrl(bucketName, objectSummary.getKey()).toString();
 						S3ObjectInputStream content = s3Client.getObject(bucketName, objectSummary.getKey())
@@ -309,15 +312,12 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		
 		public void process() throws Exception {
 			int threadCount = ThreadUtils.getNumberOfThreads();
-			
-			//Joseph - added
-			int fileLength = isDirectory ? files.length : v2Result.getObjectSummaries().size();
-			
+
 			ExecutorService executor = Executors.newFixedThreadPool(threadCount);
 
 			int perThread;
-			if (fileLength < threadCount) perThread = fileLength;
-			else perThread = fileLength / threadCount;
+			if (files.length < threadCount) perThread = files.length;
+			else perThread = files.length / threadCount;
 			int index = 0;
 
 			// batch import is transactional - open up one dbms channel for each thread
@@ -325,23 +325,97 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			List<Dbms> dbmsList = new ArrayList<Dbms>();
 			try {
 				List<Future<Pair<List<String>,List<Pair<Exception,String>>>>> sList = new ArrayList<Future<Pair<List<String>,List<Pair<Exception,String>>>>>();
-				while(index < fileLength) {
+				while(index < files.length) {
 					int start = index;
-					int count = Math.min(perThread,fileLength - start);
+					int count = Math.min(perThread,files.length-start);
 					// create threads to process this chunk of files
 					Dbms dbms = (Dbms) context.getResourceManager().openDirect(Geonet.Res.MAIN_DB);
 					dbmsList.add(dbms);
 					
-					//Joseph added
+					//Joseph Added
 					Callable<Pair<List<String>,List<Pair<Exception,String>>>> worker = new ImportCallable(files, s3Client, start, count, params, context, stylePath, failOnError, dbms);
 					
-					//Joseph commented
+					//Joseph Commented
 					//Callable<Pair<List<String>,List<Pair<Exception,String>>>> worker = new ImportCallable(files, start, count, params, context, stylePath, failOnError, dbms);
 					
 					Future<Pair<List<String>,List<Pair<Exception,String>>>> submit = executor.submit(worker);
 					sList.add(submit);
 					index += count;
 				}
+	
+				for (Future<Pair<List<String>,List<Pair<Exception,String>>>> future : sList) {
+					try {
+						ids.addAll(future.get().one());
+						exceptions.addAll(future.get().two());
+					} catch (InterruptedException e) {
+						exceptions.add(Pair.read((Exception)e,"unknown"));  // don't know the file name here
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+						exceptions.add(Pair.read((Exception)e,"unknown"));  // don't know the file name here
+					}
+				}
+		
+				for (Dbms dbms : dbmsList) {
+					if (exceptions.size() > 0 && failOnError) dbms.abort();
+					else dbms.commit();
+				}
+			} finally {
+				for (Dbms dbms : dbmsList) {
+					context.getResourceManager().close(Geonet.Res.MAIN_DB, dbms);
+				}
+			}
+
+			executor.shutdown();
+		}
+		
+		//-----------------------------------------------------------
+		//
+		// Joseph Added this function to Process Files from S3 Bucket
+		//
+		//-----------------------------------------------------------
+		public void processS3Files() throws Exception {
+			int threadCount = ThreadUtils.getNumberOfThreads();
+			
+			ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+
+			// batch import is transactional - open up one dbms channel for each thread
+			// - we abort the dbms channels if we get an exception otherwise commit
+			List<Dbms> dbmsList = new ArrayList<Dbms>();
+			try {
+				List<Future<Pair<List<String>,List<Pair<Exception,String>>>>> sList = new ArrayList<Future<Pair<List<String>,List<Pair<Exception,String>>>>>();
+					
+				do {//get object keys in a bucket if more than 1000 (default max-key)
+					v2Result = s3Client.listObjectsV2(v2Request);
+					
+					int resultSize = v2Result.getObjectSummaries().size();
+					int perThread;
+					if (resultSize < threadCount) 
+						perThread = resultSize;
+					else 
+						perThread = resultSize / threadCount;
+					
+					int index = 0;
+					
+					fileLength = fileLength + resultSize;
+					while (index < resultSize) {
+						int start = index;
+						int count = Math.min(perThread, resultSize - start);
+						// create threads to process this chunk of files
+						Dbms dbms = (Dbms) context.getResourceManager().openDirect(Geonet.Res.MAIN_DB);
+						dbmsList.add(dbms);
+						
+						Callable<Pair<List<String>, List<Pair<Exception, String>>>> worker = new ImportCallable(
+								files, s3Client, start, count, params, context, stylePath, failOnError, dbms);
+
+						Future<Pair<List<String>, List<Pair<Exception, String>>>> submit = executor.submit(worker);
+						sList.add(submit);
+						index += count;
+					}
+
+					v2Request.setContinuationToken(v2Result.getNextContinuationToken());
+				} while (v2Result.isTruncated() == true);
+				
 	
 				for (Future<Pair<List<String>,List<Pair<Exception,String>>>> future : sList) {
 					try {
@@ -386,7 +460,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 
 	private int standardImport(Element params, ServiceContext context) throws Exception
 	{
-		int fileLength = 0;
+		
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager   dm = gc.getDataManager();
 
@@ -398,8 +472,8 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			isDirectory = false;
 			try{
 				AmazonS3 s3 = getAmazonS3(dir);
-				fileLength = v2Result.getObjectSummaries().size();
 				r = new ImportMetadata(params, context, s3, stylePath, failOnError);
+				r.processS3Files();
 			}catch (AmazonServiceException ase) {
 				throw new Exception("Request made to Amazon S3, but was rejected " + ase.getRawResponseContent());
 			} catch (AmazonClientException ace) {
@@ -413,13 +487,13 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			
 			if (files == null)
 				throw new Exception("Directory not found: " + dir);
-
+			
 			fileLength = files.length;
 			r = new ImportMetadata(params, context, files, stylePath, failOnError);
-			
+			r.process();
 		}
 
-		r.process();
+		
 		ids = r.getIds();
 		exceptions = r.getExceptions();
 	
@@ -440,8 +514,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		AmazonS3URI s3uri = new AmazonS3URI(url);
 		bucketName = s3uri.getBucket();
 		AmazonS3 s3client = AmazonS3ClientBuilder.standard().withRegion(s3uri.getRegion()).build();
-		ListObjectsV2Request req = new ListObjectsV2Request().withBucketName(bucketName);
-		v2Result = s3client.listObjectsV2(req);
+		v2Request = new ListObjectsV2Request().withBucketName(bucketName);
 		
 		return s3client;
 	}
