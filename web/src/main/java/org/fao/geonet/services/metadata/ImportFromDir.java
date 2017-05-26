@@ -460,7 +460,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 
 	private int standardImport(Element params, ServiceContext context) throws Exception
 	{
-		
+		fileLength = 0;
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager   dm = gc.getDataManager();
 
