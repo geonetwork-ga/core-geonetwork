@@ -908,7 +908,7 @@ div.showBigMapItemInactive:hover {
 }
 
 #metadata-info a {
-	color: #0076A1;
+	color: #FFFFFF;
 }
 
 .metadata * label {
@@ -1047,7 +1047,7 @@ div.showBigMapItemInactive:hover {
 	width: auto;
 	margin: 0px 5px 5px 0px;
 	padding: 4px;
-	background-color: #FEEDDD;
+	background-color: #006983; 
 	color: #565B5E;
 }
 
