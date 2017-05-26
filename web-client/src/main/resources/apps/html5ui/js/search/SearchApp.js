@@ -264,6 +264,7 @@ GeoNetwork.searchApp = function() {
 						var serviceTypeField = GeoNetwork.util.INSPIRESearchFormTools
 						    .getServiceTypeField(true);
 
+			var marlinFields = MarLIN.SearchFormTools.getTitleField1(catalogue.services);
             advancedCriteria.push(
 										idField, authorField, categoryField, statusField, ownedByField,
 										metadataTypeField, ownerField, hitsPerPage);
@@ -425,6 +426,7 @@ GeoNetwork.searchApp = function() {
                 },
 								resetCb: function() {
             			Ext.getCmp('sortByToolBar').setValue("relevance");
+            			Ext.getCmp('fullTextField').setValue("");//Joseph Added - To clear search field after reset 
 								},
                 listeners : {
                     onreset : function() {
