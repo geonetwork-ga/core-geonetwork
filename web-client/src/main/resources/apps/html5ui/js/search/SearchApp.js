@@ -266,7 +266,7 @@ GeoNetwork.searchApp = function() {
 
 			var marlinFields = MarLIN.SearchFormTools.getTitleField1(catalogue.services);
             advancedCriteria.push(
-										idField, authorField, categoryField, statusField, ownedByField,
+										idField, authorField, marlinFields, categoryField, statusField, ownedByField,
 										metadataTypeField, ownerField, hitsPerPage);
 
             var sortByCombo = new Ext.form.TextField({
