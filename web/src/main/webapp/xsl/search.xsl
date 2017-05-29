@@ -174,11 +174,11 @@
 											</a>
 										</li>
 										-->
-										<li>
+										<!-- <li>
 											<a id="browse-tab" href="javascript:showBrowse();">
 												<xsl:value-of select="'Browse'" />
 											</a>
-										</li>
+										</li> -->
 										<li>
 											<a id="about-tab" href="javascript:showAbout();">
 												<xsl:value-of select="/root/gui/strings/about" />
