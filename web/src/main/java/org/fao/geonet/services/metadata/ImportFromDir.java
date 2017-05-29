@@ -263,8 +263,10 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 						S3ObjectInputStream content = s3Client.getObject(bucketName, objectSummary.getKey())
 								.getObjectContent();
 						
-						f = new File("temp/" + objectSummary.getKey());
+						//f = new File("temp/" + objectSummary.getKey());
+						f = File.createTempFile(objectSummary.getKey(), "xml");
 						FileUtils.copyInputStreamToFile(content, f);
+						f.deleteOnExit();
 					}else{//Import files from a given directory
 						f = files[i];
 						filePath = files[i].getPath();
@@ -468,7 +470,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		
 		List<String> ids = null;
 		ImportMetadata r = null;
-		if(dir.startsWith("https")){//Joseph Added - To import files from AWS
+		if(dir.startsWith("https") || dir.startsWith("http")){//Joseph Added - To import files from AWS
 			isDirectory = false;
 			try{
 				AmazonS3 s3 = getAmazonS3(dir);
