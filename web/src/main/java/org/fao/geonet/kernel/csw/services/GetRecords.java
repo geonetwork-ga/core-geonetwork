@@ -563,23 +563,23 @@ public class GetRecords extends AbstractOperation implements CatalogService {
             if(StringUtils.isEmpty(typeNamesValue)) {
                 return cswPrefix + ":Record";
             }
-            // not empty: scan comma-separated string
-            Scanner commaSeparator = new Scanner(typeNamesValue);
-            commaSeparator.useDelimiter(",");
+            // not empty: scan space-separated string
+            Scanner spaceSeparator = new Scanner(typeNamesValue);
+            spaceSeparator.useDelimiter(" ");
             String result = cswPrefix + ":Record";
-            while(commaSeparator.hasNext()) {
-                String typeName = commaSeparator.next();
+            while(spaceSeparator.hasNext()) {
+                String typeName = spaceSeparator.next();
                 typeName = typeName.trim();
                 if(Log.isDebugEnabled(Geonet.CSW_SEARCH)) {
                     Log.debug(Geonet.CSW_SEARCH, "checking typename in query:" + typeName);
                 }
                 if(!(typeName.equals(cswPrefix + ":Record") || typeName.equals(gmdPrefix + ":MD_Metadata"))) {
-                throw new InvalidParameterValueEx("typeNames", "invalid value");
-            }
+                  throw new InvalidParameterValueEx("typeNames", "invalid value");
+                }
                 if(typeName.equals(gmdPrefix + ":MD_Metadata")) {
                     return typeName;
+                }
             }
-        }
             return result;
         }
         // missing typeNames element
@@ -829,7 +829,7 @@ public class GetRecords extends AbstractOperation implements CatalogService {
         Set<String> typeNames = null;
         String typeNames$ = query.getAttributeValue("typeNames");
         if(typeNames$ != null) {
-            Scanner commaSeparatedScanner = new Scanner(typeNames$).useDelimiter(",");
+            Scanner commaSeparatedScanner = new Scanner(typeNames$).useDelimiter(" ");
             while(commaSeparatedScanner.hasNext()) {
                 String typeName = commaSeparatedScanner.next().trim();
                 // These two are explicitly not allowed as search targets in CSW 2.0.2, so we throw an exception if the

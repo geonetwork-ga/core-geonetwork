@@ -275,7 +275,7 @@ GeoNetwork.data.MetadataResultsFastStore = function(){
     }
     function getECatId(v, record){
         if (record.eCatId) {
-            return record.eCatId;
+            return record.eCatId[0].value;
         } else {
             return '';
         }
@@ -337,7 +337,30 @@ GeoNetwork.data.MetadataResultsFastStore = function(){
         }
     }
     
-    
+    function getAuthor(v, record){
+      if(record.author){
+        return record.author[0].value;
+      }else{
+        return 'Geoscience Australia';
+      }
+    }
+
+    function getPublisher(v, record){
+      if(record.publisher){
+        return record.publisher[0].value;
+      }else{
+        return 'Geoscience Australia';
+      }
+    }
+
+    function getLegalConstraints(v, record){
+      if(record.legalConstraints){
+        return record.legalConstraints[0].value;
+      }else{
+        return '';
+      }
+    }
+
     return new Ext.data.JsonStore({
         totalProperty: 'summary.count',
         root: 'records',
@@ -458,7 +481,16 @@ GeoNetwork.data.MetadataResultsFastStore = function(){
         }, {
             name: 'idxMsg',
             convert: getIdxMsg
+        }, {
+            name: 'author',
+            convert: getAuthor
+        }, {
+            name: 'publisher',
+            convert: getPublisher
+        }, {
+            name: 'legalConstraints',
+            convert: getLegalConstraints
         }
-        ]
+      ]
     });
 };

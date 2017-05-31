@@ -25,12 +25,15 @@
 				<meta name="description" content="" ></meta>
                 <meta name="viewport" content="width=device-width"></meta>
 				<meta name="og:title" content="{$siteName}"/>
+        <meta name="dc.language" content="en-au" />
 				
 				<link rel="icon" type="image/gif" href="../../images/logos/favicon.gif" />
 				<link rel="alternate" type="application/rss+xml" title="{$siteName} - RSS" href="{$rssUrl}"/>
 				<link rel="search" href="{$serviceUrl}/portal.opensearch" type="application/opensearchdescription+xml" title="{$siteName}"/>
 
     		<link rel="stylesheet" href="{concat($baseUrl, '/static/geonetwork-client_css.css')}"></link> 
+        <link rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
+        <link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
 
 				<script type="text/javascript">
 					var _gaq = _gaq || [];
@@ -68,7 +71,8 @@
 
 			<div class="grey">
 					<a href="javascript:window.print();" id="printer-button"><i class="fa fa-print"></i><xsl:value-of select="/root/gui/strings/print-button"/></a>
-					<a id="rss-button" href="/geonetwork/srv/eng/rss.latest"><i class="fa fa-rss-square"></i><xsl:value-of select="/root/gui/strings/rss-button"/></a>
+					<!-- ======================= Commented by Joseph - To remove rss button ============== -->
+					<!--<a id="rss-button" href="/geonetwork/srv/eng/rss.latest"><i class="fa fa-rss-square"></i><xsl:value-of select="/root/gui/strings/rss-button"/></a>-->
 					<span id="login-stuff">
 						<a id="user-button">
 							<xsl:choose>
@@ -153,6 +157,7 @@
 				<div id="container">
 					<div id="header">
 					  <div id="logo"></div>
+            <div id="search-title" style="width: 500px">Data and Publications Search</div>
 						<header class="wrapper clearfix">
 							<div style="width: 100%; margin: 0 auto;">
 								<nav id="nav">
@@ -169,11 +174,11 @@
 											</a>
 										</li>
 										-->
-										<li>
+										<!-- <li>
 											<a id="browse-tab" href="javascript:showBrowse();">
 												<xsl:value-of select="'Browse'" />
 											</a>
-										</li>
+										</li> -->
 										<li>
 											<a id="about-tab" href="javascript:showAbout();">
 												<xsl:value-of select="/root/gui/strings/about" />
@@ -182,6 +187,7 @@
 									</ul>
 								</nav>
 							</div>
+              <div id="ga-line"></div>
 						</header>
 					</div>
 					

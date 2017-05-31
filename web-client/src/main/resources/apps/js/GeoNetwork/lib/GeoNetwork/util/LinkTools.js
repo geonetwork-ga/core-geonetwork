@@ -105,8 +105,8 @@ GeoNetwork.util.LinkTools = {
                  
                      store.each(function (record) {
                      		 nid++;
-                         // Avoid empty URL
-                         if (record.get('href') !== '') {
+                         // Avoid empty URL and no description
+                         if (record.get('href') !== '' && (record.get('name') !== '' || record.get('title') !== '')) {
                              // Check that current record type is the same as the previous record
                              // In such case, add the previous button if exist
                              // or create a new button to be added later

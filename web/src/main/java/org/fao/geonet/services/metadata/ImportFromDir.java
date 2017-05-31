@@ -25,6 +25,7 @@ package org.fao.geonet.services.metadata;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -45,6 +46,7 @@ import jeeves.server.context.ServiceContext;
 import jeeves.utils.Util;
 import jeeves.utils.Xml;
 
+import org.apache.commons.io.FileUtils;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Geonet.Profile;
@@ -58,6 +60,17 @@ import org.fao.geonet.services.NotInReadOnlyModeService;
 import static org.fao.geonet.services.metadata.Insert.applyImportStylesheet;
 import org.fao.geonet.util.ThreadUtils;
 import org.jdom.Element;
+
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.ClientConfiguration;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.AmazonS3URI;
+import com.amazonaws.services.s3.model.ListObjectsV2Request;
+import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 // FIXME: this class could be moved to DataManager
 
@@ -105,7 +118,13 @@ public class ImportFromDir extends NotInReadOnlyModeService{
     private List<Pair<Exception,String>> exceptions = new ArrayList<Pair<Exception,String>>();
     private boolean failOnError;
 	private static final String CONFIG_FILE = "import-config.xml";
-
+	
+	//Joseph Added
+	private String bucketName = "";
+	private ListObjectsV2Result v2Result;
+	private ListObjectsV2Request v2Request;
+	private boolean isDirectory = true;
+	private int fileLength = 0;
 	//--------------------------------------------------------------------------
 	//---
 	//--- Init
@@ -180,7 +199,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			}
 			response.addContent(ex);
 		}
-
+		
 		return response;
 	}
 
@@ -192,6 +211,7 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 
 	public class ImportCallable implements Callable<Pair<List<String>,List<Pair<Exception,String>>>> {
 		private final File files[];
+		private final AmazonS3 s3Client;
 		private final int beginIndex, count;
 		private final Element params;
 		private final String stylePath;
@@ -202,8 +222,9 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		private final String userProfile;
 		private final Dbms dbms;
 
-		ImportCallable(File files[], int beginIndex, int count, Element params, ServiceContext context, String stylePath, boolean failOnError, Dbms dbms) {
+		ImportCallable(File files[], AmazonS3 s3Client, int beginIndex, int count, Element params, ServiceContext context, String stylePath, boolean failOnError, Dbms dbms) {
 			this.files = files;
+			this.s3Client = s3Client;
 			this.beginIndex = beginIndex;
 			this.count = count;
 			this.params = params;
@@ -231,25 +252,45 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			List<Pair<Exception,String>> exceptions = new ArrayList<Pair<Exception,String>>();
 			
 			login();
-			
+			String filePath = "";
 			for(int i=beginIndex; i<beginIndex+count; i++) {
 				try {
-					List<String> nIds = MEFLib.doImport(params, context, files[i], stylePath, dbms);
+					File f;
+					if(!isDirectory){//Import AWS files 
+						
+						S3ObjectSummary objectSummary = v2Result.getObjectSummaries().get(i);
+						filePath = s3Client.getUrl(bucketName, objectSummary.getKey()).toString();
+						S3ObjectInputStream content = s3Client.getObject(bucketName, objectSummary.getKey())
+								.getObjectContent();
+						
+						//f = new File("temp/" + objectSummary.getKey());
+						f = File.createTempFile(objectSummary.getKey(), "xml");
+						FileUtils.copyInputStreamToFile(content, f);
+						f.deleteOnExit();
+					}else{//Import files from a given directory
+						f = files[i];
+						filePath = files[i].getPath();
+					}
+					
+					List<String> nIds = MEFLib.doImport(params, context, f, stylePath, dbms);
 					ids.addAll(nIds);
+					
 				} catch (Exception e) {
 					if (failOnError) {
 						throw e;
 					}
-					exceptions.add(Pair.read(e, files[i].getPath()));
+					exceptions.add(Pair.read(e, filePath));
 				}
 			}
 			return Pair.read(ids,exceptions);
 		}
 	}
 
+	
 	public class ImportMetadata {
 		Element params;
 		File files[];
+		AmazonS3 s3Client;
 		String stylePath;
 		ServiceContext context;
 		List<String> ids = new ArrayList<String>();
@@ -263,6 +304,14 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 			this.stylePath = stylePath;
 		}
 
+		//Joseph - added
+		public ImportMetadata(Element params, ServiceContext context, AmazonS3 s3Client, String stylePath, boolean failOnError) {
+			this.params = params;
+			this.context = context;
+			this.s3Client = s3Client;
+			this.stylePath = stylePath;
+		}
+		
 		public void process() throws Exception {
 			int threadCount = ThreadUtils.getNumberOfThreads();
 
@@ -284,11 +333,91 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 					// create threads to process this chunk of files
 					Dbms dbms = (Dbms) context.getResourceManager().openDirect(Geonet.Res.MAIN_DB);
 					dbmsList.add(dbms);
-					Callable<Pair<List<String>,List<Pair<Exception,String>>>> worker = new ImportCallable(files, start, count, params, context, stylePath, failOnError, dbms);
+					
+					//Joseph Added
+					Callable<Pair<List<String>,List<Pair<Exception,String>>>> worker = new ImportCallable(files, s3Client, start, count, params, context, stylePath, failOnError, dbms);
+					
+					//Joseph Commented
+					//Callable<Pair<List<String>,List<Pair<Exception,String>>>> worker = new ImportCallable(files, start, count, params, context, stylePath, failOnError, dbms);
+					
 					Future<Pair<List<String>,List<Pair<Exception,String>>>> submit = executor.submit(worker);
 					sList.add(submit);
 					index += count;
 				}
+	
+				for (Future<Pair<List<String>,List<Pair<Exception,String>>>> future : sList) {
+					try {
+						ids.addAll(future.get().one());
+						exceptions.addAll(future.get().two());
+					} catch (InterruptedException e) {
+						exceptions.add(Pair.read((Exception)e,"unknown"));  // don't know the file name here
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						e.printStackTrace();
+						exceptions.add(Pair.read((Exception)e,"unknown"));  // don't know the file name here
+					}
+				}
+		
+				for (Dbms dbms : dbmsList) {
+					if (exceptions.size() > 0 && failOnError) dbms.abort();
+					else dbms.commit();
+				}
+			} finally {
+				for (Dbms dbms : dbmsList) {
+					context.getResourceManager().close(Geonet.Res.MAIN_DB, dbms);
+				}
+			}
+
+			executor.shutdown();
+		}
+		
+		//-----------------------------------------------------------
+		//
+		// Joseph Added this function to Process Files from S3 Bucket
+		//
+		//-----------------------------------------------------------
+		public void processS3Files() throws Exception {
+			int threadCount = ThreadUtils.getNumberOfThreads();
+			
+			ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+
+			// batch import is transactional - open up one dbms channel for each thread
+			// - we abort the dbms channels if we get an exception otherwise commit
+			List<Dbms> dbmsList = new ArrayList<Dbms>();
+			try {
+				List<Future<Pair<List<String>,List<Pair<Exception,String>>>>> sList = new ArrayList<Future<Pair<List<String>,List<Pair<Exception,String>>>>>();
+					
+				do {//get object keys in a bucket if more than 1000 (default max-key)
+					v2Result = s3Client.listObjectsV2(v2Request);
+					
+					int resultSize = v2Result.getObjectSummaries().size();
+					int perThread;
+					if (resultSize < threadCount) 
+						perThread = resultSize;
+					else 
+						perThread = resultSize / threadCount;
+					
+					int index = 0;
+					
+					fileLength = fileLength + resultSize;
+					while (index < resultSize) {
+						int start = index;
+						int count = Math.min(perThread, resultSize - start);
+						// create threads to process this chunk of files
+						Dbms dbms = (Dbms) context.getResourceManager().openDirect(Geonet.Res.MAIN_DB);
+						dbmsList.add(dbms);
+						
+						Callable<Pair<List<String>, List<Pair<Exception, String>>>> worker = new ImportCallable(
+								files, s3Client, start, count, params, context, stylePath, failOnError, dbms);
+
+						Future<Pair<List<String>, List<Pair<Exception, String>>>> submit = executor.submit(worker);
+						sList.add(submit);
+						index += count;
+					}
+
+					v2Request.setContinuationToken(v2Result.getNextContinuationToken());
+				} while (v2Result.isTruncated() == true);
+				
 	
 				for (Future<Pair<List<String>,List<Pair<Exception,String>>>> future : sList) {
 					try {
@@ -333,27 +462,65 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 
 	private int standardImport(Element params, ServiceContext context) throws Exception
 	{
+		fileLength = 0;
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager   dm = gc.getDataManager();
 
 		String dir      = Util.getParam(params, Params.DIR);
 		
-		File files[] = new File(dir).listFiles(mdFilter);
+		List<String> ids = null;
+		ImportMetadata r = null;
+		if(dir.startsWith("https") || dir.startsWith("http")){//Joseph Added - To import files from AWS
+			isDirectory = false;
+			try{
+				AmazonS3 s3 = getAmazonS3(dir);
+				r = new ImportMetadata(params, context, s3, stylePath, failOnError);
+				r.processS3Files();
+			}catch (AmazonServiceException ase) {
+				throw new Exception("Request made to Amazon S3, but was rejected " + ase.getRawResponseContent());
+			} catch (AmazonClientException ace) {
+				throw new Exception("Encountered an internal error while trying to communicate with S3 Bucket");
+			} catch (Exception e) {
+				throw new Exception("Exception while accessing AWS S3 Bucket");
+			}
+		}else{
+			isDirectory = true;
+			File files[] = new File(dir).listFiles(mdFilter);
+			
+			if (files == null)
+				throw new Exception("Directory not found: " + dir);
+			
+			fileLength = files.length;
+			r = new ImportMetadata(params, context, files, stylePath, failOnError);
+			r.process();
+		}
 
-		if (files == null)
-			throw new Exception("Directory not found: " + dir);
-
-		ImportMetadata r = new ImportMetadata(params, context, files, stylePath, failOnError);
-		r.process();
-		List<String> ids = r.getIds();
+		
+		ids = r.getIds();
 		exceptions = r.getExceptions();
 	
 		context.info("Now reindexing "+ids.size());
 
 		dm.batchRebuild(context, ids);
-		return files.length;
+		return fileLength;
 	}
 
+	/**
+	 * This method creates AmazonS3 client  
+	 * @param url
+	 * @return
+	 * @throws IOException
+	 */
+	private AmazonS3 getAmazonS3(String url) throws IOException, IllegalArgumentException{
+		
+		AmazonS3URI s3uri = new AmazonS3URI(url);
+		bucketName = s3uri.getBucket();
+		AmazonS3 s3client = AmazonS3ClientBuilder.standard().withRegion(s3uri.getRegion()).build();
+		v2Request = new ListObjectsV2Request().withBucketName(bucketName);
+		
+		return s3client;
+	}
+	
 	//--------------------------------------------------------------------------
 	//---
 	//--- Config import

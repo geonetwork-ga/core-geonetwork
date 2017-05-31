@@ -925,11 +925,11 @@ GeoNetwork.util.SearchFormTools = {
                 text: OpenLayers.i18n('mdChangeDate')
             }];
         items.push(GeoNetwork.util.SearchFormTools.getMetadataDateField(anyTime));
-        items.push({
+        /*items.push({
                 xtype: 'label',
                 text: OpenLayers.i18n('tempExtent')
             });
-        items.push(GeoNetwork.util.SearchFormTools.getTemporalExtentField(anyTime));
+        items.push(GeoNetwork.util.SearchFormTools.getTemporalExtentField(anyTime));*/
 
         // This should be moved somewhere else probably
         // FIXME

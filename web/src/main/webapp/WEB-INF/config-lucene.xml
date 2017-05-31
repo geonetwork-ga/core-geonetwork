@@ -130,6 +130,10 @@
       <field name="_indexingError" tagName="idxError"/>
       <field name="_indexingErrorMsg" tagName="idxMsg"/>
       <field name="eCatId" tagName="eCatId"/>
+      <field name="author" tagName="author"/>
+      <field name="publisher" tagName="publisher"/>
+      <field name="legalConstraints" tagName="legalConstraints"/>
+      
     </dumpFields>
   </search>
 
