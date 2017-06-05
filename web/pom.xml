@@ -26,9 +26,22 @@
     </license>
   </licenses>
 
+   <!--  To select individual SDK modules (eg:aws-java-sdk-s3), use the AWS SDK for Java BOM for Maven -->
+   <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-java-sdk-bom</artifactId>
+        <version>1.11.128</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <!-- FIXME set common dependencies to the root pom.xml  -->
   <dependencies>
+
 	  <dependency>
       	<groupId>net.sf.ehcache</groupId>
       	<artifactId>ehcache-core</artifactId>
@@ -41,6 +54,38 @@
           <version>3.2.0</version>
       </dependency>
 
+	<dependency>
+   		<groupId>com.amazonaws</groupId>
+   		<artifactId>aws-java-sdk-s3</artifactId>
+	</dependency>
+
+	<!-- 3rd Party libraries dependencies to AWS - Start -->
+	
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>1.8.2</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.8.2</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.freemarker</groupId>
+	    <artifactId>freemarker</artifactId>
+	    <version>2.3.9</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>javax.mail-api</artifactId>
+	    <version>1.4.6</version>
+	</dependency>
+	<!-- 3rd Party libraries dependencies to AWS - End -->
+	
     <dependency>
       <groupId>xalan</groupId>
       <artifactId>xalan</artifactId>
@@ -258,6 +303,7 @@
     <dependency>
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
+       <version>2.8.1</version>
     </dependency>
     <dependency>
       <groupId>jaxen</groupId>

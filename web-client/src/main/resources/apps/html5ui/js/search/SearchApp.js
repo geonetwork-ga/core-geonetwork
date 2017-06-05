@@ -54,18 +54,19 @@ GeoNetwork.searchApp = function() {
         setAdminFieldsCallback : function(adminFields) {
             // Hide or show extra fields after login event
             Ext.each(adminFields, function(item) {
-                item.setVisible(catalogue.identifiedUser
+                item.setVisible(catalogue.identifiedUser !== undefined
                         && catalogue.identifiedUser.role === "Administrator");
             });
             catalogue.on('afterLogin', function() {
                 Ext.each(adminFields, function(item) {
-                    item.setVisible(catalogue.identifiedUser && catalogue.identifiedUser.role === "Administrator");
+                    item.setVisible(catalogue.identifiedUser !== undefined
+                        && catalogue.identifiedUser.role === "Administrator");
                 });
                 GeoNetwork.util.SearchFormTools.refreshGroupFieldValues();
             });
             catalogue.on('afterLogout', function() {
                 Ext.each(adminFields, function(item) {
-                    item.setVisible(!(catalogue.identifiedUser === undefined));
+                    item.setVisible(false);
                 });
                 GeoNetwork.util.SearchFormTools.refreshGroupFieldValues();
             });
@@ -76,13 +77,14 @@ GeoNetwork.searchApp = function() {
          */
         setRegisteredUserFieldsOnlyCallback : function(registeredUserFields) {
             // Hide or show extra fields after login event
-						var loggedIn = catalogue.identifiedUser && catalogue.identifiedUser.role !== "Administrator";
             Ext.each(registeredUserFields, function(item) {
-                item.setVisible(loggedIn);
+                item.setVisible(catalogue.identifiedUser !== undefined
+                        && catalogue.identifiedUser.role !== "Administrator");
             });
             catalogue.on('afterLogin', function() {
                 Ext.each(registeredUserFields, function(item) {
-                    item.setVisible(catalogue.identifiedUser && catalogue.identifiedUser.role !== "Administrator");
+                    item.setVisible(catalogue.identifiedUser 
+                        && catalogue.identifiedUser.role !== "Administrator");
                 });
             });
             catalogue.on('afterLogout', function() {
@@ -97,13 +99,12 @@ GeoNetwork.searchApp = function() {
          */
         setRegisteredUserFieldsCallback : function(registeredUserFields) {
             // Hide or show extra fields after login event
-						var loggedIn = catalogue.identifiedUser;
             Ext.each(registeredUserFields, function(item) {
-                item.setVisible(loggedIn);
+                item.setVisible(catalogue.identifiedUser !== undefined);
             });
             catalogue.on('afterLogin', function() {
                 Ext.each(registeredUserFields, function(item) {
-                    item.setVisible(catalogue.identifiedUser);
+                    item.setVisible(catalogue.identifiedUser !== undefined);
                 });
             });
             catalogue.on('afterLogout', function() {
@@ -169,7 +170,9 @@ GeoNetwork.searchApp = function() {
                 hidden : true
             });
 
-            var onlineData_ = new Ext.form.Checkbox({
+            /* Joseph Commented Start - To remove "Web Services" checkbox */
+            
+            /* var onlineData_ = new Ext.form.Checkbox({
                 name : 'O_dynamic',
                 id : 'o_dynamic',
                 boxLabel : OpenLayers.i18n('Online data'),
@@ -181,7 +184,7 @@ GeoNetwork.searchApp = function() {
                 Ext.getCmp('advanced-search-options-content-form').fireEvent(
                         'search');
             });
-
+			*/ 
             var dataForDownload = new Ext.form.Checkbox({
                 name : 'O_download',
                 id : 'E_download',
@@ -233,10 +236,10 @@ GeoNetwork.searchApp = function() {
 
             var idField = GeoNetwork.util.SearchFormTools.getIdField();
             var authorField = GeoNetwork.util.SearchFormTools.getAuthorField();
-        		var catalogueField = GeoNetwork.util.SearchFormTools.getCatalogueField(
+        		/*var catalogueField = GeoNetwork.util.SearchFormTools.getCatalogueField(
                 		catalogue.services.getSources, catalogue.services.logoUrl, true);
         		var groupField = GeoNetwork.util.SearchFormTools.getGroupField(
-                		catalogue.services.getGroups, true);
+                		catalogue.services.getGroups, true);*/
         		var ownerGroupField = GeoNetwork.util.SearchFormTools.getOwnerGroupField(
                 		catalogue.services.getGroups, true);
         		var ownedByField = GeoNetwork.util.SearchFormTools.getOwnedByField(
@@ -247,11 +250,11 @@ GeoNetwork.searchApp = function() {
                 		.getMetadataTypeField(true);
         		var categoryField = GeoNetwork.util.SearchFormTools.getCategoryField(
                 		catalogue.services.getCategories, '../../apps/images/default/category/', true);
-        		var validField = GeoNetwork.util.SearchFormTools.getValidField(true);
+        		/*var validField = GeoNetwork.util.SearchFormTools.getValidField(true);
         		var spatialTypes = GeoNetwork.util.SearchFormTools
                 		.getSpatialRepresentationTypeField(null, true);
         		var denominatorField = GeoNetwork.util.SearchFormTools
-                		.getScaleDenominatorField(true);
+                		.getScaleDenominatorField(true);*/
 
             var hitsPerPage = new Ext.form.TextField({
                 name : 'E_hitsperpage',
@@ -261,11 +264,10 @@ GeoNetwork.searchApp = function() {
 						var serviceTypeField = GeoNetwork.util.INSPIRESearchFormTools
 						    .getServiceTypeField(true);
 
+			var marlinFields = MarLIN.SearchFormTools.getTitleField1(catalogue.services);
             advancedCriteria.push(
-										idField, authorField, categoryField, statusField, groupField, ownedByField,
-										ownerGroupField, metadataTypeField, catalogueField,
-										validField, spatialTypes, denominatorField,
-                    ownerField, hitsPerPage);
+										idField, authorField, marlinFields, categoryField, statusField, ownedByField,
+										metadataTypeField, ownerField, hitsPerPage);
 
             var sortByCombo = new Ext.form.TextField({
                 name : 'E_sortBy',
@@ -356,19 +358,19 @@ GeoNetwork.searchApp = function() {
 
             var formItems = [];
 
-            var marlinFields = MarLIN.SearchFormTools.getFields
-                                (catalogue.services, true);
+           /* var marlinFields = MarLIN.SearchFormTools.getFields
+                                (catalogue.services, true);*/
             formItems.push({
                 id : 'advSearchTabs',
                 plain: true,
                 items:[
                    // MarLIN panel
-                   {
+               /*    {
                       margins:'5 5 5 5',
                       layout:'form',
                       autoHeight: true,
                       items: marlinFields
-                   },
+                   },*/
                    // Standard Advanced panel
                    {
                       plain: true,
@@ -392,9 +394,9 @@ GeoNetwork.searchApp = function() {
                    }]
             });
 
-            this.setAdminFieldsCallback([ groupField, ownedByField, ownerGroupField ]);
+            this.setAdminFieldsCallback([ ownedByField ]);
             this.setRegisteredUserFieldsOnlyCallback([ myMetadata_ ]);
-            this.setRegisteredUserFieldsCallback([ statusField ]);
+            this.setRegisteredUserFieldsCallback([ statusField, categoryField, metadataTypeField ]);
 
             return new GeoNetwork.SearchFormPanel({
                 id : 'advanced-search-options-content-form',
@@ -424,6 +426,7 @@ GeoNetwork.searchApp = function() {
                 },
 								resetCb: function() {
             			Ext.getCmp('sortByToolBar').setValue("relevance");
+            			Ext.getCmp('fullTextField').setValue("");//Joseph Added - To clear search field after reset 
 								},
                 listeners : {
                     onreset : function() {

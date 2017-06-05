@@ -38,6 +38,9 @@
                     <xpath schema="iso19139" path="gmd:fileIdentifier/gco:CharacterString"/>
                 </parameter>
 
+				<!-- Joseph Added for querying based on eCatId -->
+				<parameter name="AlternateIdentifier" field="eCatId" type="SupportedISOQueryables" />
+				
                 <parameter name="Modified" field="changeDate" type="SupportedISOQueryables">
                     <xpath schema="iso19139" path="gmd:dateStamp/gco:DateTime"/>
                 </parameter>

@@ -539,8 +539,9 @@ GeoNetwork.view.ViewPanel = Ext.extend(Ext.Panel, {
         this.tipTpl = new Ext.XTemplate(GeoNetwork.util.HelpTools.Templates.SIMPLE);
         this.relatedTpl = new Ext.XTemplate(this.relatedTpl || GeoNetwork.Templates.Relation.SHORT);
         
-        this.tbar = [this.createViewMenu(), this.createActionMenu(), '->', this.createPrintMenu(), this.createFeedbackMenu(), this.createTooltipMenu()];
-        
+        //this.tbar = [this.createViewMenu(), this.createActionMenu(), '->', this.createPrintMenu(), this.createFeedbackMenu(), this.createTooltipMenu()]; //Commented by Joseph
+        this.tbar = [this.createViewMenu(), this.createActionMenu(), '->', this.createPrintMenu(), this.createTooltipMenu()]; //Updated by Joseph - remove Feedback button
+                
         GeoNetwork.view.ViewPanel.superclass.initComponent.call(this);
         this.metadataSchema = this.record ? this.record.get('schema') : '';
         

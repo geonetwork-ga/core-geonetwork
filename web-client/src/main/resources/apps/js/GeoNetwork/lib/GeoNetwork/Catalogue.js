@@ -1180,8 +1180,14 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
             this.onAfterLogin();
             return true;
          }else{
+            // Reset user cookie information
+            if (cookie) {
+                cookie.set('user', undefined);
+            }
+            this.identifiedUser = undefined;
            return false;
          }
+
         } else if (response.status === 404) {
             this.showError(OpenLayers.i18n('connectIssue'), 
                 OpenLayers.i18n('connectIssueMsg') + this.services.rootUrl + '.');

@@ -290,8 +290,11 @@ GeoNetwork.app = function() {
         hide("share-capabilities");
         hide("permalink-div");
 
-        // Adding social capabilities
-        Ext.getCmp("metadata-panel").getTopToolbar().addButton({
+		// Adding social capabilities
+
+		/** Commented by Joseph - To remove social share button **/
+        
+		/*Ext.getCmp("metadata-panel").getTopToolbar().addButton({
             id : 'viewpanel-share',
             width : button_width,
             height : button_height,
@@ -304,16 +307,36 @@ GeoNetwork.app = function() {
             tooltip : OpenLayers.i18n('Social Share'),
             enableToggle : true,
 						iconCls: GeoNetwork.Settings.viewPanelButtonCSS('viewpanel-share')
-        });
+        });*/
 
         GeoNetwork.Util.removeMetaTags({
             'og:title' : true,
-            'og:url' : true
+            'og:url' : true,
+            'dc.language' : true,
+            'dc.identifier' : true,
+            'dc.format' : true,
+            'dcterms.title' : true,
+            'dcterms.created' : true,
+            'dcterms.modified' : true,
+            'dcterms.description' : true,
+            'dcterms.publisher' : true,
+            'dcterms.rights' : true
         });
 
         GeoNetwork.Util.addMetaTag("og:title", record.get('title'));
         GeoNetwork.Util.addMetaTag("og:url", Ext.state.Manager.getProvider()
                 .getPrettyLink());
+
+        // dc tags
+        GeoNetwork.Util.addMetaTag("dc.language", "en-au");
+        GeoNetwork.Util.addMetaTag("dc.identifier", "http://pid.geoscience.gov.au/dataset/"+record.get('eCatId'));
+        GeoNetwork.Util.addMetaTag("dc.format", "text/html");
+        GeoNetwork.Util.addMetaTag("dcterms.title", record.get('title'));
+        GeoNetwork.Util.addMetaTag("dcterms.created", record.get('createdate'));
+        GeoNetwork.Util.addMetaTag("dcterms.modified", record.get('changedate'));
+        GeoNetwork.Util.addMetaTag("dcterms.description", record.get('abstract'));
+        GeoNetwork.Util.addMetaTag("dcterms.publisher", record.get('publisher'));
+        GeoNetwork.Util.addMetaTag("dcterms.rights", record.get('legalConstraints'));
 
         // Updating social
         Ext.get("custom-tweet-button").dom.href = "https://twitter.com/share?text="
@@ -491,6 +514,7 @@ GeoNetwork.app = function() {
                 delete cookie.state.user;
             } else {
                 catalogue.identifiedUser = cookie.get('user');
+                catalogue.isLoggedIn();
             }
 
             // set a permalink provider which will be the main state provider.

@@ -559,7 +559,49 @@ MarLIN.SearchFormTools = {
 
 				return MarLIN.buildKeywordRow(services, selector, thesaurusInfo);
 		},
-		/** api:method[getFields]
+		
+		/**
+		 * Joseph Added for Title textfield
+		 * 
+		 * api:method[getTitleField]
+		 * 
+		 * :param services: Catalogue service URLs (eg. catalogue.services).
+		 * 
+		 * :return: A multi-select field with autocompletion (based on Lucene field
+		 * content - not a thesaurus)
+		 */
+		getTitleField1 : function(services) {
+			var titNameStore = new GeoNetwork.data.OpenSearchSuggestionStore({
+				url : services.opensearchSuggest,
+				rootId : 1,
+				sortInfo : {
+					field : 'value',
+					direction : 'ASC'
+				},
+				baseParams : {
+					field : 'title'
+				}
+			});
+
+			var titNameField = new Ext.form.TextField({
+				anchor : '95%',
+				minChars : 0,
+				queryParam : 'q',
+				hideTrigger : false,
+				id : 'title',
+				name : 'E_title',
+				store : titNameStore,
+				valueField : 'value',
+				displayField : 'value',
+				valueDelimiter : ' or ',
+				mode : 'local',
+				fieldLabel : OpenLayers.i18n('Title')
+			});
+
+			return titNameField;
+		},
+		
+	/** api:method[getFields]
      *  :param services: Catalogue service URLs (eg. catalogue.services).
      *  :param multi: Create fields with multiselection combobox.
      *  :return: A MarLIN form

@@ -493,7 +493,7 @@ div.help ul li {
 }
 
 #metadata-info * {
-	font-size: 12px;
+	font-size: 14px; /* Updated by Joseph from 12px to 14px */
 }
 
 #metadata-info .relation {
@@ -779,6 +779,7 @@ div#resultsPanel .x-toolbar-right {
 #resultsPanel .md-full .thumbnail {
 	min-height: 140px;
 	width: 192px;
+	margin-top: 5px; /* Joseph added */
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
 	background: #fff;
@@ -790,6 +791,7 @@ div#resultsPanel .x-toolbar-right {
 #resultsPanel .md-full .md-contact {
 	border-right: 1px solid #e5e5e5;
 	padding: 5px;
+	width:190px;/* Joseph added */
 	background: #fff;
 	border-left: 1px solid #e5e5e5;
 	border-bottom: 1px solid #e5e5e5;
@@ -906,7 +908,7 @@ div.showBigMapItemInactive:hover {
 }
 
 #metadata-info a {
-	color: #0076A1;
+	color: #FFFFFF;
 }
 
 .metadata * label {
@@ -1045,7 +1047,7 @@ div.showBigMapItemInactive:hover {
 	width: auto;
 	margin: 0px 5px 5px 0px;
 	padding: 4px;
-	background-color: #FEEDDD;
+	background-color: #006983; 
 	color: #565B5E;
 }
 
