@@ -66,7 +66,7 @@ public class CswParams extends AbstractParams
 
 		capabUrl = Util.getParam(site, "capabilitiesUrl", "");
         rejectDuplicateResource = Util.getParam(site, "rejectDuplicateResource",  false);
-        
+        outputSchema = Util.getParam(site, "outputSchema",  "");
         try {
             capabUrl = URLDecoder.decode(capabUrl, "UTF-8");
         }
@@ -106,6 +106,7 @@ public class CswParams extends AbstractParams
 		
 		capabUrl = Util.getParam(site, "capabilitiesUrl", capabUrl);
         rejectDuplicateResource = Util.getParam(site, "rejectDuplicateResource",  rejectDuplicateResource);
+        outputSchema = Util.getParam(site, "outputSchema",  outputSchema);
         
         try {
             capabUrl = URLDecoder.decode(capabUrl, "UTF-8");
@@ -156,7 +157,7 @@ public class CswParams extends AbstractParams
 		copy.capabUrl = capabUrl;
 		copy.icon     = icon;
 		copy.rejectDuplicateResource = rejectDuplicateResource;
-
+		copy.outputSchema = outputSchema;
 		for (Search s : alSearches)
 			copy.alSearches.add(s.copy());
 		
@@ -194,7 +195,7 @@ public class CswParams extends AbstractParams
 	public String capabUrl;
 	public String icon;
     public boolean rejectDuplicateResource;
-
+    public String outputSchema;//Joseph added - for preferred outupt schema, Issue - EA-273
 	private List<Search> alSearches = new ArrayList<Search>();	
 	public List<Element> eltSearches = new ArrayList<Element>();
 	

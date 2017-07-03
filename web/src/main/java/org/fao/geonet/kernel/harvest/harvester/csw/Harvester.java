@@ -157,8 +157,11 @@ class Harvester
 		if (capabil.getName().equals("ExceptionReport"))
 			CatalogException.unmarshal(capabil);
 
-		CswServer server = new CswServer(capabil);
-
+		// ==================== Joseph Updated - For issue EA-273 - Start ==================/
+		//CswServer server = new CswServer(capabil);
+		CswServer server = new CswServer(capabil, params);
+		// ==================== Joseph Updated - For issue EA-273 - End ==================/
+		
 		if (!checkOperation(log, server, "GetRecords"))
 			throw new OperationAbortedEx("GetRecords operation not found");
 

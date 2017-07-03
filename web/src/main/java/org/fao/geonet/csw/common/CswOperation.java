@@ -67,13 +67,21 @@ public class CswOperation {
 
     public List<String> typeNamesList = new ArrayList<String>();
 
-	protected void choosePreferredOutputSchema() {
-		OutputSchemaPreference preference = new OutputSchemaPreference();
-		for(Iterator<String> i = preference.iterator(); i.hasNext();){
-			String nextBest = i.next();
-			if(outputSchemaList.contains(nextBest)) {
-				preferredOutputSchema = nextBest;
-				break;
+	protected void choosePreferredOutputSchema(String outputSchema) {
+		
+		// ============== Joseph Added if condition, Issue - EA-273 ============= /
+		if(outputSchema.equals("iso19115-3")){
+			preferredOutputSchema = Csw.NAMESPACE_MDB.getURI();
+		}
+		
+		if(preferredOutputSchema == null || preferredOutputSchema.isEmpty()){
+			OutputSchemaPreference preference = new OutputSchemaPreference();
+			for(Iterator<String> i = preference.iterator(); i.hasNext();){
+				String nextBest = i.next();
+				if(outputSchemaList.contains(nextBest)) {
+					preferredOutputSchema = nextBest;
+					break;
+				}
 			}
 		}
 	}
