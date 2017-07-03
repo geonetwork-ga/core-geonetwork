@@ -148,7 +148,7 @@
 	<rejectDuplicateResource>Rejeter les fiches si un doublon sur l'identifiant de la ressource est détecté (uniquement pour les métadonnées en ISO19139 ou profil ISO)</rejectDuplicateResource>
 
 	<!--  Joseph Added - For issue EA-273 - Start -->
-	<selectOutPutSchema>Select OutputSchema</selectOutPutSchema>
+	<selectOutPutSchema>Sélectionner OutputSchema</selectOutPutSchema>
 	<outputSchema>
 		<schema label="ISO 19115-3">iso19115-3</schema>
 		<schema label="ISO 19139">iso19139</schema>

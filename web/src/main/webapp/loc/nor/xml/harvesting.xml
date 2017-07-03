@@ -153,7 +153,7 @@
 	<rejectDuplicateResource>Check for duplicate resources based on resource identifier comparison (only for records in ISO19139 or ISO profiles)</rejectDuplicateResource>
 
 	<!--  Joseph Added - For issue EA-273 - Start -->
-	<selectOutPutSchema>Select OutputSchema</selectOutPutSchema>
+	<selectOutPutSchema>Velg OutputSchema</selectOutPutSchema>
 	<outputSchema>
 		<schema label="ISO 19115-3">iso19115-3</schema>
 		<schema label="ISO 19139">iso19139</schema>
