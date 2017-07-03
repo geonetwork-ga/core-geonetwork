@@ -14,6 +14,7 @@
 		<capabilitiesUrl><xsl:value-of select="capabUrl/value" /></capabilitiesUrl>
 		<icon><xsl:value-of select="icon/value" /></icon>
 		<rejectDuplicateResource><xsl:value-of select="rejectDuplicateResource/value"/></rejectDuplicateResource>
+		<outputSchema><xsl:value-of select="outputSchema/value"/></outputSchema><!-- Joseph added -->
 	</xsl:template>
 
 	<!-- ============================================================================================= -->
