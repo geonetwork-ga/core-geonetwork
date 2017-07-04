@@ -222,12 +222,6 @@ public abstract class CatalogRequest
 
     public Element execute() throws Exception
 	{
-    	
-    	System.setProperty("http.proxyHost", "http://proxy.ga.gov.au");
-        System.setProperty("http.proxyPort", "8080");
-        System.setProperty("https.proxyHost", "https://proxy.ga.gov.au");
-        System.setProperty("https.proxyPort", "8080");
-        
 		HttpMethodBase httpMethod = setupHttpMethod();
 
 		Element response = doExecute(httpMethod);
@@ -464,7 +458,7 @@ public abstract class CatalogRequest
 	private Element doExecute(HttpMethodBase httpMethod) throws IOException, JDOMException
 	{
 		client.getHostConfiguration().setHost(host, port, protocol);
-		
+
 		byte[] data = null;
 
 		try
