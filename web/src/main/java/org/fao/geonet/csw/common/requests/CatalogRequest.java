@@ -458,7 +458,7 @@ public abstract class CatalogRequest
 	private Element doExecute(HttpMethodBase httpMethod) throws IOException, JDOMException
 	{
 		client.getHostConfiguration().setHost(host, port, protocol);
-
+		client.getHostConfiguration().setProxy("https://proxy.ga.gov.au", 8080);//Joseph added - Connection refused issue (Need to revert if csw harvesting doesn't work)
 		byte[] data = null;
 
 		try
