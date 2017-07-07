@@ -258,8 +258,7 @@ public class SearchController {
         // OGC 07-045 :
         // Because for this application profile it is not possible that a query includes more than one
         // typename, any value(s) of the typeNames attribute of the elementSetName element are ignored.
-    	if(outSchema != OutputSchema.ISO_19115_3)//Joseph added - Otherwise converts 19115-3 to 19139
-    		res = applyElementSetName(context, scm, schema, res, outSchema, setName, resultType, id);
+    	res = applyElementSetName(context, scm, schema, res, outSchema, setName, resultType, id);
         
         // apply elementnames
         res = applyElementNames(context, elemNames, typeName, scm, schema, res, resultType, info, strategy);
@@ -303,7 +302,7 @@ public class SearchController {
             prefix = "ogc";
         } else if (outputSchema == OutputSchema.ISO_PROFILE || outputSchema == OutputSchema.ISO_19139) {
             prefix = "iso";
-        } else if (outputSchema == OutputSchema.OWN) {
+        } else if (outputSchema == OutputSchema.OWN || outputSchema == OutputSchema.ISO_19115_3) {
             prefix = "own";
         }
         else {

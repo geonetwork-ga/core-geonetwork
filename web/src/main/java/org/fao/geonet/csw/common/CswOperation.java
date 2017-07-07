@@ -70,7 +70,7 @@ public class CswOperation {
 	protected void choosePreferredOutputSchema(String outputSchema) {
 		
 		// ============== Joseph Added if condition, Issue - EA-273 ============= /
-		if(outputSchema.equals("iso19115-3")){
+		if(outputSchema != null && outputSchema.equals("iso19115-3")){
 			preferredOutputSchema = Csw.NAMESPACE_MDB.getURI();
 		}
 		
