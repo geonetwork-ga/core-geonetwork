@@ -170,7 +170,7 @@ public class SearchController {
                                                     String typeName, ResultType resultType, String strategy)
             throws CatalogException {
 
-        List<ResultItem> resultsList = summaryAndSearchResults.two();
+    	List<ResultItem> resultsList = summaryAndSearchResults.two();
         int counter = 0;
         for (int i=0; ( i < maxRecords) && ( i < resultsList.size()); i++) {
             ResultItem resultItem = resultsList.get(i);
@@ -222,8 +222,7 @@ public class SearchController {
         }
     Element info = res.getChild(Edit.RootChild.INFO, Edit.NAMESPACE);
     String schema = info.getChildText(Edit.Info.Elem.SCHEMA);
-
-
+       
     // --- transform iso19115 record to iso19139
     // --- If this occur user should probably migrate the catalogue from iso19115 to iso19139.
     // --- But sometimes you could harvest remote node in iso19115 and make them available through CSW
@@ -234,22 +233,36 @@ public class SearchController {
       schema = "iso19139";
     }
     
+    // ============== Joseph Added - transform metadata based on output  schema, Issue - EA-273 - Start ============= /
+    
+    if(outSchema == OutputSchema.ISO_19115_3){
+    	if(schema.equals("iso19139.anzlic") || schema.equals("iso19139")){
+
+    		//Transform from iso19139 to iso19115-3
+            res = Xml.transform(res, new StringBuilder().append(context.getAppPath()).append("xsl")
+                          .append(File.separator).append("conversion").append(File.separator).append("import")
+                          .append(File.separator).append("ISO19139to19115-3.xsl").toString());
+            schema = "iso19115-3";
+        }
+    }
+    
+    // ============== Joseph Added - transform metadata based on output  schema, Issue - EA-273 - End ============= /
+    
     //--- skip metadata with wrong schemas
     if (schema.equals("fgdc-std") || schema.equals("dublin-core"))
         if(outSchema != OutputSchema.OGC_CORE)
           return null;
-        
-    // apply stylesheet according to setName and schema
+     
+    	// apply stylesheet according to setName and schema
         //
         // OGC 07-045 :
         // Because for this application profile it is not possible that a query includes more than one
         // typename, any value(s) of the typeNames attribute of the elementSetName element are ignored.
-        res = applyElementSetName(context, scm, schema, res, outSchema, setName, resultType, id);
-    //
-      // apply elementnames
-        //
+    	res = applyElementSetName(context, scm, schema, res, outSchema, setName, resultType, id);
+        
+        // apply elementnames
         res = applyElementNames(context, elemNames, typeName, scm, schema, res, resultType, info, strategy);
-
+        
         if(res != null) {
             if(Log.isDebugEnabled(Geonet.CSW_SEARCH))
                 Log.debug(Geonet.CSW_SEARCH, "SearchController returns\n" + Xml.getString(res));
@@ -287,9 +300,9 @@ public class SearchController {
         String prefix ;
         if (outputSchema == OutputSchema.OGC_CORE) {
             prefix = "ogc";
-        } else if (outputSchema == OutputSchema.ISO_PROFILE) {
+        } else if (outputSchema == OutputSchema.ISO_PROFILE || outputSchema == OutputSchema.ISO_19139) {
             prefix = "iso";
-        } else if (outputSchema == OutputSchema.OWN) {
+        } else if (outputSchema == OutputSchema.OWN || outputSchema == OutputSchema.ISO_19115_3) {
             prefix = "own";
         }
         else {
@@ -297,8 +310,7 @@ public class SearchController {
         }
 
     String service = context.getService();
-
-
+    
     String schemaDir  = schemaManager.getSchemaCSWPresentDir(schema);
     String virtualPresentDir = null;
     if (!service.equals("csw")) {
@@ -311,7 +323,7 @@ public class SearchController {
     schemaDir += File.separator;
   
     String styleSheet = findStyleSheet(schemaDir, virtualPresentDir, prefix, elementSetName);
-
+    
     Map<String, String> params = new HashMap<String, String>();
     params.put("lang", context.getLanguage());
     params.put("displayInfo", resultType == ResultType.RESULTS_WITH_SUMMARY ? "true" : "false");

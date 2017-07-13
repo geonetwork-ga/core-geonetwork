@@ -49,6 +49,7 @@ public final class Csw {
     public static final Namespace NAMESPACE_INSPIRE_DS = Namespace.getNamespace("inspire_ds", "http://inspire.ec.europa.eu/schemas/inspire_ds/1.0");
     public static final Namespace NAMESPACE_INSPIRE_COM = Namespace.getNamespace("inspire_common", "http://inspire.ec.europa.eu/schemas/common/1.0");
 	public static final Namespace NAMESPACE_SRV = Geonet.Namespaces.SRV;
+	public static final Namespace NAMESPACE_MDB = Namespace.getNamespace("mdb", "http://standards.iso.org/iso/19115/-3/mdb/1.0");
 	
 	//---------------------------------------------------------------------------
 	//---

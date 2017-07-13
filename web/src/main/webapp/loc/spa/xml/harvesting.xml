@@ -147,6 +147,15 @@
 	<importxslt>Apply this XSLT to harvested records</importxslt>
 	<rejectDuplicateResource>Check for duplicate resources based on resource identifier comparison (only for records in ISO19139 or ISO profiles)</rejectDuplicateResource>
 
+<!--  Joseph Added - For issue EA-273 - Start -->
+	<selectOutPutSchema>Seleccionar OutputSchema</selectOutPutSchema>
+	<outputSchema>
+		<schema label="ISO 19115-3">iso19115-3</schema>
+		<schema label="ISO 19139">iso19139</schema>
+	</outputSchema>
+	<!--  Joseph Added - For issue EA-273 - End -->
+	
+	
 	<at>Ejecutar a</at>
 	<atSpec>( hora del d�a : minutos ej. 23:15 )</atSpec>
 	<interval>Se ejecutar� cada</interval>
