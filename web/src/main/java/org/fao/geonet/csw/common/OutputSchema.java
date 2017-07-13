@@ -4,7 +4,9 @@ import org.fao.geonet.csw.common.exceptions.InvalidParameterValueEx;
 
 public enum OutputSchema
 {
-	OGC_CORE("Record"), ISO_PROFILE("IsoRecord"), OWN("own");
+	
+	//Joseph Added: ISO_19115_3 and ISO_19139 - Issue - EA-273
+	OGC_CORE("Record"), ISO_PROFILE("IsoRecord"), OWN("own"), ISO_19115_3("iso19115-3"), ISO_19139("iso19139");
 
 	//------------------------------------------------------------------------
 
@@ -58,8 +60,14 @@ public enum OutputSchema
 		if (schema.equals("csw:Record"))		return OGC_CORE;
 		if (schema.equals("csw:IsoRecord")) return ISO_PROFILE;
 		
+		//Joseph added - Start
+		if (schema.equals("iso19115-3"))		return ISO_19115_3;
+		if (schema.equals("iso19139"))		return ISO_19139;
+		//Joseph added - End
+		
 		if (schema.equals(Csw.NAMESPACE_CSW.getURI())) return OGC_CORE;
 		if (schema.equals(Csw.NAMESPACE_GMD.getURI())) return ISO_PROFILE;
+		if (schema.equals(Csw.NAMESPACE_MDB.getURI())) return ISO_19115_3;//Joseph Added
 		
 		if (schema.equals(OWN.toString())) return OWN;
 		

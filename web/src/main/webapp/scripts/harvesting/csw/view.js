@@ -100,7 +100,7 @@ function setData(node)
 	hvutil.setOption(site, 'capabilitiesUrl', 'csw.capabUrl');
 	hvutil.setOption(site, 'icon',            'csw.icon');
     hvutil.setOption(site, 'rejectDuplicateResource', 'csw.rejectDuplicateResource');
-    
+    hvutil.setOption(site, 'outputSchema', 'csw.outputSchema');//Joseph added - For issue EA-273
 	//--- add search entries
 	
 	var list = searches.getElementsByTagName('search');
@@ -134,6 +134,7 @@ function getData()
 	data.CAPAB_URL = $F('csw.capabUrl');
 	data.ICON      = $F('csw.icon');
 	data.REJECTDUPLICATERESOURCE = $('csw.rejectDuplicateResource').checked;
+	data.OUTPUTSCHEMA = $F('csw.outputSchema');//Joseph added - For issue EA-273
 	//--- retrieve search information
 	
 	var searchData = [];

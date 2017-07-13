@@ -908,7 +908,7 @@ div.showBigMapItemInactive:hover {
 }
 
 #metadata-info a {
-	color: #FFFFFF;
+	color: #0076A1;
 }
 
 .metadata * label {
@@ -1053,6 +1053,7 @@ div.showBigMapItemInactive:hover {
 
 #metadata-info .related li a {
 	text-decoration: none;
+	color: #FFFFFF;
 }
 
 #metadata-info .related li a:hover {

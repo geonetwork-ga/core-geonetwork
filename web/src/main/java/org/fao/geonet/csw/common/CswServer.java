@@ -25,6 +25,7 @@ package org.fao.geonet.csw.common;
 
 import jeeves.utils.Log;
 import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.kernel.harvest.harvester.csw.CswParams;
 import org.jdom.Element;
 import org.jdom.Namespace;
 
@@ -43,13 +44,14 @@ import java.util.Map;
 public class CswServer {
 	public static final String GET_RECORDS      = "GetRecords";
 	public static final String GET_RECORD_BY_ID = "GetRecordById";
-
+	private CswParams      params;
     /**
      * Constructor.
      *
      * @param capab
      */
-	public CswServer(Element capab) {
+	public CswServer(Element capab, CswParams params) {
+		this.params = params;
 		parse(capab);
 	}
 
@@ -168,7 +170,11 @@ public class CswServer {
                 log("Adding outputSchema: " + outputSchemaValue + " to operation: " + name);
                 op.outputSchemaList.add(outputSchemaValue);
             }
-            op.choosePreferredOutputSchema();
+            
+            // ============== Joseph Updated if condition, Issue - EA-273 Start ============= /
+            //op.choosePreferredOutputSchema();
+            op.choosePreferredOutputSchema(params.outputSchema);
+         // ============== Joseph Updated if condition, Issue - EA-273 - End ============= /
         }
         else {
         	log("No outputSchema for operation: " + name);

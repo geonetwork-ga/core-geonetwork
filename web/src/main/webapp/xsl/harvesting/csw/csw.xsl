@@ -70,6 +70,18 @@
 				<td class="padded"><label for="csw.rejectDuplicateResource"><xsl:value-of select="/root/gui/harvesting/rejectDuplicateResource"/></label></td>
 				<td class="padded"><input id="csw.rejectDuplicateResource" type="checkbox" value=""/></td>
 			</tr>
+			
+			<!--  Joseph added, For issue EA-273 - Start -->
+			<tr>
+                <td class="padded"><xsl:value-of select="/root/gui/harvesting/selectOutPutSchema"/></td>
+                <td class="padded">
+					<select id="csw.outputSchema" class="content">
+						<xsl:apply-templates mode="selectoptions" select="/root/gui/harvesting/outputSchema/schema" />
+					</select>
+				</td>
+            </tr>
+            <!--  Joseph added, For issue EA-273 - End -->
+            
 		</table>
 	</xsl:template>
 	
@@ -129,4 +141,16 @@
 
     <!-- ============================================================================================= -->
 
+	<!-- Populating a set of options for a select-->
+	<!--  Joseph added, For issue EA-273 - Start -->
+	<xsl:template mode="selectoptions" match="schema">
+		<option>
+			<xsl:attribute name="value">
+				<xsl:value-of select="."/>
+			</xsl:attribute>
+			<xsl:value-of select="@label"/>
+		</option>
+	</xsl:template>
+	<!--  Joseph added, For issue EA-273 - End -->
+	
 </xsl:stylesheet>

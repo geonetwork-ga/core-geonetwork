@@ -123,7 +123,7 @@ var updateTemp =
 '        <password>{PASSWORD}</password>'+
 '      </account>'+
 '      <rejectDuplicateResource>{REJECTDUPLICATERESOURCE}</rejectDuplicateResource>'+
-
+'      <outputSchema>{OUTPUTSCHEMA}</outputSchema>'+
 '    </site>'+
     
 '    <options>'+
