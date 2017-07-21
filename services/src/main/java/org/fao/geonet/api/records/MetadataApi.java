@@ -99,7 +99,7 @@ public class MetadataApi implements ApplicationContextAware {
             "When requesting a ZIP, a MEF version 2 file is returned. " +
             "When requesting HTML, the default formatter is used.",
         nickname = "getRecord")
-    @RequestMapping(value = "/{metadataUuid}",
+    @RequestMapping(value = "/{metadataUuid:.+}",
         method = RequestMethod.GET,
         consumes = {
             MediaType.ALL_VALUE
@@ -150,19 +150,19 @@ public class MetadataApi implements ApplicationContextAware {
         if (accept.contains(MediaType.TEXT_HTML_VALUE)
             || accept.contains(MediaType.APPLICATION_XHTML_XML_VALUE)
             || accept.contains("application/pdf")) {
-            return "forward:" + (metadataUuid + "/formatters/" + defaultFormatter);
+            return "forward:/api/records/" + (metadataUuid + "/formatters/" + defaultFormatter);
         } else if (accept.contains(MediaType.APPLICATION_XML_VALUE)
                 || accept.contains(MediaType.APPLICATION_JSON_VALUE)) {
-            return "forward:" + (metadataUuid + "/formatters/xml");
+            return "forward:/api/records/" + (metadataUuid + "/formatters/xml");
         } else if (accept.contains("application/zip")
                 || accept.contains(MEF_V1_ACCEPT_TYPE)
                 || accept.contains(MEF_V2_ACCEPT_TYPE)) {
-            return "forward:" + (metadataUuid + "/formatters/zip");
+            return "forward:/api/records/" + (metadataUuid + "/formatters/zip");
         } else {
             // FIXME this else is never reached because any of the accepted medias match one of the previous if conditions.
             response.setHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_XHTML_XML_VALUE);
             //response.sendRedirect(metadataUuid + "/formatters/" + defaultFormatter);
-            return "forward:" + (metadataUuid + "/formatters/" + defaultFormatter);
+            return "forward:/api/records/" + (metadataUuid + "/formatters/" + defaultFormatter);
         }
     }
 
@@ -201,6 +201,10 @@ public class MetadataApi implements ApplicationContextAware {
             required = false)
         @RequestParam(required = false, defaultValue = "true")
             boolean increasePopularity,
+        @ApiParam(value = "Add geonet:info details",
+            required = false)
+        @RequestParam(required = false, defaultValue = "false")
+            boolean withInfo,
         @RequestHeader(
             value = HttpHeaders.ACCEPT,
             defaultValue = MediaType.APPLICATION_XML_VALUE
@@ -240,7 +244,13 @@ public class MetadataApi implements ApplicationContextAware {
             dataManager.increasePopularity(context, metadata.getId() + "");
         }
 
-        Element xml = metadata.getXmlData(false);
+
+        boolean withValidationErrors = false, keepXlinkAttributes = false, forEditing = false;
+        Element xml  = withInfo ?
+            dataManager.getMetadata(context,
+            metadata.getId() + "", forEditing, withValidationErrors, keepXlinkAttributes) :
+            dataManager.getMetadataNoInfo(context, metadata.getId() + "");
+
         if (addSchemaLocation) {
             Attribute schemaLocAtt = _schemaManager.getSchemaLocation(
                 metadata.getDataInfo().getSchemaId(), context);
