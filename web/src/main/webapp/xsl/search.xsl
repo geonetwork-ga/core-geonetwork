@@ -156,8 +156,8 @@
       <div id="page-container">  
 				<div id="container">
 					<div id="header">
-					  <div id="logo"></div>
-            <div id="search-title" style="width: 500px">Data and Publications Search</div>
+					  <a href="http://www.ga.gov.au/" title="Navigate to the Geoscience Australia home page"><div id="logo"></div></a>
+            			<div id="search-title" style="width: 500px">Data and Publications Search</div>
 						<header class="wrapper clearfix">
 							<div style="width: 100%; margin: 0 auto;">
 								<nav id="nav">
