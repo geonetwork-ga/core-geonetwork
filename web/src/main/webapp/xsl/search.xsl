@@ -202,7 +202,7 @@
 						</header>
 					</div>
 					
-					<div id="main">
+					<div id="main" style="min-height:700px;">
 			        <div id="copy-clipboard-ie"></div>
                        <div id="share-capabilities" style="display:none">
                             <a id="custom-tweet-button" href="javascript:void(0);" target="_blank">
