@@ -35,8 +35,19 @@
         <link rel="schema.dc" href="http://purl.org/dc/elements/1.1/" />
         <link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
 
-				<script type="text/javascript">
-					var _gaq = _gaq || [];
+				 <script type="text/javascript">
+
+					<!-- Added by Joseph/Alice for Google analytics code  -->
+					(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+					(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new
+					Date();a=s.createElement(o),
+					m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+					})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+				
+					ga('create', 'UA-1501753-1', 'ga.gov.au');
+					ga('send', 'pageview');
+				
+				<!-- var _gaq = _gaq || [];
 					_gaq.push(['_setAccount', 'UA-36263643-1']);
 					_gaq.push(['_trackPageview']);
 
@@ -49,7 +60,7 @@
 					var s = document.getElementsByTagName('script')[0];
 					s.parentNode.insertBefore(ga, s);
 					})();
-
+				-->
 				</script>
 
                  <xsl:choose>
@@ -156,8 +167,8 @@
       <div id="page-container">  
 				<div id="container">
 					<div id="header">
-					  <div id="logo"></div>
-            <div id="search-title" style="width: 500px">Data and Publications Search</div>
+					  <a href="http://www.ga.gov.au/" title="Navigate to the Geoscience Australia home page"><div id="logo"></div></a>
+            			<div id="search-title" style="width: 500px">Data and Publications Search</div>
 						<header class="wrapper clearfix">
 							<div style="width: 100%; margin: 0 auto;">
 								<nav id="nav">
@@ -324,22 +335,59 @@
 					</div>
 					<!-- #main -->
 
-					<div id="footer">
-            <xsl:if test="/root/gui/config/html5ui-footer!='true'">
+					<footer id="footer">
+            <!--<xsl:if test="/root/gui/config/html5ui-footer!='true'">
               <xsl:attribute name="style">display:none;</xsl:attribute>
-            </xsl:if>
-						<footer class="wrapper">
-							<ul>
-								<li style="float:left">
-									<xsl:value-of select="/root/gui/strings/poweredBy"/> 
-									<a href="http://geonetwork-opensource.org/">GeoNetwork OpenSource</a>
-								</li>
-								<li>
-                                    <a href="http://www.gnu.org/copyleft/gpl.html">GPL</a>
-								</li>
-							</ul>
-						</footer>
-					</div>
+            </xsl:if>-->
+						<div class="footerWrapper">
+							<div id="ccByLicense">
+							  <a href="https://creativecommons.org/licenses/by/4.0/legalcode"
+								target="_blank"
+								title="Go to Creative Commons home page"> <img
+								src="../../apps/html5ui/img/cc-by.png"
+								height="20" width="107"
+								alt="Creative Commons Logo"></img>
+							  </a>
+							</div>
+							<div id="gaCopyright">
+							  <a href="http://www.ga.gov.au/copyright"
+								target="_blank"
+								title="View Geoscience Australia copyright statement">Copyright</a>
+							</div>
+							<div id="gaDisclaimer">
+							  <a href="http://www.ga.gov.au/disclaimer"
+								target="_blank"
+								title="View Geoscience Australia disclaimer web page">Disclaimer</a>
+							</div>
+							<div id="gaPrivacy">
+							  <a href="http://www.ga.gov.au/privacy"
+								target="_blank"
+								title="View Geoscience Australia privacy policy">Privacy</a>
+							</div>
+							<div id="gaAccessibility">
+							  <a href="http://www.ga.gov.au/accessibility"
+								target="_blank"
+								title="View Geoscience Australia accessibility statement">Accessibility</a>
+							</div>
+							<div id="gaInfoScheme">
+							  <a href="http://www.ga.gov.au/ips"
+								target="_blank"
+								style="padding-top: 22px"
+								title="View Geoscience Australia privacy statement">Information Publication Scheme
+							  </a>
+							</div>
+							<div id="gaFOI">
+							  <a href="http://www.ga.gov.au/ips/foi"
+								target="_blank"
+								title="View Geoscience Australia freedom of information statement">Freedom of Information</a>
+							</div>
+							<div id="gaContact">
+								<a href="http://www.ga.gov.au/contact-us"
+								target="_blank"
+								title="Contact Geoscience Australia">Contact us</a>
+							</div>
+						</div>
+					</footer>
 				</div>
 
 				<input type="hidden" id="x-history-field" />
