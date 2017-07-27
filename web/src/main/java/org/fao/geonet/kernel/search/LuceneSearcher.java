@@ -624,7 +624,18 @@ public class LuceneSearcher extends MetaSearcher {
                     }
                 }
             }
-
+			/********* Joseph Added - Search by author must not be case sensitive - Start ********/
+			Element authorEmt = request.getChild("author");
+			if(authorEmt != null){
+				try{
+					String author = authorEmt.getText();
+					author = StringUtils.capitalize(author.toLowerCase());
+					request.getChild("author").setText(author);
+				}catch(Exception e){
+				}
+			}
+			/******** Joseph Added - Search by author must not be case sensitive - End *********/
+			
 			//--- handle the time elements
 
 			processTimeRange(request.getChild(SearchParameter.DATEFROM), "0000-01-01", request.getChild(SearchParameter.DATETO), "9999-01-01");
