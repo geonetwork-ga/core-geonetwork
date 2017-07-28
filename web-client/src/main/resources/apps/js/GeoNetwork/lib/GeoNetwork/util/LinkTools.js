@@ -128,8 +128,7 @@ GeoNetwork.util.LinkTools = {
                              // Only display WMS link if dynamic property set to true for current user & record
                              if (currentType === 'application/vnd.ogc.wms_xml' || (currentType.indexOf('OGC:WMS') > -1)) {
                                  if (allowDynamic) {
-                                	 //Commented by Joseph - Remove "Add to map" button. Not working as expected 
-                                     /*linkButton.push({
+                                     linkButton.push({
                                          text: record.get('title') || record.get('name'),
                                          handler: function (b, e) {
                                              // FIXME : ref to app
@@ -137,7 +136,7 @@ GeoNetwork.util.LinkTools = {
                                              app.getIMap().addWMSLayer([[record.get('title'), record.get('href'), record.get('name'), uuid]]);
                                          },
                                          href: record.get('href')
-                                     });*/
+                                     });
                                  }
                              } else if (currentType === 'application/vnd.ogc.wmc') {
                                  linkButton.push({
@@ -204,6 +203,10 @@ GeoNetwork.util.LinkTools = {
            return;
          }
  
+         //Joseph added - Removed "Add to Map" button as the add to map functionality is broken. Need to remove once its fixed 
+         if(currentType === 'application/vnd.ogc.wms_xml' || (currentType.indexOf('OGC:WMS') > -1)){
+			 return;
+		 }
  
          var href = linkButton[0].href,
              isDownload = (currentType === 'downloadAllIcon') || (href.indexOf('resources.get') !== -1) || (href.indexOf('file.disclaimer') !== -1);
