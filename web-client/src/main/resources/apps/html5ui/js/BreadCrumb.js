@@ -34,7 +34,7 @@ GeoNetwork.BreadCrumb = function() {
         defaultSteps : [ 
 				{
             text : OpenLayers.i18n("BROWSE"),
-            func : "showBrowse()"
+            func : "showSearch()"
         },{
             text : OpenLayers.i18n("SEARCH RESULTS"),
             func : "showSearch()"
