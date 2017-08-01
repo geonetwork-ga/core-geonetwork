@@ -130,11 +130,12 @@ GeoNetwork.util.LinkTools = {
                                  if (allowDynamic) {
                                      linkButton.push({
                                          text: record.get('title') || record.get('name'),
-                                         handler: function (b, e) {
+                                         //Joseph added -  - Changed "Add to Map" button functionality as the add to map functionality is broken. It redirects to WMS metadata 
+                                         /*handler: function (b, e) {
                                              // FIXME : ref to app
                                              app.switchMode('1', true);
                                              app.getIMap().addWMSLayer([[record.get('title'), record.get('href'), record.get('name'), uuid]]);
-                                         },
+                                         },*/
                                          href: record.get('href')
                                      });
                                  }
@@ -202,11 +203,6 @@ GeoNetwork.util.LinkTools = {
          if (Ext.get(id)) { // don't need to add them again
            return;
          }
- 
-         //Joseph added - Removed "Add to Map" button as the add to map functionality is broken. Need to remove once its fixed 
-         if(currentType === 'application/vnd.ogc.wms_xml' || (currentType.indexOf('OGC:WMS') > -1)){
-			 return;
-		 }
  
          var href = linkButton[0].href,
              isDownload = (currentType === 'downloadAllIcon') || (href.indexOf('resources.get') !== -1) || (href.indexOf('file.disclaimer') !== -1);
