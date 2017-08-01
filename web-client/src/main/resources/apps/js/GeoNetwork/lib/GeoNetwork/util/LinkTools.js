@@ -204,7 +204,7 @@ GeoNetwork.util.LinkTools = {
          }
  
          //Joseph added - Removed "Add to Map" button as the add to map functionality is broken. Need to remove once its fixed 
-         if(currentType === 'application/vnd.ogc.wms_xml' || (currentType.indexOf('OGC:WMS') > -1)){
+         if(currentType === 'application/vnd.ogc.wms_xml' || (currentType.indexOf('OGC:WMS') > -1) || currentType === 'text/plain'){
 			 return;
 		 }
  
