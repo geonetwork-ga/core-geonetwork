@@ -1027,7 +1027,7 @@ public class DataManager {
      * @return empty string if no gaid or no Geonet.File.EXTRACT_GAID
      * @throws Exception
      */
-    private String extractGAID(String schema, Element md) throws Exception {
+    public String extractGAID(String schema, Element md) throws Exception {
         String styleSheet = getSchemaDir(schema) + Geonet.File.EXTRACT_GAID;
         String gaid       = "";
 				if (new File(styleSheet).exists()) {
@@ -1051,7 +1051,7 @@ public class DataManager {
      * @return gaid next sequence number from database table 
      * @throws Exception
      */
-    private String getGAID(Dbms dbms) throws Exception {
+    public String getGAID(Dbms dbms) throws Exception {
         return dbms.sequence();
     }
 
@@ -1152,12 +1152,29 @@ public class DataManager {
         root.addContent(env.detach());
 
         //--- do an XSL  transformation
-
+        
         String styleSheet = getSchemaDir(schema) + Geonet.File.SET_UUID;
-
         return Xml.transform(root, styleSheet);
     }
 
+    //Joseph added - Add GAID into the metadata 
+    public Element setGAID(String schema, String gaid, Element md) throws Exception {
+        //--- setup environment
+    	
+        Element env = new Element("env");
+        
+        env.addContent(new Element("gaid").setText(gaid));
+        //--- setup root element
+
+        Element root = new Element("root");
+        root.addContent(md.detach());
+        root.addContent(env.detach());
+
+        //--- do an XSL  transformation
+        String styleSheet = getSchemaDir(schema) + Geonet.File.SET_GAID;
+        return Xml.transform(root, styleSheet);
+    }
+    
     /**
      *
      * @param dbms
