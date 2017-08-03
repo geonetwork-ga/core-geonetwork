@@ -429,6 +429,7 @@ public class Importer {
 			response = search.exec(params, context);
 			Element summary = response.getChild("summary");
 			count = summary.getAttribute("count").getIntValue();
+			Log.debug(Geonet.DATA_MANAGER, "Number of eCatId with same "+ gaid + " is " + count);
 		} catch (Exception e) {
 			Log.error(Geonet.DATA_MANAGER, " Exception while eCat search, " + e.getMessage());
 		}
@@ -481,7 +482,10 @@ public class Importer {
 
 		//Joseph Added for created eCatId while importing metadata
 		gaid = dm.extractGAID(schema, md.get(index));
-		boolean isExist = eCatIdExist(gaid, context, gc);
+		boolean isExist = false;
+		if(!gaid.isEmpty())
+			isExist = eCatIdExist(gaid, context, gc);
+		
 		Log.debug(Geonet.DATA_MANAGER, "Metadata with eCatId "+ gaid + " exist: " + isExist);
 		
 		if(isExist && !gaid.isEmpty() && !uuidAction.equals(Params.GENERATE_UUID)){
