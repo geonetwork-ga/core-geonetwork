@@ -482,11 +482,11 @@ public class Importer {
 		//Joseph Added for created eCatId while importing metadata
 		gaid = dm.extractGAID(schema, md.get(index));
 		boolean isExist = eCatIdExist(gaid, context, gc);
+		Log.debug(Geonet.DATA_MANAGER, "Metadata with eCatId "+ gaid + " exist: " + isExist);
 		
 		if(isExist && !gaid.isEmpty() && !uuidAction.equals(Params.GENERATE_UUID)){
 			throw new Exception(" Existing metadata with eCatId " + gaid + " could not be deleted. Current transaction is aborted.");
 		}
-		
 		try {
 			if (dm.existsMetadataUuid(dbms, uuid) && !uuidAction.equals(Params.NOTHING)) {
 				
@@ -512,6 +512,7 @@ public class Importer {
         //If eCatId doesn't exist add new eCatId
         if(!isExist && gaid.isEmpty()){
         	gaid = dm.getGAID(dbms);
+        	Log.debug(Geonet.DATA_MANAGER, "Generated new eCatId: " + gaid);
         	// --- set gaid inside metadata
 			md.add(index, dm.setGAID(schema, gaid, md.get(index)));
         }
