@@ -30,6 +30,8 @@ import jeeves.utils.BinaryFile;
 import jeeves.utils.Log;
 import jeeves.utils.Util;
 import jeeves.utils.Xml;
+
+import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
@@ -480,17 +482,59 @@ public class Importer {
 			}
 		}
 
-		//Joseph Added for created eCatId while importing metadata
+		/* ============= Joseph Added - Creating eCatId while importing metadata - Start ========= */
 		gaid = dm.extractGAID(schema, md.get(index));
+		
+		//If eCatId is non-numeric, set as empty
+		if(!gaid.isEmpty() && !StringUtils.isNumeric(gaid))
+			gaid = "";
+		
 		boolean isExist = false;
 		if(!gaid.isEmpty())
 			isExist = eCatIdExist(gaid, context, gc);
 		
 		Log.debug(Geonet.DATA_MANAGER, "Metadata with eCatId "+ gaid + " exist: " + isExist);
 		
-		if(isExist && !gaid.isEmpty() && !uuidAction.equals(Params.GENERATE_UUID)){
-			throw new Exception(" Existing metadata with eCatId " + gaid + " could not be deleted. Current transaction is aborted.");
+		
+		if(!uuidAction.equals(Params.GENERATE_UUID)){
+			try{
+				boolean uuidExist = dm.existsMetadataUuid(dbms, uuid);
+				String oldGaid = "";
+				boolean sameGaid = false;
+				
+				//UUID action is overwrite and record exist, get the existing eCatId to add into metadata. 
+				//Otherwise eCatId will be lost while deleting and new eCatId will generated
+				if(uuidAction.equals(Params.OVERWRITE) && uuidExist){
+					String mId = dm.getMetadataId(dbms, uuid);
+	    			Element metadata = dm.getMetadata(dbms, mId);
+	    			if(uuidExist){
+	    					oldGaid = dm.extractGAID(schema, metadata);
+	    					if(oldGaid.equals(gaid))
+	    						sameGaid = true;
+	    					
+	    					gaid = oldGaid;
+	    					Log.debug(Geonet.DATA_MANAGER, "Set old eCatId: " + gaid);
+	    			}
+				}
+				
+				if(isExist && !gaid.isEmpty() && !sameGaid){
+					throw new Exception(" Existing metadata with eCatId " + gaid + " could not be deleted. Current transaction is aborted.");
+				}else{
+					if(gaid.isEmpty()){
+						gaid = dm.getGAID(dbms);
+						Log.debug(Geonet.DATA_MANAGER, "Generated new eCatId: " + gaid);
+					}
+				}
+				
+				// --- set gaid inside metadata
+				md.add(index, dm.setGAID(schema, gaid, md.get(index)));	
+			}catch(Exception e){
+				throw e;
+			}
+			
 		}
+		/* ============= Joseph Added - Creating eCatId while importing metadata - End ========= */
+		
 		try {
 			if (dm.existsMetadataUuid(dbms, uuid) && !uuidAction.equals(Params.NOTHING)) {
 				
@@ -512,16 +556,7 @@ public class Importer {
 
         if(Log.isDebugEnabled(Geonet.MEF))
             Log.debug(Geonet.MEF, "Adding metadata with uuid:" + uuid);
-
-        //If eCatId doesn't exist add new eCatId
-        if(!isExist && gaid.isEmpty()){
-        	gaid = dm.getGAID(dbms);
-        	Log.debug(Geonet.DATA_MANAGER, "Generated new eCatId: " + gaid);
-        	// --- set gaid inside metadata
-			md.add(index, dm.setGAID(schema, gaid, md.get(index)));
-        }
-        
-        
+        	
 		// Try to insert record with localId provided, if not use a new id.
 		boolean insertedWithLocalId = false;
 		if (localId != null && !localId.equals("")) {
