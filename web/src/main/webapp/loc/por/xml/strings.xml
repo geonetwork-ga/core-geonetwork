@@ -515,7 +515,7 @@
 	<fuzzySearch>Ajustar a exactidão de pesquisa.</fuzzySearch>
 	<general>Geral</general>
 	<generalInfo>Informação geral</generalInfo>
-	<generateUUID>Gerar UUID para os metadados introduzidos</generateUUID>
+	<generateUUID>Gerar UUID de eCatId para os metadados introduzidos</generateUUID>
 	<georss>Abrir um feed de GeoRSS</georss>
 	<group>Grupo</group>
 	<usergroups>User groups</usergroups>
@@ -691,7 +691,7 @@
 	<output>Output</output>
 	<outputType id="full">Completo</outputType>
 	<outputType id="text">Só texto</outputType>
-	<overwrite>Sobrescreva metadados com mesmo UUID</overwrite>
+	<overwrite>Sobrescreva metadados com mesmo UUID de eCatId</overwrite>
 	<overwriteFile>Sobrescrever?</overwriteFile>
 	<owner>Dono</owner>
 	<ownerRights>Apagar/Privilégios/Categorias desbloqueados: Você tem direitos dum dono</ownerRights>

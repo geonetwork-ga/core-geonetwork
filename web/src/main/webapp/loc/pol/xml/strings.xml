@@ -522,7 +522,7 @@
 	<fuzzySearch>Ustaw precyzję wyszukiwania</fuzzySearch>
 	<general>Generalnie</general>
 	<generalInfo>Generalne informacje</generalInfo>
-	<generateUUID>Generuj UUID dla wstawionych metadanych</generateUUID>
+	<generateUUID>Generuj UUID i eCatId dla wstawionych metadanych</generateUUID>
 	<georss>Otwórz pobieranie GeoRSS</georss>
 	<group>Grupa</group>
 	<usergroups>User groups</usergroups>
@@ -700,7 +700,7 @@
 	<output>Wynik</output>
 	<outputType id="full">Pełen</outputType>
 	<outputType id="text">Tylko tekst</outputType>
-	<overwrite>Nadpisz metadane o tym samym UUID</overwrite>
+	<overwrite>Nadpisz metadane o tym samym UUID i eCatId</overwrite>
 	<overwriteFile>Nadpisać?</overwriteFile>
 	<owner>Właściciel</owner>
 	<ownerRights>Usuń/uprawnienia/kategorie odblokowane</ownerRights>

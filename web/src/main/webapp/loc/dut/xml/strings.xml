@@ -514,7 +514,7 @@
 	<fuzzySearch>Stel de zoeknauwkeurigheid in (van exact zoeken tot fuzzy zoeken).</fuzzySearch>
 	<general>Algemeen</general>
 	<generalInfo>Algemene informatie</generalInfo>
-	<generateUUID>Genereer een UUID voor de nieuwe metadata</generateUUID>
+	<generateUUID>Genereer een UUID en eCatId voor de nieuwe metadata</generateUUID>
 	<georss>Open een GeoRSS feed</georss>
 	<group>Groep</group>
 	<usergroups>Gebruikersgroepen</usergroups>
@@ -698,7 +698,7 @@
 	<output>Output</output>
 	<outputType id="full">Volledig</outputType>
 	<outputType id="text">Alleen Tekst</outputType>
-	<overwrite>Overschrijf metadata met eenzelfde UUID</overwrite>
+	<overwrite>Overschrijf metadata met eenzelfde UUID en eCatId</overwrite>
 	<overwriteFile>Overschrijven?</overwriteFile>
 	<owner>Gebruiker</owner>
 	<ownerRights>Verwijder/Toegangsrechten/Categorieën vrij: u heeft beheersrechten</ownerRights>

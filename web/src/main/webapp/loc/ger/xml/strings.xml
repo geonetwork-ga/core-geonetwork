@@ -511,7 +511,7 @@
 	<fuzzySearch>Setzen der Suchgenauigkeit.</fuzzySearch>
 	<general>Generell</general>
 	<generalInfo>Generelle Information</generalInfo>
-	<generateUUID>Generiere UUID für eingefügte Metadaten</generateUUID>
+	<generateUUID>Generiere UUID und eCatId für eingefügte Metadaten</generateUUID>
 	<georss>Öffnen eines GeoRSS feed</georss>
 	<group>Gruppe</group>
 	<usergroups>Nutzergruppen</usergroups>
@@ -687,7 +687,7 @@
 	<output>Ausgabe</output>
 	<outputType id="full">Komplett</outputType>
 	<outputType id="text">Nur Text</outputType>
-	<overwrite>Überschreibe Metadatensätze mit gleicher UUID</overwrite>
+	<overwrite>Überschreibe Metadatensätze mit gleicher UUID und eCatId</overwrite>
 	<overwriteFile>Überschreiben?</overwriteFile>
 	<owner>Besitzer</owner>
 	<ownerRights>Löschen/Privilegien/Kategorien gesperrt: Sie haben keine Besitzerrechte</ownerRights>
