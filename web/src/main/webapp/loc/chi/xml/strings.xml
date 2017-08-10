@@ -509,7 +509,7 @@
 	<fuzzySearch>Set the precision of the search (from exact term search to fuzzy search).</fuzzySearch>
 	<general>常规</general>
 	<generalInfo>常规信息</generalInfo>
-	<generateUUID>Generate UUID for inserted metadata</generateUUID>
+	<generateUUID>Generate UUID and eCatId for inserted metadata</generateUUID>
 	<georss>打开GeoRSS馈入</georss>
 	<group>用户组</group>
 	<usergroups>User groups</usergroups>
@@ -685,7 +685,7 @@
 	<output>Output</output>
 	<outputType id="full">Full</outputType>
 	<outputType id="text">Text only</outputType>
-	<overwrite>Overwrite metadata with same UUID</overwrite>
+	<overwrite>Overwrite metadata with same UUID and eCatId</overwrite>
 	<overwriteFile>Overwrite?</overwriteFile>
 	<owner>Owner</owner>
 	<ownerRights>Delete/Privileges/Categories Unlocked: You have ownership rights</ownerRights>

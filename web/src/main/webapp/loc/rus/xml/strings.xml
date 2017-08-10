@@ -514,7 +514,7 @@ ISO 19115 не позволяет иметь более одного.
 	<fuzzySearch>Указать точность поиска (от точного совпадения до размытого поиска).</fuzzySearch>
 	<general>General</general>
 	<generalInfo>Общая информация</generalInfo>
-	<generateUUID>Сгенерировать UUID-идентификатор для вставленных метаданных</generateUUID>
+	<generateUUID>Сгенерировать UUID и eCatId-идентификатор для вставленных метаданных</generateUUID>
 	<georss>Открыть ленту GeoRSS</georss>
 	<group>Группа</group>
 	<usergroups>User groups</usergroups>
@@ -690,7 +690,7 @@ ISO 19115 не позволяет иметь более одного.
 	<output>Результаты</output>
 	<outputType id="full">Полные</outputType>
 	<outputType id="text">Только текст</outputType>
-	<overwrite>Переписать метаданные с одинаковым UUID-идентификатором</overwrite>
+	<overwrite>Переписать метаданные с одинаковым UUID и eCatId-идентификатором</overwrite>
 	<overwriteFile>Переписать?</overwriteFile>
 	<owner>Собственник</owner>
 	<ownerRights>Удаление/Привилегии/Категории - Доступ: У Вас есть права собственника</ownerRights>

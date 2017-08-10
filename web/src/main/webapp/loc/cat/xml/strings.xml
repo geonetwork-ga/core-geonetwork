@@ -503,7 +503,7 @@
 	<fuzzySearch>Estableix la precisió de la cerca.</fuzzySearch>
 	<general>General</general>
 	<generalInfo>Informació general</generalInfo>
-	<generateUUID>Generar UUID per les metadadades inserides</generateUUID>
+	<generateUUID>Generar UUID i eCatId per les metadadades inserides</generateUUID>
 	<georss>Obrir alimentació GeoRSS</georss>
 	<group>Grup</group>
 	<usergroups>User groups</usergroups>
@@ -679,7 +679,7 @@
 	<output>Sortida</output>
 	<outputType id="full">Completa</outputType>
 	<outputType id="text">Només text</outputType>
-	<overwrite>Sobreescriure les metadades amb el mateix UUID</overwrite>
+	<overwrite>Sobreescriure les metadades amb el mateix UUID i eCatId</overwrite>
 	<overwriteFile>Sobreescriure?</overwriteFile>
 	<owner>Propietari</owner>
 	<ownerRights>Esborrar/Privilegis/Categories no bloquejades: Disposeu de dret de propietari</ownerRights>

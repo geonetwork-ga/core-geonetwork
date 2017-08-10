@@ -504,7 +504,7 @@
 	<fuzzySearch>Aramanın hassasiyetini ayarlayın (tam terim aramadan muğlak aramaya kadar).</fuzzySearch>
 	<general>Genel</general>
 	<generalInfo>Genel bilgi</generalInfo>
-	<generateUUID>Seçilen metaveri için UUID oluştur</generateUUID>
+	<generateUUID>Seçilen metaveri için UUID ve eCatId oluştur</generateUUID>
 	<georss>GeoRSS feed aç</georss>
 	<group>Grup</group>
 	<usergroups>User groups</usergroups>
@@ -687,7 +687,7 @@
 	<output>Çıktı</output>
 	<outputType id="full">Tam</outputType>
 	<outputType id="text">Sadece metin</outputType>
-	<overwrite>Metaveri aynı UUID ile üzerine yazılsın  mı</overwrite>
+	<overwrite>Metaveri aynı UUID ve eCatId ile üzerine yazılsın  mı</overwrite>
 	<overwriteFile>Üstüne yazılsın mı?</overwriteFile>
 	<owner>Sahibi</owner>
 	<ownerRights>Silme/Haklar/Kategoriler Açıldı: Mülkiyet hakkına sahipsiniz</ownerRights>
