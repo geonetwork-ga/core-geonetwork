@@ -691,7 +691,7 @@
 	<output>Tuloste</output>
 	<outputType id="full">Koko sisältö</outputType>
 	<outputType id="text">Vain teksti</outputType>
-	<overwrite>Korvaa metatietodokumentti, jolla on sama tunniste.</overwrite>
+	<overwrite>Korvaa metatietodokumentti, jolla on sama tunniste ja eCatId.</overwrite>
 	<overwriteFile>Korvataanko?</overwriteFile>
 	<owner>Omistaja</owner>
 	<ownerRights>Sinulla on omistusoikeus kyseiseen metatietodokumenttiin.</ownerRights>

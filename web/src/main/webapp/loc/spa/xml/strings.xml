@@ -513,7 +513,7 @@
 	<fuzzySearch>Establece la precisión de la búsqueda (desde búdqueda de términos exactos a búsquedas fuzzy).</fuzzySearch>
 	<general>General</general>
 	<generalInfo>Información general</generalInfo>
-	<generateUUID>Generar UUID para el metadato insertado</generateUUID>
+	<generateUUID>Generar UUID y eCatId para el metadato insertado</generateUUID>
 	<georss>Abrir alimentación GeoRSS</georss>
 	<group>Grupo de usuarios</group>
 	<usergroups>User groups</usergroups>
@@ -689,7 +689,7 @@
 	<output>Salida</output>
 	<outputType id="full">Completa</outputType>
 	<outputType id="text">Solo texto</outputType>
-	<overwrite>Sobrescribir los metadatos con el mismo UUID</overwrite>
+	<overwrite>Sobrescribir los metadatos con el mismo UUID y eCatId</overwrite>
 	<overwriteFile>¿Sobrescribir?</overwriteFile>
 	<owner>Propietario</owner>
 	<ownerRights>Delete/Privileges/Categories Unlocked: You have ownership rights</ownerRights>

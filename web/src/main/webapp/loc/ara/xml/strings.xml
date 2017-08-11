@@ -514,7 +514,7 @@
 	<fuzzySearch>Set the precision of the search (from exact term search to fuzzy search).</fuzzySearch>
 	<general>عام</general>
 	<generalInfo>معلومات عامة</generalInfo>
-	<generateUUID>Generate UUID for inserted metadata</generateUUID>
+	<generateUUID>Generate UUID and eCatId for inserted metadata</generateUUID>
 	<georss>فتح GeoRSS</georss>
 	<group>مجموعة</group>
 	<usergroups>User groups</usergroups>
@@ -694,7 +694,7 @@
 	<output>Output</output>
 	<outputType id="full">Full</outputType>
 	<outputType id="text">Text only</outputType>
-	<overwrite>Overwrite metadata with same UUID</overwrite>
+	<overwrite>Overwrite metadata with same UUID and eCatId</overwrite>
 	<overwriteFile>Overwrite?</overwriteFile>
 	<owner>Owner</owner>
 	<ownerRights>Delete/Privileges/Categories Unlocked: You have ownership rights</ownerRights>

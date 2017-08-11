@@ -511,7 +511,7 @@
 	<fuzzySearch>Velg nøyaktighet for søket (fra eksakt treff til fuzzy søk).</fuzzySearch>
 	<general>Generell</general>
 	<generalInfo>Generell informasjon</generalInfo>
-	<generateUUID>Lag UUID for innlagte metadata</generateUUID>
+	<generateUUID>Lag UUID og eCatId for innlagte metadata</generateUUID>
 	<georss>Åpne en GeoRSS datastrøm</georss>
 	<group>Gruppe</group>
 	<usergroups>User groups</usergroups>
@@ -686,7 +686,7 @@
 	<output>Utputt</output>
 	<outputType id="full">Full</outputType>
 	<outputType id="text">Kun tekst</outputType>
-	<overwrite>Overskriv metadata med samme UUID</overwrite>
+	<overwrite>Overskriv metadata med samme UUID og eCatId</overwrite>
 	<overwriteFile>Overskrive?</overwriteFile>
 	<owner>Eier</owner>
 	<ownerRights>Slette/Privilegier/Kategorier Låst opp: Du har eierskapsrettigheter</ownerRights>

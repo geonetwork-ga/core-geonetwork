@@ -516,7 +516,7 @@
 	<fuzzySearch>Définir la précision de la recherche (recherche plus ou moins floue).</fuzzySearch>
 	<general>Général</general>
 	<generalInfo>Information générale</generalInfo>
-	<generateUUID>Générer un nouvel identifiant pour les métadonnées insérées</generateUUID>
+	<generateUUID>Générer un nouvel identifiant et eCatId pour les métadonnées insérées</generateUUID>
 	<georss>Ouvrez flux GeoRSS</georss>
 	<group>Groupe</group>
 	<usergroups>Groupes de l'utilisateur</usergroups>
@@ -692,7 +692,7 @@
 	<output>Type de présentation</output>
 	<outputType id="full">Complet</outputType>
 	<outputType id="text">Texte seulement</outputType>
-	<overwrite>Ecraser les métadonnées de même identifiant</overwrite>
+	<overwrite>Ecraser les métadonnées de même identifiant et eCatId</overwrite>
 	<overwriteFile>Écraser ?</overwriteFile>
 	<owner>Auteur</owner>
 	<ownerRights>Suppression/Privilèges/Catégories débloqués: vous avez les droits</ownerRights>

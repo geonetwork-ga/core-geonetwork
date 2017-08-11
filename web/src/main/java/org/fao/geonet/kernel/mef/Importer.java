@@ -30,6 +30,8 @@ import jeeves.utils.BinaryFile;
 import jeeves.utils.Log;
 import jeeves.utils.Util;
 import jeeves.utils.Xml;
+
+import org.apache.commons.lang.StringUtils;
 import org.fao.geonet.GeonetContext;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
@@ -51,6 +53,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import org.fao.geonet.services.main.XmlSearch;
 import org.fao.geonet.services.metadata.Insert;
 
 public class Importer {
@@ -242,7 +246,7 @@ public class Importer {
                 }
 
 				String schema = dm.autodetectSchema(metadata);
-
+				
 				if (schema == null)
 					throw new Exception("Unknown schema format : " + schema);
 
@@ -413,17 +417,38 @@ public class Importer {
 		return id;
 	}
 
+	public static boolean eCatIdExist(String gaid, ServiceContext context, GeonetContext gc) {
+		
+		int count = 0;
+		Element response = null;
+		Element params = new Element("request");
+		Element eCatId = new Element("eCatId");
+		eCatId.setText(gaid);
+		params.addContent(eCatId);
+		try {
+			XmlSearch search = new XmlSearch();
+			search.init("", gc.getHandlerConfig());
+			response = search.exec(params, context);
+			Element summary = response.getChild("summary");
+			count = summary.getAttribute("count").getIntValue();
+			Log.debug(Geonet.DATA_MANAGER, "Number of eCatId with same "+ gaid + " is " + count);
+		} catch (Exception e) {
+			Log.error(Geonet.DATA_MANAGER, " Exception while eCat search, " + e.getMessage());
+		}
+		
+		return count > 0;
+	}
+	
 	public static void importRecord(String uuid, String localId,
 			String uuidAction, List<Element> md, String schema, int index,
 			String source, String sourceName, ServiceContext context,
 			List<String> id, String createDate, String changeDate,
 			String groupId, String isTemplate, Dbms dbms) throws Exception {
-
+		String gaid = "";
 		GeonetContext gc = (GeonetContext) context
 				.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager dm = gc.getDataManager();
-
-
+		
 		if (uuid == null || uuid.equals("")
 				|| uuidAction.equals(Params.GENERATE_UUID)) {
 			String newuuid = UUID.randomUUID().toString();
@@ -436,6 +461,13 @@ public class Importer {
 
 			// --- set uuid inside metadata
 			md.add(index, dm.setUUID(schema, uuid, md.get(index)));
+			
+			//create new eCatId
+	        gaid = dm.getGAID(dbms);
+        	// --- set gaid inside metadata
+			md.add(index, dm.setGAID(schema, gaid, md.get(index)));
+	        
+	        
 		} else {
 			if (sourceName == null)
 				sourceName = "???";
@@ -450,8 +482,62 @@ public class Importer {
 			}
 		}
 
+		/* ============= Joseph Added - Creating eCatId while importing metadata - Start ========= */
+		gaid = dm.extractGAID(schema, md.get(index));
+		
+		//If eCatId is non-numeric, set as empty
+		if(!gaid.isEmpty() && !StringUtils.isNumeric(gaid))
+			gaid = "";
+		
+		boolean isExist = false;
+		if(!gaid.isEmpty())
+			isExist = eCatIdExist(gaid, context, gc);
+		
+		Log.debug(Geonet.DATA_MANAGER, "Metadata with eCatId "+ gaid + " exist: " + isExist);
+		
+		
+		if(!uuidAction.equals(Params.GENERATE_UUID)){
+			try{
+				boolean uuidExist = dm.existsMetadataUuid(dbms, uuid);
+				String oldGaid = "";
+				boolean sameGaid = false;
+				
+				//UUID action is overwrite and record exist, get the existing eCatId to add into metadata. 
+				//Otherwise eCatId will be lost while deleting and new eCatId will generated
+				if(uuidAction.equals(Params.OVERWRITE) && uuidExist){
+					String mId = dm.getMetadataId(dbms, uuid);
+	    			Element metadata = dm.getMetadata(dbms, mId);
+	    			if(uuidExist){
+	    					oldGaid = dm.extractGAID(schema, metadata);
+	    					if(oldGaid.equals(gaid))
+	    						sameGaid = true;
+	    					
+	    					gaid = oldGaid;
+	    					Log.debug(Geonet.DATA_MANAGER, "Set old eCatId: " + gaid);
+	    			}
+				}
+				
+				if(isExist && !gaid.isEmpty() && !sameGaid){
+					throw new Exception(" Existing metadata with eCatId " + gaid + " could not be deleted. Current transaction is aborted.");
+				}else{
+					if(gaid.isEmpty()){
+						gaid = dm.getGAID(dbms);
+						Log.debug(Geonet.DATA_MANAGER, "Generated new eCatId: " + gaid);
+					}
+				}
+				
+				// --- set gaid inside metadata
+				md.add(index, dm.setGAID(schema, gaid, md.get(index)));	
+			}catch(Exception e){
+				throw e;
+			}
+			
+		}
+		/* ============= Joseph Added - Creating eCatId while importing metadata - End ========= */
+		
 		try {
 			if (dm.existsMetadataUuid(dbms, uuid) && !uuidAction.equals(Params.NOTHING)) {
+				
                 // user has privileges to replace the existing metadata
                 if(dm.getAccessManager().canEdit(context, dm.getMetadataId(dbms, uuid))) {
                     dm.deleteMetadata(context, dbms, dm.getMetadataId(dbms, uuid));
@@ -468,11 +554,9 @@ public class Importer {
             throw new Exception(" Existing metadata with UUID " + uuid + " could not be deleted. Error is: " + e.getMessage());
 		}
 
-
-
         if(Log.isDebugEnabled(Geonet.MEF))
             Log.debug(Geonet.MEF, "Adding metadata with uuid:" + uuid);
-
+        	
 		// Try to insert record with localId provided, if not use a new id.
 		boolean insertedWithLocalId = false;
 		if (localId != null && !localId.equals("")) {
