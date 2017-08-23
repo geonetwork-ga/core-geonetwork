@@ -462,11 +462,12 @@ public class Importer {
 			// --- set uuid inside metadata
 			md.add(index, dm.setUUID(schema, uuid, md.get(index)));
 			
-			//create new eCatId
-	        gaid = dm.getGAID(dbms);
-        	// --- set gaid inside metadata
-			md.add(index, dm.setGAID(schema, gaid, md.get(index)));
-	        
+			if("n".equals(isTemplate)){
+				//create new eCatId
+		        gaid = dm.getGAID(dbms);
+	        	// --- set gaid inside metadata
+				md.add(index, dm.setGAID(schema, gaid, md.get(index)));
+			}
 	        
 		} else {
 			if (sourceName == null)
@@ -483,20 +484,21 @@ public class Importer {
 		}
 
 		/* ============= Joseph Added - Creating eCatId while importing metadata - Start ========= */
-		gaid = dm.extractGAID(schema, md.get(index));
 		
-		//If eCatId is non-numeric, set as empty
-		if(!gaid.isEmpty() && !StringUtils.isNumeric(gaid))
-			gaid = "";
-		
-		boolean isExist = false;
-		if(!gaid.isEmpty())
-			isExist = eCatIdExist(gaid, context, gc);
-		
-		Log.debug(Geonet.DATA_MANAGER, "Metadata with eCatId "+ gaid + " exist: " + isExist);
-		
-		
-		if(!uuidAction.equals(Params.GENERATE_UUID)){
+		if(!uuidAction.equals(Params.GENERATE_UUID) && "n".equals(isTemplate)){
+			
+			gaid = dm.extractGAID(schema, md.get(index));
+			
+			//If eCatId is non-numeric, set as empty
+			if(!gaid.isEmpty() && !StringUtils.isNumeric(gaid))
+				gaid = "";
+			
+			boolean isExist = false;
+			if(!gaid.isEmpty())
+				isExist = eCatIdExist(gaid, context, gc);
+			
+			Log.debug(Geonet.DATA_MANAGER, "Metadata with eCatId "+ gaid + " exist: " + isExist);
+			
 			try{
 				boolean uuidExist = dm.existsMetadataUuid(dbms, uuid);
 				String oldGaid = "";
