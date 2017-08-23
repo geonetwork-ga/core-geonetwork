@@ -237,6 +237,20 @@ body {
   font: bold 1.6em/1.4em Helvetica,Arial,Verdana,sans-serif;
 }
 
+#ecat-news {
+  display:inline;
+  float:right;
+  padding-top:15px;
+}
+
+#ecat-news a{
+  color: #767B7E;
+  font: 12px Verdana,Helvetica,Arial;
+}
+#ecat-news a>i{
+	padding-right: 5px;
+}
+
 #ga-line {
   margin-top: 31px;
   width: 100%;
