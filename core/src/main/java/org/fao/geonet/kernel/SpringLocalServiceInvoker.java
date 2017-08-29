@@ -38,6 +38,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod;
 
 import org.apache.commons.lang.StringUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
 public class SpringLocalServiceInvoker {
 
@@ -65,6 +68,10 @@ public class SpringLocalServiceInvoker {
     public Object invoke(String uri) throws Exception {
         MockHttpServletRequest request = prepareMockRequestFromUri(uri);
         MockHttpServletResponse response = new MockHttpServletResponse();
+        return invoke(request, response);
+    }
+
+    public Object invoke(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HandlerExecutionChain handlerExecutionChain = requestMappingHandlerMapping.getHandler(request);
         HandlerMethod handlerMethod = (HandlerMethod) handlerExecutionChain.getHandler();
@@ -79,7 +86,21 @@ public class SpringLocalServiceInvoker {
         if (o instanceof String) {
           String checkForward = (String)o;
           if (checkForward.startsWith("forward:")) {
-            return invoke(StringUtils.substringAfter(checkForward,"forward:"));
+            //
+            // if the original url ends with the first component of the fwd url, then concatenate them, otherwise
+            // just invoke it and hope for the best...
+            // eg. local://srv/api/records/urn:marlin.csiro.au:org:1_organisation_name
+            // returns forward:urn:marlin.csiro.au:org:1_organisation_name/formatters/xml
+            // so we join the original url and the forwarded url as:
+            // /api/records/urn:marlin.csiro.au:org:1_organisation_name/formatters/xml and invoke it.
+            //
+            String fwdUrl = StringUtils.substringAfter(checkForward,"forward:");
+						String lastComponent = StringUtils.substringAfterLast(request.getRequestURI(),"/");
+            if (lastComponent.length() > 0 && StringUtils.startsWith(fwdUrl, lastComponent)) {
+							return invoke(request.getRequestURI()+StringUtils.substringAfter(fwdUrl,lastComponent));
+						} else {
+							return invoke(fwdUrl);	
+           	} 
           }
         }
         return o;
@@ -102,8 +123,7 @@ public class SpringLocalServiceInvoker {
             for (String param : params.split("&")) {
                 String[] parts = param.split("=");
                 String name = parts[0];
-                String value = parts[1];
-                request.addParameter(name, value);
+                request.addParameter(name, parts.length == 2 ? parts[1] : "");
             }
         }
         return request;

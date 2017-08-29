@@ -34,10 +34,11 @@
                 version="2.0" exclude-result-prefixes="#all">
 
   <xsl:include href="../iso19139/convert/functions.xsl"/>
-  <xsl:include href="../iso19139/convert/thesaurus-transformation.xsl"/>
+  <xsl:include href="update-fixed-info-keywords.xsl"/>
   <xsl:include href="layout/utility-fn.xsl"/>
 
   <xsl:variable name="serviceUrl" select="/root/env/siteURL"/>
+  <xsl:variable name="node" select="/root/env/node"/>
 
   <!-- We use the category check to find out if this is an SDS metadata. Please replace with anything better -->
   <xsl:variable name="isSDS"
@@ -55,6 +56,9 @@
 
   <xsl:variable name="mainLanguageId"
                 select="upper-case(java:twoCharLangCode($mainLanguage))"/>
+
+  <xsl:variable name="locales"
+                select="/root/*/gmd:locale/gmd:PT_Locale"/>
 
   <xsl:variable name="defaultEncoding"
                 select="'utf8'"/>
@@ -271,8 +275,8 @@
       <xsl:choose>
         <xsl:when test="not($isMultilingual) or
                         $excluded">
-          <!-- Copy what's in here ... probably only a gco:CharacterString -->
-          <xsl:apply-templates select="node()"/>
+          <!-- Copy gco:CharacterString only. PT_FreeText are removed if not multilingual. -->
+          <xsl:apply-templates select="gco:CharacterString"/>
         </xsl:when>
         <xsl:otherwise>
           <!-- Add xsi:type for multilingual element. -->
@@ -442,7 +446,7 @@
 
 
   <!-- ================================================================= -->
-  <!-- Set local identifier to the first 3 letters of iso code. Locale ids
+  <!-- Set local identifier to the first 2 letters of iso code. Locale ids
         are used for multilingual charcterString using #iso2code for referencing.
     -->
   <xsl:template match="gmd:PT_Locale">
@@ -460,145 +464,47 @@
     </xsl:element>
   </xsl:template>
 
-  <!-- Apply same changes as above to the gmd:LocalisedCharacterString -->
-  <xsl:variable name="language" select="//gmd:PT_Locale"/> <!-- Need list of all locale -->
-  <xsl:template match="gmd:LocalisedCharacterString">
-    <xsl:element name="gmd:{local-name()}">
-      <xsl:variable name="currentLocale"
-                    select="upper-case(replace(normalize-space(@locale), '^#', ''))"/>
-      <xsl:variable name="ptLocale"
-                    select="$language[upper-case(replace(normalize-space(@id), '^#', ''))=string($currentLocale)]"/>
-      <xsl:variable name="id"
-                    select="upper-case(java:twoCharLangCode($ptLocale/gmd:languageCode/gmd:LanguageCode/@codeListValue))"/>
-      <xsl:apply-templates select="@*"/>
-      <xsl:if test="$id != '' and ($currentLocale='' or @locale!=concat('#', $id)) ">
-        <xsl:attribute name="locale">
-          <xsl:value-of select="concat('#',$id)"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:apply-templates select="node()"/>
-    </xsl:element>
+
+  <!-- For multilingual elements. Check that the local
+  is defined in record. If not, remove the element. -->
+  <xsl:template match="gmd:textGroup">
+    <xsl:variable name="elementLocalId"
+                  select="replace(gmd:LocalisedCharacterString/@locale, '^#', '')"/>
+   <xsl:choose>
+      <xsl:when test="count($locales[@id = $elementLocalId]) > 0">
+        <gmd:textGroup>
+          <gmd:LocalisedCharacterString>
+            <xsl:variable name="currentLocale"
+                          select="replace(gmd:LocalisedCharacterString/@locale, '^#', '')"/>
+            <xsl:variable name="ptLocale"
+                          select="$locales[@id = string($currentLocale)]"/>
+            <xsl:variable name="id"
+                          select="upper-case(java:twoCharLangCode($ptLocale/gmd:languageCode/gmd:LanguageCode/@codeListValue))"/>
+            <xsl:apply-templates select="@*"/>
+            <xsl:if test="$id != ''">
+              <xsl:attribute name="locale">
+                <xsl:value-of select="concat('#',$id)"/>
+              </xsl:attribute>
+            </xsl:if>
+
+            <xsl:apply-templates select="gmd:LocalisedCharacterString/text()"/>
+          </gmd:LocalisedCharacterString>
+        </gmd:textGroup>
+      </xsl:when>
+      <xsl:otherwise>
+        <!--<xsl:message>Removing <xsl:copy-of select="."/>.
+          This element was removed because not declared in record locales.</xsl:message>-->
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
+
+
 
   <!-- Remove attribute indeterminatePosition having empty
-  value which is not a valid facet for it. -->
+       value which is not a valid facet for it. -->
   <xsl:template match="@indeterminatePosition[. = '']" priority="2"/>
 
-  <xsl:template match="gmd:descriptiveKeywords[@xlink:href]" priority="10">
-    <xsl:variable name="isAllThesaurus"
-                  select="contains(@xlink:href, 'thesaurus=external.none.allThesaurus')"/>
-    <xsl:variable name="allThesaurusFinished"
-                  select="count(preceding-sibling::gmd:descriptiveKeywords[contains(@xlink:href, 'thesaurus=external.none.allThesaurus')]) > 0"/>
 
-    <xsl:choose>
-      <xsl:when test="$isAllThesaurus and not($allThesaurusFinished)">
-        <xsl:variable name="allThesaurusEl"
-                      select="../gmd:descriptiveKeywords[contains(@xlink:href, 'thesaurus=external.none.allThesaurus')]"/>
-        <xsl:variable name="ids">
-          <xsl:for-each
-            select="$allThesaurusEl/tokenize(replace(@xlink:href, '.+id=([^&amp;]+).*', '$1'), ',')">
-            <keyword>
-              <thes>
-                <xsl:value-of
-                  select="replace(., 'http://org.fao.geonet.thesaurus.all/(.+)@@@.+', '$1')"/>
-              </thes>
-              <id>
-                <xsl:value-of
-                  select="replace(., 'http://org.fao.geonet.thesaurus.all/.+@@@(.+)', '$1')"/>
-              </id>
-            </keyword>
-          </xsl:for-each>
-        </xsl:variable>
-
-        <xsl:variable name="hrefPrefix" select="replace(@xlink:href, '(.+\?).*', '$1')"/>
-        <xsl:variable name="hrefQuery" select="replace(@xlink:href, '.+\?(.*)', '$1')"/>
-        <xsl:variable name="params">
-          <xsl:for-each select="$allThesaurusEl/tokenize($hrefQuery, '\?|&amp;')">
-            <param>
-              <key>
-                <xsl:value-of select="tokenize(., '=')[1]"/>
-              </key>
-              <val>
-                <xsl:value-of select="tokenize(., '=')[2]"/>
-              </val>
-            </param>
-          </xsl:for-each>
-        </xsl:variable>
-
-        <xsl:variable name="uniqueParams"
-                      select="distinct-values($params//key[. != 'id' and . != 'thesaurus' and . != 'multiple']/text())"/>
-        <xsl:variable name="queryString">
-          <xsl:for-each select="$uniqueParams">
-            <xsl:variable name="p" select="."/>
-            <xsl:value-of select="concat('&amp;', ., '=', $params/param[key/text() = $p]/val)"/>
-          </xsl:for-each>
-        </xsl:variable>
-
-
-        <xsl:variable name="thesaurusNames" select="distinct-values($ids//thes)"/>
-        <xsl:variable name="context" select="."/>
-        <xsl:variable name="root" select="/"/>
-        <xsl:for-each select="$thesaurusNames">
-          <xsl:variable name="thesaurusName" select="."/>
-
-          <xsl:variable name="finalIds">
-            <xsl:value-of separator="," select="$ids/keyword[thes/text() = $thesaurusName]/id"/>
-          </xsl:variable>
-
-          <gmd:descriptiveKeywords
-            xlink:href="{concat($hrefPrefix, 'thesaurus=', $thesaurusName, '&amp;id=', $finalIds, '&amp;multiple=true',$queryString)}"
-            xlink:show="{$context/@xlink:show}">
-          </gmd:descriptiveKeywords>
-        </xsl:for-each>
-      </xsl:when>
-      <xsl:when test="$isAllThesaurus and $allThesaurusFinished">
-        <!--Do nothing-->
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:copy-of select="."/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
-
-  <xsl:template match="gmd:descriptiveKeywords[not(@xlink:href)]" priority="10">
-    <xsl:variable name="isAllThesaurus"
-                  select="count(gmd:MD_Keywords/gmd:keyword[starts-with(@gco:nilReason,'thesaurus::')]) > 0"/>
-    <xsl:variable name="allThesaurusFinished"
-                  select="count(preceding-sibling::gmd:descriptiveKeywords[not(@xlink:href)]/gmd:MD_Keywords/gmd:keyword[starts-with(@gco:nilReason,'thesaurus::')]) > 0"/>
-    <xsl:choose>
-      <xsl:when test="$isAllThesaurus and not($allThesaurusFinished)">
-        <xsl:variable name="thesaurusNames"
-                      select="distinct-values(../gmd:descriptiveKeywords[not(@xlink:href)]/gmd:MD_Keywords/gmd:keyword/@gco:nilReason[starts-with(.,'thesaurus::')])"/>
-        <xsl:variable name="context" select="."/>
-        <xsl:variable name="root" select="/"/>
-        <xsl:for-each select="$thesaurusNames">
-          <xsl:variable name="thesaurusName" select="."/>
-          <xsl:variable name="keywords"
-                        select="$context/../gmd:descriptiveKeywords[not(@xlink:href)]/gmd:MD_Keywords/gmd:keyword[@gco:nilReason = $thesaurusName]"/>
-
-          <gmd:descriptiveKeywords>
-            <gmd:MD_Keywords>
-              <xsl:for-each select="$keywords">
-                <gmd:keyword>
-                  <xsl:copy-of select="./node()"/>
-                </gmd:keyword>
-              </xsl:for-each>
-
-              <xsl:copy-of
-                select="geonet:add-thesaurus-info(substring-after(., 'thesaurus::'), true(), $root/root/env/thesauri, true())"/>
-
-            </gmd:MD_Keywords>
-          </gmd:descriptiveKeywords>
-        </xsl:for-each>
-      </xsl:when>
-      <xsl:when test="$isAllThesaurus and $allThesaurusFinished">
-        <!--Do nothing-->
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:copy-of select="."/>
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:template>
 
 
   <!-- ================================================================= -->

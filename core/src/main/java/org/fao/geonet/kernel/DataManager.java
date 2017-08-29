@@ -932,6 +932,24 @@ public class DataManager implements ApplicationEventPublisherAware {
     }
 
     /**
+     * Extract the title field from the Metadata Repository. This is only valid for subtemplates as the title
+     * can be stored with the subtemplate (since subtemplates don't have a title) - metadata records don't store the 
+     * title here as this is part of the metadata.
+     *
+     * @param id metadata id to retrieve
+     */
+    public String getMetadataTitle(String id) throws Exception {
+        Metadata md = getMetadataRepository().findOne(id);
+
+        if (md == null) {
+            throw new IllegalArgumentException("Metadata not found for id : " + id);
+        } else {
+            // get metadata title
+            return md.getDataInfo().getTitle();
+        }
+    }
+
+    /**
      *
      * @param context
      * @param id
@@ -1374,7 +1392,7 @@ public class DataManager implements ApplicationEventPublisherAware {
             public void apply(@Nonnull Metadata metadata) {
                 final MetadataDataInfo dataInfo = metadata.getDataInfo();
                 dataInfo.setType(MetadataType.SUB_TEMPLATE);
-                if (title != null) { // do we need to do this?
+                if (title != null) {
                   dataInfo.setTitle(title);
                 }
             }
@@ -1675,9 +1693,17 @@ public class DataManager implements ApplicationEventPublisherAware {
                                    boolean fullRightsForGroup, boolean forceRefreshReaders) throws Exception {
         final String schema = newMetadata.getDataInfo().getSchemaId();
 
+        // Check if the schema is allowed by settings
+        String mdImportSetting = getSettingManager().getValue(Settings.METADATA_IMPORT_RESTRICT);
+        if(mdImportSetting != null && !mdImportSetting.equals("")) {
+            if(!Arrays.asList(mdImportSetting.split(",")).contains(schema)) {
+                throw new IllegalArgumentException(schema+" is not permitted in the database as a non-harvested metadata.  " +
+                        "Apply a import stylesheet to convert file to allowed schemas");
+            }
+        }
+
         //--- force namespace prefix for iso19139 metadata
         setNamespacePrefixUsingSchemas(schema, metadataXml);
-
 
         if (updateFixedInfo && newMetadata.getDataInfo().getType() == MetadataType.METADATA) {
             String parentUuid = null;
@@ -2942,11 +2968,29 @@ public class DataManager implements ApplicationEventPublisherAware {
 							//env.addContent(new Element("gaid").setText(getGAID(dbms)));
 						}
 
+						// add user information to env if user is authenticated (should be)
+            Element elUser = new Element("user");
+            UserSession usrSess = context.getUserSession();
+            if (usrSess.isAuthenticated()) {
+              String myUserId  = usrSess.getUserId();
+              User user = getApplicationContext().getBean(UserRepository.class).findOne(myUserId);
+        			if (user != null) {
+								Element elUserDetails = new Element("details");
+            		elUserDetails.addContent(new Element("surname").setText(user.getSurname()));
+            		elUserDetails.addContent(new Element("firstname").setText(user.getName()));
+            		elUserDetails.addContent(new Element("organisation").setText(user.getOrganisation()));
+                elUserDetails.addContent(new Element("username").setText(user.getUsername()));
+								elUser.addContent(elUserDetails);
+            		env.addContent(elUser);
+        			}
+            }
+
             // add original metadata to result
             Element result = new Element("root");
             result.addContent(md);
             // add 'environment' to result
             env.addContent(new Element("siteURL").setText(getSettingManager().getSiteURL(context)));
+            env.addContent(new Element("node").setText(context.getNodeId()));
 
             // Settings were defined as an XML starting with root named config
             // Only second level elements are defined (under system).
