@@ -755,6 +755,7 @@ div#resultsPanel .x-toolbar-right {
 
 #resultsPanel .md-full .icon .md-links {
 	margin: 0px 0px 0px 4px;
+	display: flex;
 }
 
 #resultsPanel .md-full .icon .md-links table {
@@ -911,6 +912,67 @@ div.showBigMapItemInactive:hover {
 	color: #0076A1;
 }
 
+#metadata-info ul li p {
+	color: #0076A1;
+ /*   white-space: nowrap;
+    overflow: hidden; */
+    text-overflow: ellipsis;
+    min-width: 800px;
+    max-width: 800px;
+}
+
+#metadata-info ul li span.button-orange a{
+	color: #ffffff;
+    background-color: #dd9f47;
+    min-width: 200px;
+    border-radius: 5px;
+    height: 25px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+#metadata-info ul li span.button-orange a:before{
+	content: "\f019";
+    font-family: FontAwesome;
+    padding-right:5px;
+}
+
+#metadata-info ul li span.button-blue a{
+	color: #ffffff;
+    background-color: #47A8DD;
+    min-width: 200px;
+    border-radius: 5px;
+    height: 25px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+#metadata-info ul li span.button-blue a:before{
+	content: "\f0c1";
+    font-family: FontAwesome;
+    padding-right:5px;
+}
+
+#metadata-info ul li span.button-green a{
+	color: #ffffff;
+    background-color: #6bad37;
+    min-width: 200px;
+    border-radius: 5px;
+    height: 25px;
+    padding-left: 15px;
+    padding-top: 5px;
+}
+
+#metadata-info ul li span.button-green a:before{
+	content: "\f0c1";
+    font-family: FontAwesome;
+    padding-right:5px;
+}
+
+#metadata-info ul li span.button a>i{
+	padding-right: 5px;
+}
+
 .metadata * label {
 	color: #444444;
 }
@@ -1047,13 +1109,13 @@ div.showBigMapItemInactive:hover {
 	width: auto;
 	margin: 0px 5px 5px 0px;
 	padding: 4px;
-	background-color: #006983; 
-	color: #565B5E;
+/*	background-color: #006983; 
+	color: #565B5E;*/
 }
 
 #metadata-info .related li a {
 	text-decoration: none;
-	color: #FFFFFF;
+	color: #006983;
 }
 
 #metadata-info .related li a:hover {

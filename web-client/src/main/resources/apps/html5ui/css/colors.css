@@ -314,7 +314,17 @@ div#tabs .x-tab-strip span.x-tab-strip-text {
 }
 
 #result-panel div#resultsPanel .md-mn-download {
-	color: #ffb977;
+	color: #ffffff;
+    background-color: #dd9f47;
+    min-width: 125px;
+    border-radius: 5px;
+    height: 25px !important;
+    font-size: 1.3em !important;
+}
+
+#result-panel div#resultsPanel .md-mn-download::after {
+    content: "Download";
+	font-size: initial;
 }
 
 #result-panel div#resultsPanel .md-mn-bookmark {
