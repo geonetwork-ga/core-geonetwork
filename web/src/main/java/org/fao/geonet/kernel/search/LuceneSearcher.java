@@ -955,7 +955,7 @@ public class LuceneSearcher extends MetaSearcher {
         		|| sortBy.equals(Geonet.SearchResult.SortBy.RATING)) {
             sortType = SortField.Type.INT;
             sortBy = "_" + sortBy;
-        } else if (sortBy.equals(Geonet.SearchResult.SortBy.SCALE_DENOMINATOR)) {
+        } else if (sortBy.equals(Geonet.SearchResult.SortBy.SCALE_DENOMINATOR) || sortBy.equals(Geonet.SearchResult.SortBy.ECATID)) {
             sortType = SortField.Type.INT;
         } else if (sortBy.equals(Geonet.SearchResult.SortBy.DATE) 
         		|| sortBy.equals(Geonet.SearchResult.SortBy.TITLE)) {

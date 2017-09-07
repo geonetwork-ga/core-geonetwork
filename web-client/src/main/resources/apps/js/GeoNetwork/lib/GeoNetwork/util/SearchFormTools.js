@@ -390,7 +390,7 @@ GeoNetwork.util.SearchFormTools = {
             inputType: 'hidden',
             linkedCombo: combo
         });
-        combo.setValue(defaultValue || 'relevance#');
+        combo.setValue(defaultValue || 'changeDate');
         return [sortByField, sortOrderField, combo];
     },
     /** api:method[getSortByStore]
@@ -401,15 +401,19 @@ GeoNetwork.util.SearchFormTools = {
         return new Ext.data.ArrayStore({
             id: 0,
             fields: ['id', 'name'],
-            data: [ 
-										['relevance#', OpenLayers.i18n('relevance')] 
-                   ,['title#reverse', OpenLayers.i18n('title')] 
-                   ,['changeDate#', OpenLayers.i18n('changeDate')] 
+            data: [
+                   	['changeDate#', OpenLayers.i18n('changeDate')]
+                   ,['changeDate#reverse', OpenLayers.i18n('changeDateReverse')]
+				   ,['relevance#', OpenLayers.i18n('relevance')] 
+                   ,['title#reverse', OpenLayers.i18n('aztitle')]
+				   ,['title', OpenLayers.i18n('zatitle')]
+                   ,['eCatId#', OpenLayers.i18n('eCatId')]
                    ,['rating#', OpenLayers.i18n('rating')]
                    ,['popularity#', OpenLayers.i18n('popularity')]
-              		 ,['denominator#', OpenLayers.i18n('scaleDesc')] 
+              	   ,['denominator#', OpenLayers.i18n('scaleDesc')] 
                    ,['denominator#reverse', OpenLayers.i18n('scaleAsc')]
-						      ]
+				   
+				]
         });
     },
     /** api:method[getFullTextField]

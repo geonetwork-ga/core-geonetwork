@@ -425,7 +425,7 @@ GeoNetwork.searchApp = function() {
 										hideAdvancedSearch();
                 },
 								resetCb: function() {
-            			Ext.getCmp('sortByToolBar').setValue("relevance");
+            			Ext.getCmp('sortByToolBar').setValue("changeDate#");
             			Ext.getCmp('fullTextField').setValue("");//Joseph Added - To clear search field after reset 
 								},
                 listeners : {
