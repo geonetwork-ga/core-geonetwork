@@ -112,7 +112,7 @@ function resetSimpleSearch()
 		resetWherePars();
 	
     setParam(form['requestedLanguage_simple'],      Env.lang);
-    setParam(form['sortBy'],      'relevance');
+    setParam(form['sortBy'],      'changeDate#');
     setParam(form['sortOrder'],   '');
     setParam(form['hitsPerPage_simple'], '10');
     setParam(form['output_simple'],      'full');
@@ -315,7 +315,7 @@ function resetAdvancedSearch()
 	form['radfromext1'].disable();
 
     setParam(form['requestedLanguage'],      Env.lang);
- 	setParam(form['sortBy'],      'relevance');
+ 	setParam(form['sortBy'],      'changeDate#');
   setParam(form['hitsPerPage'], '10');
   setParam(form['output'],      'full');
 
