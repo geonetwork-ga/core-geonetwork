@@ -552,8 +552,18 @@ public class Info implements Service {
 
 		int id = Integer.parseInt(us.getUserId());
 
-		if (us.getProfile().equals(Geonet.Profile.ADMINISTRATOR))
-			return dbms.select("SELECT * FROM Users").getChildren();
+		if (us.getProfile().equals(Geonet.Profile.ADMINISTRATOR)){
+			//return dbms.select("SELECT * FROM Users").getChildren();
+			List userList = dbms.select("SELECT * FROM Users").getChildren();
+			
+			//Created to get all records that not belong to admin
+			Element nonAdminRec = new Element("record")
+					.addContent(new Element("id").setText("0"))
+					.addContent(new Element("username").setText("non-admin"));
+			
+			userList.add(nonAdminRec);
+			return userList;
+		}
 
 		if (!us.getProfile().equals(Geonet.Profile.USER_ADMIN))
 			return dbms.select("SELECT * FROM Users WHERE id=?", id).getChildren();
