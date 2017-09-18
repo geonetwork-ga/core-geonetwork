@@ -376,6 +376,7 @@ GeoNetwork.Lang.nl = {
     'publishLayerAdded': " Laag toegevoegd aan het kaartvoorbeeld.",
     'unpublish': "Maak publicatie ongedaan",
     'unpublishTooltip': "Verwijder huidige dataset van de externe node.",
+    'unpublishConfirm': 'Bent u zeker dat u dit metadatarecord wil publiceren?',
     'unpublishSuccess': "Publicatie ongedaan maken geslaagd.",
     'unpublishError': "Publicatie ongedaan maken is mislukt. ",
     'check': "Check",

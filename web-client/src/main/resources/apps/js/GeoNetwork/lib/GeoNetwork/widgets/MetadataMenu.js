@@ -153,7 +153,24 @@ GeoNetwork.MetadataMenu = Ext.extend(Ext.menu.Menu, {
             },
             scope: this
         });
-
+        this.publishAction = new Ext.Action({
+            text: OpenLayers.i18n('publish'),
+            //iconCls : 'md-mn-copy',
+            handler: function(){
+                var id = this.record.get('id');
+                this.catalogue.metadataPublish(id);
+            },
+            scope: this
+       });
+		this.unPublishAction = new Ext.Action({
+            text: OpenLayers.i18n('unpublish'),
+            //iconCls : 'md-mn-copy',
+            handler: function(){
+                var id = this.record.get('id');
+                this.catalogue.metadataUnPublish(id);
+            },
+            scope: this
+       });
         this.statusAction = new Ext.Action({
             text: OpenLayers.i18n('status'),
             tooltip: OpenLayers.i18n('statusTT'),
@@ -293,7 +310,7 @@ GeoNetwork.MetadataMenu = Ext.extend(Ext.menu.Menu, {
             this.otherActions = new Ext.menu.Item({
                 text: OpenLayers.i18n('otherActions'),
                 menu: {
-                    items: [this.duplicateAction, this.createChildAction, this.adminAction, this.statusAction, this.versioningAction, this.categoryAction, this.createThesaurusAction]
+                    items: [this.duplicateAction, this.createChildAction, this.adminAction, this.publishAction, this.unPublishAction, this.statusAction, this.versioningAction, this.categoryAction, this.createThesaurusAction]
                 }
             });
         }
@@ -405,7 +422,9 @@ GeoNetwork.MetadataMenu = Ext.extend(Ext.menu.Menu, {
         this.deleteAction.setDisabled((!isOwner && !isHarvested && !isReviewer) || isReadOnly);
         this.duplicateAction.setDisabled(isReadOnly);
         this.createChildAction.setDisabled(!isEditable || isReadOnly);
-
+        this.publishAction.setDisabled(!isAdmin);
+		this.unPublishAction.setDisabled(!isAdmin);
+		
         if (this.ratingWidget) {
             this.ratingWidget.reset();
             if ((isHarvested && harvesterType !== 'geonetwork') || isReadOnly) {

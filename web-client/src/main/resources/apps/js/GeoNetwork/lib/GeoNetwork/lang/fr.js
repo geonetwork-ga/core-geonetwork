@@ -394,6 +394,7 @@ GeoNetwork.Lang.fr = {
     'publishLayerAdded': " Couche ajoutée à la carte.",
     'unpublish': "Dépublier",
     'unpublishTooltip': "Supprimer le jeu de données en cours dans le nœud distant.",
+    'unpublishConfirm': 'Confirmez-vous la non-publication de la métadonnée ?',
     'unpublishSuccess': "Dépublication effectuée.",
     'unpublishError': "Echec de la dépublication. ",
     'check': "Vérifier",

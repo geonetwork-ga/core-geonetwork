@@ -386,6 +386,7 @@ GeoNetwork.Lang.pl = {
     'publishLayerAdded': " Warstwa dodana do podglądu.",
     'unpublish': "Cofnij publikację",
     'unpublishTooltip': "Usuń zbiór ze zdalnej usługi.",
+    'unpublishConfirm': 'Jesteś pewny, że chcesz nie publikuj wybrane metadane?',
     'unpublishSuccess': "Cofnięcie publikacji zakończone powodzeniem.",
     'unpublishError': "Cofnięcie publikacji nieudane. ",
     'check': "Sprawdź",

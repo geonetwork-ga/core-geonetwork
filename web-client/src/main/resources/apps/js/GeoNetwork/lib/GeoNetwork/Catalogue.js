@@ -299,6 +299,8 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
             mdValidate: serviceUrl + 'xml.metadata.validate',
             mdSuggestion: serviceUrl + 'metadata.suggestion',
             mdCategory: serviceUrl + 'metadata.category.form',
+            mdPublishCategory: serviceUrl + 'metadata.publish.category.form',
+            mdUnPublish: serviceUrl + 'metadata.unpublish',
             mdRelationInsert: serviceUrl + 'xml.relation.insert',
             mdRelationDelete: serviceUrl + 'xml.relation.delete',
             mdRelation: serviceUrl + 'xml.relation',
@@ -344,7 +346,9 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
                 Delete: serviceUrl + 'metadata.batch.delete',
                 Privileges: serviceUrl + 'metadata.batch.admin.form',
                 Versioning: serviceUrl + 'metadata.batch.version',
-                Status: serviceUrl + 'metadata.batch.status.form'
+                Status: serviceUrl + 'metadata.batch.status.form',
+				Publish: serviceUrl + 'metadata.batch.publish.category.form',
+				UnPublish: serviceUrl + 'metadata.batch.unpublish'
             },
             metadataMassiveUpdatePrivilege: serviceUrl + 'metadata.batch.update.privileges',
             metadataMassiveUpdateCategories: serviceUrl + 'metadata.batch.update.categories',
@@ -1097,6 +1101,34 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
                                     catalogue.onAfterDelete.bind(catalogue));
         }
     },
+    /** api: method[metadataUnPublish]
+     *  :param uuid: ``String`` id of the metadata
+     *
+     *  unpublish metadata record.
+     */
+    metadataUnPublish: function(id){
+        Ext.Msg.confirm(OpenLayers.i18n('unpublish'), OpenLayers.i18n('unpublishConfirm'), this.metadataUnPublishDo, id);
+    },
+    /** api: private[metadataUnPublishDo]
+     *
+     *  Private method called after user confirmation.
+     *  Use GeoNetwork metadata.unpublish service.
+     *
+     *  FIXME : need a global var named catalogue
+     *  TODO : trigger results refresh ?
+     *  TODO : create a status or popup bar object to display info
+     */
+    metadataUnPublishDo: function(btn){
+        if (btn === 'yes') {
+            var params = {
+                id: this
+            };
+            catalogue.doAction(catalogue.services.mdUnPublish, params, OpenLayers.i18n('unpublishSuccess'), 
+            		OpenLayers.i18n('unpublishError'), function(response){
+                		
+            }, null);
+        }
+    },
     /** api: method[doAction]
      *  :param url: ``String`` The service URL to call
      *  :param params: ``Object`` The service parameters
@@ -1434,6 +1466,13 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
      */
     metadataCategory: function(id){
         var url = this.services.mdCategory + "?id=" + id;
+        this.modalAction(OpenLayers.i18n('setCategories'), url);
+    },
+    /** api: method[metadataPublishCategory]
+     *  Metadata admin form for categories
+     */
+    metadataPublish: function(id){
+        var url = this.services.mdPublishCategory + "?id=" + id;
         this.modalAction(OpenLayers.i18n('setCategories'), url);
     },
     /** api: method[createThesaurus]

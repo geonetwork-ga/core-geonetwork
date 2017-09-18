@@ -371,6 +371,7 @@ GeoNetwork.Lang.es = {
     'publishLayerAdded':'Capas añadido para asignar sólo una vista previa.',
     'unpublish':'No Publicar',
     'unpublishTooltip':'Eliminar el registro actual del nodo remoto.',
+    'unpublishConfirm': '¿Estás seguro de anular la publicación este registro de metadatos?',
     'unpublishSuccess':'Éxito en la despublicación.',
     'unpublishError':'Fallo en la despublicación.',
     'check':'Comprobar',

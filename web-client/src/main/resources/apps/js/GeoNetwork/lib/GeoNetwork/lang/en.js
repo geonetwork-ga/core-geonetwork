@@ -357,6 +357,7 @@ GeoNetwork.Lang.en = {
     'publishSuccess': "Successful publication.",
     'publishLayerAdded': " Layer added to map preview.",
     'unpublish': "Unpublish",
+    'unpublishConfirm': "Are you sure to unpublish this metadata record?",
     'unpublishTooltip': "Remove current dataset from remote node.",
     'unpublishSuccess': "Successful unpublication.",
     'unpublishError': "Unpublication failed. ",

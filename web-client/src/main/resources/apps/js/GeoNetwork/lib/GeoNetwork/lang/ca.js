@@ -387,6 +387,7 @@ GeoNetwork.Lang.ca={
     'publishLayerAdded': " Capa afegida a la previsualització del mapa.",
     'unpublish': "Despublicar",
     'unpublishTooltip': "Esborrar l'actual conjunt de dades del node remot.",
+    'unpublishConfirm': "Està segur que vol no publicar aquesta metadada?",
     'unpublishSuccess': "Despublicació realitzada amb èxit.",
     'unpublishError': "Error despublicant. ",
     'check': "Comprovar",

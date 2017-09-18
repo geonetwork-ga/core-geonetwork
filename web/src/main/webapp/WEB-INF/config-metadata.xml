@@ -377,7 +377,45 @@
 				<xml name="info" file="xml/metadata-batchUpdatePrivileges.xml" />
 			</output>
 		</service>
+
+		<!-- ============= Joseph created for publish and unpublish - Start ============ -->
+		<service name="metadata.batch.publish.category.form">
+			<class name=".services.metadata.PrepareBatchUpdateCategories"/>
+
+			<output sheet="metadata-publish-category.xsl"/>
+		</service>
 		
+		<service name="metadata.batch.publish">
+			<class name=".services.metadata.BatchPublish"/>
+
+			<output sheet="metadata-batch-results.xsl">
+				<xml name="info" file="xml/metadata-batchPublish.xml" />
+			</output>
+		</service>
+				
+		<service name="metadata.batch.unpublish">
+			<class name=".services.metadata.BatchUnPublish"/>
+
+			<output sheet="metadata-batch-results.xsl">
+				<xml name="info" file="xml/metadata-batchPublish.xml" />
+			</output>
+		</service>
+		
+		<service name="metadata.publish.category.form">
+			<class name=".services.metadata.GetCategories"/>
+			<output sheet="metadata-publish-category.xsl"/>
+		</service>
+		
+		<service name="metadata.publish">
+			<class name=".services.metadata.Publish"/>
+		</service>
+
+		<service name="metadata.unpublish">
+			<class name=".services.metadata.UnPublish"/>
+		</service>
+		
+		<!-- =========== Joseph created for publish and unpublish - End ================ -->
+				
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- Update child -->
 		

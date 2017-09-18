@@ -373,6 +373,7 @@ GeoNetwork.Lang.de = {
 'publishLayerAdded':'Kartenebene zur Kartenvorschau hinzugefügt.',
 'unpublish':'Veröffentlichung zurücknehmen',
 'unpublishTooltip':'Entfernen Sie die aktuellen Datensatz aus Remote-Knoten.',
+'unpublishConfirm':'Sind Sie sicher, diese Metadaten Datensatz wirklich veröffentlichen?',
 'unpublishSuccess':'Veröffentlichung erfolgreich zurückgenommen.',
 'unpublishError':'Veröffentlichung konnte nicht zürckgenommen werden.',
 'check':'Überprüfen',

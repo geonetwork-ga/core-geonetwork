@@ -354,6 +354,7 @@ GeoNetwork.Lang.it = {
     'publishLayerAdded': " Livello aggiunto alla mappa di anteprima.",
     'unpublish': "Revoca",
     'unpublishTooltip': "Rimuovi il dataset corrente dal nodo remoto.",
+    'unpublishConfirm': 'Sei sicuro di voler disattivare questo metadato?',
     'unpublishSuccess': "Revoca effettuata.",
     'unpublishError': "Revoca fallita.",
     'check': "Controlla",
