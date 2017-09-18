@@ -61,7 +61,7 @@ function clearAll(id){
 function checkBoxModalUpdate(div, service, modalbox, title){
     var boxes = Ext.DomQuery.select('input[type="checkbox"]');
     var pars = "?";
-    if (service === 'metadata.admin' || service === 'metadata.category') {
+    if (service === 'metadata.admin' || service === 'metadata.category' || service === 'metadata.publish') {
         pars += "id=" + Ext.getDom('metadataid').value;
     }
     Ext.each(boxes, function(s){
@@ -73,7 +73,7 @@ function checkBoxModalUpdate(div, service, modalbox, title){
     // FIXME : title is not an error message title
     catalogue.doAction(service + pars, null, null, title, function(response){
         Ext.getDom(div).innerHTML = response.responseText;
-        if (service === 'metadata.admin' || service === 'metadata.category') {
+        if (service === 'metadata.admin' || service === 'metadata.category' || service === 'metadata.publish') {
             Ext.getCmp('modalWindow').close();
         }
     }, null);

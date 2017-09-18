@@ -104,6 +104,10 @@ GeoNetwork.MetadataResultsToolbar = Ext.extend(Ext.Toolbar, {
     
     ownerAction: undefined,
     
+    publishAction: undefined,
+    
+    unPublishAction: undefined,
+    
     updateCategoriesAction: undefined,
     
     updatePrivilegesAction: undefined,
@@ -238,7 +242,28 @@ GeoNetwork.MetadataResultsToolbar = Ext.extend(Ext.Toolbar, {
             scope: this,
             hidden: hide
         });
-        
+        this.publishAction = new Ext.menu.Item({
+            text: OpenLayers.i18n('publish'),
+            id: 'publishAction',
+            iconCls : 'statusIcon',
+            handler: function(){
+                this.catalogue.massiveOp('Publish');
+            },
+            scope: this,
+            hidden: hide
+        });
+        this.unPublishAction = new Ext.menu.Item({
+            text: OpenLayers.i18n('unpublish'),
+            id: 'unPublishAction',
+            iconCls : 'statusIcon',
+            handler: function(){
+                this.catalogue.massiveOp('UnPublish', function() {
+                    this.catalogue.metadataSelectNone();
+                });
+            },
+            scope: this,
+            hidden: hide
+        });
         this.updateCategoriesAction = new Ext.menu.Item({
             text: OpenLayers.i18n('updateCategories'),
             id: 'updateCategoriesAction',
@@ -279,11 +304,13 @@ GeoNetwork.MetadataResultsToolbar = Ext.extend(Ext.Toolbar, {
             hidden: hide
         });
         
-        this.selectionActions.push(this.deleteAction, this.ownerAction, this.updateCategoriesAction, 
+        this.selectionActions.push(this.deleteAction, this.ownerAction, this.updateCategoriesAction, this.publishAction, this.unPublishAction,
                 this.updatePrivilegesAction, this.updateStatusAction, this.updateVersionAction);
 
         if(!this.catalogue.isReadOnly()) {
             this.actionMenu.addItem(this.ownerAction);
+            this.actionMenu.addItem(this.publishAction);
+			this.actionMenu.addItem(this.unPublishAction);
             this.actionMenu.addItem(this.updateCategoriesAction);
             this.actionMenu.addItem(this.updatePrivilegesAction);
             this.actionMenu.addItem(this.updateStatusAction);
@@ -636,13 +663,18 @@ GeoNetwork.MetadataResultsToolbar = Ext.extend(Ext.Toolbar, {
      *  Update privileges after user login
      */
     updatePrivileges: function(catalogue, user){
-        var editingActions = [this.deleteAction, this.updateCategoriesAction, 
+        var editingActions = [this.deleteAction, this.updateCategoriesAction,
                         this.updatePrivilegesAction, this.createMetadataAction ],
+            onlyAdminActions = [ this.publishAction, this.unPublishAction ],
             adminActions = [this.ownerAction],
             actions = [this.adminAction, this.mdImportAction, this.otherItem];
        
         //if (this.myMetadataAction) editingActions.push(this.myMetadataAction); - Not Necessary
 
+        Ext.each(onlyAdminActions, function(){
+            this.setVisible(user && (user.role === 'Administrator'));
+        });
+        
         Ext.each(actions, function(){
             this.setVisible(user && (user.role === 'Administrator' || user.role === 'UserAdmin'));
         });
