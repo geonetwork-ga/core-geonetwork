@@ -128,23 +128,18 @@ GeoNetwork.searchApp = function() {
                     // search form which is going to be submitted
                     change : function() {
                         if (this.getValue().length > 0)
-                            Ext.getCmp('E_trueany').setValue(
-                                    this.getValue() //+ "*"
-																		);
+                            Ext.getCmp('E_trueany').setValue(this.getValue() //+ "*");
                         else
                             Ext.getCmp('E_trueany').setValue(this.getValue());
                     },
                     keyup : function(e, a) {
                         if (this.getValue().length > 0)
-                            Ext.getCmp('E_trueany').setValue(
-                                    this.getValue() //+ "*"
-																		);
+                            Ext.getCmp('E_trueany').setValue(this.getValue() + "*" );
                         else
                             Ext.getCmp('E_trueany').setValue(this.getValue());
                         if (a.ENTER == a.keyCode) {
                             e.list.hide();
-                            Ext.getCmp('advanced-search-options-content-form')
-                                    .fireEvent('search');
+                            Ext.getCmp('advanced-search-options-content-form').fireEvent('search');
                         }
                     }
                 }
