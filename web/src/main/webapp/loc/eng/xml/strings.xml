@@ -609,7 +609,8 @@
 	<batchNewOwnerTitle>Batch New Owner Operation</batchNewOwnerTitle>
 	<batchUpdateCategoriesTitle>Batch Update Categories Operation</batchUpdateCategoriesTitle>
 	<batchUpdatePrivilegesTitle>Batch Update Privileges Operation</batchUpdatePrivilegesTitle>
-
+	<batchPublishTitle>Batch Publish Operation</batchPublishTitle>
+	<batchUnPublishTitle>Batch UnPublish Operation</batchUnPublishTitle>
 	<max>Maximum</max>
 	<mdRating>Data Rating</mdRating>
 	<mdUpdateError>Update error</mdUpdateError>

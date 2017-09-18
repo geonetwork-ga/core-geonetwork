@@ -435,6 +435,9 @@ public class LuceneQueryBuilder {
             else if (SearchParameter.FEATURED.equals(fieldName)) {
                 featuredCriteria(fieldValue, bq);
             }
+            else if("_owner".equals(fieldName) && "0".equals(fieldValue)){//Joseph added - For querying non admin records
+            	addProhibitedTextField("1", fieldName, (criteriaIsASet ? bq : query));
+            }
             else {
                 if(criteriaIsASet) {
                     // Add to the boolean query which will be added to the main query
