@@ -129,7 +129,7 @@ GeoNetwork.searchApp = function() {
                     change : function() {
                         if (this.getValue().length > 0)
                             Ext.getCmp('E_trueany').setValue(
-                                    this.getValue() //+ "*"
+                                    this.getValue() + "*"
 																		);
                         else
                             Ext.getCmp('E_trueany').setValue(this.getValue());
