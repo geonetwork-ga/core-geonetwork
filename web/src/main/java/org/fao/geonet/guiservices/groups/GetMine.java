@@ -65,7 +65,7 @@ public class GetMine implements Service
 		//--- retrieve user groups
 
 		if (Geonet.Profile.ADMINISTRATOR.equals(session.getProfile())) {
-			return Lib.local.retrieveWhere(dbms, "Groups", "id > ?", 1);
+			return Lib.local.retrieveWhere(dbms, "Groups", "id >= ?", 0);//Joseph updated - To list All
 		} else {
 			Element list = null;
 			if (profile == null) {
