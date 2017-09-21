@@ -273,6 +273,7 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
             feedback: serviceUrl + 'feedback.send',
             xmlSearch: serviceUrl + 'xml.search',
             mdSelect: serviceUrl + 'metadata.select',
+            mdSelectUuids:serviceUrl + 'metadata.select.uuids',
             mdView: serviceUrl + 'view',
             mdXMLInsert: serviceUrl + 'xml.metadata.insert',
             mdShow: serviceUrl + 'metadata.show.embedded',
@@ -837,6 +838,31 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
             failure: function(response){
                 // TODO app.selectedRecords =
                 // response.responseXML.documentElement.getElementsByTagName("Selected")[0].childNodes[0].nodeValue;
+            }
+        });
+    },
+    /** api: private[metadataSelectionSearch]
+     *  :param onSuccess: function to trigger on success
+     *
+     *  Private method called after selection call operations.
+     *  Use GeoNetwork selection service.
+     */
+	metadataSelectionSearch: function(onSuccess){
+        var app = this;
+		
+        OpenLayers.Request.GET({
+            url: this.services.mdSelectUuids,
+            success: function(response){
+            	var node = response.responseXML.documentElement.getElementsByTagName("uuids")[0].childNodes[0];
+				if(node){
+					var uuids = node.nodeValue;
+					Ext.getCmp('E_Uuid').setValue(uuids);
+				}else{
+					Ext.getCmp('E_Uuid').setValue('');
+				}
+				Ext.getCmp('advanced-search-options-content-form').fireEvent('search');
+            },
+            failure: function(response){
             }
         });
     },

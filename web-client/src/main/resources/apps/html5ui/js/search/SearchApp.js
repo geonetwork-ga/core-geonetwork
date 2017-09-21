@@ -170,6 +170,12 @@ GeoNetwork.searchApp = function() {
                 hidden : true
             });
 
+            var uuidTF = new Ext.form.TextField({
+                name : 'E__uuid',
+				id : 'E_Uuid',
+                hidden : true
+            });
+            
             /* Joseph Commented Start - To remove "Web Services" checkbox */
             
             /* var onlineData_ = new Ext.form.Checkbox({
@@ -291,7 +297,7 @@ GeoNetwork.searchApp = function() {
                 },
                 forceLayout : true,
                 items : [ any, onlineData, dataForDownload, myMetadata,
-                        sortByCombo, orderBy, advancedCriteria ]
+                        sortByCombo, orderBy, advancedCriteria, uuidTF ]
             };
 
             var mapLayers = [];

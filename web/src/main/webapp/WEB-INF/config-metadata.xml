@@ -450,6 +450,12 @@
 			</class>
 		</service>
 
+		<!-- - - - - - - - - - - - - Joseph added for getting UUIDs - - - - - - - - - - - - - - - - - - - -->
+		
+		<service name="metadata.select.uuids">
+			<class name=".services.main.SelectUuids" />
+		</service>
+		
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
 		<service name="metadata.create.form">
