@@ -849,7 +849,11 @@ GeoNetwork.Catalogue = Ext.extend(Ext.util.Observable, {
      */
 	metadataSelectionSearch: function(onSuccess){
         var app = this;
-		
+        if(app.getSelectedRecords() > 150){
+			Ext.Msg.minWidth = 320;
+			Ext.Msg.alert("Unable to display over 150 selected records", "Selected:" + app.getSelectedRecords());
+			return;
+		}
         OpenLayers.Request.GET({
             url: this.services.mdSelectUuids,
             success: function(response){
