@@ -175,7 +175,7 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/metadata.publish.category.form!?.*" access="hasRole('Administrator')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/metadata.publish!?.*" access="hasRole('Administrator')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/metadata.unpublish!?.*" access="hasRole('Administrator')"></sec:intercept-url>
-                <sec:intercept-url pattern="/srv/[a-z]{2,3}/metadata.select.uuids!?.*" access="hasRole('Administrator')"></sec:intercept-url>
+                <sec:intercept-url pattern="/srv/[a-z]{2,3}/metadata.select.uuids!?.*" access="permitAll"></sec:intercept-url>
                 
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/metadata.batch.update.categories!?.*" access="hasRole('Editor')"></sec:intercept-url>
                 <sec:intercept-url pattern="/srv/[a-z]{2,3}/xml.metadata.batch.update.categories!?.*" access="hasRole('Editor')"></sec:intercept-url>
