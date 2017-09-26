@@ -225,6 +225,9 @@
                                     onmouseout="Ext.get(this).removeClass('hover');"
                                     id="search-submit" class="form-submit" value="&#xf002;">
                                 </input>
+                                <button type="button"
+                                    onclick="Ext.getCmp('advanced-search-options-content-form').fireEvent('reset');"
+                                    class="md-mn-reset1">Reset</button>
                                 <div class="form-dummy">
                                     <span><xsl:value-of select="/root/gui/strings/dummySearch" /></span>
 	                                <div id="ck1"/>
