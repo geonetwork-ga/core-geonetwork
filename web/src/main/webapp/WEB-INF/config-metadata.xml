@@ -574,6 +574,7 @@
 				<call name="groups"  class=".guiservices.groups.GetMine">
 					<param name="profile" value="Editor"/>
 				</call>
+				<call name="status"            class=".guiservices.status.List"/>
 				<call name="categories"        class=".services.category.List"/>
 				<call name="importStyleSheets" class=".guiservices.util.GetImportXSLs"/>
 			</output>
@@ -584,6 +585,7 @@
 		<service name="metadata.batchimport.form">
 			<output sheet="metadata-batchimport.xsl">
 				<call name="groups"            class=".guiservices.groups.GetMine"/>
+				<call name="status"            class=".guiservices.status.List"/>
 				<call name="categories"        class=".services.category.List"/>
 				<call name="importStyleSheets" class=".guiservices.util.GetImportXSLs"/>
 			</output>

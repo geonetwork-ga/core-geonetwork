@@ -62,6 +62,8 @@ import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.kernel.search.spatial.Pair;
 import org.fao.geonet.kernel.setting.SettingManager;
 import org.fao.geonet.lib.Lib;
+import org.fao.geonet.services.metadata.StatusActions;
+import org.fao.geonet.services.metadata.StatusActionsFactory;
 import org.fao.geonet.util.ISODate;
 import org.fao.geonet.util.ThreadUtils;
 import org.jdom.Attribute;
@@ -1394,6 +1396,28 @@ public class DataManager {
 				setStatusHarvestedExt(dbms, id);
     }
 
+    /**
+     * Joseph added - This method set the status after import
+     * @param dbms
+     * @param context
+     * @param ids
+     * @param status
+     * @throws Exception
+     */
+    public void setStatusAfterImport(Dbms dbms, ServiceContext context, List<String> ids, String status) throws Exception{
+		
+		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
+		Set<Integer> metadataIds = new HashSet<Integer>();
+		for (String id : ids) {
+			context.debug("Joseph --> DataManager, id: " + id);
+			dbms.execute("DELETE FROM MetadataStatus WHERE metadataId=?", Integer.valueOf(id));
+			metadataIds.add(Integer.parseInt(id));
+		}
+		StatusActionsFactory saf = new StatusActionsFactory(gc.getStatusActionsClass());
+		StatusActions sa = saf.createStatusActions(context, dbms);
+		Set<Integer> noChange = saf.statusChange(sa, status, metadataIds, new ISODate().toString(), "Imported");
+
+    }
     /**
      * TODO javadoc.
      *
