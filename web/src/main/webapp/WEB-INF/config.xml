@@ -1294,6 +1294,12 @@
 			<class name=".services.main.Forward" />
 		</service>
 
+		<!-- - - - - - - - - - - - Joseph added - xml metadata validation - - - - - - - - - - -->
+
+		<service name="xml.metadata.validation">
+			<class name=".services.metadata.Validation"/>
+		</service>
+		
 		<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 		<!-- GeoNetwork Mapping Application XML services  -->
 
