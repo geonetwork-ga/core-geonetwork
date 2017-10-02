@@ -1409,7 +1409,6 @@ public class DataManager {
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		Set<Integer> metadataIds = new HashSet<Integer>();
 		for (String id : ids) {
-			context.debug("Joseph --> DataManager, id: " + id);
 			dbms.execute("DELETE FROM MetadataStatus WHERE metadataId=?", Integer.valueOf(id));
 			metadataIds.add(Integer.parseInt(id));
 		}
