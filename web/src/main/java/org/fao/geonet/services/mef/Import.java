@@ -81,7 +81,8 @@ public class Import extends NotInReadOnlyModeService {
 		String mefFile = Util.getParam(params, "mefFile");
         String fileType = Util.getParam(params, "file_type", "mef");
 		String uploadDir = context.getUploadDir();
-
+		String status = Util.getParam(params, Params.STATUS);
+		
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager   dm = gc.getDataManager();
 		Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
@@ -91,6 +92,15 @@ public class Import extends NotInReadOnlyModeService {
 		List<String> id = MEFLib.doImport(params, context, file, stylePath, dbms);
         String ids = "";
 
+		// Joseph added - set status while import - Start
+		if (id.size() > 0) {
+			try {
+				dm.setStatusAfterImport(dbms, context, id, status);
+			} catch (Exception e) {
+				context.error("Unable to update the status.");
+			}
+		}
+		// Joseph added - set status while import - End
         Iterator<String> iter = id.iterator();
         while (iter.hasNext()) {
             String item = (String) iter.next();
@@ -118,7 +128,7 @@ public class Import extends NotInReadOnlyModeService {
             }
 
         }
-
+        
 		// --- return success with all metadata id
 		return result;
 	}
