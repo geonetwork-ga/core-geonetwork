@@ -123,7 +123,22 @@
             </td>
         </tr>
 
-
+		<!-- status -->
+        <tr id="gn.status">
+            <th class="padded">
+                <xsl:value-of select="/root/gui/strings/status"/>
+            </th>
+            <td class="padded">
+                <select class="content" name="status" size="1">
+                    <xsl:for-each select="/root/gui/status/record">
+                        <xsl:sort select="label/child::*[name() = $lang]"/>
+                        <option value="{id}">
+                            <xsl:value-of select="label/child::*[name() = $lang]"/>
+                        </option>
+                    </xsl:for-each>
+                </select>
+            </td>
+        </tr>
 
         <!-- categories 
         Some users are not using categories, so hide the list and

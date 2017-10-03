@@ -27,8 +27,10 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -58,6 +60,7 @@ import org.fao.geonet.kernel.MetadataIndexerProcessor;
 import org.fao.geonet.kernel.mef.MEFLib;
 import org.fao.geonet.services.NotInReadOnlyModeService;
 import static org.fao.geonet.services.metadata.Insert.applyImportStylesheet;
+
 import org.fao.geonet.util.ThreadUtils;
 import org.jdom.Element;
 
@@ -465,7 +468,8 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		fileLength = 0;
 		GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 		DataManager   dm = gc.getDataManager();
-
+		Dbms dbms = (Dbms) context.getResourceManager().open(Geonet.Res.MAIN_DB);
+		String status = Util.getParam(params, Params.STATUS);
 		String dir      = Util.getParam(params, Params.DIR);
 		
 		List<String> ids = null;
@@ -498,7 +502,17 @@ public class ImportFromDir extends NotInReadOnlyModeService{
 		
 		ids = r.getIds();
 		exceptions = r.getExceptions();
-	
+		
+		//Joseph added - set status while batch import - Start
+		if(ids.size() > 0){
+			try{
+				dm.setStatusAfterImport(dbms, context, ids, status);
+			}catch(Exception e){
+				context.error("Unable to update the status.");
+			}
+		}
+		//Joseph added - set status while batch import - End
+
 		context.info("Now reindexing "+ids.size());
 
 		dm.batchRebuild(context, ids);

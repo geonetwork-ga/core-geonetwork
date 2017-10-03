@@ -82,6 +82,7 @@
                 displayElement('gn.validate',display);
                 displayElement('gn.groups',display);
                 displayElement('gn.categories',display);
+                displayElement('gn.status',display);
                 displayElement('gn.assign',mefdisplay);
                 
             }
