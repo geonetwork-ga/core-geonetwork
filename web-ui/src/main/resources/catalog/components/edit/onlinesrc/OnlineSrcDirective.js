@@ -94,6 +94,17 @@
                 }
               };
 
+              /**
+               * On edit, loads the values. For communicating with gnAddOnlinesrc directive
+               * need to send an event to GnCatController
+               */
+			  scope.editSetValues = function (params){
+				  params.updateName = params.name;
+				  params.updateUrl = params.url;
+				  scope.$emit('setEditParams', params);
+				  scope.onlinesrcService.onOpenPopup('onlinesrc');
+			  };
+			  
               // Reload relations when a directive requires it
               scope.$watch('onlinesrcService.reload', function() {
                 if (scope.onlinesrcService.reload) {
@@ -378,6 +389,13 @@
                 }
               };
 
+              scope.updateOnlineResource = function() {
+				  var processname = 'onlinesrc-withformat-add';
+				  gnOnlinesrc.updateOnlinesrc(scope.params, scope.popupid, processname);
+				  scope.params.updateName = null;
+				  scope.params.updateUrl = null;
+              };
+              
               scope.onAddSuccess = function() {
                 gnEditor.refreshEditorForm();
                 scope.onlinesrcService.reload = true;
@@ -421,7 +439,20 @@
                   scope.loadWMSCapabilities();
                 }
               });
-
+              
+              /**
+               * Receives an event from GnCatControllort 
+               */
+			  scope.$on('setEditParams1', function(event, editParams) {
+				  var params = {};
+				  scope.params.id = gnCurrentEdit.id;
+				  scope.params.url = editParams.url;
+				  scope.params.protocol = editParams.protocol;
+				  scope.params.name = editParams.name;
+				  scope.params.desc = editParams.description;
+				  scope.params.updateName = editParams.updateName;
+				  scope.params.updateUrl = editParams.updateUrl;
+			  });
             }
           };
         }])

@@ -142,7 +142,7 @@
           refreshForm(scope, $(data.data));
         });
       };
-
+	  
       /**
        * Run a service (not a batch) to add or remove
        * an onlinesrc.
@@ -264,6 +264,27 @@
           });
         },
 
+        /**
+         * @ngdoc method
+         * @methodOf gn_onlinesrc.service:gnOnlinesrc
+         * @name gnOnlinesrc#updateOnlinesrc
+         *
+         * @description
+         * The `updateOnlinesrc` method call a batch process to update an online
+         * resource to the current metadata.
+         * It prepares the parameters and call batch
+         * request from the `gnBatchProcessing` service.
+         *
+         * @param {string} params to send to the batch process
+         * @param {string} popupid id of the popup to close after process.
+         * @param {string} processname name of the process to run (if undefined use onlinesrc-add)
+         */
+        updateOnlinesrc: function(params, popupid, processname) {
+        	runProcess(this, setParams(processname, params)).then(function() {
+        		closePopup(popupid);
+            });
+        },
+          
         /**
          * @ngdoc method
          * @name gnOnlinesrc#addThumbnailByURL
