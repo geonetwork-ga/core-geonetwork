@@ -1917,6 +1917,19 @@ public class DataManager {
     }
 
     /**
+     *  For update of owner info.
+     *
+     * @param dbms
+     * @param id
+     * @param owner
+     * @param groupOwner
+     * @throws Exception
+     */
+    public synchronized void updateMetadataOwner(Dbms dbms, int id, String owner) throws Exception {
+        dbms.execute("UPDATE Metadata SET owner=?, groupOwner=? WHERE id=?", Integer.valueOf(owner), id);
+    }
+    
+    /**
      * Updates a metadata record. Deletes validation report currently in session (if any). If user asks for validation
      * the validation report will be (re-)created then.
      *
