@@ -77,11 +77,11 @@ public class Publish extends NotInReadOnlyModeService {
 			throw new IllegalArgumentException("Metadata not found --> " + id);
 		
 		MdInfo info = dm.getMetadataInfo(dbms, id);
-
+		
 		if (info == null)
 			throw new MetadataNotFoundEx(id);
-
 		
+		dm.updateMetadataOwner(dbms, Integer.parseInt(id), us.getUserId());
 		updatePriviledge(context, info, dbms, id, dm, us);
 		updateCategory(params, context, dbms, id, dm);
 		updateStatus(context, gc, dbms, iLocalId);

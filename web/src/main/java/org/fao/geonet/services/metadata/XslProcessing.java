@@ -48,6 +48,7 @@ import org.jdom.Element;
 import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -111,7 +112,6 @@ public class XslProcessing extends NotInReadOnlyModeService {
 
         String process = Util.getParam(params, Params.PROCESS);
         boolean save = "1".equals(Util.getParam(params, Params.SAVE, "1"));
-
         Set<Integer> metadata = new HashSet<Integer>();
         Set<Integer> notFound = new HashSet<Integer>();
         Set<Integer> notEditable = new HashSet<Integer>();
@@ -179,6 +179,9 @@ public class XslProcessing extends NotInReadOnlyModeService {
             notEditable.add(Integer.valueOf(id));
         } else {
 
+        	String updateName = Util.getParam(params, "updateName", "");
+        	String updateUrl = Util.getParam(params, "updateUrl", "");
+        	
             // -----------------------------------------------------------------------
             // --- check processing exist for current schema
             String schema = info.schemaId;
@@ -204,9 +207,21 @@ public class XslProcessing extends NotInReadOnlyModeService {
             }
 
             xslParameter.put("siteUrl", siteUrl);
-
+            
+            if(updateName != null && !updateName.isEmpty()){
+            	Map<String, String> removeXslParameter = new HashMap<String, String>();
+            	removeXslParameter.put("guiLang", context.getLanguage());
+            	removeXslParameter.put("baseUrl", context.getBaseUrl());
+            	removeXslParameter.put("id", xslParameter.get("id"));
+            	removeXslParameter.put("name", updateName);
+            	removeXslParameter.put("process", "onlinesrc-withformat-remove");
+            	removeXslParameter.put("url", updateUrl);
+            	removeXslParameter.put("siteUrl", siteUrl);
+            	String removefilePath = schemaMan.getSchemaDir(schema) + "process" + File.separator + "onlinesrc-withformat-remove.xsl";
+            	md = Xml.transform(md, removefilePath, removeXslParameter);
+            }
+            
             Element processedMetadata = Xml.transform(md, filePath, xslParameter);
-
             // --- save metadata and return status
             if (save) {
                 Lib.resource.checkEditPrivilege(context, id);

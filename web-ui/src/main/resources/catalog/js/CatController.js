@@ -155,7 +155,9 @@
         }
       });
 
-
+      $scope.$on('setEditParams', function(event, params) {
+          $scope.$broadcast('setEditParams1', params);
+      });
 
       $scope.loadCatalogInfo();
 

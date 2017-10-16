@@ -94,7 +94,7 @@ public class BatchPublish extends NotInReadOnlyModeService {
 					} else if (!accessMan.isOwner(context, id)) {
 						notOwner.add(Integer.valueOf(id));
 					} else {
-	
+						dm.updateMetadataOwner(dbms, Integer.parseInt(id), us.getUserId());
 						updatePriviledge(context, info, dbms, id, dm, us);
 						updateCategory(params, context, dbms, id, dm);
 						metadata.add(Integer.valueOf(id));
