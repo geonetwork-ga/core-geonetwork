@@ -101,8 +101,8 @@
 			  scope.editSetValues = function (params){
 				  params.updateName = params.name;
 				  params.updateUrl = params.url;
-				  scope.$emit('setEditParams', params);
 				  scope.onlinesrcService.onOpenPopup('onlinesrc');
+				  scope.$emit('setEditParams', params);
 			  };
 			  
               // Reload relations when a directive requires it
@@ -318,7 +318,7 @@
               gnOnlinesrc.register('onlinesrc', function() {
                 scope.metadataId = gnCurrentEdit.id;
                 scope.schema = gnCurrentEdit.schema;
-
+                scope.resetForm();//Joseph added - To clear field after add/edit an online resource
                 $(scope.popupid).modal('show');
 
               });
@@ -392,8 +392,6 @@
               scope.updateOnlineResource = function() {
 				  var processname = 'onlinesrc-withformat-add';
 				  gnOnlinesrc.updateOnlinesrc(scope.params, scope.popupid, processname);
-				  scope.params.updateName = null;
-				  scope.params.updateUrl = null;
               };
               
               scope.onAddSuccess = function() {
@@ -453,6 +451,17 @@
 				  scope.params.updateName = editParams.updateName;
 				  scope.params.updateUrl = editParams.updateUrl;
 			  });
+			  
+			  scope.resetForm = function() {
+				scope.params.url = null;
+				scope.params.protocol = null;
+				scope.params.name = null;
+				scope.params.desc = null;
+				scope.params.format = null;
+				scope.params.version = null;
+				scope.params.updateName = null;
+				scope.params.updateUrl = null;
+              };
             }
           };
         }])
