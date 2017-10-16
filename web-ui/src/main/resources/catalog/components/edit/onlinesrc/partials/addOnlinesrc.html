@@ -123,12 +123,21 @@
         data-layers="layers"
         data-selection="params.layers"></div>
   </form>
-  <div class="">
-    <button type="button" class="btn navbar-btn btn-success"
-      data-ng-click="addOnlinesrc()">
-      <i class="fa fa-archive" /><i class="icon-external-link"></i>
-      <span data-translate="">addOnlinesrc</span>
-    </button>
+  <div ng-switch="!!params.updateName" class="">
+	<div ng-switch-when="true">
+	    <button type="button" class="btn navbar-btn btn-success"
+		  data-ng-click="updateOnlineResource()">
+		  <i class="fa fa-archive" /><i class="icon-external-link"></i>
+		  <span data-translate="">Update online resource</span>
+		</button>
+	</div>
+	<div ng-switch-when="false">
+		<button type="button" class="btn navbar-btn btn-success"
+		  data-ng-click="addOnlinesrc()">
+		  <i class="fa fa-archive" /><i class="icon-external-link"></i>
+		  <span data-translate="">addOnlinesrc</span>
+		</button>
+	</div>
   </div>
 
 </div>

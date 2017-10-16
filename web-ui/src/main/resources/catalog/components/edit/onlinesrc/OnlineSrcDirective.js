@@ -94,6 +94,17 @@
                 }
               };
 
+              /**
+               * On edit, loads the values. For communicating with gnAddOnlinesrc directive
+               * need to send an event to GnCatController
+               */
+			  scope.editSetValues = function (params){
+				  params.updateName = params.name;
+				  params.updateUrl = params.url;
+				  scope.onlinesrcService.onOpenPopup('onlinesrc');
+				  scope.$emit('setEditParams', params);
+			  };
+			  
               // Reload relations when a directive requires it
               scope.$watch('onlinesrcService.reload', function() {
                 if (scope.onlinesrcService.reload) {
@@ -307,7 +318,7 @@
               gnOnlinesrc.register('onlinesrc', function() {
                 scope.metadataId = gnCurrentEdit.id;
                 scope.schema = gnCurrentEdit.schema;
-
+                scope.resetForm();//Joseph added - To clear field after add/edit an online resource
                 $(scope.popupid).modal('show');
 
               });
@@ -378,6 +389,11 @@
                 }
               };
 
+              scope.updateOnlineResource = function() {
+				  var processname = 'onlinesrc-withformat-add';
+				  gnOnlinesrc.updateOnlinesrc(scope.params, scope.popupid, processname);
+              };
+              
               scope.onAddSuccess = function() {
                 gnEditor.refreshEditorForm();
                 scope.onlinesrcService.reload = true;
@@ -421,7 +437,31 @@
                   scope.loadWMSCapabilities();
                 }
               });
-
+              
+              /**
+               * Receives an event from GnCatControllort 
+               */
+			  scope.$on('setEditParams1', function(event, editParams) {
+				  var params = {};
+				  scope.params.id = gnCurrentEdit.id;
+				  scope.params.url = editParams.url;
+				  scope.params.protocol = editParams.protocol;
+				  scope.params.name = editParams.name;
+				  scope.params.desc = editParams.description;
+				  scope.params.updateName = editParams.updateName;
+				  scope.params.updateUrl = editParams.updateUrl;
+			  });
+			  
+			  scope.resetForm = function() {
+				scope.params.url = null;
+				scope.params.protocol = null;
+				scope.params.name = null;
+				scope.params.desc = null;
+				scope.params.format = null;
+				scope.params.version = null;
+				scope.params.updateName = null;
+				scope.params.updateUrl = null;
+              };
             }
           };
         }])

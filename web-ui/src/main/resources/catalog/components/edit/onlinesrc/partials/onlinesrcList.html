@@ -88,7 +88,9 @@
           <i class="fa" data-ng-class="onlinesrcService.getIconByProtocol(resource.protocol)"/>
           <a href="" data-ng-click="onlinesrcService.openLink(resource.url)">
             {{resource.title}}
-         </a> 
+         </a>
+         <span data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+            data-ng-click="editSetValues(resource)"><i class="btn fa fa-pencil-square-o pull-right"></i></span>
          <span class="onlinesrc-remove"
             data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
             data-ng-click="onlinesrcService.removeOnlinesrc(resource)"><i class="btn fa fa-times text-danger pull-right"></i></span>
