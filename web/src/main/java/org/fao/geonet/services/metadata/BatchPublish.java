@@ -20,9 +20,12 @@
 //==============================================================================
 package org.fao.geonet.services.metadata;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -32,6 +35,7 @@ import org.fao.geonet.constants.Params;
 import org.fao.geonet.kernel.AccessManager;
 import org.fao.geonet.kernel.DataManager;
 import org.fao.geonet.kernel.MdInfo;
+import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.SelectionManager;
 import org.fao.geonet.services.NotInReadOnlyModeService;
 import org.fao.geonet.util.ISODate;
@@ -42,6 +46,7 @@ import jeeves.resources.dbms.Dbms;
 import jeeves.server.ServiceConfig;
 import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
+import jeeves.utils.Xml;
 
 
 /**
@@ -69,6 +74,7 @@ public class BatchPublish extends NotInReadOnlyModeService {
 			GeonetContext gc = (GeonetContext) context.getHandlerContext(Geonet.CONTEXT_NAME);
 
 			DataManager dm = gc.getDataManager();
+			SchemaManager schemaMan = gc.getSchemamanager();
 			AccessManager accessMan = gc.getAccessManager();
 			UserSession us = context.getUserSession();
 
@@ -94,6 +100,7 @@ public class BatchPublish extends NotInReadOnlyModeService {
 					} else if (!accessMan.isOwner(context, id)) {
 						notOwner.add(Integer.valueOf(id));
 					} else {
+						updateMetadataWithModifiedDate(context, info, schemaMan, dm, dbms, id);
 						dm.updateMetadataOwner(dbms, Integer.parseInt(id), us.getUserId());
 						updatePriviledge(context, info, dbms, id, dm, us);
 						updateCategory(params, context, dbms, id, dm);
@@ -119,6 +126,18 @@ public class BatchPublish extends NotInReadOnlyModeService {
 							.addContent(new Element("notFound").setText(notFound.size()+""));
 		}
 		
+		private void updateMetadataWithModifiedDate(ServiceContext context, MdInfo info, SchemaManager schemaMan,
+				DataManager dm, Dbms dbms, String id) throws Exception {
+			String schema = info.schemaId;
+			String publishDate = new ISODate().toString();
+			Element md = dm.getMetadata(dbms, id);
+			Map<String, String> xslParameters = new HashMap<String, String>();
+			xslParameters.put("date", publishDate);
+			String styleSheetPath = schemaMan.getSchemaDir(schema) + "process" + File.separator
+					+ Geonet.File.PUBLICATION_DATE;
+			md = Xml.transform(md, styleSheetPath, xslParameters);
+			dm.updateMetadata(context, dbms, id, md, false, false, false, context.getLanguage(), publishDate, false);
+		}
 
 		private void updatePriviledge(ServiceContext context, MdInfo info, Dbms dbms, String id, DataManager dm, UserSession us) throws Exception{
 			//--- remove old operations
