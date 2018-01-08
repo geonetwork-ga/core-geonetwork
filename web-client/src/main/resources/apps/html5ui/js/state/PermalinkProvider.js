@@ -304,9 +304,9 @@ Ext
 						var eCatId = record.get('eCatId');
                         if (eCatId !== ''){
                             if(record.get('type') == 'service'){
-                                url = "http://pid.geoscience.gov.au/service/"+eCatId;
+                                url = "http://pid.geoscience.gov.au/service/ga/"+eCatId;
                             }else{
-                                url = "http://pid.geoscience.gov.au/dataset/"+eCatId;
+                                url = "http://pid.geoscience.gov.au/dataset/ga/"+eCatId;
                             }
                         }
                         return url;
