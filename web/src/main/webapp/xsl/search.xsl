@@ -413,7 +413,7 @@
 			if(browser.name === 'Chrome'){
 				if(browser.version === '64'){
 					var div = document.getElementById("issue");  
-					div.textContent = "FOR CHROME USERS PRESS CATALOG TAB";  
+					div.textContent = "We are currently fixing an error in Chrome browsers that prevents direct access to record links. Chrome users press \"Catalog\" tab and search for the data/publication you are looking for.";  
 					var text = div.textContent;  
 				}
 			}
