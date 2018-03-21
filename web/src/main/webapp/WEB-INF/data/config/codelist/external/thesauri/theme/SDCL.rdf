@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:ns3="http://purl.org/dc/elements/1.1/"
+	xmlns:ns6="http://www.opengis.net/gml#"
+	xmlns:ns2="http://www.w3.org/2004/02/skos/core#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656293605">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfg299x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656293605">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfg299x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfg299x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="http://geonetwork-opensource.org/Source Dataset Copy Location">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#ConceptScheme"/>
+	<ns3:title>Source Dataset Copy Location</ns3:title>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656351967">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656293605">
+	<ns2:prefLabel xml:lang="en">NEMO</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfhrasx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656351967">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfhrasx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656293605">
+	<ns2:scopeNote xml:lang="en">AWS S3 bucket location for the Source Dataset Copy Location for NEMO</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfhrasx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656351967">
+	<ns2:prefLabel xml:lang="en">AdminBoundaries</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Clearly defined administrative areas of a political, natural, or regulatory boundary nature, excluding scientific speculative boundaries such as geological boundaries, ecological/ecosystem boundaries etc.  Examples include coastlines (because coastlines define certain administrative boundaries), state boundaries, electoral boundaries, mineral tenement boundaries, petroleum title boundaries and marine protected areas.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656365190">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfi8a2x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656365190">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfi8a2x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfi8a2x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfijb2x1">
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656365190">
+	<ns2:prefLabel xml:lang="en">Boreholes</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">For storing borehole header data only. Any data that may have been recorded such as geophysics or lithology to be stored in the relevant thematic location</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656376574">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfijb2x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656376574">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfijb2x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656388742">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfiv73x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfiv73x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656376574">
+	<ns2:prefLabel xml:lang="en">Compilations</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Significant compilations of data which do not comprise a single theme or major theme</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656388742">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfiv73x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfjhhqx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656407532">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<ns6:BoundedBy rdf:nodeID="node1c6bfjhhqx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfjhhqx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656426900">
+	<ns2:scopeNote xml:lang="en">Satellite and air platform imagery. This includes imagery designed to represent surficial condition of the earth such as Landsat, SPOT, MODIS,ASTER,HYMAP and Aerial Photography. Remotely sensed data acquired from earth observation satellites and Sensing Instruments for both scientific and operational applications, such as LANDSAT 5,LANDSAT 7,RADARSAT 1 (Synthetic Aperture Radar – SAR), ERS 2 (Synthetic Aperture Radar – SAR) TERRA Modis,AQUA Modis ,NOAA 17, SPOT,ASTER,HYMAP and Aerial Photography</ns2:scopeNote>
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/SPOT</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656388742">
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/AerialPhoto</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656410621">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfjki8x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656388742">
+	<ns2:scopeNote xml:lang="en">Photographs of a part of the earth’s surface taken by a camera mounted in an aircraft for mapping purposes. This usually consists of a series of overlapping vertical photos taken in strips which can form the basis for mapping.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656410621">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfjki8x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfjki8x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk1ncx1">
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656431299">
+	<ns2:scopeNote xml:lang="en">Satellite and air platform imagery. This includes imagery designed to represent surficial condition of the earth such as Landsat, SPOT, MODIS,ASTER,HYMAP and Aerial Photography. Remotely sensed data acquired from earth observation satellites and Sensing Instruments for both scientific and operational applications, such as LANDSAT 5,LANDSAT 7,RADARSAT 1 (Synthetic Aperture Radar – SAR), ERS 2 (Synthetic Aperture Radar – SAR) TERRA Modis,AQUA Modis ,NOAA 17, SPOT,ASTER,HYMAP and Aerial Photography</ns2:scopeNote>
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/Radar</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656424036">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk1ncx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656424036">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfk1ncx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk1ncx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk4fhx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656407532">
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/Lidar</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Satellite and air platform imagery. This includes imagery designed to represent surficial condition of the earth such as Landsat, SPOT, MODIS,ASTER,HYMAP and Aerial Photography. Remotely sensed data acquired from earth observation satellites and Sensing Instruments for both scientific and operational applications, such as LANDSAT 5,LANDSAT 7,RADARSAT 1 (Synthetic Aperture Radar – SAR), ERS 2 (Synthetic Aperture Radar – SAR) TERRA Modis,AQUA Modis ,NOAA 17, SPOT,ASTER,HYMAP and Aerial Photography</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656426900">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk4fhx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656426900">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfk4fhx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk8pax1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656431299">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfk8pax1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfk8pax1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656410621">
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/ASTER</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Satellite and air platform imagery. This includes imagery designed to represent surficial condition of the earth such as Landsat, SPOT, MODIS,ASTER,HYMAP and Aerial Photography. Remotely sensed data acquired from earth observation satellites and Sensing Instruments for both scientific and operational applications, such as LANDSAT 5,LANDSAT 7,RADARSAT 1 (Synthetic Aperture Radar – SAR), ERS 2 (Synthetic Aperture Radar – SAR) TERRA Modis,AQUA Modis ,NOAA 17, SPOT,ASTER,HYMAP and Aerial Photography</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656431299">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656433652">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfkb40x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656424036">
+	<ns2:scopeNote xml:lang="en">Satellite and air platform imagery. This includes imagery designed to represent surficial condition of the earth such as Landsat, SPOT, MODIS,ASTER,HYMAP and Aerial Photography. Remotely sensed data acquired from earth observation satellites and Sensing Instruments for both scientific and operational applications, such as LANDSAT 5,LANDSAT 7,RADARSAT 1 (Synthetic Aperture Radar – SAR), ERS 2 (Synthetic Aperture Radar – SAR) TERRA Modis,AQUA Modis ,NOAA 17, SPOT,ASTER,HYMAP and Aerial Photography</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656433652">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfkb40x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfkb40x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656424036">
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/Landsat</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656433652">
+	<ns2:prefLabel xml:lang="en">EarthObservationImagery/Thermal</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Satellite and air platform imagery. This includes imagery designed to represent surficial condition of the earth such as Landsat, SPOT, MODIS,ASTER,HYMAP and Aerial Photography. Remotely sensed data acquired from earth observation satellites and Sensing Instruments for both scientific and operational applications, such as LANDSAT 5,LANDSAT 7,RADARSAT 1 (Synthetic Aperture Radar – SAR), ERS 2 (Synthetic Aperture Radar – SAR) TERRA Modis,AQUA Modis ,NOAA 17, SPOT,ASTER,HYMAP and Aerial Photography</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656527404">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfn6lvx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656527404">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfn6lvx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfn6lvx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfnijqx1">
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656527404">
+	<ns2:prefLabel xml:lang="en">Geochemistry</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Data related to the chemical analyses and composition of earth materials. This includes information related to the chemical analysis of organic material, surficial, groundwater and pore water samples, benthic chemical analysis, and stable isotope studies</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656539500">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfnijqx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656539500">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfnijqx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656553539">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfo06px1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfo06px1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656539500">
+	<ns2:prefLabel xml:lang="en">ElevationAndBathymetry</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">DEM, DSM, Digital subaqueous datasets</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656553539">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfo06px1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfomtqx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656576841">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<ns6:BoundedBy rdf:nodeID="node1c6bfomtqx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfomtqx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656553539">
+	<ns2:prefLabel xml:lang="en">Geochronology</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Age approximations of earth materials such as rocks, sediments and minerals. Age data resulting from scientific techniques such as radio isotopes and chemical dating.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656593000">
+	<ns2:scopeNote xml:lang="en">SEGY, seismic profiles, images, of data collected using artificially-generated seismic energy</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656582064">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfos1tx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656593000">
+	<ns2:prefLabel xml:lang="en">Geophysics/ActiveSeismic</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656582064">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfos1tx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfos1tx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfousdx1">
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656576841">
+	<ns2:scopeNote xml:lang="en">Active-source electromagnetic data including AEM</ns2:scopeNote>
+	<ns2:prefLabel xml:lang="en">Geophysics/Electromagnetics</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656585017">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfousdx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656585017">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfousdx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfousdx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp2s2x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656589112">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656585017">
+	<ns2:prefLabel xml:lang="en">Geophysics/AirborneGravity</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Gravity collected from airborne platforms, including point located data, grids, derivative grids (reduced to pole, upward continued, etc), algorithms, images</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656589112">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfp2s2x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp2s2x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656582064">
+	<ns2:scopeNote xml:lang="en">Including ground, point located data, grids, derivative grids (reduced to pole, upward continued, etc), algorithms, images</ns2:scopeNote>
+	<ns2:prefLabel xml:lang="en">Geophysics/GroundGravity</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656587088">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp2s2x1">
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656587088">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfp12cx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp12cx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656591064">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp4rbx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656587088">
+	<ns2:prefLabel xml:lang="en">Geophysics/Magnetics</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656591064">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfp4rbx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp4rbx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656587088">
+	<ns2:scopeNote xml:lang="en">Point located data, grids, derivative grids (reduced to pole, upward continued, etc), algorithms, images</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656589112">
+	<ns2:scopeNote xml:lang="en">Passive-source electromagnetic data</ns2:scopeNote>
+	<ns2:prefLabel xml:lang="en">Geophysics/Magnetotellurics</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656593000">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp6mqx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656593000">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfp6mqx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp6mqx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp900x1">
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656591064">
+	<ns2:scopeNote xml:lang="en">Point located data, grids, derivative grids (filtered, etc), algorithms, images</ns2:scopeNote>
+	<ns2:prefLabel xml:lang="en">Geophysics/Radiometrics</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656595295">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bfp900x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656595295">
+	<ns6:BoundedBy rdf:nodeID="node1c6bfp900x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656904053">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg2meax1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg2meax1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656595295">
+	<ns2:prefLabel xml:lang="en">Geophysics/PassiveSeismic</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">“Listening” data eg Data, weak and strong motion from seismographs and accelerators. SEGY, seismic profiles, images,</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656904053">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg2meax1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg31u1x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656915772">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+	<ns6:BoundedBy rdf:nodeID="node1c6bg31u1x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg31u1x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656904053">
+	<ns2:prefLabel xml:lang="en">HazardEvents</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Natural  and human environmental phenomena, whether slow or fast acting.  Information on the natural environment and its interaction with geology, eg waste disposal and pollution such as geological disposal of CO2.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656915772">
+	<ns2:scopeNote xml:lang="en">The distribution and movement of groundwater and dissolved materials in the soil and rocks of the Earth's crust (commonly in aquifers).</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656933476">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg3j7sx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656915772">
+	<ns2:prefLabel xml:lang="en">Hydrogeology</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656933476">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg3j7sx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg3j7sx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg3tedx1">
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656933476">
+	<ns2:prefLabel xml:lang="en">Hydrology</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Data relating to surface water, for example: SW gauge data; exceedance calculations; dam volumes, areas, construction; stream transacts; drainage catchments; Geofabric data; inundation areas; flood extents</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656943930">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg3tedx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656943930">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg3tedx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg3tedx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg4demx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656943930">
+	<ns2:prefLabel xml:lang="en">Infrastructure</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Datasets relating to any built environment , egroads, rail, fences, airports, pipelines). Any structure fixed to a terrestrial or marine location to facilitate commercial or daily activities, or the supply of essential services. Examples include processing plants / factories, ports, oil rigs etc. This includes information regarding the facilitation of transporting  people or commodities.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656960337">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg4demx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656960337">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg4demx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg55ibx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656985032">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg55ibx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg55ibx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656960337">
+	<ns2:prefLabel xml:lang="en">Geology/Stratigraphy</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Datasets relating to the order and relative position of strata and their relationship to the geological timescale</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656985032">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657001046">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg5l91x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656985032">
+	<ns2:scopeNote xml:lang="en">Datasets relating to the general physical characteristics of rocks. Includes petrographic observations and measurements such as mineralogy, lithology, alteration, mineralisation, metamorphic grade, weathering and grainsize in specimens and thin sections (micro scale).</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657001046">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg5l91x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg5l91x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518656985032">
+	<ns2:prefLabel xml:lang="en">Geology/Lithology</ns2:prefLabel>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657001046">
+	<ns2:prefLabel xml:lang="en">NaturalHabitat</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">The distribution of plants, animals; natural biotic distribution patterns and habitats for aerial, terrestrial, marine, and other life. BIOME: are distinct ecological communities of plants and animals living together in a particular climate. Scientists classify biomes in various ways, but the major biomes include aquatic, deserts, forests, grasslands, and tundra. </ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657053467">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg78g1x1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657053467">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg78g1x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg78g1x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg8ltmx1">
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657053467">
+	<ns2:prefLabel xml:lang="en">Paleontology</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">The study of life in past geologic time, based on fossil plants and animals. Chronology of the Earth's history.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657100049">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg8ltmx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657100049">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg8ltmx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657110648">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg909mx1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg909mx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657100049">
+	<ns2:prefLabel xml:lang="en">Geomorphology</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Data related to the physical expression of the earths surface either terrestrial or marine. Examples include marine bathymetric information, seafloor expressions (mounts, slopes, shelf, rise) freshwater/estuarine bed profiles and  Digital Elevation Models</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657110648">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg909mx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657136726">
+	<ns6:BoundedBy rdf:nodeID="node1c6bg9pl5x1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg9pl5x1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657110648">
+	<ns2:prefLabel xml:lang="en">Resources/Energy</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">DefinitionData on resource production and/or commodity potential or information. Examples include minerals and petroleum potential, oil and gas fields information, resource and production tonnage and grade information, deposit types and mineralisation styles</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657129837">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg9pl5x1">
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657129837">
+	<ns2:prefLabel xml:lang="en">Resources/Mineral</ns2:prefLabel>
+	<ns6:BoundedBy rdf:nodeID="node1c6bg9ivux1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg9ivux1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bg9pl5x1">
+	<ns6:upperCorner> </ns6:upperCorner>
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657136726">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657129837">
+	<ns2:scopeNote xml:lang="en">Data on resource production and/or commodity potential or information. Examples include minerals and petroleum potential, oil and gas fields information, resource and production tonnage and grade information, deposit types and mineralisation styles</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bgap4px1">
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657136726">
+	<ns2:prefLabel xml:lang="en">Resources/Water</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Data on resource production and/or commodity potential or information. Examples include minerals and petroleum potential, oil and gas fields information, resource and production tonnage and grade information, deposit types and mineralisation styles</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657168860">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bgap4px1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657168860">
+	<ns6:BoundedBy rdf:nodeID="node1c6bgap4px1"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bgap4px1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bgb33rx1">
+	<rdf:type rdf:resource="http://www.opengis.net/gml#Envelope"/>
+	<ns6:lowerCorner> </ns6:lowerCorner>
+	<ns6:upperCorner> </ns6:upperCorner>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657168860">
+	<ns2:prefLabel xml:lang="en">RockProperties</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Physical measurements of rock properties such as density and susceptibility for use in predictive modelling studies such as seismic predictions, geophysical inversions, and groundwater distribution, or engineering work.</ns2:scopeNote>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657179090">
+	<rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+</rdf:Description>
+
+<rdf:Description rdf:nodeID="node1c6bgb33rx1">
+	<ns6:srsName rdf:resource="http://www.opengis.net/gml/srs/epsg.xml#epsg:4326"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="https://internal.ecat.ga.gov.au/thesaurus#1518657179090">
+	<ns6:BoundedBy rdf:nodeID="node1c6bgb33rx1"/>
+	<ns2:prefLabel xml:lang="en">Survey</ns2:prefLabel>
+	<ns2:scopeNote xml:lang="en">Information regarding the location, purpose and methodology related to particular surveys of any kind. This includes, for example navigational data for seismic surveys, landsat path row diagrams. This category can be summarised as metadata regarding any type of survey undertaken or managed within the Organisation. DGPS</ns2:scopeNote>
+</rdf:Description>
+
+</rdf:RDF>
