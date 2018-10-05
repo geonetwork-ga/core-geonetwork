@@ -84,6 +84,7 @@
   <xsl:param name="Keyword" select="false"/>
   <xsl:param name="Keyword-Thesaurus" select="false"/>
   <xsl:param name="MaintenanceFrequency" select="false"/>
+  <xsl:param name="ServiceMaintenanceFrequency" select="false"/>
   <xsl:param name="TopicCategory" select="false"/>
   <xsl:param name="ResponsibleParty" select="false"/>
   <xsl:param name="ResourceContact" select="false"/>
@@ -104,9 +105,26 @@
   <xsl:param name="DataStorageLink" select="false"/>
   <xsl:param name="DataStorageFormat" select="false"/>
   <xsl:param name="Lineage" select="false"/>
+  <xsl:param name="SourceScopeCode" select="false"/>
   <xsl:param name="SourceDescription" select="false"/>
   <xsl:param name="AssociatedResourcesLink" select="false"/>
   <xsl:param name="AdditionalInfo" select="false"/>
+  <xsl:param name="ServiceType" select="false"/>
+  <xsl:param name="ServiceTypeVersion" select="false"/>
+  <xsl:param name="CouplingType" select="false"/>
+  <xsl:param name="OperationName" select="false"/>
+  <xsl:param name="DistributedComputingPlatform" select="false"/>
+  <xsl:param name="OperationDescription" select="false"/>
+  <xsl:param name="ConnectPointLinkage" select="false"/>
+  <xsl:param name="ConnectPointProtocol" select="false"/>
+  <xsl:param name="ParameterName" select="false"/>
+  <xsl:param name="ParameterType" select="false"/>
+  <xsl:param name="ParameterDirection" select="false"/>
+  <xsl:param name="ParameterDescription" select="false"/>
+  <xsl:param name="ParameterOptionality" select="false"/>
+  <xsl:param name="ParameterRepeatability" select="false"/>
+
+  
   
   <!-- A template to add a new line \n with no extra space. -->
   <xsl:template name="newLine">

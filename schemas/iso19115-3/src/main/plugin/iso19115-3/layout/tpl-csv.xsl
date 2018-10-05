@@ -132,7 +132,13 @@
 	 <MaintenanceFrequency>
                 <xsl:value-of select="mdb:identificationInfo/*/mri:resourceMaintenance/*/mmi:MD_MaintenanceFrequencyCode/@codeListValue"/>
 	  </MaintenanceFrequency>
-</xsl:if>
+	  </xsl:if>
+	  
+	  <xsl:if test="xs:boolean($ServiceMaintenanceFrequency)">
+	  <ServiceMaintenanceFrequency>
+                <xsl:value-of select="mdb:identificationInfo/srv:SV_ServiceIdentification/mri:resourceMaintenance/mmi:MD_MaintenanceInformation/mmi:maintenanceAndUpdateFrequency/mmi:MD_MaintenanceFrequencyCode/@codeListValue"/>
+	  </ServiceMaintenanceFrequency>
+	  </xsl:if>
 	  
 	  <xsl:if test="xs:boolean($ResponsibleParty)">
 	  <xsl:for-each select="mdb:identificationInfo/*/mri:citation/cit:CI_Citation/cit:citedResponsibleParty/cit:CI_Responsibility">
@@ -287,6 +293,13 @@
 			select="mdb:resourceLineage/mrl:LI_Lineage/mrl:statement/gco:CharacterString" />
 	</Lineage>
 </xsl:if>
+
+<xsl:if test="xs:boolean($SourceScopeCode)">
+	<SourceScopeCode>
+		<xsl:value-of
+			select="mdb:resourceLineage/mrl:LI_Lineage/mrl:scope/mcc:MD_Scope/mcc:level/mcc:MD_ScopeCode/@codeListValue"/>
+	</SourceScopeCode>
+</xsl:if>
 	
 	<xsl:if test="xs:boolean($SourceDescription)">
 	<SourceDescription>
@@ -328,7 +341,118 @@
         </AdditionalInformationLink>
       </xsl:for-each>
 	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ServiceType)">
+	<ServiceType>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceType/gco:ScopedName"/>
+	</ServiceType>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ServiceTypeVersion)">
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceTypeVersion">
+	<ServiceTypeVersion>
+		<xsl:value-of
+			select="*/text()"/>
+	</ServiceTypeVersion>
+	</xsl:for-each>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($CouplingType)">
+	<CouplingType>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:couplingType/srv:SV_CouplingType/@codeListValue"/>
+	</CouplingType>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($OperationName)">
+	<OperationName>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:operationName/gco:CharacterString"/>
+	</OperationName>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($DistributedComputingPlatform)">
+	<DistributedComputingPlatform>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:distributedComputingPlatform/srv:DCPList/@codeListValue"/>
+	</DistributedComputingPlatform>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($OperationDescription)">
+	<OperationDescription>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:operationDescription/gco:CharacterString"/>
+	</OperationDescription>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ConnectPointLinkage)">
+	<ConnectPointLinkage>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:connectPoint/cit:CI_OnlineResource/cit:linkage/gco:CharacterString"/>
+	</ConnectPointLinkage>
+	</xsl:if>
+	
+	 <xsl:if test="xs:boolean($ConnectPointProtocol)"> 
+	 <ConnectPointProtocol>
+		<xsl:value-of
+			select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:connectPoint/cit:CI_OnlineResource/cit:protocol/gco:CharacterString"/>
+	</ConnectPointProtocol>
+	</xsl:if>
 
+	<xsl:if test="xs:boolean($ParameterName)">	
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:parameter/srv:SV_Parameter/srv:name/gco:MemberName/gco:aName">
+	<ParameterName>
+		<xsl:value-of
+			select="*/text()"/>
+	</ParameterName>
+	</xsl:for-each>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ParameterType)">
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:parameter/srv:SV_Parameter/srv:name/gco:MemberName/gco:attributeType/gco:TypeName/gco:aName">
+	<ParameterType>
+		<xsl:value-of
+			select="*/text()"/>
+	</ParameterType>
+	</xsl:for-each>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ParameterDirection)">
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:parameter/srv:SV_Parameter/srv:direction">
+	<ParameterDirection>
+		<xsl:value-of
+			select="*/text()"/>
+	</ParameterDirection>
+	</xsl:for-each>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ParameterDescription)">
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:parameter/srv:SV_Parameter/srv:description">
+	<ParameterDescription>
+		<xsl:value-of
+			select="*/text()"/>
+	</ParameterDescription>
+	</xsl:for-each>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ParameterOptionality)">
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:parameter/srv:SV_Parameter/srv:optionality">
+	<ParameterOptionality>
+		<xsl:value-of
+			select="*/text()"/>
+	</ParameterOptionality>
+	</xsl:for-each>
+	</xsl:if>
+	
+	<xsl:if test="xs:boolean($ParameterRepeatability)">	
+	<xsl:for-each select="mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations/srv:SV_OperationMetadata/srv:parameter/srv:SV_Parameter/srv:repeatability">
+	<ParameterRepeatability>
+		<xsl:value-of
+			select="*/text()"/>
+	</ParameterRepeatability>
+	</xsl:for-each>
+	</xsl:if>
 	
       <xsl:copy-of select="gn:info"/>
     </metadata>
