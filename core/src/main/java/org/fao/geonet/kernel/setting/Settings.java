@@ -28,6 +28,7 @@ package org.fao.geonet.kernel.setting;
  */
 public class Settings {
     public static final String SYSTEM_SITE_ORGANIZATION = "system/site/organization";
+    public static final String SYSTEM_SITE_ORGANIZATION_WEBSITE = "system/site/organizationWebsite";
     public static final String SYSTEM_SITE_SITE_ID_PATH = "system/site/siteId";
     public static final String SYSTEM_SITE_NAME_PATH = "system/site/name";
     public static final String SYSTEM_SITE_LABEL_PREFIX = "system/site/labels/";

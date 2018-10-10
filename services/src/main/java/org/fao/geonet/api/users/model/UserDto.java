@@ -40,6 +40,8 @@ public class UserDto {
     private String surname;
     private List<String> emailAddresses;
     private String organisation;
+    private String position;
+    private String voiceTelephone;
     private List<Address> addresses;
     private String kind;
     private String password;
@@ -118,6 +120,24 @@ public class UserDto {
 
     public UserDto setOrganisation(String organisation) {
         this.organisation = organisation;
+        return this;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public UserDto setPosition(String position) {
+        this.position = position;
+        return this;
+    }
+
+    public String getVoiceTelephone() {
+        return voiceTelephone;
+    }
+
+    public UserDto setVoiceTelephone(String voiceTelephone) {
+        this.voiceTelephone = voiceTelephone;
         return this;
     }
 
@@ -212,6 +232,10 @@ public class UserDto {
             return false;
         if (organisation != null ? !organisation.equals(userDto.organisation) : userDto.organisation != null)
             return false;
+        if (position != null ? !position.equals(userDto.position) : userDto.position != null)
+            return false;
+        if (voiceTelephone != null ? !voiceTelephone.equals(userDto.voiceTelephone) : userDto.voiceTelephone != null)
+            return false;
         if (addresses != null ? !addresses.equals(userDto.addresses) : userDto.addresses != null) return false;
         if (kind != null ? !kind.equals(userDto.kind) : userDto.kind != null) return false;
         if (password != null ? !password.equals(userDto.password) : userDto.password != null) return false;
@@ -236,6 +260,8 @@ public class UserDto {
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (emailAddresses != null ? emailAddresses.hashCode() : 0);
         result = 31 * result + (organisation != null ? organisation.hashCode() : 0);
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (voiceTelephone != null ? voiceTelephone.hashCode() : 0);
         result = 31 * result + (addresses != null ? addresses.hashCode() : 0);
         result = 31 * result + (kind != null ? kind.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);

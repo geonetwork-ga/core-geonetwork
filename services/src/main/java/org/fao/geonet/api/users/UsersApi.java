@@ -668,6 +668,8 @@ public class UsersApi {
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
         user.setOrganisation(userDto.getOrganisation());
+        user.setPosition(userDto.getPosition());
+        user.setVoiceTelephone(userDto.getVoiceTelephone());
         user.setName(userDto.getName());
         user.setKind(userDto.getKind());
 
@@ -680,17 +682,30 @@ public class UsersApi {
 //                user.getAddresses().add(address);
 //            }
 
-            Set<Address> userAddresses = user.getAddresses();
-            if (userAddresses.size() == 1) {
-                Address userAddress = (Address) userAddresses.toArray()[0];
-                for (Address address : userDto.getAddresses()) {
-                    userAddress.setAddress(address.getAddress());
-                    userAddress.setCity(address.getCity());
-                    userAddress.setCountry(address.getCountry());
-                    userAddress.setState(address.getState());
-                    userAddress.setZip(address.getZip());
-                }
-            }
+//            Set<Address> userAddresses = user.getAddresses();
+//            if (userAddresses.size() == 1) {
+//                Address userAddress = (Address) userAddresses.toArray()[0];
+//                for (Address address : userDto.getAddresses()) {
+//                    userAddress.setAddress(address.getAddress());
+//                    userAddress.setCity(address.getCity());
+//                    userAddress.setCountry(address.getCountry());
+//                    userAddress.setState(address.getState());
+//                    userAddress.setZip(address.getZip());
+//                }
+//            }
+//        }
+        
+            // Clear out any existing addresses and add new one(s)
+        	user.getAddresses().clear();
+            for (Address address : userDto.getAddresses()) {
+            	Address userAddress = new Address();
+                userAddress.setAddress(address.getAddress());
+                userAddress.setCity(address.getCity());
+                userAddress.setCountry(address.getCountry());
+                userAddress.setState(address.getState());
+                userAddress.setZip(address.getZip());
+                user.getAddresses().add(userAddress);
+            }        	
         }
 
         if (!userDto.getEmailAddresses().isEmpty()) {

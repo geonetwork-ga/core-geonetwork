@@ -847,6 +847,7 @@
     "system/site/name": "Catalog name",
     "system/site/name-help": "The name displayed in different places (eg. news feed).",
     "system/site/organization": "Organization",
+    "system/site/organizationWebsite": "Organization website",
     "system/site/siteId": "Catalogue identifier",
     "system/site/siteId-help": "Unique catalogue identifier. After changing the site identifier, user should update the index and the logo from the administration panel.",
     "system/site/svnUuid": "SVN UUID",
