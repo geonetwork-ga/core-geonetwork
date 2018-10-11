@@ -553,6 +553,7 @@ INSERT INTO Operations (id, name) VALUES  (6,'featured');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/name', 'My GeoNetwork catalogue', 0, 110, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/siteId', '', 0, 120, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organization', 'My organization', 0, 130, 'n');
+INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/organizationWebsite', 'http://my.organization.net', 0, 140, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/version', '3.2.1', 0, 150, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/platform/subVersion', '0', 0, 160, 'n');
 INSERT INTO Settings (name, value, datatype, position, internal) VALUES ('system/site/svnUuid', '', 0, 170, 'y');
@@ -691,7 +692,7 @@ INSERT INTO MetadataIdentifierTemplate (id, name, template, isprovided) VALUES  
 
 -- Sequence: public.metadataid
 
--- DROP SEQUENCE public.metadataid;
+DROP SEQUENCE public.metadataid;
 
 CREATE SEQUENCE IF NOT EXISTS public.metadataid
   INCREMENT 1
@@ -700,4 +701,4 @@ CREATE SEQUENCE IF NOT EXISTS public.metadataid
   START 130000
   CACHE 1;
 ALTER TABLE public.metadataid
-  OWNER TO "geonetwork";
+ OWNER TO "geonetwork";

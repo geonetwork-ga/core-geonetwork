@@ -20,7 +20,7 @@
   </ows:ServiceIdentification>
   <ows:ServiceProvider>
     <ows:ProviderName>$PROVIDER_NAME</ows:ProviderName>
-    <ows:ProviderSite xlink:href="$PROTOCOL://$HOST$PORT$SERVLET"/>
+    <ows:ProviderSite xlink:href="$PROVIDER_SITE"/>
     <ows:ServiceContact>
       <ows:IndividualName>$IND_NAME</ows:IndividualName>
       <ows:PositionName>$POS_NAME</ows:PositionName>
@@ -208,10 +208,10 @@
         <ogc:ComparisonOperator>GreaterThan</ogc:ComparisonOperator>
         <!-- LessThanOrEqualTo is in OGC Filter Spec, LessThanEqualTo is in OGC CSW schema -->
         <ogc:ComparisonOperator>LessThanEqualTo</ogc:ComparisonOperator>
-        <ogc:ComparisonOperator>LessThanOrEqualTo</ogc:ComparisonOperator>
+        <!-- <ogc:ComparisonOperator>LessThanOrEqualTo</ogc:ComparisonOperator> -->
         <!-- GreaterThanOrEqualTo is in OGC Filter Spec, GreaterThanEqualTo is in OGC CSW schema -->
         <ogc:ComparisonOperator>GreaterThanEqualTo</ogc:ComparisonOperator>
-        <ogc:ComparisonOperator>GreaterThanOrEqualTo</ogc:ComparisonOperator>
+        <!-- <ogc:ComparisonOperator>GreaterThanOrEqualTo</ogc:ComparisonOperator> -->
         <ogc:ComparisonOperator>NotEqualTo</ogc:ComparisonOperator>
         <ogc:ComparisonOperator>Between</ogc:ComparisonOperator>
         <ogc:ComparisonOperator>NullCheck</ogc:ComparisonOperator>
