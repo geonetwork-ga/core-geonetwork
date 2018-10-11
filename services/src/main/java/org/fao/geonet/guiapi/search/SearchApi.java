@@ -125,8 +125,6 @@ public class SearchApi {
     }
 
 
-
-
     private Element query(Map<String, String> queryFields, HttpServletRequest request){
         ApplicationContext applicationContext = ApplicationContextHolder.get();
         SearchManager searchMan = applicationContext.getBean(SearchManager.class);

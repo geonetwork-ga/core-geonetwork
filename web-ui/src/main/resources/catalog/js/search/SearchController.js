@@ -160,6 +160,23 @@
         })()
       };
 
+      $scope.obj = {
+   		   xpath: ''
+   	   };
+   	  $scope.triggerXPathSearch = function(){
+   		  angular.extend($scope.obj, $scope.searchObj.params);
+   		  $http.post('../api/records/search/xpath',  $scope.obj).success(function(data){
+   			  var eCatIds = {
+   				  eCatId : ''
+   			  }
+   			  
+   			  eCatIds.eCatId = (data.length == 0) ? 'xxxx' : data.join(',');
+   			  
+   			  angular.extend($scope.searchObj.params, eCatIds);
+   			  $scope.$broadcast('search');
+   		  })
+   	  };
+   	  
       /**
        * Keep a reference on main cat scope
        * @return {*}

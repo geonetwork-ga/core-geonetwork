@@ -50,6 +50,18 @@
           </div>
         </div>
       </form>
+      <div class="row">
+		<div class="col-md-6">
+			<div class="input-group gn-form-any">
+			<span class="input-group-addon"><label>Search by XPath...</label></span>
+			  <input type="text"  class="form-control"  data-ng-model="obj.xpath"  placeholder="Search by XPath..." />
+				<div class="input-group-btn">
+				  <button type="button"  data-ng-click="triggerXPathSearch()"  class="btn btn-primary">
+					&nbsp;&nbsp;<i class="fa fa-search"></i>&nbsp;&nbsp;</button>
+				</div>
+			  </div>
+			</div>
+		</div>
       <br/>
       <div class="row"
            data-ng-show="searchResults.records.length > 0">
