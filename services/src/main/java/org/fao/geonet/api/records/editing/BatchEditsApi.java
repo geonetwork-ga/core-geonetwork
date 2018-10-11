@@ -149,7 +149,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 	AmazonS3URI s3uri = new AmazonS3URI(Geonet.BATCHEDIT_BACKUP_BUCKET);
 	List<Metadata> tempBackupData = new ArrayList<>();
 	Gson g = new Gson();
-	Map<String, XPath> xpathExpr = new HashMap<>();
+	
 	double pct;
 	SimpleMetadataProcessingReport report = new SimpleMetadataProcessingReport();
 	
@@ -416,11 +416,8 @@ public class BatchEditsApi implements ApplicationContextAware {
 		Date datetime = new Date(System.currentTimeMillis());
 		final String dateTimeStr = Geonet.DATE_FORMAT.format(datetime);
 		
-		try {
-			xpathExpr = new BatchEditXpath().loadXpath();
-		} catch (JDOMException e) {
-			Log.error(Geonet.SEARCH_ENGINE, "Unable to loadXpath, " + e.getMessage());
-		}
+		
+		
 		SAXBuilder sb = new SAXBuilder();
 		// final CSVBatchEdit cbe = context.getBean(CSVBatchEdit.class);
 		CSVBatchEdit cbe = new CSVBatchEdit(context);
@@ -429,7 +426,11 @@ public class BatchEditsApi implements ApplicationContextAware {
 		final DataManager dataMan = context.getBean(DataManager.class);
 		EditLib editLib = new EditLib(schemaManager);
 		final SettingRepository settingRepo = context.getBean(SettingRepository.class);
+
 		
+		
+		final BatchEditXpath bxpath = context.getBean(BatchEditXpath.class);
+		Map<String, XPath> xpathExpr = bxpath.getXPathExpr();
 		
 		final String s3key = dateTimeStr;
 		Log.debug(Geonet.SEARCH_ENGINE, "CSVRecord, BatchEditsApi --> s3key : " + s3key);

@@ -1,0 +1,12 @@
+<srv:connectPoint xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
+	xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0"
+	xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">
+	<cit:CI_OnlineResource>
+		<cit:linkage>
+			<gco:CharacterString>{0}</gco:CharacterString>
+		</cit:linkage>
+		<cit:protocol>
+			<gco:CharacterString>{1}</gco:CharacterString>
+		</cit:protocol>
+	</cit:CI_OnlineResource>
+</srv:connectPoint>

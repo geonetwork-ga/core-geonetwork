@@ -1,65 +1,70 @@
 package org.fao.geonet.kernel.batchedit;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
-import org.fao.geonet.constants.Geonet;
+import javax.servlet.ServletContext;
+
 import org.jdom.JDOMException;
 import org.jdom.xpath.XPath;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-public class BatchEditXpath {
+import jeeves.server.sources.http.ServletPathFinder;
+
+@Configuration
+public class BatchEditXpath implements ApplicationContextAware{
 
 	Map<String, XPath> xpathExpr = new HashMap<>();
+	Properties prop = new Properties();
 	
-	public Map<String, XPath> loadXpath() throws JDOMException {
+	private ApplicationContext context;
+	
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.context = applicationContext;
 		
-		xpathExpr.put(Geonet.EditType.TITLE, getXPath("//mdb:identificationInfo/*/mri:citation/*/cit:title/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.ABSTRACT, getXPath("//mdb:identificationInfo/*/mri:abstract/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.PURPOSE, getXPath("//mdb:identificationInfo/*/mri:purpose/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.USE_LIMITATION, getXPath("//mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints/mco:useLimitation/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.LINEAGE, getXPath("//mdb:resourceLineage/mrl:LI_Lineage/mrl:statement/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.SOURCE_DESC, getXPath("//mdb:resourceLineage/mrl:LI_Lineage/mrl:source/mrl:LI_Source/mrl:description/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.SPACIAL_REF_SYSYTEM, getXPath("//mdb:identificationInfo/*/gex:EX_Extent/gex:verticalElement/*/gex:verticalCRSId/mrs:MD_ReferenceSystem/mrs:referenceSystemIdentifier/mcc:MD_Identifier/mcc:code/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.SPACIAL_EXTENT_DESC, getXPath("//mdb:identificationInfo/*/mri:extent/*/gex:description/gco:CharacterString"));
-		xpathExpr.put(Geonet.EditType.HORIZONTAL_SPACIAL_REFSYSTEM, getXPath("//mdb:referenceSystemInfo/*/mrs:referenceSystemIdentifier/mcc:MD_Identifier/mcc:code/gco:CharacterString"));
-		
-		xpathExpr.put(Geonet.EditType.MAINTENANCE_FREQ, getXPath("//mdb:identificationInfo/*/mri:resourceMaintenance/mmi:MD_MaintenanceInformation/mmi:maintenanceAndUpdateFrequency/mmi:MD_MaintenanceFrequencyCode/@codeListValue"));
-		xpathExpr.put(Geonet.EditType.STATUS, getXPath("//mdb:identificationInfo/*/mri:status/mcc:MD_ProgressCode/@codeListValue"));
-		xpathExpr.put(Geonet.EditType.MD_SECURITY_CONSTRAINT, getXPath("//mdb:metadataConstraints/mco:MD_SecurityConstraints/mco:classification/mco:MD_ClassificationCode/@codeListValue"));
-		xpathExpr.put(Geonet.EditType.RES_SECURITY_CONSTRAINT, getXPath("//mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_SecurityConstraints/mco:classification/mco:MD_ClassificationCode/@codeListValue"));
-		xpathExpr.put(Geonet.EditType.RES_LEGAL_CONSTRAINT, getXPath("//mdb:identificationInfo/*/mri:resourceConstraints/mco:MD_LegalConstraints"));
-		
-		xpathExpr.put(Geonet.EditType.GEOBOX, getXPath("//mdb:identificationInfo/*/mri:extent[*/gex:geographicElement/gex:EX_GeographicBoundingBox]"));
-		xpathExpr.put(Geonet.EditType.VERTICAL, getXPath("//mdb:identificationInfo/*/mri:extent[*/gex:verticalElement/gex:EX_VerticalExtent]"));
-		xpathExpr.put(Geonet.EditType.VERTICAL_CRS, getXPath("//mdb:identificationInfo/*/mri:extent/*/gex:verticalElement/gex:EX_VerticalExtent/gex:verticalCRSId"));
-		xpathExpr.put(Geonet.EditType.TEMPORAL, getXPath("//mdb:identificationInfo/*/mri:extent[*/gex:temporalElement/gex:EX_TemporalExtent]"));
-		
-		xpathExpr.put(Geonet.EditType.KEYWORD, getXPath("//mdb:identificationInfo/*/mri:descriptiveKeywords[not(mri:MD_Keywords/mri:thesaurusName)]"));
-		xpathExpr.put(Geonet.EditType.KEYWORD_THESAURUS, getXPath("//mdb:identificationInfo/*/mri:descriptiveKeywords[mri:MD_Keywords/mri:thesaurusName]"));
-		
-		xpathExpr.put(Geonet.EditType.MD_CONTACT, getXPath("//mdb:contact"));
-		xpathExpr.put(Geonet.EditType.RES_CONTACT, getXPath("//mdb:identificationInfo/*/mri:pointOfContact"));
-		xpathExpr.put(Geonet.EditType.RESPONSIBLE_PARTY, getXPath("//mdb:identificationInfo/*/mri:citation/cit:CI_Citation/cit:citedResponsibleParty"));
-		
-		xpathExpr.put(Geonet.EditType.CITATION_DATE, getXPath("//mdb:identificationInfo/*/mri:citation/cit:CI_Citation/cit:date"));
-		
-		xpathExpr.put(Geonet.EditType.TOPIC_CAT, getXPath("//mdb:identificationInfo/*/mri:topicCategory/mri:MD_TopicCategoryCode"));
-		xpathExpr.put(Geonet.EditType.MD_SCOPE, getXPath("//mdb:metadataScope"));
-		xpathExpr.put(Geonet.EditType.MD_PARENT, getXPath("//mdb:parentMetadata"));
-
-		xpathExpr.put(Geonet.EditType.DATA_STORAGE_LINK, getXPath("//mdb:identificationInfo/*/mri:citation/cit:CI_Citation/cit:onlineResource"));
-		xpathExpr.put(Geonet.EditType.ASSOCIATED_RES, getXPath("//mdb:identificationInfo/*/mri:associatedResource/mri:MD_AssociatedResource/mri:metadataReference/cit:CI_Citation/cit:onlineResource"));
-		xpathExpr.put(Geonet.EditType.ADDITIONAL_INFO, getXPath("//mdb:identificationInfo/*/mri:additionalDocumentation"));
-		xpathExpr.put(Geonet.EditType.DISTRIBUTION_LINK, getXPath("//mdb:distributionInfo/*/mrd:transferOptions/mrd:MD_DigitalTransferOptions/mrd:onLine"));
-		
-		xpathExpr.put(Geonet.EditType.RESOURCE_FORMAT, getXPath("//mdb:identificationInfo/*/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation"));
-		xpathExpr.put(Geonet.EditType.DISTRIBUTION_FORMAT, getXPath("//mdb:distributionInfo/*/mrd:distributionFormat/mrd:MD_Format/mrd:formatSpecificationCitation"));
-		
+	}
+	
+	public Map<String, XPath> getXPathExpr(){
 		return xpathExpr;
 	}
 	
+	@Bean
+	public Map<String, XPath> loadCustomXpath() throws JDOMException, IOException {
+		
+		ServletPathFinder finder = new ServletPathFinder(this.context.getBean(ServletContext.class));
+        Path appPath = finder.getAppPath();
+        
+		Path customXPath = appPath.resolve("WEB-INF/data/config/schema_plugins/iso19115-3/csv").resolve("xpath.properties");
+		
+		InputStream input = new FileInputStream(customXPath.toFile());
+		prop.load(input);
+
+		Enumeration<?> e = prop.propertyNames();
+		while (e.hasMoreElements()) {
+			String key = (String) e.nextElement();
+			String value = prop.getProperty(key);
+			//Log.debug(Geonet.SEARCH_ENGINE, " BatchEditXpath ----> Key : " + key + ", Value : " + value);
+			
+			xpathExpr.put(key, getXPath(value));
+		}
+		
+		return xpathExpr;
+		
+	}
 	public XPath getXPath(String xpath) throws JDOMException {
 		XPath _xpath = XPath.newInstance(xpath);
 		return _xpath;
 	}
+	
 }

@@ -55,7 +55,7 @@ public class OnlineResourceEditElement implements EditElement {
 		for (String content : contents) {
 			String[] values = content.split(type_separator);
 
-			String name = "", desc = "", linkage = "";
+			String name = "", desc = "", linkage = "", protocol = "WWW:LINK-1.0-http--link";
 
 			if (values.length > 0)
 				name = values[0];
@@ -63,14 +63,16 @@ public class OnlineResourceEditElement implements EditElement {
 				desc = values[1];
 			if (values.length > 2)
 				linkage = values[2];
+			if (values.length > 3)
+				protocol = values[3];
 
 			Element rootE = null;
 
 			try {
 				if (Arrays.asList(Geonet.EditType.DATA_STORAGE_LINK, Geonet.EditType.ASSOCIATED_RES, Geonet.EditType.DISTRIBUTION_LINK).contains(headerVal)) {
-					rootE = getOnlineResourceElement(name, desc, linkage);
+					rootE = getOnlineResourceElement(name, desc, linkage, protocol);
 				} else if (Geonet.EditType.ADDITIONAL_INFO.equalsIgnoreCase(headerVal)) {
-					rootE = additionalInformation(name, desc, linkage);
+					rootE = additionalInformation(name, desc, linkage, protocol);
 				}
 			} catch (BatchEditException e) {
 				report.getErrorInfo().add(e.getMessage());
@@ -98,10 +100,10 @@ public class OnlineResourceEditElement implements EditElement {
 	 * @return
 	 * @throws BatchEditException
 	 */
-	private Element getOnlineResourceElement(String _name, String description, String link) throws BatchEditException {
+	private Element getOnlineResourceElement(String _name, String description, String link, String protocol) throws BatchEditException {
 		try{
 			
-			return onlineResElement(_name, description, link);
+			return onlineResElement(_name, description, link, protocol);
 			
 		}catch(BatchEditException e){
 			throw new BatchEditException("Unable to process Online Resource Element having name " + _name + " and link " + link);
@@ -116,14 +118,14 @@ public class OnlineResourceEditElement implements EditElement {
 	 * @return
 	 * @throws BatchEditException
 	 */
-	private Element additionalInformation(String _name, String description, String link) throws BatchEditException {
+	private Element additionalInformation(String _name, String description, String link, String protocol) throws BatchEditException {
 		try{
 			Element citation = new Element("CI_Citation", Geonet.Namespaces.CIT);
 			Element onlineres = new Element("onlineResource", Geonet.Namespaces.CIT);
 			Element title = new Element("title", Geonet.Namespaces.CIT);
 	
 			citation.addContent(title.addContent(new Element("CharacterString", Geonet.Namespaces.GCO_3).setText(_name)));
-			citation.addContent(onlineres.addContent(onlineResElement(_name, description, link)));
+			citation.addContent(onlineres.addContent(onlineResElement(_name, description, link, protocol)));
 		
 			return citation;
 			
@@ -140,7 +142,7 @@ public class OnlineResourceEditElement implements EditElement {
 	 * @return
 	 * @throws BatchEditException
 	 */
-	private Element onlineResElement(String _name, String description, String link) throws BatchEditException {
+	private Element onlineResElement(String _name, String description, String link, String _protocol) throws BatchEditException {
 
 		try {
 			Element onlineRes = new Element("CI_OnlineResource", Geonet.Namespaces.CIT);
@@ -150,7 +152,7 @@ public class OnlineResourceEditElement implements EditElement {
 
 			Element protocol = new Element("protocol", Geonet.Namespaces.CIT);
 			protocol.addContent(
-					new Element("CharacterString", Geonet.Namespaces.GCO_3).setText("WWW:LINK-1.0-http--link"));
+					new Element("CharacterString", Geonet.Namespaces.GCO_3).setText(_protocol));
 
 			Element name = new Element("name", Geonet.Namespaces.CIT);
 			name.addContent(new Element("CharacterString", Geonet.Namespaces.GCO_3).setText(_name));

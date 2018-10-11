@@ -198,7 +198,15 @@
 			  'Lineage',
 			  'SourceDescription',
 			  'AssociatedResourcesLink',
-			  'AdditionalInfo'
+			  'AdditionalInfo',
+			  'ServiceParameter',
+			  'ConnectPoint',
+			  'ServiceType',
+			  'ServiceTypeVersion',
+			  'CouplingType',
+			  'OperationName',
+			  'DistributedComputingPlatform',
+			  'OperationDescription'
 		  ];
 		 
 		  scope.csv = {

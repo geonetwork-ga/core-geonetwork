@@ -20,6 +20,7 @@
 package org.fao.geonet.kernel.batchedit;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ import org.apache.lucene.search.TopDocs;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.Metadata;
 import org.fao.geonet.exceptions.BatchEditException;
+import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.search.IndexAndTaxonomy;
 import org.fao.geonet.kernel.search.LuceneConfig;
 import org.fao.geonet.kernel.search.LuceneQueryBuilder;
@@ -107,10 +109,16 @@ public class CSVBatchEdit implements ApplicationEventPublisherAware {
 			XPath _xpath, Document metadata, List<BatchEditParam> listOfUpdates, String mode) {
 
 		BatchEditReport report = new BatchEditReport();
-		
+		final SchemaManager schemaManager = context.getBean(SchemaManager.class);
 		String headerVal = header.getKey();
 		EditElement editElement = EditElementFactory.getElementType(headerVal);
-		
+		if(editElement == null){
+			Path p = schemaManager.getSchemaDir("iso19115-3").resolve("csv").resolve(headerVal + ".xml");
+			if(p != null && p.toFile().exists()){
+				Log.debug(Geonet.SEARCH_ENGINE, "p.toFile().getAbsolutePath() ---> "+p.toFile().getAbsolutePath());
+				editElement = new CustomElement();
+			}
+		}
 			
 		if(StringUtils.isNotEmpty(csvr.get(headerVal).trim())){
 			if(editElement != null){
