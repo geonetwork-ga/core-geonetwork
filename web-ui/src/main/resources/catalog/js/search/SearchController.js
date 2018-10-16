@@ -41,10 +41,11 @@
     '$scope',
     '$q',
     '$http',
+    '$timeout',
     'suggestService',
     'gnAlertService',
     'gnSearchSettings',
-    function($scope, $q, $http, suggestService,
+    function($scope, $q, $http, $timeout, suggestService,
              gnAlertService, gnSearchSettings) {
 
       /** Object to be shared through directives and controllers */
@@ -165,17 +166,33 @@
    	   };
    	  $scope.triggerXPathSearch = function(){
    		  angular.extend($scope.obj, $scope.searchObj.params);
-   		  $http.post('../api/records/search/xpath',  $scope.obj).success(function(data){
-   			  var eCatIds = {
-   				  eCatId : ''
-   			  }
-   			  
-   			  eCatIds.eCatId = (data.length == 0) ? 'xxxx' : data.join(',');
-   			  
-   			  angular.extend($scope.searchObj.params, eCatIds);
-   			  $scope.$broadcast('search');
+   		  $http.post('../api/records/search/xpath',  $scope.obj).then(function(){
+   			  checkIsSearching();
    		  })
    	  };
+   	  
+   	   function checkIsSearching(){
+   			  
+   			// Check if completed
+   			return $http.get('../api/records/search/status').
+   				success(function(data) {
+   				  if (data) {
+   					$timeout(checkIsSearching, 1000);
+   				  }else{
+   					  $http.get('../api/records/search/xpath',{}).success(function(data){
+   						  var eCatIds = {
+   							  eCatId : ''
+   						  }
+   						  
+   						  eCatIds.eCatId = (data.length == 0) ? 'xxxx' : data.slice(0, 1000).join(',');
+   						  
+   						  angular.extend($scope.searchObj.params, eCatIds);
+   						  $scope.$broadcast('search');
+   						  
+   					  })
+   				  }
+   				});
+   		  };
    	  
       /**
        * Keep a reference on main cat scope
