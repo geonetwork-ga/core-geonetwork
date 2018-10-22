@@ -164,6 +164,9 @@
       $scope.obj = {
    		   xpath: ''
    	   };
+      $scope.stat = {
+   		   searching: false
+   	   };
    	  $scope.triggerXPathSearch = function(){
    		  angular.extend($scope.obj, $scope.searchObj.params);
    		  $http.post('../api/records/search/xpath',  $scope.obj).then(function(){
@@ -172,7 +175,7 @@
    	  };
    	  
    	   function checkIsSearching(){
-   			  
+   		    $scope.stat.searching = true;  
    			// Check if completed
    			return $http.get('../api/records/search/status').
    				success(function(data) {
@@ -180,6 +183,7 @@
    					$timeout(checkIsSearching, 1000);
    				  }else{
    					  $http.get('../api/records/search/xpath',{}).success(function(data){
+   						  $scope.stat.searching = false;
    						  var eCatIds = {
    							  eCatId : ''
    						  }
