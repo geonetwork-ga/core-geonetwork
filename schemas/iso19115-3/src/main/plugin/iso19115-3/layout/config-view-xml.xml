@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="xml" displayIfServiceInfo="count(session[profile='Administrator'])=1">
+    <tab id="xml" default="true"/>
+</view>

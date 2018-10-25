@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="default" displayIfRecord="'true'"
+	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
+	xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+	xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
+	xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
+	xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/1.0"
+	xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/1.0"
+	xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+	xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/1.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">
+	<tab id="resourceDescription" default="true" mode="flat">
+		<section name=" ">
+			<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation/cit:title" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:abstract" />
+			<field name="serviceType" templateModeOnly="true"
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceType"
+				or="serviceType"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification"
+				del=".">
+				<template>
+					<values>
+						<key label="serviceType" xpath="gco:ScopedName" tooltip="srv:serviceType">
+							<helper name="srv:serviceType" context="srv:SV_ServiceIdentification"></helper>
+						</key>
+					</values>
+					<snippet>
+						<srv:serviceType>
+							<gco:ScopedName>{{serviceType}}</gco:ScopedName>
+						</srv:serviceType>
+					</snippet>
+				</template>
+			</field>
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceTypeVersion"
+				or="serviceTypeVersion"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification" />
+			<field xpath="/mdb:MD_Metadata/mdb:metadataScope" in="/mdb:MD_Metadata" />
+		</section>
+	</tab>
+
+	<tab id="resourceCitation" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation/cit:date"
+				or="date"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation" />
+		</section>
+	</tab>
+
+	<tab id="resourceKeywords" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:descriptiveKeywords"
+				or="descriptiveKeywords"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:topicCategory"
+				or="topicCategory"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification" />
+		</section>
+	</tab>
+
+	<tab id="resourceMaintenance" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:resourceMaintenance" />
+		</section>
+	</tab>
+
+	<tab id="contacts" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:pointOfContact"
+				or="pointOfContact"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification" />
+			<field xpath="/mdb:MD_Metadata/mdb:contact" or="contact"
+				in="/mdb:MD_Metadata" />
+		</section>
+	</tab>
+
+	<tab id="resourceLineageTab" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement"
+				or="statement" in="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage" />
+		</section>
+	</tab>
+
+	<tab id="resourceExtents" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:extent" />
+			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
+				in="/mdb:MD_Metadata" />
+		</section>
+	</tab>
+
+	<tab id="containsOperations" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:containsOperations"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification" />
+			<action type="add" name="operation" or="containsOperations"
+				if="true()"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification">
+				<template>
+					<snippet>
+						<srv:containsOperations>
+							<srv:SV_OperationMetadata>
+								<srv:operationName>
+									<gco:CharacterString />
+								</srv:operationName>
+								<srv:distributedComputingPlatform>
+									<srv:DCPList codeList="codeListLocation#DCPList"
+										codeListValue="WebServices" />
+								</srv:distributedComputingPlatform>
+								<srv:operationDescription>
+									<gco:CharacterString />
+								</srv:operationDescription>
+								<srv:connectPoint>
+									<cit:CI_OnlineResource>
+										<cit:linkage>
+											<gco:CharacterString />
+										</cit:linkage>
+										<cit:protocol>
+											<gco:CharacterString />
+										</cit:protocol>
+									</cit:CI_OnlineResource>
+								</srv:connectPoint>
+								<srv:parameter>
+									<srv:SV_Parameter>
+										<srv:name>
+											<gco:MemberName>
+												<gco:aName>
+													<gco:CharacterString></gco:CharacterString>
+												</gco:aName>
+												<gco:attributeType>
+													<gco:TypeName>
+														<gco:aName>
+															<gco:CharacterString>TEXT</gco:CharacterString>
+														</gco:aName>
+													</gco:TypeName>
+												</gco:attributeType>
+											</gco:MemberName>
+										</srv:name>
+										<srv:direction>
+											<srv:SV_ParameterDirection></srv:SV_ParameterDirection>
+										</srv:direction>
+										<srv:description>
+											<gco:CharacterString>Describe the parameter eg. Name for
+												service</gco:CharacterString>
+										</srv:description>
+										<srv:optionality>
+											<gco:Boolean>false</gco:Boolean>
+										</srv:optionality>
+										<srv:repeatability>
+											<gco:Boolean>false</gco:Boolean>
+										</srv:repeatability>
+									</srv:SV_Parameter>
+								</srv:parameter>
+							</srv:SV_OperationMetadata>
+						</srv:containsOperations>
+					</snippet>
+				</template>
+			</action>
+		</section>
+	</tab>
+
+	<tab id="operatesOn" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:couplingType" />
+			<text ref="useAssociatedResourcesForOperatesOn" />
+		</section>
+	</tab>
+
+	<tab id="distribution" mode="flat">
+		<section name=" ">
+			<field xpath="/mdb:MD_Metadata/mdb:distributionInfo" />
+			<!-- <text ref="useAssociatedResources" if="count(mdb:MD_Metadata/mdb:distributionInfo/*) 
+				= 0"/> -->
+			<text ref="useAssociatedResources" />
+		</section>
+	</tab>
+
+
+	<!-- Elements that should not use the "flat" mode -->
+	<flatModeExceptions>
+		<for name="cit:date" />
+		<for name="mri:descriptiveKeywords" />
+		<for name="cit:party" />
+		<for name="cit:CI_Individual" />
+		<for name="cit:CI_Organisation" />
+		<for name="mrl:LI_Lineage" />
+		<for name="srv:containsOperations" />
+		<for name="srv:parameter" />
+		<for name="srv:description" />
+	</flatModeExceptions>
+</view>

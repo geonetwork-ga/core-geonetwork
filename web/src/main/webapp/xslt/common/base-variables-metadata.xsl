@@ -96,8 +96,18 @@
 
   <xsl:variable name="withXPath" select="false()"/>
 
+  <xsl:variable name="scope">
+	<saxon:call-template name="{concat('get-', $schema, '-scope')}">
+		<xsl:with-param name="metadata" select="$metadata"/>
+	</saxon:call-template>
+  </xsl:variable>
+	
+  <xsl:variable name="editorConfig_temp">
+		<saxon:call-template name="{concat('get-', $schema, '-configuration')}"/>
+	</xsl:variable>
+  
   <xsl:variable name="editorConfig">
-    <saxon:call-template name="{concat('get-', $schema, '-configuration')}"/>
+    <xsl:apply-templates select="$editorConfig_temp" mode="load-config"/>
   </xsl:variable>
 
   <xsl:variable name="iso19139EditorConfig">
@@ -105,6 +115,23 @@
     <xsl:call-template name="get-iso19139-configuration"/>
   </xsl:variable>
 
+  <xsl:template match="editor" mode="load-config">
+    <xsl:copy>
+		<xsl:copy-of select="@*|node()" />
+       <views>
+          <saxon:call-template name="{concat('get-', $schema, '-view')}">
+            <xsl:with-param name="filename" select="concat('config-view-', $scope, '.xml')"></xsl:with-param>
+          </saxon:call-template>
+          <saxon:call-template name="{concat('get-', $schema, '-view')}">
+            <xsl:with-param name="filename" select="'config-view-advanced.xml'"></xsl:with-param>
+          </saxon:call-template>
+          <saxon:call-template name="{concat('get-', $schema, '-view')}">
+            <xsl:with-param name="filename" select="'config-view-xml.xml'"></xsl:with-param>
+          </saxon:call-template>
+      </views>
+    </xsl:copy>
+  </xsl:template>
+  
 
   <xsl:variable name="tab"
                 select="if (/root/request/currTab)

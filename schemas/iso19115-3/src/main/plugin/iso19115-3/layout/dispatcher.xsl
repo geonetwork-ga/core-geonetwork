@@ -33,6 +33,16 @@
     <xsl:copy-of select="document('config-editor.xml')"/>
   </xsl:template>
 
+  <xsl:template name="get-iso19115-3-scope">
+	<xsl:param name="metadata" select="." />
+    <xsl:value-of select="$metadata/mdb:metadataScope/mdb:MD_MetadataScope/@id"/>
+  </xsl:template>
+  
+  <xsl:template name="get-iso19115-3-view">
+	<xsl:param name="filename" as="xs:string" />
+	<xsl:copy-of select="document($filename)"/>
+  </xsl:template>
+  
 
   <!-- Dispatch to the current profile mode -->
   <xsl:template name="dispatch-iso19115-3">

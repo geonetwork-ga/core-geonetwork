@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view name="SourceDataset" displayIfRecord="'true'"
+	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
+	xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+	xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
+	xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
+	xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/1.0"
+	xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/1.0"
+	xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+	xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/1.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">
+	<tab id="resourceDescription" default="true" mode="flat">
+		<section name=" ">
+			<!-- special template to render this field readonly - see layout-custom-fields.xsl -->
+			<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:title" />
+		</section>
+	</tab>
+
+	<tab id="resourceKeywords" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:descriptiveKeywords"
+				or="descriptiveKeywords"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification" />
+		</section>
+	</tab>
+
+	<tab id="resourceMandatory" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:abstract" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:date"
+				or="date"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:pointOfContact"
+				or="pointOfContact"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification" />
+			<field xpath="/mdb:MD_Metadata/mdb:contact" or="contact"
+				in="/mdb:MD_Metadata" />
+		</section>
+	</tab>
+
+	<tab id="resourceOptional" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement" />
+			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
+				in="/mdb:MD_Metadata" />
+		</section>
+	</tab>
+
+	<tab id="NLI" mode="flat">
+		<section name=" ">
+
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:purpose" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:citedResponsibleParty"
+				or="citedResponsibleParty"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:verticalElement/gex:EX_VerticalExtent" />
+			<action type="add" name="verticalElement" or="verticalElement"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
+				<template>
+					<snippet>
+						<gex:verticalElement>
+							<gex:EX_VerticalExtent>
+								<gex:minimumValue>
+									<gco:Real></gco:Real>
+								</gex:minimumValue>
+								<gex:maximumValue>
+									<gco:Real></gco:Real>
+								</gex:maximumValue>
+								<gex:verticalCRSId>
+									<mrs:MD_ReferenceSystem>
+										<mrs:referenceSystemIdentifier>
+											<mcc:MD_Identifier>
+												<mcc:code>
+													<gco:CharacterString></gco:CharacterString>
+												</mcc:code>
+												<mcc:codeSpace>
+													<gco:CharacterString>EPSG</gco:CharacterString>
+												</mcc:codeSpace>
+												<mcc:version>
+													<gco:CharacterString></gco:CharacterString>
+												</mcc:version>
+											</mcc:MD_Identifier>
+										</mrs:referenceSystemIdentifier>
+									</mrs:MD_ReferenceSystem>
+								</gex:verticalCRSId>
+							</gex:EX_VerticalExtent>
+						</gex:verticalElement>
+					</snippet>
+				</template>
+			</action>
+		</section>
+	</tab>
+	<!-- Elements that should not use the "flat" mode -->
+	<flatModeExceptions>
+		<for name="cit:date" />
+		<for name="mri:descriptiveKeywords" />
+		<for name="cit:party" />
+		<for name="cit:CI_Individual" />
+		<for name="cit:CI_Organisation" />
+		<for name="mrl:LI_Lineage" />
+	</flatModeExceptions>
+</view>
