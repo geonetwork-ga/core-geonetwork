@@ -74,7 +74,7 @@ public class DbLib {
 			Log.debug(Geonet.DB, "Filling database tables");
 
 		final List<String> data = loadSqlDataFile(servletContext, context.getApplicationContext(), appPath, filePath,
-				filePrefix).stream().filter(d -> d.startsWith("INSERT")).collect(Collectors.toList());
+				filePrefix).stream().filter(d -> d.startsWith("INSERT") && !(d.toLowerCase().contains("delete"))).collect(Collectors.toList());
 		runSQL(context, data);
 	}
 
