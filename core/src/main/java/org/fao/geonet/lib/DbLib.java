@@ -37,6 +37,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -67,6 +68,17 @@ public class DbLib {
         runSQL(context, data);
     }
 
+	public void onlyInsertData(ServletContext servletContext, final ServiceContext context, Path appPath, Path filePath,
+			String filePrefix) throws Exception {
+		if (Log.isDebugEnabled(Geonet.DB))
+			Log.debug(Geonet.DB, "Filling database tables");
+
+		final List<String> data = loadSqlDataFile(servletContext, context.getApplicationContext(), appPath, filePath,
+				filePrefix).stream().filter(d -> d.startsWith("INSERT")).collect(Collectors.toList());
+		runSQL(context, data);
+	}
+
+    
     static public void runSQL(final ServiceContext context, final List<String> data) {
         TransactionManager.runInTransaction("Apply SQL statements in database", context.getApplicationContext(),
             TransactionManager.TransactionRequirement.CREATE_ONLY_WHEN_NEEDED, TransactionManager.CommitBehavior.ALWAYS_COMMIT, false,
@@ -125,7 +137,7 @@ public class DbLib {
                         Log.warning(Geonet.DB, "SQL failure for: " + sql + ", error is:" + e.getMessage(), e);
 
                         if (failOnError)
-                            throw new RuntimeException(e);
+                            throw new Exception(e);
                     }
                     sb = new StringBuffer();
                 }

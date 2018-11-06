@@ -475,13 +475,16 @@ public class Geonetwork implements ApplicationHandler {
         // check if database has any data
         final SettingRepository settingRepository = context.getBean(SettingRepository.class);
         final long count = settingRepository.count();
+        
+        List<Pair<String, String>> importData = context.getApplicationContext().getBean("initial-data", List.class);
+        final DbLib dbLib = new DbLib();
+        final ServletContext servletContext = context.getServlet().getServletContext();
         if (count == 0) {
             try {
                 // import data from init files
-                List<Pair<String, String>> importData = context.getApplicationContext().getBean("initial-data", List.class);
-                final DbLib dbLib = new DbLib();
+                
                 for (Pair<String, String> pair : importData) {
-                    final ServletContext servletContext = context.getServlet().getServletContext();
+                    
                     final Path appPath = context.getAppPath();
                     final Path filePath = IO.toPath(pair.one());
                     final String filePrefix = pair.two();
@@ -497,6 +500,13 @@ public class Geonetwork implements ApplicationHandler {
             } catch (Throwable t) {
                 Log.error(Geonet.DB, "Error occurred while trying to execute SQL", t);
                 throw new RuntimeException(t);
+            }
+        }else{
+        	// import new data
+        	try{
+        		dbLib.onlyInsertData(servletContext, context, appPath, IO.toPath("WEB-INF/classes/setup/sql/data"), "new-db-");
+        	} catch (Exception t) {
+                Log.error(Geonet.DB, "Error occurred while trying to execute SQL", t);
             }
         }
     }
