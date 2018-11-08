@@ -133,6 +133,18 @@
   				return gnGlobalSettings.isIntranet;
   			  };
   			  
+  			  if (!String.prototype.startsWith) {
+				  String.prototype.startsWith = function(searchString, position) {
+					position = position || 0;
+					return this.indexOf(searchString, position) === position;
+				 };
+			  }
+				
+			  scope.display = function(r) {
+				  var dis = !r.url.startsWith('file') || (r.url.startsWith('file') && gnGlobalSettings.isIntranet);
+				  return dis;
+			  };
+			  
   			scope.getClass = function(title) {
   				 if(title.eng){
 					  if(title.eng.toLowerCase() === 'purchase this product'){

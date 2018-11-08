@@ -8,7 +8,7 @@
     <div class="row list-group-item gn-related-item"
          data-ng-repeat="r in items track by $index"
          data-ng-init="mainType = config.getType(r, type);"
-         data-ng-if="!r.url.startsWith('file') || (r.url.startsWith('file') && isIntranet())">
+         data-ng-if="display(r)">
       <div class="col-xs-1">
         <strong>
           <i class="fa"
