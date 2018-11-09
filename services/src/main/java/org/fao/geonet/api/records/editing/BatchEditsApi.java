@@ -602,10 +602,17 @@ public class BatchEditsApi implements ApplicationContextAware {
 				.withMinimumUploadPartSize(5 * 1024 * 1024L)
 				.build();
 		
+        String tmpDir = System.getProperty("java.io.tmpdir");
+		Path tempPath = Paths.get(tmpDir);
+	
+		if(!tempPath.toFile().isDirectory()){
+			tempPath.toFile().mkdir();
+		}
+        
 		List<File> files = tempBackupData.stream().map(md -> {
 				
 				try {
-					Path path = Files.createTempFile(md.getUuid(), ".xml"); 
+					Path path = Files.createTempFile(tempPath, md.getUuid(), ".xml"); 
 					File f = path.toFile();
 					f.deleteOnExit();
 					FileUtils.writeByteArrayToFile(f, md.getData().getBytes());
