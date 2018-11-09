@@ -33,6 +33,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -609,6 +610,8 @@ public class BatchEditsApi implements ApplicationContextAware {
 			tempPath.toFile().mkdir();
 		}
         
+		Log.debug(Geonet.SEARCH_ENGINE, "BatchEditAPI, tmpDir for backup xml files --->" + tmpDir);
+		
 		List<File> files = tempBackupData.stream().map(md -> {
 				
 				try {
@@ -656,6 +659,13 @@ public class BatchEditsApi implements ApplicationContextAware {
 			e.printStackTrace();
 		}
 		
+        try{
+        	files.stream().forEach(f -> {
+        		f.delete();	
+        	});
+        }catch(Exception e){
+        	Log.error(Geonet.SEARCH_ENGINE, "Unable to remove tmp xml files created during batch edit");
+        }
 	}
 	
 	/**
