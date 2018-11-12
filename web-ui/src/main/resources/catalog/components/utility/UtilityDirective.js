@@ -227,7 +227,7 @@
 			};
 		  scope.recall = function(dateTime){
 			  if (confirm("Are you sure to recall selected batch edit?")) {
-			  var url = 'https://s3-ap-southeast-2.amazonaws.com/ga-ecat3-batchedit/'+dateTime+'/mp';
+			  var url = 'https://s3-ap-southeast-2.amazonaws.com/ga-ecat3-batchedit/'+dateTime;
 			  
 			  gnMetadataManager.getFilesFromS3(url)
 				.then(function(response) {
@@ -247,9 +247,6 @@
 									if(response.data.errors.length > 0){
 										scope.reports.push({'message' : response.data.errors[0].message, 'class':'alert alert-danger'});		
 									}
-							  }, 
-							  function(error){
-								  scope.reports.push({'message' : 'Failed to recall ' + filename});
 							  });
 
 						});
