@@ -84,7 +84,6 @@
   <xsl:param name="Keyword" select="false"/>
   <xsl:param name="Keyword-Thesaurus" select="false"/>
   <xsl:param name="MaintenanceFrequency" select="false"/>
-  <xsl:param name="ServiceMaintenanceFrequency" select="false"/>
   <xsl:param name="TopicCategory" select="false"/>
   <xsl:param name="ResponsibleParty" select="false"/>
   <xsl:param name="ResourceContact" select="false"/>
@@ -105,7 +104,6 @@
   <xsl:param name="DataStorageLink" select="false"/>
   <xsl:param name="DataStorageFormat" select="false"/>
   <xsl:param name="Lineage" select="false"/>
-  <xsl:param name="SourceScopeCode" select="false"/>
   <xsl:param name="SourceDescription" select="false"/>
   <xsl:param name="AssociatedResourcesLink" select="false"/>
   <xsl:param name="AdditionalInfo" select="false"/>
@@ -117,7 +115,6 @@
   <xsl:param name="OperationName" select="false"/>
   <xsl:param name="DistributedComputingPlatform" select="false"/>
   <xsl:param name="OperationDescription" select="false"/>
-
   <!-- A template to add a new line \n with no extra space. -->
   <xsl:template name="newLine">
 <xsl:text>

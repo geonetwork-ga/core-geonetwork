@@ -141,8 +141,46 @@
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialResolution" />
 			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
 				in="/mdb:MD_Metadata" />
+<<<<<<< HEAD
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
+=======
+			<field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
+			<action type="add" name="verticalElement" or="verticalElement"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
+				<template>
+					<snippet>
+						<gex:verticalElement>
+							<gex:EX_VerticalExtent>
+								<gex:minimumValue>
+									<gco:Real></gco:Real>
+								</gex:minimumValue>
+								<gex:maximumValue>
+									<gco:Real></gco:Real>
+								</gex:maximumValue>
+								<gex:verticalCRSId>
+									<mrs:MD_ReferenceSystem>
+										<mrs:referenceSystemIdentifier>
+											<mcc:MD_Identifier>
+												<mcc:code>
+													<gco:CharacterString></gco:CharacterString>
+												</mcc:code>
+												<mcc:codeSpace>
+													<gco:CharacterString>EPSG</gco:CharacterString>
+												</mcc:codeSpace>
+												<mcc:version>
+													<gco:CharacterString></gco:CharacterString>
+												</mcc:version>
+											</mcc:MD_Identifier>
+										</mrs:referenceSystemIdentifier>
+									</mrs:MD_ReferenceSystem>
+								</gex:verticalCRSId>
+							</gex:EX_VerticalExtent>
+						</gex:verticalElement>
+					</snippet>
+				</template>
+			</action>
+>>>>>>> a4802433362bb5124b39d481c2eb4578b6483f1e
 		</section>
 	</tab>
 
