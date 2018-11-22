@@ -283,6 +283,22 @@
     </xsl:copy>
   </xsl:template>
   
+  <xsl:template match="cit:CI_Citation/cit:identifier[mcc:MD_Identifier/mcc:code/gco:CharacterString = 'Link to be added by administrator']">
+	<xsl:variable name="ecatId" select="/root/env/gaid" />
+	<xsl:variable name="pid" select="concat('http://pid.geoscience.gov.au/service/ga/', $ecatId)" />
+	<xsl:copy>
+		<mcc:MD_Identifier>
+			<mcc:code>
+				<gco:CharacterString>
+					<xsl:value-of select="$pid" />
+				</gco:CharacterString>
+			</mcc:code>
+			<mcc:codeSpace>
+				<gco:CharacterString>ga-dataSetURI</gco:CharacterString>
+			</mcc:codeSpace>
+		</mcc:MD_Identifier>
+	</xsl:copy>
+</xsl:template>
   
   <!-- Update revision date -->
   <xsl:template match="mdb:dateInfo[cit:CI_Date/cit:dateType/cit:CI_DateTypeCode/@codeListValue='lastUpdate']">
