@@ -101,4 +101,17 @@ public class DublinCoreSchemaPlugin
     public Map<String, Namespace> getCswTypeNames() {
         return allTypenames;
     }
+
+	@Override
+	public Element getAssociatedResourceElement(Element metadata) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public String getAssociatedParentUuid(Element metadata) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -185,27 +185,27 @@
       
       <!-- bounding box -->
       <xsl:for-each select="$identification/mri:extent/gex:EX_Extent/gex:geographicElement/gex:EX_GeographicBoundingBox">
-        <xsl:variable name="rsi"  select="/mdb:MD_Metadata/mdb:referenceSystemInfo/*/mrs:referenceSystemIdentifier/mcc:MD_Identifier"/>
-        <xsl:variable name="auth" select="$rsi/mcc:codeSpace/gco:CharacterString"/>
-        <xsl:variable name="id"   select="$rsi/mcc:code/gco:CharacterString"/>
-        <xsl:variable name="crs" select="concat('urn:ogc:def:crs:', $auth, '::', $id)"/>
-        
-        <ows:BoundingBox>
-          <xsl:attribute name="crs">
-            <xsl:choose>
-              <xsl:when test="$crs = 'urn:ogc:def:crs:::'">urn:ogc:def:crs:EPSG:6.6:4326</xsl:when>
-              <xsl:otherwise><xsl:value-of select="$crs"/></xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-          
-          <ows:LowerCorner>
-            <xsl:value-of select="concat(gex:eastBoundLongitude/gco:Decimal, ' ', gex:southBoundLatitude/gco:Decimal)"/>
-          </ows:LowerCorner>
-          
-          <ows:UpperCorner>
-            <xsl:value-of select="concat(gex:westBoundLongitude/gco:Decimal, ' ', gex:northBoundLatitude/gco:Decimal)"/>
-          </ows:UpperCorner>
-        </ows:BoundingBox>
+	        <xsl:variable name="rsi"  select="/mdb:MD_Metadata/mdb:referenceSystemInfo[1]/*/mrs:referenceSystemIdentifier/mcc:MD_Identifier"/>
+	        <xsl:variable name="auth" select="$rsi/mcc:codeSpace/gco:CharacterString"/>
+	        <xsl:variable name="id"   select="$rsi/mcc:code/gco:CharacterString"/>
+	        <xsl:variable name="crs" select="concat('urn:ogc:def:crs:', $auth, '::', $id)"/>
+	        
+	        <ows:BoundingBox>
+	          <xsl:attribute name="crs">
+	            <xsl:choose>
+	              <xsl:when test="$crs = 'urn:ogc:def:crs:::'">urn:ogc:def:crs:EPSG:6.6:4326</xsl:when>
+	              <xsl:otherwise><xsl:value-of select="$crs"/></xsl:otherwise>
+	            </xsl:choose>
+	          </xsl:attribute>
+	          
+	          <ows:LowerCorner>
+	            <xsl:value-of select="concat(gex:eastBoundLongitude/gco:Decimal, ' ', gex:southBoundLatitude/gco:Decimal)"/>
+	          </ows:LowerCorner>
+	          
+	          <ows:UpperCorner>
+	            <xsl:value-of select="concat(gex:westBoundLongitude/gco:Decimal, ' ', gex:northBoundLatitude/gco:Decimal)"/>
+	          </ows:UpperCorner>
+	        </ows:BoundingBox>
       </xsl:for-each>
       
       

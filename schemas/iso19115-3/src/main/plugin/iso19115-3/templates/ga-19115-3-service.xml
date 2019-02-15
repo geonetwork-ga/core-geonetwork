@@ -59,6 +59,17 @@
               </cit:dateType>
             </cit:CI_Date>
           </cit:date>
+          <cit:identifier>
+	         <mcc:MD_Identifier>
+				<mcc:code>
+					<gco:CharacterString>Link to be added by administrator
+					</gco:CharacterString>
+				</mcc:code>
+				<mcc:codeSpace>
+					<gco:CharacterString>ga-serviceURI</gco:CharacterString>
+				</mcc:codeSpace>
+			</mcc:MD_Identifier>
+		</cit:identifier>
         </cit:CI_Citation>
       </mri:citation>
       <mri:abstract>

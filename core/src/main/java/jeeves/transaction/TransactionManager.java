@@ -116,11 +116,15 @@ public class TransactionManager {
         for (BeforeCommitTransactionListener listener : context.getBeansOfType(BeforeCommitTransactionListener.class).values()) {
             listener.beforeCommit(transaction);
         }
+        try{//Joseph added try block for the error "JpaTransactionManager - Commit exception overridden by rollback exception"
+            transactionManager.commit(transaction);
 
-        transactionManager.commit(transaction);
-
-        for (AfterCommitTransactionListener listener : context.getBeansOfType(AfterCommitTransactionListener.class).values()) {
-            listener.afterCommit(transaction);
+            for (AfterCommitTransactionListener listener : context.getBeansOfType(AfterCommitTransactionListener.class).values()) {
+                listener.afterCommit(transaction);
+            }
+        	
+        } catch (RollbackException e) {
+            throw e;
         }
     }
 

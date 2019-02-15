@@ -48,7 +48,10 @@ import javax.xml.bind.annotation.XmlType;
     "protocol",
     "description",
     "function",
-    "applicationProfile"
+    "applicationProfile",
+    "formatname",
+    "edition",
+    "filecomp"
 })
 public class RelatedLinkItem
     extends RelatedItem {
@@ -58,6 +61,9 @@ public class RelatedLinkItem
     protected RelatedLinkItem.Description description;
     protected String function;
     protected String applicationProfile;
+    protected String formatname;
+    protected String edition;
+    protected String filecomp;
 
     /**
      * Gets the value of the protocol property.
@@ -132,7 +138,32 @@ public class RelatedLinkItem
     }
 
 
-    /**
+    public String getFormatname() {
+		return formatname;
+	}
+
+	public void setFormatname(String formatname) {
+		this.formatname = formatname;
+	}
+
+	public String getEdition() {
+		return edition;
+	}
+
+	public void setEdition(String edition) {
+		this.edition = edition;
+	}
+
+	public String getFilecomp() {
+		return filecomp;
+	}
+
+	public void setFilecomp(String filecomp) {
+		this.filecomp = filecomp;
+	}
+
+
+	/**
      * <p>Java class for anonymous complex type.
      *
      * <p>The following schema fragment specifies the expected content contained within this class.

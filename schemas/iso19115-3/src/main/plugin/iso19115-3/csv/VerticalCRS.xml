@@ -1,0 +1,15 @@
+<mrs:MD_ReferenceSystem xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0">
+	<mrs:referenceSystemIdentifier>
+		<mcc:MD_Identifier xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0">
+			<mcc:code>
+				<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{0}</gco:CharacterString>
+			</mcc:code>
+			<mcc:codeSpace>
+				<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{1}</gco:CharacterString>
+			</mcc:codeSpace>
+			<mcc:version>
+				<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{2}</gco:CharacterString>
+			</mcc:version>
+		</mcc:MD_Identifier>
+	</mrs:referenceSystemIdentifier>
+</mrs:MD_ReferenceSystem>

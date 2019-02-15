@@ -47,8 +47,7 @@
         <item>
           <id><xsl:value-of select="mcc:fileName/gco:CharacterString"/></id>
           <url>
-              <xsl:apply-templates mode="get-iso19115-3-localized-string"
-                                    select="mcc:fileName"/>
+              <xsl:value-of select="mcc:fileName/gco:CharacterString"/>
           </url>
           <title>
               <xsl:apply-templates mode="get-iso19115-3-localized-string"
@@ -96,7 +95,8 @@
          </item>
       </xsl:for-each>
 
-      <xsl:for-each select="*/descendant::*[
+		<!-- Joseph commented - For changes in online distribution -->
+      <!--  <xsl:for-each select="*/descendant::*[
                             local-name() = 'onLine'
                             ]/*[cit:linkage/gco:CharacterString != '']">
         <item>
@@ -118,8 +118,42 @@
           <protocol><xsl:value-of select="cit:protocol/gco:CharacterString"/></protocol>
           <type>onlinesrc</type>
         </item>
+      </xsl:for-each>-->
+		
+		<!-- Joseph added - For changes in online distribution -->
+		<xsl:for-each select="*//mrd:distributorTransferOptions/*[mrd:onLine/cit:CI_OnlineResource/cit:linkage/gco:CharacterString != '']">
+          <item>
+              <id><xsl:value-of select="mrd:onLine/cit:CI_OnlineResource/cit:linkage/gco:CharacterString"/></id>
+              <title>
+                  <xsl:apply-templates mode="get-iso19115-3-localized-string"
+                      select="mrd:onLine/cit:CI_OnlineResource/cit:name"/>
+              </title>
+              <url>
+                  <xsl:apply-templates mode="get-iso19115-3-localized-string"
+                      select="mrd:onLine/cit:CI_OnlineResource/cit:linkage"/>
+              </url>
+              <function><xsl:value-of select="cit:function/*/@codeListValue"/></function>
+              <applicationProfile><xsl:value-of select="mrd:onLine/cit:CI_OnlineResource/cit:applicationProfile/gco:CharacterString"/></applicationProfile>
+              <description>
+                  <xsl:apply-templates mode="get-iso19115-3-localized-string"
+                      select="mrd:onLine/cit:CI_OnlineResource/cit:description"/>
+              </description>
+              <protocol>
+                <xsl:value-of select="mrd:onLine/cit:CI_OnlineResource/cit:protocol/gco:CharacterString"/>
+              </protocol>
+              <formatname>
+                <xsl:value-of select="mrd:distributionFormat/*/mrd:formatSpecificationCitation/*/cit:title/gco:CharacterString"/>
+              </formatname>
+              <edition>
+                <xsl:value-of select="mrd:distributionFormat/*/mrd:formatSpecificationCitation/*/cit:edition/gco:CharacterString"/>
+              </edition>
+              <filecomp>
+                <xsl:value-of select="mrd:distributionFormat/*/mrd:fileDecompressionTechnique/gco:CharacterString"/>
+              </filecomp>
+              <type>onlinesrc</type>
+          </item>
       </xsl:for-each>
-
+      
       <xsl:for-each select="*/descendant::*[
                             local-name() = 'featureCatalogueCitation'
                             ]/*[cit:onlineResource/*/cit:linkage/gco:CharacterString != '']">

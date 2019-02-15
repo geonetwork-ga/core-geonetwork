@@ -75,8 +75,8 @@
    * </ul>
    *
    */
-      .directive('gnOnlinesrcList', ['gnOnlinesrc', 'gnCurrentEdit', '$filter',
-        function(gnOnlinesrc, gnCurrentEdit, $filter) {
+      .directive('gnOnlinesrcList', ['gnOnlinesrc', 'gnCurrentEdit', '$filter','$rootScope',
+        function(gnOnlinesrc, gnCurrentEdit, $filter, $rootScope) {
           return {
             restrict: 'A',
             templateUrl: '../../catalog/components/edit/onlinesrc/' +
@@ -87,7 +87,13 @@
               scope.gnCurrentEdit = gnCurrentEdit;
               scope.allowEdits = true;
               scope.lang = scope.$parent.lang;
-
+             
+              scope.isAdministrator = function(){
+                if($rootScope.user.profile === 'Administrator'){
+                  return true;
+                }
+                return false;            
+              }
               /**
                * Calls service 'relations.get' to load
                * all online resources of the current
@@ -192,529 +198,45 @@
               post: function(scope, element, attrs) {
                 scope.popupid = attrs['gnPopupid'];
 
-                //{
-                //  // Optional / optGroup
-                //  group: 'onlineDiscover',
-                //  // Label
-                //    label: 'onlineDiscoverWMS',
-                //  // Optional / On select copy the label in desc field
-                //  copyLabel: 'desc',
-                //  // Optional / Icon
-                //  icon: 'fa gn-icon-onlinesrc',
-                //  // XSL process to run
-                //  process: 'onlinesrc-add',
-                //  // Optional / List of fields
-                //  // (URL only will be displayed if none)
-                //  fields: {
-                //  'url': {},
-                //  'protocol': {
-                //    // Fixed value
-                //    value: 'OGC:WMS',
-                //      // Hide field
-                //      hidden: true},
-                //  'name': {},
-                //  'desc': {
-                //    // Rename parameter for the XSL process
-                //    param: 'myParam'},
-                //  'function': {value: 'browsing', hidden: true}
-                //}
-                //}
+               
 
                 var schemaConfig = {
-                  'dublin-core': {
+                  
+                  'iso19115-3': {
                     display: 'radio',
-                    types: [{
-                      label: 'addOnlinesrc',
-                      sources: {
-                        filestore: true,
-                        thumbnailMaker: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {}
-                      }
-                    }]
-                  },
-                  'iso19139': {
-                    display: 'radio',
-                    types: [{
-                      label: 'addOnlinesrc',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'WWW:LINK-1.0-http--link'},
-                        'name': {},
-                        'desc': {},
-                        'function': {},
-                        'applicationProfile': {}
-                      }
-                    }, {
+                    types: [ 
+                      {
+                        label: 'addOnlinesrc',
+                        copyLabel: 'name',
+                        sources: {
+                          filestore: true
+                        },
+                        icon: 'fa gn-icon-onlinesrc',
+                        process: 'onlinesrc-add',
+                        fields: {
+                          'url': {},
+                          'protocol': {
+                            value: 'WWW:LINK-1.0-http--link'
+                          },
+                          'name': {},
+                          'desc': {},
+                          'function': {value: 'download'},
+                          'formatname': {},
+                          'edition': {},
+                          'filecomp': {}
+                        }
+                      }, {
                       label: 'addThumbnail',
                       sources: {
                         filestore: true,
                         thumbnailMaker: true
                       },
                       icon: 'fa gn-icon-thumbnail',
-                      fileStoreFilter: '*.{jpg,JPG,png,PNG,gif,GIF}',
-                      process: 'thumbnail-add',
-                      fields: {
-                        'url': {param: 'thumbnail_url'},
-                        'name': {param: 'thumbnail_desc'}
-                      }
-                    }]
-                  },
-                  'iso19115-3': {
-                    display: 'select',
-                    types: [{
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverThumbnail',
-                      sources: {
-                        filestore: true,
-                        thumbnailMaker: true
-                      },
-                      icon: 'fa gn-icon-thumbnail',
-                      fileStoreFilter: '*.{jpg,JPG,png,PNG,gif,GIF}',
+                      fileStoreFilter: '*.{jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}',
                       process: 'thumbnail-add',
                       fields: {
                         'url': {},
-                        'name': {param: 'desc'}
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverInApp',
-                      copyLabel: 'name',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAnApplication',
-                          params: {
-                            type: 'application'
-                          }
-                        }
-                      },
-                      icon: 'fa gn-icon-map',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverWMS',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'OGC:WMS or WMS or view'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'OGC:WMS', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverINSPIREView',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'view'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'OGC:WMS', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true},
-                        'applicationProfile': {
-                          value: 'inspire-view', hidden: true
-                        }
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverWMTS',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'OGC:WMTS or WMTS'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'OGC:WMTS', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverArcGIS',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'ESRI:REST'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'ESRI:REST', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverKML',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true},
-                        'applicationProfile': {
-                          value: 'application/vnd.google-earth.kml+xml',
-                          hidden: true
-                        }
-                      }
-                    }, {
-                      group: 'onlineDiscover',
-                      label: 'onlineDiscoverMap',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-map',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'browsing', hidden: true},
-                        'applicationProfile': 'applicationProfile'
-                      }
-                    }, {
-                      group: 'onlineDownload',
-                      label: 'onlineDownloadFile',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'download', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDownload',
-                      label: 'onlineDownloadKML',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'download', hidden: true},
-                        'applicationProfile': {
-                          value: 'application/vnd.google-earth.kml+xml',
-                          hidden: true
-                        }
-                      }
-                    }, {
-                      group: 'onlineDownload',
-                      label: 'onlineDownloadWWW',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'download', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDownload',
-                      label: 'onlineDownloadWFS',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'OGC:WFS or WFS or download'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'OGC:WFS', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'download', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDownload',
-                      label: 'onlineDownloadWCS',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'OGC:WCS or WCS'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'OGC:WCS', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'download', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineDownload',
-                      label: 'onlineDownloadINSPIRE',
-                      copyLabel: 'desc',
-                      icon: 'fa gn-icon-onlinesrc',
-                      sources: {
-                        metadataStore: {
-                          label: 'searchAservice',
-                          params: {
-                            serviceType: 'download'
-                          }
-                        }
-                      },
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {value: 'OGC:WFS', hidden: true},
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'download', hidden: true},
-                        'applicationProfile': {
-                          value: 'inspire-download', hidden: true
-                        }
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseFcats',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa fa-table',
-                      process: 'fcats-file-add',
-                      fields: {
-                        'url': {},
-                        'name': {}
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseDQReport',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa fa-table',
-                      process: 'dq-report-add',
-                      fields: {
-                        'url': {},
-                        'name': {},
-                        'desc': {},
-                        'type': {param: 'type', value: 'qualityReport'}
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseDQTOR',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa fa-table',
-                      process: 'dq-report-add',
-                      fields: {
-                        'url': {},
-                        'name': {},
-                        'desc': {},
-                        'type': {param: 'type', value: 'qualitySpecification'}
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseDQProdReport',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa fa-table',
-                      process: 'dq-report-add',
-                      fields: {
-                        'url': {},
-                        'name': {},
-                        'desc': {},
-                        'type': {param: 'type', value: 'lineage'}
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseLegendLYR',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      fileStoreFilter: '*.{lyr,LYR}',
-                      icon: 'fa fa-table',
-                      process: 'legend-add',
-                      fields: {
-                        'url': {},
-                        'name': {}
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseStyleSLD',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      fileStoreFilter: '*.{sld,SLD}',
-                      icon: 'fa fa-table',
-                      process: 'legend-add',
-                      fields: {
-                        'url': {},
-                        'name': {}
-                      }
-                    }, {
-                      group: 'onlineUse',
-                      label: 'onlineUseStyleQML',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      fileStoreFilter: '*.{qml,QML}',
-                      icon: 'fa fa-table',
-                      process: 'legend-add',
-                      fields: {
-                        'url': {},
-                        'name': {}
-                      }
-                      //},{
-                      //  group: 'onlineUse',
-                      //  label: 'onlineUseLimitation',
-                      //  copyLabel: 'name',
-                      //  sources: {
-                      //    templatestore: true,
-                      //    filestore: true
-                      //  },
-                      //  icon: 'fa fa-table',
-                      //  process: 'use-limitation-add',
-                      //  fields: {
-                      //  }
-                      //},{
-                      //  group: 'onlineUse',
-                      //  label: 'onlineAccessLimitation',
-                      //  copyLabel: 'name',
-                      //  sources: {
-                      //    templatestore: true,
-                      //    filestore: true
-                      //  },
-                      //  icon: 'fa fa-table',
-                      //  process: 'use-limitation-add',
-                      //  fields: {
-                      //  }
-                    }, {
-                      group: 'onlineMore',
-                      label: 'onlineMoreWWW',
-                      copyLabel: 'name',
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'information', hidden: true}
-                      }
-                    }, {
-                      group: 'onlineMore',
-                      label: 'onlineMoreFile',
-                      copyLabel: 'name',
-                      sources: {
-                        filestore: true
-                      },
-                      icon: 'fa gn-icon-onlinesrc',
-                      process: 'onlinesrc-add',
-                      fields: {
-                        'url': {},
-                        'protocol': {
-                          value: 'WWW:LINK-1.0-http--link', hidden: true
-                        },
-                        'name': {},
-                        'desc': {},
-                        'function': {value: 'information', hidden: true}
+                        'desc': {}
                       }
                     }]
                   }
@@ -830,20 +352,16 @@
                   for (var i = 0; i < scope.config.types.length; i++) {
                     var c = scope.config.types[i];
                     if (scope.schema === 'iso19115-3') {
-                      var p = c.fields &&
-                              c.fields.protocol &&
-                              c.fields.protocol.value || '',
-                          f = c.fields &&
-                          c.fields.function &&
-                          c.fields.function.value || '',
-                          ap = c.fields &&
-                          c.fields.applicationProfile &&
-                          c.fields.applicationProfile.value || '';
-                      if (c.process.indexOf(link.type) === 0 &&
-                          p === (link.protocol || '') &&
-                          f === (link.function || '') &&
-                          ap === (link.applicationProfile || '')
-                      ) {
+                      var p = c.fields && c.fields.protocol && c.fields.protocol.value || '',
+                          f = c.fields && c.fields.function && c.fields.function.value || '',
+                          ap = c.fields && c.fields.applicationProfile && c.fields.applicationProfile.value || '', 
+                          fn = c.fields && c.fields.formatname && c.fields.formatname.value || '', 
+                          e = c.fields && c.fields.edition && c.fields.edition.value || '', 
+                          fc = c.fields && c.fields.filecomp && c.fields.filecomp.value || ''; 
+                      if (c.process.indexOf(link.type) === 0 && p === (link.protocol || '') &&
+                          f === (link.function || '') && ap === (link.applicationProfile || '')
+                          && fn === (link.formatname || '') && e === (link.edition || '')
+                          && fc === (link.filecomp || '')) {
                         return c;
                       }
                     } else {
@@ -951,16 +469,25 @@
                       name: name,
                       desc: desc,
                       applicationProfile: linkToEdit.applicationProfile,
+                      formatname: linkToEdit.formatname,
+                      edition: linkToEdit.edition,
+                      filecomp: linkToEdit.filecomp,
                       function: linkToEdit.function,
                       selectedLayers: []
                       };
-                      } else{
-                      scope.editingKey= null;
-                      scope.params.linkType= scope.config.types[0];
-                      scope.params.protocol= null;
-                      setParameterValue(scope.params.name, '');
-                      setParameterValue(scope.params.desc, '');
-                    }
+
+                      if(scope.params.linkType.process === 'thumbnail-add'){
+                        scope.params.desc = $filter('gnLocalized')(linkToEdit.title);
+                      }
+                      
+
+                  } else{
+                    scope.editingKey= null;
+                    scope.params.linkType= scope.config.types[0];
+                    scope.params.protocol= null;
+                    setParameterValue(scope.params.name, '');
+                    setParameterValue(scope.params.desc, '');
+                  }
                   });
 
                 // mode can be 'url' or 'thumbnailMaker' to init thumbnail panel
@@ -985,6 +512,9 @@
                     scope.params.protocol = '';
                     scope.params.function = '';
                     scope.params.applicationProfile = '';
+                    scope.params.formatname = '';
+                    scope.params.edition = '';
+                    scope.params.filecomp = '';
                     resetProtocol();
                   }
                 };
@@ -1112,7 +642,7 @@
                           });
                     }
                   } else if (scope.params.url.indexOf('http') === 0) {
-                    var useProxy =
+                    /*var useProxy =
                         scope.params.url.indexOf(location.hostname) === -1;
                     var url = useProxy ?
                         '../../proxy?url=' +
@@ -1123,7 +653,8 @@
                     function(response) {
                       // Proxy may return 500 when document is not proxyable
                       scope.isUrlOk = response.status === 200;
-                    });
+                    });*/
+                    scope.isUrlOk = true;
                   } else {
                     scope.isUrlOk = true;
                   }
@@ -1311,6 +842,18 @@
                   };
                   scope.modelOptions =
                       angular.copy(gnGlobalSettings.modelOptions);
+                  
+                  scope.params = {
+                        url:'',
+                        _uuid:'',
+                        protocol:'WWW:LINK-1.0-http--link',
+                        name:'',
+                        desc:'Link to eCat service metadata record landing page',
+                        code:'',
+                        associationType:'dependency',
+                        identifierDesc:'eCat Identifier',
+                        process:'association-add'                        
+                      }
                 },
                 post: function postLink(scope, iElement, iAttrs) {
                   scope.mode = iAttrs['gnLinkServiceToDataset'];
@@ -1411,6 +954,12 @@
                           scope.alertMsg = $translate.instant(
                               'linkToServiceWithoutURLError');
                         }
+
+                        var pidUrl = 'http://pid.geoscience.gov.au/'+md.type[0]+'/ga/'+md.eCatId;
+                        scope.params.url=pidUrl;
+                        scope.params.name=md.title;
+                        scope.params.code=md.eCatId;
+                        scope.params._uuid=md.getUuid();
                       }
                       else {
                         scope.srcParams.uuidDS = md.getUuid();
@@ -1427,7 +976,7 @@
                   scope.linkTo = function() {
                     if (scope.mode == 'service') {
                       return gnOnlinesrc.
-                          linkToService(scope.srcParams, scope.popupid);
+                          linkToService(scope.srcParams, scope.popupid, scope.params);
                     } else {
                       return gnOnlinesrc.
                           linkToDataset(scope.srcParams, scope.popupid);
@@ -1531,6 +1080,209 @@
           };
         }])
 
+	 /**
+	     * @ngdoc directive
+	     * @name gn_onlinesrc.directive:gnAddAssociatedResource
+	     * @restrict A
+	     * @requires gnOnlinesrc
+	     * @requires $Metadata
+	     * @requires gnEditor
+	     * @requires $translate
+	     *
+	     * @description
+	     * The `gnAddAssociatedResource` directive provides
+	     * a form to link to another metadata or to different associated resources as
+	     * 
+	     * <ul>
+	     *  <li>add resources</li> 
+	     *  <li>parent</li>
+	     *  <li>feature catalog</li>
+	     *  <li>source dataset</li>
+	     * </ul>
+	     * The directive contains a search form allowing one local selection or a form to enter values manually.
+	     *
+	     * On submit, the metadata is saved, the associated resources is added,
+	     * then the form and the list are refreshed.
+	     */
+       .directive('gnAddAssociatedResource', [
+          'gnOnlinesrc', 'Metadata', 'gnEditor', '$translate', 'gnGlobalSettings',
+          function(gnOnlinesrc, Metadata, gnEditor, $translate, gnGlobalSettings) {
+            return {
+              restrict: 'A',
+              scope: {},
+              templateUrl: '../../catalog/components/edit/onlinesrc/' +
+                  'partials/addAssociatedRes.html',
+              compile: function compile(tElement, tAttrs, transclude) {
+                return {
+                  pre: function preLink(scope) {
+                    scope.isResOk = false;
+                    scope.selectionType = {
+                      ECAT_RECORD : 'eCat Record',
+                      OTHER: 'Other'
+                    };
+                    scope.searchObj = {
+                      any: '',
+                      params: {}
+                    };
+                    scope.modelOptions = angular.copy(gnGlobalSettings.modelOptions);
+                    scope.metadata = null;
+                    scope.isMdRecord = true;
+                    scope.params = {
+                      url:'',
+                      _uuid:'',
+                      protocol:'WWW:LINK-1.0-http--link',
+                      name:'',
+                      desc:'',
+                      code:'',
+                      associationType:'',
+                      identifierDesc:'',
+                      process:'association-add',
+                      preCode:'',
+                      preType:''
+                    }
+
+                    scope.associationTypes = [];
+                    
+                    scope.associationTypes.push(scope.selectionType.ECAT_RECORD);
+                    scope.associationTypes.push(scope.selectionType.OTHER);
+                    
+                    scope.model = {};
+                    scope.model.selectedType = scope.selectionType.ECAT_RECORD;
+                  
+                  },
+                  post: function postLink(scope, iElement, iAttrs) {
+                    scope.mode = iAttrs['gnAddAssociatedResource'];
+                    scope.popupid = '#addassociatedres-popup';
+                    scope.btn = {};
+                    scope.stateObj = {};
+                    scope.onlinesrcService = gnOnlinesrc;
+                    scope.config = {
+                      associationType: null
+                    };
+                    // Append * for like search
+                    scope.updateParams = function() {
+                      scope.searchObj.params.any =
+                          '*' + scope.searchObj.any + '*';
+                    };
+  
+                    scope.displayType = function(){
+                      scope.isResOk = true;
+                      if(scope.model.selectedType === scope.selectionType.ECAT_RECORD){
+                        scope.isMdRecord = true;
+                        if(!scope.metadata){
+                          scope.isResOk = false;
+                        }
+                        scope.model.selectedType = scope.selectionType.ECAT_RECORD;
+                      }else{
+                        
+                        scope.isMdRecord = false;
+                        if(!scope.isEditing){
+                          resetForm();
+                        }                       
+                        scope.model.selectedType = scope.selectionType.OTHER;
+                      }
+                    }
+
+                    scope.addAssociatedRes = function() {
+                      
+                      if(scope.model.selectedType === scope.selectionType.ECAT_RECORD){
+                        if(scope.metadata){
+                          var md = scope.metadata;
+                          var pidUrl = 'http://pid.geoscience.gov.au/'+md.type[0]+'/ga/'+md.eCatId;
+                          scope.params.url=pidUrl;
+                          scope.params._uuid=md.getUuid();
+                          scope.params.protocol='WWW:LINK-1.0-http--link';
+                          scope.params.name=md.title;
+                          scope.params.desc='Link to eCat metadata record landing page';
+                          scope.params.code=md.eCatId;
+                          scope.params.identifierDesc='eCat Identifier';
+                        }
+                      }
+
+                      scope.metadata = null;
+                      if(scope.isEditing){
+                        scope.params.associationType=scope.config.associationType;
+                        return scope.onlinesrcService.updateAssociation(scope.params, scope.popupid).then(function(){
+                          console.log('for editing, removed association and calling add function');
+                        });
+                      } else {
+                        scope.params.associationType=scope.config.associationType;
+                        return scope.onlinesrcService.add(
+                          scope.params, scope.popupid).then(function() {
+                          resetForm();
+                        });
+                      }
+                      
+                    };
+    
+                    scope.onAddSuccess = function() {
+                      gnEditor.refreshEditorForm();
+                      scope.onlinesrcService.reload = true;
+                    };
+                    
+                  gnOnlinesrc.register('associatedres', function(linkToEdit) {
+                    scope.isEditing = angular.isDefined(linkToEdit);
+                    scope.model.selectedType = scope.selectionType.ECAT_RECORD;
+                    if(scope.isEditing){
+                      console.log('linkToEdit.identifierDesc ---> ' + linkToEdit.identifierDesc);
+                      if(linkToEdit.identifierDesc !== 'eCat Identifier'){
+                          scope.model.selectedType = scope.selectionType.OTHER;
+                          scope.params.url=linkToEdit.url;
+                          scope.params.protocol=linkToEdit.protocol;
+                          scope.params.name=linkToEdit.title['eng'];
+                          scope.params.desc=linkToEdit.description['eng'];
+                          scope.params.identifierDesc=linkToEdit.identifierDesc;
+                          scope.isResOk = true;
+                      }
+                      scope.params.preType=linkToEdit.identifierDesc;
+                      scope.params.code=linkToEdit.id;
+                      scope.params.preCode=linkToEdit.id;
+                      scope.config.associationType = linkToEdit.associationType;
+                    }else{
+                      resetForm();
+                    }
+
+                    scope.displayType();
+                    $(scope.popupid).modal('show');
+                    var searchParams = {
+                      hitsPerPage: 10
+                    };
+                    scope.$broadcast('resetSearch', searchParams);
+                  });
+
+                  scope.$watchCollection('stateObj.selectRecords',
+                    function(n, o) {
+                      if (!angular.isUndefined(scope.stateObj.selectRecords) &&
+                        scope.stateObj.selectRecords.length > 0 && n != o) {
+                        scope.isResOk = true;
+                        scope.metadata = new Metadata(scope.stateObj.selectRecords[0]);
+                      }else{
+                        scope.isResOk = false;
+                      }
+                    });
+                  
+                    function resetForm(){
+                      if(scope.params){
+                        scope.params = {
+                          url:'',
+                          protocol:'WWW:LINK-1.0-http--link',
+                          name:'',
+                          desc:'',
+                          code:'',
+                          associationType:'',
+                          identifierDesc:'',
+                          process:'association-add'
+                        }
+                      }
+                    }
+
+                  }
+                };
+              }
+            };
+          }])
+
+          
       /**
      * @ngdoc directive
      * @name gn_onlinesrc.directive:gnLinkToSibling

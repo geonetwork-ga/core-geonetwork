@@ -1,0 +1,12 @@
+<gex:EX_Extent xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0">
+	<gex:verticalElement>
+		<gex:EX_VerticalExtent>
+			<gex:minimumValue>
+				<gco:Real xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{0}</gco:Real>
+			</gex:minimumValue>
+			<gex:maximumValue>
+				<gco:Real xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{1}</gco:Real>
+			</gex:maximumValue>
+		</gex:EX_VerticalExtent>
+	</gex:verticalElement>
+</gex:EX_Extent>

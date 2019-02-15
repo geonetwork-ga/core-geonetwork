@@ -67,8 +67,6 @@ public class MetadataEditElement implements EditElement {
 			Element rootE = null;
 
 			try {
-				if(headerVal.equalsIgnoreCase(Geonet.EditType.MD_SCOPE))
-					rootE = getMdScopeElement(values);
 				if(headerVal.equalsIgnoreCase(Geonet.EditType.MD_PARENT))
 					rootE = getMdparentElement(context, serContext, batchEdit, values);
 			} catch (BatchEditException e) {
@@ -86,46 +84,7 @@ public class MetadataEditElement implements EditElement {
 		}
 
 	}
-
-	/**
-	 * Metadatascope should have the values scope description and scope codelist value. 
-	 * Values should be in the format name~codelist 
-	 * @param scopeCodes
-	 * @return
-	 * @throws BatchEditException
-	 */
-	private Element getMdScopeElement(String[] scopeCodes) throws BatchEditException {
-
-		String value = "", codelist = "";
-		if (scopeCodes.length > 0) {
-			value = scopeCodes[0];
-		}
-		if (scopeCodes.length > 1) {
-			codelist = scopeCodes[1];
-		}
-		
-		try {
-			
-			//Element mdScope = new Element("metadataScope", Geonet.Namespaces.MDB);
-			Element _mdScope = new Element("MD_MetadataScope", Geonet.Namespaces.MDB);
-			Element resScope = new Element("resourceScope", Geonet.Namespaces.MDB);
-
-			Element cl = new Element("MD_ScopeCode", Geonet.Namespaces.MCC);
-			cl.setAttribute("codeList", "codeListLocation#MD_ScopeCode");
-			cl.setAttribute("codeListValue", codelist);
-
-			Element name = new Element("name", Geonet.Namespaces.MDB);
-			Element ch = new Element("CharacterString", Geonet.Namespaces.GCO_3).setText(value);
-
-			//mdScope.addContent(_mdScope.addContent(Arrays.asList(resScope.addContent(cl), name.addContent(ch))));
-			_mdScope.addContent(Arrays.asList(resScope.addContent(cl), name.addContent(ch)));
-			
-			return _mdScope;
-		} catch (Exception e) {
-			throw new BatchEditException("Unable to process Metadata Scope Element having value " + value);
-		}
-
-	}
+	
 	
 	/**
 	 * To create Parent metadata element, provide eCatId

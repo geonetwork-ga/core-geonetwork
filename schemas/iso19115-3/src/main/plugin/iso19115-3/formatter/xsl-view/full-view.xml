@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../config-editor.xsd" xmlns:gn="http://www.fao.org/geonetwork"
+	xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:srv="http://standards.iso.org/iso/19115/-3/srv/2.0"
+	xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0" xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+	xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0" xmlns:mmi="http://standards.iso.org/iso/19115/-3/mmi/1.0"
+	xmlns:mrs="http://standards.iso.org/iso/19115/-3/mrs/1.0" xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0"
+	xmlns:mco="http://standards.iso.org/iso/19115/-3/mco/1.0" xmlns:msr="http://standards.iso.org/iso/19115/-3/msr/1.0"
+	xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0" xmlns:mrl="http://standards.iso.org/iso/19115/-3/mrl/1.0"
+	xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0" xmlns:mdq="http://standards.iso.org/iso/19157/-2/mdq/1.0"
+	xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/1.0" xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">
+	
+	<fieldsWithFieldset>
+		<name>mdb:metadataStandard</name>
+		<name>mdb:metadataScope</name>
+		<name>mdb:metadataLinkage</name>
+		<name>mdb:identificationInfo</name>
+		<name>mdb:distributionInfo</name>
+		<name>mri:descriptiveKeywords</name>
+		<name>mri:thesaurusName</name>
+		<name>mri:resourceConstraints</name>
+		<name>mdb:spatialRepresentationInfo</name>
+		<name>mri:pointOfContact</name>
+		<name>mdb:dataQualityInfo</name>
+		<name>mdb:resourceLineage</name>
+		<name>cit:citedResponsibleParty</name>
+		<name>cit:party</name>
+		<name>cit:individual</name>
+		<name>cit:logo</name>
+		<name>mdb:contact</name>
+		<name>mrd:onLine</name>
+		<name>mdb:referenceSystemInfo</name>
+		<name>mri:equivalentScale</name>
+		<name>mri:graphicOverview</name>
+		<name>msr:projection</name>
+		<name>mdb:extent</name>
+		<name>cit:extent</name>
+		<name>gex:geographicBox</name>
+		<name>gex:EX_TemporalExtent</name>
+		<name>mrd:MD_Distributor</name>
+		<name>srv:containsOperations</name>
+		<name>srv:SV_CoupledResource</name>
+		<name>mdb:metadataConstraints</name>
+		<name>mri:associatedResource</name>
+		<name>srv:parameter</name>
+		<name>mdb:metadataProfile</name>
+		<name>mrl:source</name>
+		<name>mco:MD_LegalConstraints</name>
+		<name>mco:MD_SecurityConstraints</name>
+		
+	</fieldsWithFieldset>
+
+	<views>
+		<view name="advanced" displayIfServiceInfo="count(session[profile='Administrator'])=1"  xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0">
+			<tab id="identificationInfo" default="true">
+				<section xpath="/mdb:MD_Metadata/mdb:identificationInfo" or="identificationInfo"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="distributionInfo">
+				<section xpath="/mdb:MD_Metadata/mdb:distributionInfo" or="distributionInfo"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="dataQualityInfo">
+				<section xpath="/mdb:MD_Metadata/mdb:dataQualityInfo" or="dataQualityInfo"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="resourceLineage">
+				<section xpath="/mdb:MD_Metadata/mdb:resourceLineage" or="resourceLineage"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="spatialRepresentationInfo">
+				<section xpath="/mdb:MD_Metadata/mdb:spatialRepresentationInfo"
+					or="spatialRepresentationInfo" in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="referenceSystemInfo">
+				<section xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="contentInfo" toggle="true">
+				<section xpath="/mdb:MD_Metadata/mdb:contentInfo" or="contentInfo" in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="acquisitionInformation" toggle="true">
+				<section xpath="/mdb:MD_Metadata/mdb:acquisitionInformation" or="acquisitionInformation"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="metadata">
+				<section name="mdb:MD_Metadata">
+					<field xpath="/mdb:MD_Metadata/mdb:metadataIdentifier"/>
+					<field xpath="/mdb:MD_Metadata/mdb:defaultLocale" or="defaultLocale"
+						in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:otherLocale" or="otherLocale"
+						in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:contact" or="contact" in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:parentMetadata" or="parentMetadata"
+						in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:metadataScope" or="metadataScope"
+						in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" or="alternativeMetadataReference"
+						in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:metadataLinkage" or="metadataLinkage"
+						in="/mdb:MD_Metadata"/>
+					<field xpath="/mdb:MD_Metadata/mdb:dateInfo"/>
+					<field xpath="/mdb:MD_Metadata/mdb:metadataStandard"/>
+					<field xpath="/mdb:MD_Metadata/mdb:metadataProfile"/>
+				</section>
+			</tab>
+			<tab id="metadataConstraints" toggle="true">
+				<section xpath="/mdb:MD_Metadata/mdb:metadataConstraints" or="metadataConstraints"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="metadataMaintenance" toggle="true">
+				<section xpath="/mdb:MD_Metadata/mdb:metadataMaintenance" or="metadataMaintenance"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			<tab id="applicationSchemaInfo" toggle="true">
+				<section xpath="/mdb:MD_Metadata/mdb:applicationSchemaInfo" or="applicationSchemaInfo"
+					in="/mdb:MD_Metadata"/>
+			</tab>
+			
+		</view>
+
+	</views>
+
+</editor>

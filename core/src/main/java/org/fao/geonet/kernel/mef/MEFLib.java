@@ -371,27 +371,30 @@ public class MEFLib {
         for (OperationAllowed operationAllowed : opsAllowed) {
             int grpId = operationAllowed.getId().getGroupId();
             Group group = groupRepository.findOne(grpId);
-            String grpName = group.getName();
+            if(group != null){
+            	String grpName = group.getName();
 
-            if (!userGroups.contains(grpId)) {
-                continue;
+                if (!userGroups.contains(grpId)) {
+                    continue;
+                }
+
+                Operation operation = operationRepository.findOne(operationAllowed.getId().getOperationId());
+                String operName = operation.getName();
+
+                if (grpOwnerId != null && grpOwnerId == grpId) {
+                    grpOwnerName = grpName;
+                }
+
+                ArrayList<String> al = hmPriv.get(grpName);
+
+                if (al == null) {
+                    al = new ArrayList<String>();
+                    hmPriv.put(grpName, al);
+                }
+
+                al.add(operName);
             }
-
-            Operation operation = operationRepository.findOne(operationAllowed.getId().getOperationId());
-            String operName = operation.getName();
-
-            if (grpOwnerId != null && grpOwnerId == grpId) {
-                grpOwnerName = grpName;
-            }
-
-            ArrayList<String> al = hmPriv.get(grpName);
-
-            if (al == null) {
-                al = new ArrayList<String>();
-                hmPriv.put(grpName, al);
-            }
-
-            al.add(operName);
+            
         }
 
         // --- generate elements

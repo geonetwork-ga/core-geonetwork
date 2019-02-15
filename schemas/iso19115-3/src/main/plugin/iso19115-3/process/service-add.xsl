@@ -12,6 +12,7 @@ by adding a reference to the distribution section.
                 xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0"
                 xmlns:lan="http://standards.iso.org/iso/19115/-3/lan/1.0"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:gn-fn-iso19115-3="http://geonetwork-opensource.org/xsl/functions/profiles/iso19115-3"
                 xmlns:gn="http://www.fao.org/geonetwork"
@@ -219,4 +220,15 @@ by adding a reference to the distribution section.
       <xsl:apply-templates select="mdb:acquisitionInformation"/>
     </xsl:copy>
   </xsl:template>
+  
+  <!-- Do a copy of every nodes and attributes -->
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!-- Remove geonet:* elements. -->
+  <xsl:template match="gn:*"
+    priority="2"/>
 </xsl:stylesheet>

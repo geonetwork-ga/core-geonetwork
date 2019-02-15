@@ -27,4 +27,10 @@ public class ISO19115_3Namespaces {
     public static final Namespace LAN =
             Namespace.getNamespace("lan",
                     "http://standards.iso.org/iso/19115/-3/lan/1.0");
+    public static final Namespace CIT =
+            Namespace.getNamespace("cit",
+                    "http://standards.iso.org/iso/19115/-3/cit/1.0");
+    public static final Namespace MCC =
+            Namespace.getNamespace("mcc",
+                    "http://standards.iso.org/iso/19115/-3/mcc/1.0");
 }

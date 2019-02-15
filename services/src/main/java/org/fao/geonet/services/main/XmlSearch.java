@@ -29,17 +29,25 @@ import jeeves.server.UserSession;
 import jeeves.server.context.ServiceContext;
 
 import org.fao.geonet.Util;
+import org.apache.commons.io.FileUtils;
 import org.fao.geonet.GeonetContext;
+import org.fao.geonet.constants.Edit;
 import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.csw.common.util.Xml;
 import org.fao.geonet.kernel.SelectionManager;
 import org.fao.geonet.kernel.search.LuceneIndexField;
 import org.fao.geonet.kernel.search.MetaSearcher;
 import org.fao.geonet.kernel.search.SearchManager;
 import org.fao.geonet.kernel.search.SearcherType;
 import org.fao.geonet.services.util.SearchDefaults;
+import org.fao.geonet.utils.Log;
 import org.jdom.Element;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.fao.geonet.kernel.SelectionManager.SELECTION_BUCKET;
 import static org.fao.geonet.kernel.SelectionManager.SELECTION_METADATA;
@@ -76,6 +84,20 @@ public class XmlSearch implements Service {
         String bucket = Util.getParam(params, SELECTION_BUCKET, SELECTION_METADATA);
         params.removeChild(SELECTION_BUCKET);
 
+        //Joseph added - Able to search by UUID and eCatId for search landing page - start
+        try{
+	        Element uuidEle = params.getChild(Edit.Info.Elem.UUID);
+	        if(uuidEle != null){
+	        	String id = uuidEle.getValue();
+	        
+	        	if(!isUuid(id)){
+	            	params.removeChild(Edit.Info.Elem.UUID);
+	            	params.addContent(new Element("eCatId").setText(id));
+	            }
+	        }
+        }catch(Exception e){ }
+        //Joseph added - Able to search by UUID and eCatId for search landing page - end
+        
         Element elData = SearchDefaults.getDefaultSearch(context, params);
 
         // possibly close old searcher
@@ -92,7 +114,9 @@ public class XmlSearch implements Service {
                 elData.getChild(Geonet.SearchResult.BUILD_SUMMARY).setText("true");
             }
 
-            session.setProperty(Geonet.Session.SEARCH_REQUEST + bucket, elData.clone());
+            if(session != null)
+            	session.setProperty(Geonet.Session.SEARCH_REQUEST + bucket, elData.clone());
+            
             searcher.search(context, elData, _config);
 
             if (!"0".equals(summaryOnly)) {
@@ -116,6 +140,13 @@ public class XmlSearch implements Service {
         } finally {
             searcher.close();
         }
+    }
+    
+    public boolean isUuid(String uuid){
+    	String pattern = "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[0-9a-f]{12}";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(uuid);
+		return m.find();
     }
 }
 

@@ -64,8 +64,10 @@
           md = gnMdViewObj.records[index];
         }
 
-        // Set the route
-        this.setLocationUuid(md.getUuid());
+        // Set the route //Joseph - url shows eCatId instead of UUID. 
+        //this.setLocationUuid(md.getUuid());
+        this.setLocationUuid(md.geteCatId());
+        
         gnUtilityService.scrollTo();
 
         angular.extend(md, {

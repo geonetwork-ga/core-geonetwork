@@ -1,0 +1,9 @@
+<mri:MD_Keywords xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0">
+	<mri:keyword>
+		<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{0}</gco:CharacterString>
+	</mri:keyword>
+	<mri:type>
+		<mri:MD_KeywordTypeCode codeList="codeListLocation#MD_KeywordTypeCode"
+			codeListValue="{1}" />
+	</mri:type>
+</mri:MD_Keywords>

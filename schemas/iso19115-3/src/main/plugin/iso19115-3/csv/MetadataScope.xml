@@ -1,0 +1,9 @@
+<mdb:MD_MetadataScope xmlns:mdb="http://standards.iso.org/iso/19115/-3/mdb/1.0" id="{0}">
+	<mdb:resourceScope>
+		<mcc:MD_ScopeCode xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0"
+			codeList="codeListLocation#MD_ScopeCode" codeListValue="{1}" />
+	</mdb:resourceScope>
+	<mdb:name>
+		<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{2}</gco:CharacterString>
+	</mdb:name>
+</mdb:MD_MetadataScope>

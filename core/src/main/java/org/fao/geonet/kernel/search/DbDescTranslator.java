@@ -143,16 +143,17 @@ public class DbDescTranslator implements Translator {
                     } else {
                         entity = (Localized) method.invoke(repository, key);
                     }
-                } catch (java.lang.IllegalArgumentException e) {
+                } catch (java.lang.IllegalArgumentException | InvocationTargetException e) {
                     // Call to the method with wrong argument type.
                 }
-                if (entity == null) {
+                //Joseph commented - duplication of code, it will execute else block even fails the if conditions
+                /*if (entity == null) {
                     try {
                         entity = (Localized) method.invoke(repository, key);
                     } catch (java.lang.IllegalArgumentException e) {
                         // Call to the method with wrong argument type.
                     }
-                }
+                }*/
                 if (entity != null) {
                     break;
                 }
@@ -162,18 +163,21 @@ public class DbDescTranslator implements Translator {
         if (entity != null) {
             return entity;
         } else {
-            if (repositoryClass.getSuperclass() != null) {
-                entity = findEntity(key, repository, repositoryClass.getSuperclass());
-            }
-            if (entity == null) {
-                final Class<?>[] interfaces = repositoryClass.getInterfaces();
-                for (Class<?> anInterface : interfaces) {
-                    entity = findEntity(key, repository, anInterface);
-                    if (entity != null) {
-                        return entity;
+        	try{
+        		if (repositoryClass.getSuperclass() != null) {
+                    entity = findEntity(key, repository, repositoryClass.getSuperclass());
+                }
+                if (entity == null) {
+                    final Class<?>[] interfaces = repositoryClass.getInterfaces();
+                    for (Class<?> anInterface : interfaces) {
+                        entity = findEntity(key, repository, anInterface);
+                        if (entity != null) {
+                            return entity;
+                        }
                     }
                 }
-            }
+        	}catch(Exception e){}
+            
             return null;
         }
     }

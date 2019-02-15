@@ -460,12 +460,17 @@ public class MetadataInsertDeleteApi {
                 report.addError(e);
             }
             if (xmlContent != null) {
-                Pair<Integer, String> pair = loadRecord(
-                    metadataType, xmlContent,
-                    uuidProcessing, group, category, rejectIfInvalid, transformWith, schema, extra, request);
-                report.addMetadataInfos(pair.one(), String.format(
-                    "Metadata imported from URL with UUID '%s'", pair.two())
-                );
+            	try{
+            		Pair<Integer, String> pair = loadRecord(
+                            metadataType, xmlContent,
+                            uuidProcessing, group, category, rejectIfInvalid, transformWith, schema, extra, request);
+                        report.addMetadataInfos(pair.one(), String.format(
+                            "Metadata imported from URL with UUID '%s'", pair.two())
+                        );	
+            	}catch(Exception e){
+            		report.addError(e);
+            	}
+                
             }
             report.incrementProcessedRecords();
        
@@ -691,7 +696,7 @@ public class MetadataInsertDeleteApi {
 
     
 	@ApiOperation(value = "Create a new record", nickname = "multicreate")
-	@RequestMapping(value = "/multiduplicate", method = { RequestMethod.PUT }, produces = {
+	@RequestMapping(value = "/duplicates", method = { RequestMethod.PUT }, produces = {
 			MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE })
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Return the internal id of the newly created record."),
 			@ApiResponse(code = 403, message = ApiParams.API_RESPONSE_NOT_ALLOWED_ONLY_EDITOR) })

@@ -1,0 +1,18 @@
+<gex:EX_Extent xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0">
+	<gex:geographicElement>
+		<gex:EX_GeographicBoundingBox>
+			<gex:westBoundLongitude>
+				<gco:Decimal xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{0}</gco:Decimal>
+			</gex:westBoundLongitude>
+			<gex:eastBoundLongitude>
+				<gco:Decimal xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{1}</gco:Decimal>
+			</gex:eastBoundLongitude>
+			<gex:southBoundLatitude>
+				<gco:Decimal xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{2}</gco:Decimal>
+			</gex:southBoundLatitude>
+			<gex:northBoundLatitude>
+				<gco:Decimal xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{3}</gco:Decimal>
+			</gex:northBoundLatitude>
+		</gex:EX_GeographicBoundingBox>
+	</gex:geographicElement>
+</gex:EX_Extent>

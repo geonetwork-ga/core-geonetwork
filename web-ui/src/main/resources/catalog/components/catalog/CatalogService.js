@@ -231,7 +231,7 @@
 			  count: count,
 	          group: groupId
 	        });
-	        return $http.put('../api/records/multiduplicate?' + url, {
+	        return $http.put('../api/records/duplicates?' + url, {
 	          headers: {
 	            'Accept': 'application/json'
 	          }
@@ -591,6 +591,9 @@
       },
       getId: function() {
         return this['geonet:info'].id;
+      },
+      getTitle: function() {
+        return this.title || this.defaultTitle;
       },
       geteCatId: function() {
         return this.eCatId;

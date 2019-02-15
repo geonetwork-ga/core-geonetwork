@@ -159,21 +159,23 @@ public class SettingManager {
             Log.debug(Geonet.SETTINGS, "Requested setting with name: " + path);
         }
         SettingRepository repo = ApplicationContextHolder.get().getBean(SettingRepository.class);
-
-        Setting se = repo.findOne(path);
-        if (se == null) {
-            // TODO : When a settings is not available in the settings table
-            // we end here. It could be relevant to add a list of default
-            // settings and populate the settings table when the settings is
-            // missing (due to bad migration for example).
-            Log.error(Geonet.SETTINGS, "  Requested setting with name: " + path + "  not found. Add it to the settings table.");
-            return null;
+        if(repo != null){
+        	Setting se = repo.findOne(path);
+            if (se == null) {
+                // TODO : When a settings is not available in the settings table
+                // we end here. It could be relevant to add a list of default
+                // settings and populate the settings table when the settings is
+                // missing (due to bad migration for example).
+                Log.error(Geonet.SETTINGS, "  Requested setting with name: " + path + "  not found. Add it to the settings table.");
+                return null;
+            }
+            String value = se.getValue();
+            if (value == null) {
+                Log.warning(Geonet.SETTINGS, "  Requested setting with name: " + path + " but null value found. Check the settings table.");
+            }
+            return value;
         }
-        String value = se.getValue();
-        if (value == null) {
-            Log.warning(Geonet.SETTINGS, "  Requested setting with name: " + path + " but null value found. Check the settings table.");
-        }
-        return value;
+        return null;
     }
 
     /**

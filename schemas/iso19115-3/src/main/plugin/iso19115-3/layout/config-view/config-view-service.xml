@@ -15,7 +15,7 @@
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation/cit:title" />
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:abstract" />
-			<field name="serviceType" templateModeOnly="true"
+			<!-- <field name="serviceType" templateModeOnly="true"
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceType"
 				or="serviceType"
 				in="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification"
@@ -32,7 +32,8 @@
 						</srv:serviceType>
 					</snippet>
 				</template>
-			</field>
+			</field> -->
+			<field xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceType" in="/mdb:MD_Metadata" />
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/srv:serviceTypeVersion"
 				or="serviceTypeVersion"

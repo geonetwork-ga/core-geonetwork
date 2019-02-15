@@ -240,4 +240,17 @@ public class ISO19139SchemaPlugin
     public Map<String, String> getExportFormats() {
         return allExportFormats;
     }
+
+
+	@Override
+	public String getAssociatedParentUuid(Element metadata) {
+		return "";
+	}
+
+
+	@Override
+	public Element getAssociatedResourceElement(Element metadata) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -21,7 +21,7 @@
             </label>
           </div>
 
-          <div class="form-group"
+          <!--<div class="form-group"
                data-ng-show="config.types.length > 1 && config.display == 'select'">
             <label class="col-sm-2 control-label">
               <span data-translate="">onlineChooseDocType</span>
@@ -38,12 +38,14 @@
           <div class="alert alert-info"
                data-ng-show="(params.linkType.label + '-help') != ((params.linkType.label + '-help') | translate)">
             {{(params.linkType.label + '-help') | translate}}
-          </div>
+          </div>-->
+          
           <br/>
+
           <!-- Function Combo -->
-          <div class="form-group"
-               data-ng-show="params.linkType.fields.function &&
-                             !params.linkType.fields.function.hidden">
+          <div class="form-group" 
+            data-ng-show="params.linkType.fields.function && 
+                          !params.linkType.fields.function.hidden">
             <label class="col-sm-2 control-label">
               <span data-translate="">onlineFunction</span>
             </label>
@@ -56,9 +58,9 @@
           </div>
 
           <!-- Protocol Combo -->
-          <div class="form-group"
-               data-ng-show="params.linkType.fields.protocol &&
-                             !params.linkType.fields.protocol.hidden">
+          <div class="form-group" 
+            data-ng-show="params.linkType.fields.protocol && 
+                          !params.linkType.fields.protocol.hidden">
             <label class="col-sm-2 control-label">
               <span data-translate="">protocol</span>
             </label>
@@ -124,8 +126,8 @@
 
           <!-- Name text Field -->
           <div class="form-group"
-               data-ng-show="params.linkType.fields.name &&
-                             !params.linkType.fields.name.hidden">
+                data-ng-show="params.linkType.fields.name &&
+                              !params.linkType.fields.name.hidden">
             <label for="onlinesrcName"
                    class="col-sm-2 control-label"
                    data-translate="">onlineResourceName</label>
@@ -151,8 +153,8 @@
 
           <!-- Description Text area -->
           <div class="form-group"
-               data-ng-show="params.linkType.fields.desc &&
-                             !params.linkType.fields.desc.hidden">
+                data-ng-show="params.linkType.fields.desc &&
+                              !params.linkType.fields.desc.hidden">
             <label for="onlinesrcDescr"
                    class="col-sm-2 control-label"
                    data-translate="">Description</label>
@@ -181,20 +183,46 @@
             </div>
           </div>
 
-
-          <!-- application profile text field -->
-          <div class="form-group"
-               data-ng-show="params.linkType.fields.applicationProfile &&
-                             !params.linkType.fields.applicationProfile.hidden">
-            <label for="applicationProfile"
+          <div class="form-group" 
+                data-ng-show="params.linkType.fields.formatname &&
+                            !params.linkType.fields.formatname.hidden">
+            <label for="formatname"
                    class="col-sm-2 control-label"
-                   data-translate="">applicationProfile</label>
+                   data-translate="">Format name</label>
             <div class="col-sm-10">
-              <input data-ng-model="params.applicationProfile"
-                     name="applicationProfile"
+              <input data-ng-model="params.formatname"
+                     name="formatname"
                      class="form-control"
                      type="text"
-                     id="applicationProfile">
+                     id="formatname">
+            </div>
+          </div>
+          <div class="form-group" 
+                data-ng-show="params.linkType.fields.edition &&
+                              !params.linkType.fields.edition.hidden">
+            <label for="edition"
+                   class="col-sm-2 control-label"
+                   data-translate="">Edition</label>
+            <div class="col-sm-10">
+              <input data-ng-model="params.edition"
+                     name="edition"
+                     class="form-control"
+                     type="text"
+                     id="edition">
+            </div>
+          </div>
+          <div class="form-group" 
+                data-ng-show="params.linkType.fields.filecomp &&
+                              !params.linkType.fields.filecomp.hidden">
+            <label for="filecomp"
+                   class="col-sm-2 control-label"
+                   data-translate="">File decompression technique</label>
+            <div class="col-sm-10">
+              <input data-ng-model="params.filecomp"
+                     name="filecomp"
+                     class="form-control"
+                     type="text"
+                     id="filecomp">
             </div>
           </div>
         </div>

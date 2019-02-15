@@ -28,6 +28,8 @@ import org.fao.geonet.ApplicationContextHolder;
 import org.fao.geonet.api.API;
 import org.fao.geonet.api.ApiParams;
 import org.fao.geonet.api.ApiUtils;
+import org.fao.geonet.api.records.model.related.RelatedItem;
+import org.fao.geonet.api.records.model.related.RelatedItemType;
 import org.fao.geonet.api.tools.i18n.LanguageUtils;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
@@ -38,8 +40,10 @@ import org.fao.geonet.kernel.SchemaManager;
 import org.fao.geonet.kernel.TransformManager;
 import org.fao.geonet.kernel.metadata.StatusActions;
 import org.fao.geonet.kernel.metadata.StatusActionsFactory;
+import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Element;
+import org.jdom.xpath.XPath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -55,6 +59,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -154,28 +159,57 @@ public class MetadataWorkflowApi {
         SchemaManager schemaManager = appContext.getBean(SchemaManager.class);
         DataManager dataManager = appContext.getBean(DataManager.class);
         
-        //Joseph added - To update Keyword with Retired_Internal, if status Retired(3) - Start
-        if(status == 3){
+        //Joseph added - Remove service record (associated resource) from dataset, if service record is Retired(3)/Rejected(5) 
+        if(status == 3 || status == 5){
+        	
+        	String schema = dataManager.getMetadataSchema(String.valueOf(metadata.getId()));
         	Element md = dataManager.getMetadata(String.valueOf(metadata.getId()));
-        	md = transMan.
-            		updatePublishKeyWord(md, "//mri:descriptiveKeywords/mri:MD_Keywords/mri:keyword[gco:CharacterString = '{}']", 
-            				Geonet.Transform.PUBLISH_KEYWORDS, "{}", Geonet.Transform.RETIRED_INTERNAL, false);
-            if(md != null){
-            	dataManager.updateMetadata(context, String.valueOf(metadata.getId()), md, false, false, false, context.getLanguage(), new ISODate().toString(), false);
-            }else{
-            	String schema = dataManager.getMetadataSchema(String.valueOf(metadata.getId()));
-            	String publishDate = new ISODate().toString();
-            	md = dataManager.getMetadata(String.valueOf(metadata.getId()));
-        		Map<String, Object> xslParameters = new HashMap<String, Object>();
-        		xslParameters.put("publish_keyword", Geonet.Transform.RETIRED_INTERNAL);
-        		Path file = schemaManager.getSchemaDir(schema).resolve("process").resolve(Geonet.File.SET_KEYWORD);
-        		md = Xml.transform(md, file, xslParameters);
-        		dataManager.updateMetadata(context, String.valueOf(metadata.getId()), md, false, false, false, context.getLanguage(), publishDate, false);
+        	String publishDate = new ISODate().toString();
+        	
+        	
+        	if(status == 3){//Joseph added - To update Keyword with Retired_Internal, if status Retired(3) - Start
+        		md = transMan.
+                		updatePublishKeyWord(md, "//mri:descriptiveKeywords/mri:MD_Keywords/mri:keyword[gco:CharacterString = '{}']", 
+                				Geonet.Transform.PUBLISH_KEYWORDS, "{}", Geonet.Transform.RETIRED_INTERNAL, false);
+                if(md != null){
+                	dataManager.updateMetadata(context, String.valueOf(metadata.getId()), md, false, false, false, context.getLanguage(), new ISODate().toString(), false);
+                }else{
+                	md = dataManager.getMetadata(String.valueOf(metadata.getId()));
+            		Map<String, Object> xslParameters = new HashMap<String, Object>();
+            		xslParameters.put("publish_keyword", Geonet.Transform.RETIRED_INTERNAL);
+            		Path file = schemaManager.getSchemaDir(schema).resolve("process").resolve(Geonet.File.SET_KEYWORD);
+            		md = Xml.transform(md, file, xslParameters);
+            		dataManager.updateMetadata(context, String.valueOf(metadata.getId()), md, false, false, false, context.getLanguage(), publishDate, false);
+                }
+                //Joseph added - To update Keyword with Retired_Internal, if status Retired(3) - End
+        	}
+            
+            //Grab all operatesOn uuidref, if record is service
+            RelatedItemType[] type = {RelatedItemType.datasets};
+            Element services = MetadataUtils.getRelated(context, metadata.getId(), metadata.getUuid(), type, 1, 100, true);
+            XPath xpath = XPath.newInstance(".//uuid");
+            try {
+                @SuppressWarnings("unchecked")
+                List<Element> matches = xpath.selectNodes(services);
+                for(Element uuid : matches){
+                	Metadata dtmetadata = ApiUtils.canEditRecord(uuid.getValue(), request);
+                	Element datasetMd = dataManager.getMetadata(String.valueOf(dtmetadata.getId()));
+                	Map<String, Object> xslParameters = new HashMap<String, Object>();
+            		xslParameters.put("code", metadata.getUuid());
+            		xslParameters.put("type", "UUID");
+            		Path file = schemaManager.getSchemaDir(schema).resolve("process").resolve("association-remove.xsl");
+            		datasetMd = Xml.transform(datasetMd, file, xslParameters);
+            		dataManager.updateMetadata(context, String.valueOf(dtmetadata.getId()), datasetMd, false, false, false, context.getLanguage(), publishDate, false);
+            		dataManager.indexMetadata(String.valueOf(dtmetadata.getId()), true);
+                }
+                
+            } catch (Exception e) {
+                Log.error(Geonet.SEARCH_ENGINE, ": failed on element using XPath '" + xpath +
+                        " Exception: " + e.getMessage());
             }
         }
-        //Joseph added - To update Keyword with Retired_Internal, if status Retired(3) - End
         
-      //--- reindex metadata
+        //--- reindex metadata
         dataManager.indexMetadata(String.valueOf(metadata.getId()), true);
     }
 }

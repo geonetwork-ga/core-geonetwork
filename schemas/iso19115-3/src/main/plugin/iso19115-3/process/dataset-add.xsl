@@ -18,7 +18,7 @@ a coupledResource reference.
   <xsl:param name="uuidref"/>
   
   <!-- List of layers -->
-  <xsl:param name="scopedName"/>
+  <!--<xsl:param name="scopedName"/>-->
 
   <xsl:param name="siteUrl"/>
   
@@ -61,7 +61,7 @@ a coupledResource reference.
               
               
               <!-- Handle SV_CoupledResource -->
-              <xsl:variable name="coupledResource">
+              <!--<xsl:variable name="coupledResource">
                 <xsl:for-each select="tokenize($scopedName, ',')">
                   <srv:coupledResource>
                     <srv:SV_CoupledResource>
@@ -78,7 +78,7 @@ a coupledResource reference.
               
               <xsl:if test="$uuidref">
                 <xsl:copy-of select="$coupledResource"/>  
-              </xsl:if>
+              </xsl:if>-->
               
               <xsl:copy-of
                 select="mdb:identificationInfo/*/srv:operatedDataset|

@@ -39,6 +39,9 @@
       <!-- online and thumbnail are extracted from schema extract-relations.xsl -->
       <!--<xsl:message><xsl:copy-of select="."/></xsl:message>-->
       <xsl:apply-templates mode="relation" select="/root/relations/*"/>
+      
+      <!-- Joseph added - Currently implemented for iso19115-3 standard, refer tpl-brief.xsl --> 
+      <xsl:apply-templates mode="association" select="/root/relations/associated"/>
     </related>
   </xsl:template>
 
@@ -56,10 +59,10 @@
     </xsl:copy>
   </xsl:template>
 
-
+  <!-- Joseph removed associated from match -->
   <xsl:template mode="relation" match="related|services|datasets|children|
                        parent|sources|fcats|hasfeaturecats|
-                       siblings|associated|sources|hassources">
+                       siblings|sources|hassources">
     <xsl:variable name="type" select="name(.)"/>
 
     <xsl:if test="response/metadata|response/sibling">
@@ -95,10 +98,10 @@
 
             <xsl:if test="$type = 'siblings'">
               <associationType>
-                <xsl:value-of select="../@initiative"/>
+				<xsl:value-of select="../@association"/>                
               </associationType>
               <initiativeType>
-                <xsl:value-of select="../@association"/>
+              	<xsl:value-of select="../@initiative"/>
               </initiativeType>
             </xsl:if>
           </item>

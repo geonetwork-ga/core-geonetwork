@@ -1,3 +1,83 @@
+<div class="panel panel-default" data-ng-show="isAdministrator()">
+  <div class="panel-heading">
+    <h5 class="onlinesrc-title">
+      <a href=""
+         data-ng-click="onlinesrcService.onOpenPopup('onlinesrc')">
+        <i class="fa fa-link"></i><i class="icon-external-link"></i>&nbsp;
+        <span data-translate="">onlinesrc</span>&nbsp;
+        <i class="fa fa-plus"></i>
+      </a>
+    </h5>
+  </div>
+
+<div class="panel-body">
+  <div class="gn-onlinesrc-panel">
+
+    <!-- ******* List of online resources ******* -->
+    <ul class="list-group">
+      <li class="list-group-item" href=""
+          data-ng-repeat="resource in relations.onlines | orderBy:sortLinks">
+        <div class="row">
+          <div class="col-md-11"
+               title="{{resource.description | gnLocalized: lang}}">
+            <a data-ng-href="{{resource.url}}"
+               data-ng-if="resource.url.match('^http|ftp') !== null"
+               target="_blank">
+              <i class="fa fa-fw"
+                 data-ng-class="onlinesrcService.getIconByProtocol(resource)"/>
+              {{(resource.title | gnLocalized: lang) || resource.url}}
+            </a>
+            <span data-ng-if="resource.url.match('^http|ftp') === null">
+              <i class="fa fa-fw"
+                 data-ng-class="onlinesrcService.getIconByProtocol(resource)"/>
+              {{(resource.title | gnLocalized: lang) || resource.url}}
+            </span>
+          </div>
+          <div class="col-md-1">
+            <a href=""
+               class="onlinesrc-remove"
+               data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+               data-ng-show="allowEdits"
+               data-ng-click="onlinesrcService.onOpenPopup('onlinesrc', resource)">
+              <i class="fa fa-pencil"></i>
+            </a>
+            <a href=""
+               class="onlinesrc-remove"
+               title="{{('remove' | translate) + ' ' + resource.description | gnLocalized: lang}}"
+               data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+               data-gn-click-and-spin="onlinesrcService.removeOnlinesrc(resource)">
+              <i class="fa fa-times text-danger"></i>
+            </a>
+          </div>
+        </div>
+      </li>
+    </ul>
+     <!-- ******* Display Thumbnails ******* -->
+     <ul class="list-inline">
+      <li class="gn-list-thumb thumbnail"
+          data-ng-repeat="thumb in relations.thumbnails">
+        <img class="thumb-small"
+             title="{{thumb.title | gnLocalized: lang}}"
+             data-gn-img-modal="thumb"
+             data-ng-src="{{thumb.id}}"/>
+
+        <a href="" class="onlinesrc-remove"
+           data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+           data-ng-click="onlinesrcService.removeThumbnail(thumb)"
+           title="{{'removeThumbnail' | translate}}">
+          <i class="btn fa fa-times text-danger"></i>
+        </a>
+        <a href="" class="onlinesrc-edit"
+           data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+           data-ng-show="allowEdits"
+           data-ng-click="onlinesrcService.onOpenPopup('onlinesrc', thumb)">
+          <i class="btn fa fa-pencil"></i>
+        </a>
+      </li>
+    </ul>
+   </div>
+    </div>
+</div>
 <div class="panel panel-default">
   <div class="panel-heading">
     <i class="fa fa-link"></i><i class="icon-external-link"></i>&nbsp;
@@ -11,14 +91,14 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu pull-right" role="menu">
-        <li data-ng-show="isCategoryEnable('thumbnail') || isCategoryEnable('onlinesrc')">
-          <a href=""
-             data-ng-click="onlinesrcService.onOpenPopup('onlinesrc')">
-            <i class="fa gn-icon-onlinesrc"></i>
-            <i class="icon-external-link"></i>&nbsp;
-            <span data-translate="">addDocument</span>
-          </a>
-        </li>
+          <li>
+              <a href=""
+                 data-ng-click="onlinesrcService.onOpenPopup('associatedres')">
+                <i class="fa gn-icon-onlinesrc"></i>
+                <i class="icon-external-link"></i>&nbsp;
+                <span data-translate="">addAssociatedResource</span>
+              </a>
+            </li>
         <li class="dropdown-header"
             data-translate>linkMetadata
         </li>
@@ -54,7 +134,7 @@
             <span data-translate="">linkToSource</span>
           </a>
         </li>
-        <li data-ng-show="isCategoryEnable('fcats')">
+        <!-- <li data-ng-show="isCategoryEnable('fcats')">
           <a href=""
              data-ng-click="onlinesrcService.onOpenPopup('fcats')">
             <i class="fa gn-icon-fcats"></i>
@@ -69,7 +149,7 @@
             <i class="icon-external-link"></i>&nbsp;
             <span data-translate="">linkToSibling</span>
           </a>
-        </li>
+        </li> -->
       </ul>
     </div>
 
@@ -81,78 +161,7 @@
   <div class="panel-body">
     <div class="gn-onlinesrc-panel">
 
-      <!-- ******* Display Thumbnails ******* -->
-      <ul class="list-inline">
-        <li class="gn-list-thumb thumbnail"
-            data-ng-repeat="thumb in relations.thumbnails">
-          <img class="thumb-small"
-               title="{{thumb.title | gnLocalized: lang}}"
-               data-gn-img-modal="thumb"
-               data-ng-src="{{thumb.id}}"/>
-
-          <a href="" class="onlinesrc-remove"
-             data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
-             data-ng-click="onlinesrcService.removeThumbnail(thumb)"
-             title="{{'removeThumbnail' | translate}}">
-            <i class="btn fa fa-times text-danger"></i>
-          </a>
-          <a href="" class="onlinesrc-edit"
-             data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
-             data-ng-show="allowEdits"
-             data-ng-click="onlinesrcService.onOpenPopup('onlinesrc', thumb)">
-            <i class="btn fa fa-pencil"></i>
-          </a>
-        </li>
-      </ul>
-
-      <!-- ******* List of online resources ******* -->
-      <h4 class="onlinesrc-title" data-ng-show="relations.onlines && relations.onlines.length > 0">
-        <a href=""
-           data-ng-click="onlinesrcService.onOpenPopup('onlinesrc')">
-          <i class="fa fa-link"></i><i class="icon-external-link"></i>&nbsp;
-          <span data-translate="">onlinesrc</span>&nbsp;
-          <i class="fa fa-plus"></i>
-        </a>
-      </h4>
-      <ul class="list-group">
-        <li class="list-group-item" href=""
-            data-ng-repeat="resource in relations.onlines | orderBy:sortLinks">
-          <div class="row">
-            <div class="col-md-11"
-                 title="{{resource.description | gnLocalized: lang}}">
-              <a data-ng-href="{{resource.url}}"
-                 data-ng-if="resource.url.match('^http|ftp') !== null"
-                 target="_blank">
-                <i class="fa fa-fw"
-                   data-ng-class="onlinesrcService.getIconByProtocol(resource)"/>
-                {{(resource.title | gnLocalized: lang) || resource.url}}
-              </a>
-              <span data-ng-if="resource.url.match('^http|ftp') === null">
-                <i class="fa fa-fw"
-                   data-ng-class="onlinesrcService.getIconByProtocol(resource)"/>
-                {{(resource.title | gnLocalized: lang) || resource.url}}
-              </span>
-            </div>
-            <div class="col-md-1">
-              <a href=""
-                 class="onlinesrc-remove"
-                 data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
-                 data-ng-show="allowEdits"
-                 data-ng-click="onlinesrcService.onOpenPopup('onlinesrc', resource)">
-                <i class="fa fa-pencil"></i>
-              </a>
-              <a href=""
-                 class="onlinesrc-remove"
-                 title="{{('remove' | translate) + ' ' + resource.description | gnLocalized: lang}}"
-                 data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
-                 data-gn-click-and-spin="onlinesrcService.removeOnlinesrc(resource)">
-                <i class="fa fa-times text-danger"></i>
-              </a>
-            </div>
-          </div>
-        </li>
-      </ul>
-
+    
       <!-- ******* List of datasets ******* -->
       <h4 class="onlinesrc-title" data-ng-show="relations.datasets">
         <a href=""
@@ -369,10 +378,13 @@
       </ul>
 
       <!-- ******* List of associated records (reverse direction of siblings) ******* -->
-      <h4 class="onlinesrc-title" data-ng-show="relations.associated">
-        <i class="fa fa-sign-out"></i>
-        <i class="icon-external-link"></i>&nbsp;
-        <span data-translate="">siblings</span>&nbsp;
+      <h4 class="onlinesrc-title" data-ng-show="relations.associated.length">
+        <a href="" data-ng-click="onlinesrcService.onOpenPopup('associatedres')">
+          <i class="fa fa-sign-out" data-ng-class="onlinesrcService.reload ? 'fa-spin' : ''"></i>
+          <i class="icon-external-link"></i>&nbsp;
+          <span data-translate="">associatedResources</span>&nbsp;
+          <i class="fa fa-plus"></i>
+        </a>
       </h4>
       <ul class="list-group">
         <li class="list-group-item"
@@ -383,6 +395,20 @@
               <a target="_blank"
                  data-ng-href="{{'../metadata/' + resource.id}}">
                 {{resource.title | gnLocalized: lang}}
+              </a>
+            </div>
+            <div class="col-md-1">
+              <a href=""
+                class="onlinesrc-remove"
+                data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+                data-ng-show="allowEdits"
+                data-ng-click="onlinesrcService.onOpenPopup('associatedres', resource)">
+               <i class="fa fa-pencil"></i>
+              </a>
+              <a href="" class="onlinesrc-remove"
+                 data-ng-if="gnCurrentEdit.schemaConfig.related.readonly !== true"
+                 data-ng-click="onlinesrcService.removeAssociation(resource)">
+                <i class="fa fa-times text-danger"></i>
               </a>
             </div>
           </div>

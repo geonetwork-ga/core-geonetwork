@@ -176,12 +176,36 @@
     </entry>
   </codelist>
   <codelist name="cit:CI_OnLineFunctionCode" alias="function">
+  	<!-- extends the existing OnLineFunctionCode codelist according to GA Metadata profile -->
+    <entry>
+      <code>browseGraphic</code>
+      <label>Browse graphic</label>
+      <description>Browse graphic provided</description>
+    </entry>
+    <entry>
+      <code>browsing</code>
+      <label>Browsing</label>
+      <description>Online browsing provided</description>
+    </entry>
+    <entry>
+      <code>completeMetadata</code>
+      <label>Complete metadata</label>
+      <description>Complete metadata provided</description>
+    </entry>
     <entry>
       <code>download</code>
       <label>Download</label>
-      <description>Online instructions for transferring data from one storage
-        device or system to another
-      </description>
+      <description>Online instructions for transferring data from one storage device or system to another</description>
+    </entry>
+    <entry>
+      <code>emailService</code>
+      <label>Email service</label>
+      <description>Online email service provided</description>
+    </entry>
+    <entry>
+      <code>fileAccess</code>
+      <label>File access</label>
+      <description>Online file access provided</description>
     </entry>
     <entry>
       <code>information</code>
@@ -191,51 +215,27 @@
     <entry>
       <code>offlineAccess</code>
       <label>Offline access</label>
-      <description>Online instructions for requesting the resource from the
-        provider
-      </description>
+      <description>Online instructions for requesting the resource from the provider</description>
     </entry>
     <entry>
       <code>order</code>
       <label>Order</label>
-      <description>Online order process for obtening the resource</description>
+      <description>Online order process for obtaining the resource</description>
     </entry>
     <entry>
       <code>search</code>
       <label>Search</label>
-      <description>Online search interface for seeking out information about the
-        resource
-      </description>
-    </entry>
-    <entry>
-      <code>completeMetadata</code>
-      <label>Complete Metadata</label>
-      <description>Complete metadata provided</description>
-    </entry>
-    <entry>
-      <code>browseGraphic</code>
-      <label>Browse Graphic</label>
-      <description>Browse Graphic provided</description>
+      <description>Online search interface for seeking out information about the resource</description>
     </entry>
     <entry>
       <code>upload</code>
       <label>Upload</label>
-      <description>Upload service provided</description>
+      <description>Online resource upload capability provided</description>
     </entry>
     <entry>
-      <code>emailService</code>
-      <label>Email Service</label>
-      <description>Email service provided</description>
-    </entry>
-    <entry>
-      <code>browsing</code>
-      <label>Browsing</label>
-      <description>Online browsing provided</description>
-    </entry>
-    <entry>
-      <code>fileAccess</code>
-      <label>Access File</label>
-      <description>Online file access provided</description>
+      <code>provenanceQueryService</code>
+      <label>Provenance query service</label>
+      <description>An online service that allows querying for provenance records about the resource. The provenance records delivered are conformat to the W3C's PROV Data Model</description>
     </entry>
   </codelist>
   <codelist name="cit:CI_PresentationFormCode">
@@ -526,109 +526,94 @@
       </description>
     </entry>
   </codelist>
-  	<codelist name="mri:DS_AssociationTypeCode">
-		<entry>
-			<code>crossReference</code>
-			<label>Cross reference</label>
-			<description>Reference from one dataset to another</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>largerWorkCitation</code>
-			<label>Larger work citation</label>
-			<description>Reference to a master dataset of which this one is a part</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>partOfSeamlessDatabase</code>
-			<label>Part of seamless database</label>
-			<description>Part of the same structured set of data held in a computer</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>stereoMate</code>
-			<label>Stereo mate</label>
-			<description>Part of a set of imagery that when used together, provides three-dimensional images</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <!-- new in ISO19115-1-2013 -->
-		<entry>
-			<code>isComposedOf</code>
-			<label>Is composed of</label>
-			<description>Reference to resources that are parts of this resource</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>collectiveTitle</code>
-			<label>Collective Title</label>
-			<description>Common title for a collection of resources. NOTE Title identifies elements of a series collectively, combined with information about what volumes are available at the source cite</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>series</code>
-			<label>Series</label>
-			<description>Associated through a common heritage such as produced to a common product specification</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>dependency</code>
-			<label>Dependency</label>
-			<description>Associated through a dependency</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-			<code>revisionOf</code>
-			<label>Revision Of</label>
-			<description>Resource is a revision of associated resource</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-                        <code>operatesOn</code>
-                        <label>Operates On</label>
-                        <description>An equivalent relationship to srv:operatesOn from a Service to a Dataset</description>
-        </entry>
-                <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
- 		<entry>
-				<code>operatedOnBy</code>
-				<label>Operated On By</label>
-				<description>Inverse of operatesOn where the domain resource is, or can be, operated on (queried, subsetted etc.) by the range resource which must be an agent (i.e. is something that bears some form of responsibility for the operation taking place)</description>
-		</entry>
-                <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
- 		<entry>
-				<code>wasDerivedFrom</code>
-				<label>Was Derived From</label>
-				<description>The domain resource was derived from the range resource which must have been an entity (i.e. not an actor with agency or a temporal event)</description>
-		</entry>
-		<entry>
-				<code>hadDerivation</code>
-				<label>Had Derivation</label>
-				<description>inverse of wasDerivedFrom</description>
-		</entry>
-		<!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
- 		<entry>
-				<code>wasGeneratedBy</code>
-				<label>Was Generated By</label>
-				<description>The domain resource was generated by the range resource which must have been a temporal event such as a data processing action or a field survey</description>
-		</entry>
-                <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
- 		<entry>
-				<code>generated</code>
-				<label>Generated</label>
-				<description>Inverse of wasGeneratedBy where the domain resource generated the range resoure implying that the domain resource is a temporal event, such as a data processing action, and the range resource is an entity</description>
-		</entry>
-                <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-				<code>wasInformedBy</code>
-				<label>Was Informed By</label>
-				<description>The domain resource was informed by the range resource which must have been an Entity (i.e. not an Agent with agency or an Activity temporal event). This is a looser association than wasDerivedFrom and does not indicate direct derivation, as wasDerivedFrom does.</description>
-		</entry>
-                <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
-		<entry>
-				<code>informed</code>
-				<label>Informed</label>
-				<description>inverse of wasInformedBy</description>
-		</entry>
-                <!-- - - - - - - - - - - - - - - - - - - - - - - - - -->
+  
+  <codelist name="mri:DS_AssociationTypeCode" alias="associationType">
+  	<!-- extends the existing DS_AssociationTypeCode codelist according GA Metadata profile -->
+    <entry>
+      <code>collectiveTitle</code>
+      <label>Collective title</label>
+      <description>Common title for a collection of resources where title identifies elements of a series collectively, combined with information about what volumes are available at the source cite</description>
+    </entry>
+    <entry>
+      <code>crossReference</code>
+      <label>Cross reference</label>
+      <description>Reference from one resource to another</description>
+    </entry>
+    <entry>
+      <code>dependency</code>
+      <label>Dependency</label>
+      <description>Associated through a dependency</description>
+    </entry>
+    <entry>
+      <code>isComposedOf</code>
+      <label>Is composed of</label>
+      <description>Reference to resources that are parts of this resource</description>
+    </entry>
+    <entry>
+      <code>largerWorkCitation</code>
+      <label>Larger work citation</label>
+      <description>Reference to a master resource of which this one is a part</description>
+    </entry>
+    <entry>
+      <code>partOfSeamlessDatabase</code>
+      <label>Part of seamless database</label>
+      <description>Part of same structured set of data held in a computer</description>
+    </entry>
+    <entry>
+      <code>revisionOf</code>
+      <label>Revision of</label>
+      <description>Resource is a revision of associated resource</description>
+    </entry>
+    <entry>
+      <code>series</code>
+      <label>Series</label>
+      <description>Associated through a common heritage such as produced to a common product specification</description>
+    </entry>
+    <entry>
+      <code>stereoMate</code>
+      <label>Stereo mate</label>
+      <description>Part of a set of imagery that when used together, provides three-dimensional images</description>
+    </entry>
+    <entry>
+      <code>generated</code>
+      <label>Generated</label>
+      <description>Inverse of wasGeneratedBy where the domain resource generated the range resoure implying that the domain resource is a temporal event, such as a data processing action, and the range resource is an entity</description>
+    </entry>
+    <entry>
+      <code>hadDerivation</code>
+      <label>Had derivation</label>
+      <description>Inverse of wasDerivedFrom where the range resource was derived from the domain resource</description>
+    </entry>
+    <entry>
+      <code>informed</code>
+      <label>Informed</label>
+      <description>Inverse of wasInformedBy</description>
+    </entry>
+    <entry>
+      <code>wasDerivedFrom</code>
+      <label>Was derived from</label>
+      <description>The domain resource was derived from the range resource which must have been an entity (i.e. not an actor with agency or a temporal event)</description>
+    </entry>
+    <entry>
+      <code>wasGeneratedBy</code>
+      <label>Was generated by</label>
+      <description>The domain resource was generated by the range resource which must have been a temporal event such as a data processing action or a field survey</description>
+    </entry>
+    <entry>
+      <code>wasInformedBy</code>
+      <label>Was informed by</label>
+      <description>The domain resource was informed by the range resource which must have been an Entity (i.e. not an Agent with agency or an Activity temporal event). This is a looser association than wasDerivedFrom and does not indicate direct derivation, as wasDerivedFrom does.</description>
+    </entry>
+    <entry>
+      <code>operatesOn</code>
+      <label>Operates on</label>
+      <description>An equivalent relationship to srv:operatesOn from a Service to a Dataset</description>
+    </entry>
+    <entry>
+      <code>operatedOnBy</code>
+      <label>Operated on by</label>
+      <description>Inverse of operatesOn where the domain resource is, or can be, operated on (queried, subsetted etc.) by the range resource which must be an agent (i.e. is something that bears some form of responsibility for the operation taking place)</description>
+    </entry>
   </codelist>
   <codelist name="mri:DS_InitiativeTypeCode" alias="initiativeType">
     <entry>

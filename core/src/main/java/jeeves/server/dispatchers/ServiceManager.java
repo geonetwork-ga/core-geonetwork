@@ -505,7 +505,9 @@ public class ServiceManager {
             if (e instanceof NotAllowedEx) {
                 throw (NotAllowedEx) e;
             } else {
-                handleError(req, response, context, srvInfo, e);
+            	//Joseph commented - Because at line 552 throw error due to unable to write response to xml 
+            	//Revert if eCat couldn't log the error properly
+                //handleError(req, response, context, srvInfo, e);
             }
         }
     }

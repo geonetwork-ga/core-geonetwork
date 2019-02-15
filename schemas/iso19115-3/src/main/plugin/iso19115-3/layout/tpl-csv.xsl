@@ -51,6 +51,8 @@
 			
 			<xsl:if test="xs:boolean($MetadataScope)">
 				<MetadataScope>
+					<xsl:value-of select="mdb:metadataScope/mdb:MD_MetadataScope/@id" />
+					<xsl:value-of select="$seperator" />
 					<xsl:value-of select="mdb:metadataScope/*/mdb:name" />
 					<xsl:value-of select="$seperator" />
 					<xsl:value-of

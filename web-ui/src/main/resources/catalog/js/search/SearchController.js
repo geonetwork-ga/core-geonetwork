@@ -165,17 +165,26 @@
    		   xpath: ''
    	   };
       $scope.stat = {
-   		   searching: false
+   		   searching: false,
+   		   background:false
    	   };
-   	  $scope.triggerXPathSearch = function(){
-   		  angular.extend($scope.obj, $scope.searchObj.params);
-   		  $http.post('../api/records/search/xpath',  $scope.obj).then(function(){
-   			  checkIsSearching();
-   		  })
-   	  };
+      $scope.triggerXPathSearch = function(){
+          $scope.stat.searching = true;
+          $http.get('../api/records/search/status').success(function(data){
+            if (data) {
+              $scope.stat.searching = false;
+              $scope.stat.background = true;
+              console.log("Another Xpath search executing in the backgorund");
+            }else{
+              angular.extend($scope.obj, $scope.searchObj.params);
+              $http.post('../api/records/search/xpath',  $scope.obj);
+              checkIsSearching();
+            }
+          })
+       };
    	  
    	   function checkIsSearching(){
-   		    $scope.stat.searching = true;  
+   		    
    			// Check if completed
    			return $http.get('../api/records/search/status').
    				success(function(data) {

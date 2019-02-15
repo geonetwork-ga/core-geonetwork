@@ -45,7 +45,7 @@
   <!-- Load the editor configuration to be able
   to render the different views -->
   <xsl:variable name="configuration"
-                select="document('../../layout/config-editor.xml')"/>
+                select="document('full-view.xml')"/>
 
   <!-- Some utility -->
   <xsl:include href="../../layout/evaluate.xsl"/>

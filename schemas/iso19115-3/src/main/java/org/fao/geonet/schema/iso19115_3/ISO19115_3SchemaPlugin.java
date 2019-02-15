@@ -35,6 +35,8 @@ public class ISO19115_3SchemaPlugin
     static {
         allNamespaces = ImmutableSet.<Namespace>builder()
                 .add(ISO19115_3Namespaces.GCO)
+                .add(ISO19115_3Namespaces.CIT)
+                .add(ISO19115_3Namespaces.MCC)
                 .add(ISO19115_3Namespaces.MDB)
                 .add(ISO19115_3Namespaces.MRC)
                 .add(ISO19115_3Namespaces.MRL)
@@ -206,4 +208,45 @@ public class ISO19115_3SchemaPlugin
     public Map<String, String> getExportFormats() {
         return allExportFormats;
     }
+
+	@Override
+	public String getAssociatedParentUuid(Element metadata) {
+		String _xpath = "mdb:parentMetadata/cit:CI_Citation/*/mcc:MD_Identifier[mcc:description/gco:CharacterString='UUID']/mcc:code/gco:CharacterString";
+		try {
+			Element e = (Element) Xml.selectSingle(metadata, _xpath, allNamespaces.asList());
+			if(e != null)
+				return e.getText();
+			
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		}
+		
+        return null;
+	}
+
+	@Override
+	public Element getAssociatedResourceElement(Element metadata) {
+		String _xpath = "*//mri:associatedResource";
+        Element association = new Element("associated");
+        return getAssociatedElement(metadata, _xpath, association);
+	}
+	
+	
+	private Element getAssociatedElement(Element metadata, String _xpath, Element ele) {
+		
+        try {
+        	List<?> nodes =  Xml.selectNodes(metadata, _xpath, allNamespaces.asList());
+        	for (Object o : nodes) {
+        		if (o instanceof Element) {
+                    Element node = (Element) ((Element) o).clone();
+                    ele.addContent(node.detach());
+        		}
+        	}
+        } catch (JDOMException | NullPointerException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ele;
+	}
 }

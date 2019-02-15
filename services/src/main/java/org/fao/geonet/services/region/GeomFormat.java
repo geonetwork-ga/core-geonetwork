@@ -24,6 +24,7 @@
 package org.fao.geonet.services.region;
 
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 import com.vividsolutions.jts.io.WKTWriter;
 
@@ -54,17 +55,22 @@ public enum GeomFormat {
 
         @Override
         public Geometry parse(String geomString) throws Exception {
-			try {
-				if (geomString.contains("%")) {
-					geomString = URLDecoder.decode(geomString, Constants.ENCODING);
-				}
-				if (geomString.contains("+")) {
-					geomString = geomString.replace("+", " ");
-				}
-				return wktReader.read(geomString);
-			} catch (Exception e) {
-				throw new Exception(e.getLocalizedMessage());
+			
+			if (geomString.contains("%")) {
+				geomString = URLDecoder.decode(geomString, Constants.ENCODING);
 			}
+			if (geomString.contains("+")) {
+				geomString = geomString.replace("+", " ");
+			}
+			Geometry geo = null;
+			try{
+				geo = wktReader.read(geomString);
+			}catch (ParseException e) {
+				//Joseph added - defaulting to Australia coordinates
+				geo = wktReader.read("POLYGON((112 -44, 154 -44, 154 -9, 112 -9, 112 -44))");
+			}
+			return geo;
+			
         }
     },
     GML3 {

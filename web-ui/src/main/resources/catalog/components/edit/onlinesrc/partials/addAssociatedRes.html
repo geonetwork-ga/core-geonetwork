@@ -1,0 +1,130 @@
+<div>
+  <form class="form-horizontal" role="form" data-ng-search-form="">
+    <div class="onlinesrc-container">
+
+      <div ng-repeat="option in associationTypes track by $index" style="display: inline-block; padding: 5px;">
+        <input ng-disabled="isEditing" type="radio" name="occurrences" ng-value="option" ng-model="model.selectedType" data-ng-change="displayType()" />
+        <label>{{ option }}</label>
+      </div>
+
+      <br><br>
+      <div ng-if="!isMdRecord">
+
+        <!-- code Field -->
+        <div class="form-group">
+            <label for="onlinesrcUrl" class="col-sm-1 control-label" data-translate="">Identifier</label>
+            <div class="col-sm-8">
+              <input ng-disabled="isEditing" data-ng-model="params.code" data-ng-model-options="{debounce: 500}" required="" name="code" class="form-control"
+                type="text" id="onlinesrcUrl" 
+                placeholder="Identifier of target resource eg: HPRM number or Github commit number" 
+                onfocus="this.placeholder=''"
+                onblur="this.placeholder='Identifier of target resource eg: HPRM number or Github commit number'">
+            </div>
+          </div>
+
+          <!-- Name text Field -->
+        <div class="form-group">
+          <label for="onlinesrcName" class="col-sm-1 control-label" data-translate="">onlineResourceName</label>
+          <div class="col-sm-8">
+            <input ng-model="params.name" name="name" type="text" id="onlinesrcName" 
+              placeholder="Name of github commit or name of HPRM document contains" 
+              onfocus="this.placeholder=''" 
+              onblur="this.placeholder='Name of github commit or name of HPRM document contains'">
+          </div>
+        </div>
+
+          <!-- Resource Description text Field -->
+          <div class="form-group">
+            <label for="onlinesrcDescr" class="col-sm-1 control-label" data-translate="">Resource Description</label>
+            <div class="col-sm-8">
+              <textarea rows="3" data-gn-autogrow="" data-ng-model="params.identifierDesc" class="form-control input-sm" id="identifierDesc"
+                placeholder="Eg: Description of what the Github commt is or what the HPRM document contains" 
+                name="description" 
+                onfocus="this.placeholder=''" 
+                onblur="this.placeholder='Eg: Description of what the Github commt is or what the HPRM document contains'"
+              />
+            </div>
+          </div>
+        
+        <!-- Url Field -->
+        <div class="form-group">
+          <label for="onlinesrcUrl" class="col-sm-1 control-label" data-translate="">url</label>
+          <div class="col-sm-8">
+            <input data-ng-model="params.url" data-ng-model-options="{debounce: 500}" required="" name="url" class="form-control"
+              type="text" id="onlinesrcUrl" 
+              placeholder="URL to the resource"
+              onfocus="this.placeholder=''" 
+              onblur="this.placeholder='URL to the resource'">
+          </div>
+        </div>
+
+        <!-- Description text Field -->
+        <div class="form-group">
+          <label for="onlinesrcDescr" class="col-sm-1 control-label" data-translate="">Link Description</label>
+          <div class="col-sm-8">
+            <textarea rows="3" data-gn-autogrow="" data-ng-model="params.desc" class="form-control input-sm" id="onlinesrcDescr"
+              placeholder="Description of what the URL is. Eg: Link to Github commit or Link to HPRM document" 
+              name="description" 
+              onfocus="this.placeholder=''" 
+              onblur="this.placeholder='Description of what the URL is. Eg: Link to Github commit or Link to HPRM document'" />
+            </div>
+      </div>
+      <!-- Protocol Combo -->
+      <div class="form-group">
+        <label class="col-sm-1 control-label">
+          <span data-translate="">protocol</span>
+        </label>
+        <div class="col-sm-5">
+          <div data-schema-info-combo="element"
+                data-init-on-load="true"
+                data-selected-info="params.protocol"
+                data-gn-schema-info="protocol" lang="lang"></div>
+        </div>
+      </div>
+    </div>
+     
+    <div class="form-group">
+        <label class="col-sm-1 control-label"><span data-translate="">associationType</span></label>
+        <div class="col-sm-5">
+          <div data-schema-info-combo="codelist" data-selected-info="config.associationType" data-gn-schema-info="associationType"
+            lang="lang"></div>
+        </div>
+      </div>
+
+    <div ng-show="isMdRecord">
+        <div class="form-group">
+          <div class="col-sm-10">
+            <div class="input-group">
+              <span class="input-group-addon"><i
+                class="fa fa-search"/></span>
+              <input class="form-control"
+                     data-ng-change="updateParams();triggerSearch()"
+                     type="text"
+                     data-ng-model="searchObj.any"
+                     data-ng-model-options="modelOptions"
+                     placeholder="{{'search' | translate}}" autofocus=""/>
+            </div>
+          </div>
+        </div>
+        <div data-gn-search-form-results=""
+             data-gn-search-form-results-mode="title"
+             data-gn-search-form-results-selection-mode="local simple"
+             data-search-results="searchResults"
+             data-select-records="stateObj.selectRecords"
+             data-pagination-info="paginationInfo">
+        </div>
+      </div>
+      </div>
+    </form>
+    <div class="">
+        <button type="button" data-ng-show="isResOk"
+                class="btn navbar-btn btn-success"
+                data-gn-click-and-spin="addAssociatedRes()">
+          <i class="fa gn-icon-onlinesrc"/>
+          <i class="icon-external-link"></i>&nbsp;
+          <span>
+            {{((isEditing ? 'update' : 'add') + 'Onlinesrc') | translate}}
+            </span>
+        </button>
+      </div>
+  </div>

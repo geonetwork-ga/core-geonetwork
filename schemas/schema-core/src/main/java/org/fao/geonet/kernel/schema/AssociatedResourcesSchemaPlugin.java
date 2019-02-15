@@ -48,4 +48,8 @@ public interface AssociatedResourcesSchemaPlugin {
     public abstract Set<String> getAssociatedFeatureCatalogueUUIDs(Element metadata);
 
     public abstract Set<String> getAssociatedSourceUUIDs(Element metadata);
+    
+    public abstract String getAssociatedParentUuid(Element metadata);
+    
+    public abstract Element getAssociatedResourceElement(Element metadata);
 }

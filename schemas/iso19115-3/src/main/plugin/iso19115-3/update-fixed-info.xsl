@@ -282,6 +282,26 @@
       <xsl:apply-templates select="mdb:acquisitionInformation"/>
     </xsl:copy>
   </xsl:template>
+
+	<xsl:template
+		match="cit:CI_Citation/cit:identifier[mcc:MD_Identifier/mcc:code/gco:CharacterString = 'Link to be added by administrator']">
+		<xsl:variable name="ecatId" select="/root/env/gaid" />
+		<xsl:variable name="codelistvalue" select="//mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue" />
+		<xsl:variable name="pid"
+			select="concat('http://pid.geoscience.gov.au/', $codelistvalue, '/ga/', $ecatId)" />
+		<xsl:copy>
+			<mcc:MD_Identifier>
+				<mcc:code>
+					<gco:CharacterString>
+						<xsl:value-of select="$pid" />
+					</gco:CharacterString>
+				</mcc:code>
+				<mcc:codeSpace>
+					<gco:CharacterString>ga-dataSetURI</gco:CharacterString>
+				</mcc:codeSpace>
+			</mcc:MD_Identifier>
+		</xsl:copy>
+	</xsl:template>
   
   <xsl:template match="cit:CI_Citation/cit:identifier[mcc:MD_Identifier/mcc:code/gco:CharacterString = 'Link to be added by administrator']">
 	<xsl:variable name="ecatId" select="/root/env/gaid" />
@@ -409,6 +429,25 @@
       <xsl:attribute name="codeList">
         <xsl:value-of select="concat($codeListLocation,'#',local-name(.))"/>
       </xsl:attribute>
+    </xsl:copy>
+  </xsl:template>
+  
+  <!-- Joseph - Add Protocol codeSpace to GA Profile codelist -->
+  <xsl:template match="cit:CI_OnlineResource[not(cit:protocol/gco:CharacterString/@codeSpace = 'http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/codelist/ga_profile_codelists.xml#gapCI_ProtocolTypeCode')]">
+    <xsl:copy>
+      <xsl:copy-of select="@*"/>
+      <xsl:copy-of select="cit:linkage"/>
+      <cit:protocol>
+        <gco:CharacterString>
+		  <xsl:attribute name="xsi:type" namespace="http://www.w3.org/2001/XMLSchema-instance">gco:CodeType</xsl:attribute>
+          <xsl:attribute name="codeSpace">http://pid.geoscience.gov.au/def/schema/ga/ISO19115-3-2016/codelist/ga_profile_codelists.xml#gapCI_ProtocolTypeCode</xsl:attribute>
+          <xsl:value-of select="cit:protocol/gco:CharacterString"/>
+        </gco:CharacterString>
+      </cit:protocol>
+      <xsl:copy-of select="cit:applicationProfile"/>
+	  <xsl:copy-of select="cit:name"/>
+      <xsl:copy-of select="cit:description"/>
+      <xsl:copy-of select="cit:function"/>
     </xsl:copy>
   </xsl:template>
   

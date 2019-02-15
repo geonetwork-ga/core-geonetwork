@@ -186,6 +186,8 @@
           <xsl:value-of select="$sep"/>
           <xsl:text>"id"</xsl:text>
 		  <xsl:value-of select="$sep"/>-->
+		  <xsl:text>"uuid"</xsl:text>
+          <xsl:value-of select="$sep"/>
 		  <xsl:value-of select="string-join($columns/schema[@name=$currentSchema]/column/normalize-space(), $sep)"/>
           <xsl:call-template name="newLine"/>
         </xsl:otherwise>
@@ -204,6 +206,9 @@
     <xsl:param name="columns"/>
     <xsl:param name="metadata"/>
 
+	<xsl:value-of
+      select="concat('&quot;', $metadata/geonet:info/uuid, '&quot;', $sep)"/>
+                  
     <!--<xsl:value-of
       select="concat('&quot;', $metadata/geonet:info/schema, '&quot;', $sep,
                   '&quot;', $metadata/geonet:info/uuid, '&quot;', $sep,

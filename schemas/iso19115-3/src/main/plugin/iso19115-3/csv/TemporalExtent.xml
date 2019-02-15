@@ -1,0 +1,14 @@
+<mri:extent xmlns:mri="http://standards.iso.org/iso/19115/-3/mri/1.0">
+	<gex:EX_Extent xmlns:gex="http://standards.iso.org/iso/19115/-3/gex/1.0">
+		<gex:temporalElement>
+			<gex:EX_TemporalExtent>
+				<gex:extent>
+					<gml:TimePeriod gml:id="A1234" xmlns:gml="http://www.opengis.net/gml/3.2">
+						<gml:beginPosition>{0}</gml:beginPosition>
+						<gml:endPosition>{1}</gml:endPosition>
+					</gml:TimePeriod>
+				</gex:extent>
+			</gex:EX_TemporalExtent>
+		</gex:temporalElement>
+	</gex:EX_Extent>
+</mri:extent>

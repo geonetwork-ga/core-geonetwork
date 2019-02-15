@@ -68,8 +68,8 @@ public class SearchDefaults {
         Element elData = new Element(Jeeves.Elem.REQUEST);
         Element elSession = null;
         try{
-        	elSession = (Element) session
-                    .getProperty(Geonet.Session.MAIN_SEARCH);	
+        	if(session != null)
+        		elSession = (Element) session.getProperty(Geonet.Session.MAIN_SEARCH);	
         }catch(Exception e){
         	Log.error(Geonet.DATA_DIRECTORY, "Exception while getting the property main.search from session.");
         }
@@ -109,8 +109,11 @@ public class SearchDefaults {
                 elData.addContent(new Element(p[0]).setText(p[1]));
         }
 
-        // Set params in session for future use
-        session.setProperty(Geonet.Session.MAIN_SEARCH, elData);
+        if(session != null){
+            // Set params in session for future use
+            session.setProperty(Geonet.Session.MAIN_SEARCH, elData);
+        }
+        
         return elData;
     }
 

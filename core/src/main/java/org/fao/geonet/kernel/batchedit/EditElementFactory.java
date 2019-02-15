@@ -32,14 +32,8 @@ public class EditElementFactory {
 	public static EditElement getElementType(String type) {
 		
 		switch (type) {
-		case Geonet.EditType.KEYWORD:
 		case Geonet.EditType.KEYWORD_THESAURUS:
 			return new KeywordEditElement();
-		case Geonet.EditType.GEOBOX:
-		case Geonet.EditType.VERTICAL:
-		case Geonet.EditType.VERTICAL_CRS:
-		case Geonet.EditType.TEMPORAL:
-			return new ExtentEditElement();
 		case Geonet.EditType.RES_CONTACT:
 		case Geonet.EditType.MD_CONTACT:
 		case Geonet.EditType.RESPONSIBLE_PARTY:
@@ -49,12 +43,8 @@ public class EditElementFactory {
 		case Geonet.EditType.ADDITIONAL_INFO:
 		case Geonet.EditType.DISTRIBUTION_LINK:
 			return new OnlineResourceEditElement();
-		case Geonet.EditType.DISTRIBUTION_FORMAT:
-		case Geonet.EditType.RESOURCE_FORMAT:
-			return new FormatEditElement();
 		case Geonet.EditType.CITATION_DATE:
 			return new DateEditElement();
-		case Geonet.EditType.MD_SCOPE:
 		case Geonet.EditType.MD_PARENT:
 			return new MetadataEditElement();
 		case Geonet.EditType.RES_LEGAL_CONSTRAINT:

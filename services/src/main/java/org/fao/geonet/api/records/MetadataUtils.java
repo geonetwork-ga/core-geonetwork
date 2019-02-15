@@ -23,39 +23,6 @@
 
 package org.fao.geonet.api.records;
 
-import com.google.common.base.Joiner;
-
-import org.fao.geonet.ApplicationContextHolder;
-import org.fao.geonet.Constants;
-import org.fao.geonet.GeonetContext;
-import org.fao.geonet.api.ApiUtils;
-import org.fao.geonet.api.records.model.related.RelatedItemType;
-import org.fao.geonet.constants.Edit;
-import org.fao.geonet.constants.Geonet;
-import org.fao.geonet.domain.ISODate;
-import org.fao.geonet.domain.Metadata;
-import org.fao.geonet.domain.ReservedOperation;
-import org.fao.geonet.kernel.DataManager;
-import org.fao.geonet.kernel.SchemaManager;
-import org.fao.geonet.kernel.mef.MEFLib;
-import org.fao.geonet.kernel.schema.AssociatedResource;
-import org.fao.geonet.kernel.schema.AssociatedResourcesSchemaPlugin;
-import org.fao.geonet.kernel.schema.SchemaPlugin;
-import org.fao.geonet.kernel.search.MetaSearcher;
-import org.fao.geonet.kernel.search.SearchManager;
-import org.fao.geonet.kernel.search.SearcherType;
-import org.fao.geonet.lib.Lib;
-import org.fao.geonet.repository.MetadataRepository;
-import org.fao.geonet.services.metadata.Show;
-import org.fao.geonet.services.relations.Get;
-import org.fao.geonet.utils.BinaryFile;
-import org.fao.geonet.utils.IO;
-import org.fao.geonet.utils.Log;
-import org.fao.geonet.utils.Xml;
-import org.jdom.Content;
-import org.jdom.Element;
-import org.springframework.context.ApplicationContext;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
@@ -70,6 +37,37 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.fao.geonet.ApplicationContextHolder;
+import org.fao.geonet.Constants;
+import org.fao.geonet.GeonetContext;
+import org.fao.geonet.api.ApiUtils;
+import org.fao.geonet.api.records.model.related.RelatedItemType;
+import org.fao.geonet.constants.Edit;
+import org.fao.geonet.constants.Geonet;
+import org.fao.geonet.domain.Metadata;
+import org.fao.geonet.domain.ReservedOperation;
+import org.fao.geonet.kernel.DataManager;
+import org.fao.geonet.kernel.SchemaManager;
+import org.fao.geonet.kernel.mef.MEFLib;
+import org.fao.geonet.kernel.schema.AssociatedResource;
+import org.fao.geonet.kernel.schema.AssociatedResourcesSchemaPlugin;
+import org.fao.geonet.kernel.schema.SchemaPlugin;
+import org.fao.geonet.kernel.search.MetaSearcher;
+import org.fao.geonet.kernel.search.SearchManager;
+import org.fao.geonet.kernel.search.SearcherType;
+import org.fao.geonet.lib.Lib;
+import org.fao.geonet.services.metadata.Show;
+import org.fao.geonet.services.relations.Get;
+import org.fao.geonet.utils.BinaryFile;
+import org.fao.geonet.utils.IO;
+import org.fao.geonet.utils.Log;
+import org.jdom.Content;
+import org.jdom.Element;
+import org.springframework.context.ApplicationContext;
+
+import com.google.common.base.Joiner;
 
 import jeeves.constants.Jeeves;
 import jeeves.server.ServiceConfig;
@@ -118,11 +116,19 @@ public class MetadataUtils {
         // Get parent record from this record
         if (schemaPlugin != null && (listOfTypes.size() == 0 ||
             listOfTypes.contains(RelatedItemType.parent))) {
-            Set<String> listOfUUIDs = schemaPlugin.getAssociatedParentUUIDs(md);
+        	//Joseph commented - Parent element is added as snippet into xml, not referenced using uuidref
+            /*Set<String> listOfUUIDs = schemaPlugin.getAssociatedParentUUIDs(md);
             if (listOfUUIDs.size() > 0) {
                 String joinedUUIDs = Joiner.on(" or ").join(listOfUUIDs);
                 relatedRecords.addContent(search(joinedUUIDs, "parent", context, from, to, fast));
-            }
+                relatedRecords.addContent(parent);
+            }*/
+        	
+        	//Joseph added - Parent element is added as snippet into xml, not referenced using uuidref
+            String parentUuid = schemaPlugin.getAssociatedParentUuid(md);
+            if(StringUtils.isNotEmpty(parentUuid))
+            	relatedRecords.addContent(search(parentUuid, "parent", context, from, to, fast));
+            
         }
 
         // Get aggregates from this record
@@ -149,7 +155,11 @@ public class MetadataUtils {
         // Search for records where an aggregate point to this record
         if (listOfTypes.size() == 0 ||
             listOfTypes.contains(RelatedItemType.associated)) {
-            relatedRecords.addContent(search(uuid, "associated", context, from, to, fast));
+            //relatedRecords.addContent(search(uuid, "associated", context, from, to, fast));
+        	
+        	//Joseph added - Associated resource element is added as snippet into xml, not referenced using uuidref
+        	Element associations = schemaPlugin.getAssociatedResourceElement(md);
+        	relatedRecords.addContent(associations);
         }
 
         // Search for services

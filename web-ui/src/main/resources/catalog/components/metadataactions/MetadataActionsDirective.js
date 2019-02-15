@@ -320,6 +320,9 @@
           };
           $http.get('../api/users/groups')
               .success(function(data) {
+            	data = data.sort(function(a,b){
+            		return a.userName > b.userName ? 1 : a.userName < b.userName ? -1 : 0
+ 				})
                 var uniqueUserGroups = {};
                 angular.forEach(data, function(g) {
                   var key = g.groupId + '-' + g.userId;

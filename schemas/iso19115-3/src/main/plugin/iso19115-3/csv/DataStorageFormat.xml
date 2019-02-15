@@ -1,0 +1,8 @@
+<cit:CI_Citation xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/1.0">
+	<cit:title>
+		<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{0}</gco:CharacterString>
+	</cit:title>
+	<cit:edition>
+		<gco:CharacterString xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0">{1}</gco:CharacterString>
+	</cit:edition>
+</cit:CI_Citation>

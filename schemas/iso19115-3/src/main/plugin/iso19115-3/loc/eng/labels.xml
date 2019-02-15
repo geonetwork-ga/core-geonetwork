@@ -3901,60 +3901,58 @@
     <label>Protocol</label>
     <description>Connection protocol to be used</description>
     <helper sort="true">
-      <option value="OGC:CSW">OGC-CSW Catalogue Service for the Web
-      </option>
-      <option value="OGC:KML">OGC-KML Keyhole Markup Language
-      </option>
-      <option value="OGC:GML">OGC-GML Geography Markup Language
-      </option>
-      <option value="OGC:ODS">OGC-ODS OpenLS Directory Service
-      </option>
-      <option value="OGC:OGS">OGC-ODS OpenLS Gateway Service</option>
-      <option value="OGC:OUS">OGC-ODS OpenLS Utility Service</option>
-      <option value="OGC:OPS">OGC-ODS OpenLS Presentation Service</option>
-      <option value="OGC:ORS">OGC-ODS OpenLS Route Service</option>
-      <option value="OGC:SOS">OGC-SOS Sensor Observation Service</option>
-      <option value="OGC:SPS">OGC-SPS Sensor Planning Service</option>
-      <option value="OGC:SAS">OGC-SAS Sensor Alert Service</option>
-      <option value="OGC:WCS">OGC-WCS Web Coverage Service</option>
-      <option value="OGC:WCTS">OGC-WCTS Web Coordinate Transformation Service</option>
-      <option value="OGC:WFS">OGC-WFS Web Feature Service</option>
-      <option value="OGC:WMS">OGC-WMS Web Map Service</option>
-      <option value="OGC:WMTS">OGC-WMS Web Map Tile Service</option>
-      <option value="OGC:WNS">OGC-WNS Web Notification Service</option>
-      <option value="OGC:WPS">OGC-WPS Web Processing Service</option>
-      <option value="WWW:DOWNLOAD-1.0-ftp--download">File for download through FTP</option>
-      <option value="WWW:DOWNLOAD-1.0-http--download">File for download</option>
-      <option value="ESRI:REST">ESRI REST Service</option>
-      <option value="FILE:GEO">GIS file</option>
-      <option value="FILE:RASTER">GIS RASTER file</option>
-      <option value="WWW:LINK-1.0-http--link" default="">Web address (URL)</option>
-      <option value="WWW:LINK-1.0-http--rss">RSS News feed (URL)</option>
-      <option value="DB:POSTGIS">PostGIS database table</option>
       <option value="DB:ORACLE">ORACLE database table</option>
-      <option value="WWW:LINK-1.0-http--opendap">OPeNDAP URL</option>
-      <option value="RBNB:DATATURBINE">Data Turbine</option>
+      <option value="DB:POSTGIS">PostGIS database table</option>
+      <option value="ESRI:AIMS--http--configuration">ESRI's ArcIMS Map Service Configuration File written in ArcXML</option>
+      <option value="ESRI:AIMS--http-get-feature">ESRI's ArcIMS Internet Feature Map Service</option>
+      <option value="ESRI:AIMS--http-get-image">ESRI's ArcIMS Internet Image Map Service</option>
+      <option value="ESRI:Geoprocessing-Service">ESRI's ArcGIS Geoprocessing Server</option>
+      <option value="ESRI:Image-Service">ESRI's ArcGIS Image Server</option>
+      <option value="ESRI:Map-Service">ESRI's ArcGIS Map Server</option>
+      <option value="ESRI:Services-Directory-Page">ESRI's ArcGIS Services Directory Page</option>
+      <option value="FILE:DATA-DIRECTORY">Directory on a file system holding a collection of data files</option>
+      <option value="FILE:GEO">File containing Geographic Information System (GIS) data</option>
+      <option value="FILE:RASTER">File containing raster data</option>
+      <option value="GLG:KML-2.0-http-get-map">Google Earth Keyhole Markup Language (KML) Service version 2.0</option>
+      <option value="OGC:CSW">Open Geospatial Consortium's Catalogue Service for the Web</option>
+      <option value="OGC:GML">Open Geospatial Consortium's Geography Markup Language (GML)</option>
+      <option value="OGC:KML">Open Geospatial Consortium's Keyhole Markup Language (KML)</option>
+      <option value="OGC:ODS">Open Geospatial Consortium's Location Service (OpenLS) Directory Service (ODS)</option>
+      <option value="OGC:OGS">Open Geospatial Consortium's Location Service (OpenLS) Gateway Service (ODS)</option>
+      <option value="OGC:OPS">Open Geospatial Consortium's Location Service (OpenLS) Presentation Service (ODS)</option>
+      <option value="OGC:ORS">Open Geospatial Consortium's Location Service (OpenLS) Route Service (ODS)</option>
+      <option value="OGC:OUS">Open Geospatial Consortium's Location Service (OpenLS) Utility Service (ODS)</option>
+      <option value="OGC:SAS">Open Geospatial Consortium's Sensor Alert Service (SAS)</option>
+      <option value="OGC:SOS">Open Geospatial Consortium's Sensor Observation Service (SOS)</option>
+      <option value="OGC:SOS-1.0.0-http-get-observation">Open Geospatial Consortium's Sensor Observation Service (SOS) version 1.0.0 GetObservation operation</option>
+      <option value="OGC:SOS-1.0.0-http-post-observation">Open Geospatial Consortium's Sensor Observation Service (SOS) version 1.0.0 GetObservation operation using POST</option>
+      <option value="OGC:SPS">Open Geospatial Consortium's Sensor Planning Service (SPS)</option>
+      <option value="OGC:WCS">Open Geospatial Consortium's Web Coverage Service (WCS)</option>
+      <option value="OGC:WCS-1.0.0-http-get-capabilities">Open Geospatial Consortium's Web Coverage Service (WCS) version 1.0.0 GetCapabilities operation</option>
+      <option value="OGC:WCS-1.1.0-http-get-capabilities">Open Geospatial Consortium's Web Coverage Service (WCS) version 1.1.0 GetCapabilities operation</option>
+      <option value="OGC:WCTS">Open Geospatial Consortium's Web Coordinate Transformation Service (WCTS)</option>
+      <option value="OGC:WFS">Open Geospatial Consortium's Web Feature Service (WFS)</option>
+      <option value="OGC:WFS-1.0.0-http-get-capabilities">Open Geospatial Consortium's Web Feature Service (WFS) version 1.0.0 GetCapabilities operation</option>
+      <option value="OGC:WFS-1.1.0-http-get-capabilities">Open Geospatial Consortium's Web Feature Service (WFS) version 1.1.0 GetCapabilities operation</option>
+      <option value="OGC:WFS-G">Open Geospatial Consortium's Web Feature Service Gazetteer Profile (WFS-G)</option>
+      <option value="OGC:WMC-1.1.0-http-get-capabilities">Open Geospatial Consortium's Web Map Context (WMC) version 1.1 GetCapabilities operation</option>
+      <option value="OGC:WMS">Open Geospatial Consortium's Web Map Service (WMS)</option>
+      <option value="OGC:WMS-1.1.1-http-get-capabilities">Open Geospatial Consortium's Web Map Service (WMS) version 1.1.1 GetCapabilities operation</option>
+      <option value="OGC:WMS-1.1.1-http-get-map">Open Geospatial Consortium's Web Map Service (WMS) version 1.1.1 GetMap operation</option>
+      <option value="OGC:WMS-1.3.0-http-get-capabilities">Open Geospatial Consortium's Web Map Service (WMS) version 1.3.0 GetCapabilities operation</option>
+      <option value="OGC:WMS-1.3.0-http-get-map">Open Geospatial Consortium's Web Map Service (WMS) version 1.3.0 GetMap operation</option>
+      <option value="OGC:WNS">Open Geospatial Consortium's Web Notification Service (WNS)</option>
+      <option value="OGC:WPS">Open Geospatial Consortium's Web Processing Service (WPS)</option>
+      <option value="RBNB:DATATURBINE">Ring Buffer Network Bus (RBNB) DataTurbine streaming</option>
       <option value="UKST">Unknown Service Type</option>
-
-<!-- Extras from eCat 2.10x -->
-
-<option value="AIMS">ESRI:AIMS--http--configuration</option>
-<option value="ESRI:AIMS--http--configuration">ArcIMSMapServiceConfigurationFileAXL</option>
-<option value="ESRI:AIMS--http-get-feature">ArcIMSInternetFeatureMapService</option>
-<option value="ESRI:AIMS--http-get-image">ArcIMSInternetImageMapService</option>
-<option value="GLG:KML-2.0-http-get-map">GoogleEarthKMLserviceVer2.0</option>
-<option value="WWW:LINK-1.0-http--ical">iCalendarURL</option>
-<option value="WWW:LINK-1.0-http--partners">PartnerwebaddressURL</option>
-<option value="WWW:LINK-1.0-http--related">RelatedlinkURL</option>
-<option value="WWW:LINK-1.0-http--samples">ShowcaseproductURL</option>
-<option value="URN:JETSTREAM-PROXY">FilefordownloadthroughJetstreamProxy</option>
-<option value="OGC:WFS-1.1.0-http-get-capabilities">OGC-WFSWebFeatureServiceVer1.1.0</option>
-<option value="OGC:WCS-1.0.0-http-get-capabilities">OGC-WCSWebCoverageServiceVer1.0.0</option>
-<option value="ESRI: Map Service">ESRI ArcGIS Map Service</option>
-<option value="ESRI: Image Service">ESRI ArcGIS Image Service</option>
-<option value="ESRI: Geoprocessing Service">ESRI ArcGIS Geoprocessing Service</option>
-<option value="ESRI: Services Directory Page">ESRI ArcGIS Services Directory Page</option> 
-
+      <option value="URN:JETSTREAM-PROXY">File for download through a Jetstream streaming proxy</option>
+      <option value="WWW:LINK-1.0-http--ical">ICalendar URL</option>
+      <option value="WWW:LINK-1.0-http--link">Web address URL</option>
+      <option value="WWW:LINK-1.0-http--opendap">Open-source Project for a Network Data Access Protocol (OPeNDAP) URL</option>
+      <option value="WWW:LINK-1.0-http--partners">Partner web address URL</option>
+      <option value="WWW:LINK-1.0-http--related">Related link URL</option>
+      <option value="WWW:LINK-1.0-http--rss">Rich Site Summary (RSS) News feed URL</option>
+      <option value="WWW:LINK-1.0-http--samples">Showcase product URL</option>
     </helper>
   </element>
   <element name="mri:purpose" id="26.0">
@@ -4341,6 +4339,10 @@
       <option value="PNG">PNG</option>
       <option value="JPEG">JPEG</option>
       <option value="OGC:WMC">OGC:WMC</option>
+      <option value="OGC:WMS">OGC:WMS</option>
+      <option value="OGC:WFS">OGC:WFS</option>
+      <option value="OGC:WMTS">OGC:WMTS</option>
+      <option value="OGC:WPS">OGC:WPS</option>
       <option value="OGC:OWS-C">OGC OWS Context</option>
     </helper>
   </element>
@@ -5670,5 +5672,29 @@
   <element name="reg:RE_ItemStatus">
     <label>Item status</label>
     <description></description>
+  </element>
+  <element name="srv:serviceType" context="srv:SV_ServiceIdentification">
+  	<!-- new codelist that constrains the srv:serviceType element which was previously free text (Based on GA Metadata profile)-->
+    <label>Service Type</label>
+    <description>Type of service</description>
+    <helper>
+      <option value="ESRI:ArcGIS:GPServer">ESRI's ArcGIS Geoprocessing Server</option>
+      <option value="ESRI:ArcGIS:ImageServer">ESRI's ArcGIS Image Server</option>
+      <option value="ESRI:ArcGIS:MapServer">ESRI's ArcGIS Map Server</option>
+      <option value="ESRI:ArcIMS">ESRI's ArcIMS Service</option>
+      <option value="OGC:CSW">Open Geospatial Consortium's Catalogue Service for the Web (CSW)</option>
+      <option value="OGC:SOS">Open Geospatial Consortium's Sensor Observation Service</option>
+      <option value="OGC:WCS">Open Geospatial Consortium's Web Coverage Service (WCS)</option>
+      <option value="OGC:WFS">Open Geospatial Consortium's Web Feature Service (WFS)</option>
+      <option value="OGC:WMS">Open Geospatial Consortium's Web Map Service (WMS)</option>
+      <option value="OGC:WMTS">Open Geospatial Consortium's Web Map Tile Service (WMTS)</option>
+      <option value="OGC:WPS">Open Geospatial Consortium's Web Processing Service (WPS)</option>
+      <option value="OPeNDAP:OPeNDAP">Open-source Project for a Network Data Access Protocol (OPeNDAP) root URL</option>
+      <option value="REST">Generic REST web service</option>
+      <option value="UKST">Unknown service type</option>
+      <option value="W3C:HTML:DOWNLOAD">Download</option>
+      <option value="W3C:HTML:INFORMATION">HTML Information</option>
+      <option value="W3C:SPARQL">W3C's SPARQL service</option>
+    </helper>
   </element>
 </labels>

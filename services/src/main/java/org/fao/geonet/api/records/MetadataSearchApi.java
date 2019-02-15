@@ -30,6 +30,7 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.xpath.XPath;
 import org.jdom.Document;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class MetadataSearchApi {
 
 	SAXBuilder sb = new SAXBuilder();
+	
 	private List<String> eCatIds = new ArrayList<>();
 	private boolean isSearching = false;
 
@@ -62,7 +64,11 @@ public class MetadataSearchApi {
 	public void getMetadataRecordsByXpath(@ApiIgnore HttpServletRequest request,
 			@RequestBody Map<String, String> allRequestParams) throws Exception {
 
+		
 		isSearching = true;
+		if(eCatIds != null && eCatIds.size() > 0){
+			eCatIds.clear();
+		} 
 		ServiceContext context = ApiUtils.createServiceContext(request);
 		
 		final MetadataRepository metadataRepository = context.getBean(MetadataRepository.class);
@@ -121,7 +127,8 @@ public class MetadataSearchApi {
 				Log.error(Geonet.SEARCH_ENGINE, "Unable to search by XPath, exception: " + e1.getMessage());
 			}
 		}
-
+		
+		
 		// return eCatIds;
 
 	}
@@ -182,4 +189,5 @@ public class MetadataSearchApi {
 		}
 		return null;
 	}
+	
 }
