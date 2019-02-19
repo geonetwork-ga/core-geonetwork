@@ -36,6 +36,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -107,6 +108,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.ec2.AmazonEC2;
+import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;
+import com.amazonaws.services.ec2.model.DescribeTagsRequest;
+import com.amazonaws.services.ec2.model.DescribeTagsResult;
+import com.amazonaws.services.ec2.model.Filter;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.AmazonS3URI;
@@ -121,6 +128,7 @@ import com.amazonaws.services.s3.transfer.Transfer.TransferState;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.TransferProgress;
+import com.amazonaws.util.EC2MetadataUtils;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -352,7 +360,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 		StringBuilder sb = new StringBuilder();
 		
 		try {
-			S3Object object = getS3Client().getObject(new GetObjectRequest(s3uri.getBucket(), key + ".json"));
+			S3Object object = EditUtils.getS3Client(s3uri.getRegion()).getObject(new GetObjectRequest(s3uri.getBucket(), key + ".json"));
 			InputStream objectData = object.getObjectContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(objectData));
 	        String line = null;
@@ -569,10 +577,6 @@ public class BatchEditsApi implements ApplicationContextAware {
 		
 	}
 
-	public AmazonS3 getS3Client(){
-		AmazonS3 s3client = AmazonS3ClientBuilder.standard().withRegion(s3uri.getRegion()).build();
-		return s3client;
-	}
 	/**
 	 * Backup metadata into s3 bucket in order to revert back incase it went wrong or or need to change to old state 
 	 * @param s3client
@@ -592,7 +596,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 
 	public void startBackupOperation(String s3key){
 		
-		AmazonS3 s3client = getS3Client();
+		AmazonS3 s3client = EditUtils.getS3Client(s3uri.getRegion());
 		TransferManager xfer_mgr = TransferManagerBuilder
 				.standard()
 				.withS3Client(s3client)
@@ -635,12 +639,10 @@ public class BatchEditsApi implements ApplicationContextAware {
 		        return;
 		    }
 		    TransferProgress progress = xfer.getProgress();
-		    //long so_far = progress.getBytesTransferred();
-		    //long total = progress.getTotalBytesToTransfer();
+		   
 		    pct = progress.getPercentTransferred();
 		    progressBackup();
 		} while (xfer.isDone() == false);
-		// print the final state of the transfer.
 		TransferState xfer_state = xfer.getState();
 		
 		Log.debug(Geonet.SEARCH_ENGINE, ": " + xfer_state);
@@ -720,7 +722,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 			PutObjectRequest putObj = new PutObjectRequest(s3uri.getBucket(), s3key + ".json", targetStream, metadata)
 					.withCannedAcl(CannedAccessControlList.PublicRead);
 
-			getS3Client().putObject(putObj);
+			EditUtils.getS3Client(s3uri.getRegion()).putObject(putObj);
 			
 			
 			//Add description and and filename into DB, removes info and error report in order to minimize the content

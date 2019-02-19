@@ -23,6 +23,19 @@
 
 package org.fao.geonet.api.records.editing;
 
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.ec2.AmazonEC2;
+import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;
+import com.amazonaws.services.ec2.model.DescribeTagsRequest;
+import com.amazonaws.services.ec2.model.DescribeTagsResult;
+import com.amazonaws.services.ec2.model.Filter;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.AmazonS3URI;
+import com.amazonaws.services.s3.model.ListVersionsRequest;
+import com.amazonaws.services.s3.model.S3VersionSummary;
+import com.amazonaws.services.s3.model.VersionListing;
+import com.amazonaws.util.EC2MetadataUtils;
 import com.google.common.collect.Lists;
 
 import org.fao.geonet.exceptions.BadParameterEx;
@@ -45,6 +58,7 @@ import org.fao.geonet.exceptions.ConcurrentUpdateEx;
 import org.fao.geonet.lib.Lib;
 import org.jdom.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -364,5 +378,55 @@ class EditUtils {
 
         parent.setContent(index1, (Element) el2.clone());
         parent.setContent(index2, el1Spare);
+    }
+    
+    public static AmazonS3 getS3Client(String region){
+		AmazonS3 s3client = AmazonS3ClientBuilder.standard().withRegion(region).build();
+		return s3client;
+	}
+    
+    public static String getEC2Tag(String region){
+		
+    	String ec2tag = "";
+		String instanceId = EC2MetadataUtils.getInstanceId();
+		
+		AmazonEC2 client = AmazonEC2ClientBuilder.standard().withRegion(region).withCredentials(new ProfileCredentialsProvider()).build();
+		DescribeTagsRequest req = new DescribeTagsRequest().withFilters(
+				new Filter("resource-id", Collections.singletonList(instanceId)));
+		DescribeTagsResult result =  client.describeTags(req);
+		ec2tag = result.getTags().stream().findFirst().get().getValue();
+		
+		return ec2tag;
+	}
+    
+    public static void getVersion(AmazonS3URI s3uri, AmazonS3 s3client){
+    	ListVersionsRequest request = new ListVersionsRequest()
+                .withBucketName(s3uri.getBucket())
+                .withMaxResults(1);
+            
+            VersionListing versionListing = s3client.listVersions(request); 
+            
+            int numVersions = 0, numPages = 0;
+            while(true) {
+                numPages++;
+                for (S3VersionSummary objectSummary : versionListing.getVersionSummaries()) {
+                	
+                	if(objectSummary.isLatest()){
+                		System.out.printf("Retrieved object %s, version %s\n", 
+                                objectSummary.getKey(), 
+                                objectSummary.getVersionId());
+                		numVersions++;	
+                	}
+                    
+                }
+                // Check whether there are more pages of versions to retrieve. If
+                // there are, retrieve them. Otherwise, exit the loop.
+                if(versionListing.isTruncated()) {
+                    versionListing = s3client.listNextBatchOfVersions(versionListing);
+                }
+                else {
+                    break;
+                }
+            }
     }
 }
