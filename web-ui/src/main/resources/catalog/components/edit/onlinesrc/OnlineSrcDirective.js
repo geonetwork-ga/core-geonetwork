@@ -1138,7 +1138,8 @@
                       identifierDesc:'',
                       process:'association-add',
                       preCode:'',
-                      preType:''
+                      preType:'',
+                      preAssociation:''
                     }
 
                     scope.associationTypes = [];
@@ -1235,6 +1236,7 @@
                           scope.isResOk = true;
                       }
                       scope.params.preType=linkToEdit.identifierDesc;
+                      scope.params.preAssociation=linkToEdit.associationType;
                       scope.params.code=linkToEdit.id;
                       scope.params.preCode=linkToEdit.id;
                       scope.config.associationType = linkToEdit.associationType;

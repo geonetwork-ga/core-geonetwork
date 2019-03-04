@@ -11,6 +11,13 @@
 		<section name=" ">
 			<!-- special template to render this field readonly - see layout-custom-fields.xsl -->
 			<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" />
+		
+			<field name="PID" 
+			xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[1]/mcc:MD_Identifier/mcc:code" />
+						
+			<field name="DOI" 
+			xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[2]/mcc:MD_Identifier/mcc:code" />
+					
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:title" />
 			<field
@@ -50,29 +57,7 @@
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:series/cit:CI_Series/cit:issueIdentification" />
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:series/cit:CI_Series/cit:name" />
-			<field name="gaDatasetURI" templateModeOnly="true"
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[mcc:MD_Identifier/mcc:codeSpace/gco:CharacterString='ga-dataSetURI']"
-				del="."
-				if="count(mdb:MD_Metadata/mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode[@codeListValue='' or @codeListValue='dataset']) > 0">
-				<template>
-					<values>
-						<key label="gaDatasetURI" xpath="mcc:MD_Identifier/mcc:code/gco:CharacterString"
-							tooltip="gaDatasetURI" use="textarea" />
-					</values>
-					<snippet>
-						<cit:identifier>
-							<mcc:MD_Identifier>
-								<mcc:code>
-									<gco:CharacterString>{{gaDatasetURI}}</gco:CharacterString>
-								</mcc:code>
-								<mcc:codeSpace>
-									<gco:CharacterString>ga-dataSetURI</gco:CharacterString>
-								</mcc:codeSpace>
-							</mcc:MD_Identifier>
-						</cit:identifier>
-					</snippet>
-				</template>
-			</field>
+
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:citedResponsibleParty"
 				or="citedResponsibleParty"
@@ -141,6 +126,10 @@
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialResolution" />
 			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
 				in="/mdb:MD_Metadata" />
+<<<<<<< HEAD
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
+=======
 			<field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
 			<action type="add" name="verticalElement" or="verticalElement"
 				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
@@ -165,7 +154,7 @@
 													<gco:CharacterString>EPSG</gco:CharacterString>
 												</mcc:codeSpace>
 												<mcc:version>
-													<gco:CharacterString></gco:CharacterString>
+													<gco:CharacterString>8.6</gco:CharacterString>
 												</mcc:version>
 											</mcc:MD_Identifier>
 										</mrs:referenceSystemIdentifier>
@@ -176,199 +165,21 @@
 					</snippet>
 				</template>
 			</action>
+>>>>>>> a4802433362bb5124b39d481c2eb4578b6483f1e
 		</section>
 	</tab>
 
 	<tab id="resourceLineageTab" mode="flat">
 		<section name=" ">
 			<field
-				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:scope" />
-
-			<!-- <field xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:source" />
-			<action type="add" name="source" or="source"
-				in="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage">
-				<template>
-					<snippet>
-						<mrl:source>
-							<mrl:LI_Source>
-								<mrl:description>
-									<gco:CharacterString></gco:CharacterString>
-								</mrl:description>
-								<mrl:sourceSpatialResolution>
-									<mri:MD_Resolution>
-										<mri:equivalentScale>
-											<mri:MD_RepresentativeFraction>
-												<mri:denominator>
-													<gco:Integer />
-												</mri:denominator>
-											</mri:MD_RepresentativeFraction>
-										</mri:equivalentScale>
-									</mri:MD_Resolution>
-								</mrl:sourceSpatialResolution>
-								<mrl:scope>
-									<mcc:MD_Scope>
-										<mcc:level>
-											<mcc:MD_ScopeCode codeList="codeListLocation#MD_ScopeCode"
-												codeListValue="dataset" />
-										</mcc:level>
-										<mcc:extent>
-											<gex:EX_Extent>
-												<gex:geographicElement>
-													<gex:EX_GeographicBoundingBox>
-														<gex:westBoundLongitude>
-															<gco:Decimal>112</gco:Decimal>
-														</gex:westBoundLongitude>
-														<gex:eastBoundLongitude>
-															<gco:Decimal>154</gco:Decimal>
-														</gex:eastBoundLongitude>
-														<gex:southBoundLatitude>
-															<gco:Decimal>-44</gco:Decimal>
-														</gex:southBoundLatitude>
-														<gex:northBoundLatitude>
-															<gco:Decimal>-9</gco:Decimal>
-														</gex:northBoundLatitude>
-													</gex:EX_GeographicBoundingBox>
-												</gex:geographicElement>
-											</gex:EX_Extent>
-										</mcc:extent>
-									</mcc:MD_Scope>
-								</mrl:scope>
-							</mrl:LI_Source>
-						</mrl:source>
-					</snippet>
-				</template>
-			</action> -->  
+				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" /> 
 		</section>
 	</tab>
 
-
 	<tab id="resourceFormat" mode="flat">
 		<section name=" ">
-			<field name="resourceFormatNoTitle" templateModeOnly="true"
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat"
-				del=".">
-				<template>
-					<values>
-						<key label="distribution_name"
-							xpath="mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title/gco:CharacterString"
-							tooltip="formatName">
-							<!-- <helper name="cit:title" context="mrd:formatSpecificationCitation"></helper> 
-								- No helper -->
-						</key>
-						<key label="distribution_version"
-							xpath="mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:edition/gco:CharacterString" />
-					</values>
-					<snippet>
-						<mri:resourceFormat>
-							<mrd:MD_Format>
-								<mrd:formatSpecificationCitation>
-									<cit:CI_Citation>
-										<cit:title>
-											<gco:CharacterString>{{distribution_name}}
-											</gco:CharacterString>
-										</cit:title>
-										<cit:date>
-											<cit:CI_Date>
-												<cit:date gco:nilReason="missing" />
-												<cit:dateType gco:nilReason="missing" />
-											</cit:CI_Date>
-										</cit:date>
-										<cit:edition>
-											<gco:CharacterString>{{distribution_version}}
-											</gco:CharacterString>
-										</cit:edition>
-									</cit:CI_Citation>
-								</mrd:formatSpecificationCitation>
-								<mrd:formatDistributor>
-									<mrd:MD_Distributor>
-										<mrd:distributorContact>
-											<cit:CI_Responsibility>
-												<cit:role>
-													<cit:CI_RoleCode
-														codeList="http://asdd.ga.gov.au/asdd/profileinfo/gmxCodelists.xml#CI_RoleCode"
-														codeListValue="distributor">distributor</cit:CI_RoleCode>
-												</cit:role>
-												<cit:party>
-													<cit:CI_Organisation>
-														<cit:name>
-															<gco:CharacterString>Geoscience Australia
-															</gco:CharacterString>
-														</cit:name>
-														<cit:contactInfo>
-															<cit:CI_Contact>
-																<cit:phone>
-																	<cit:CI_Telephone>
-																		<cit:number>
-
-																			<gco:CharacterString>+61 2 6249 9966
-																			</gco:CharacterString>
-																		</cit:number>
-																		<cit:numberType>
-
-																			<cit:CI_TelephoneTypeCode
-																				codeList="codeListLocation#CI_TelephoneTypeCode"
-																				codeListValue="voice">voice</cit:CI_TelephoneTypeCode>
-																		</cit:numberType>
-																	</cit:CI_Telephone>
-																</cit:phone>
-																<cit:phone>
-																	<cit:CI_Telephone>
-																		<cit:number>
-
-																			<gco:CharacterString>+61 2 6249 9960
-																			</gco:CharacterString>
-																		</cit:number>
-																		<cit:numberType>
-
-																			<cit:CI_TelephoneTypeCode
-																				codeList="codeListLocation#CI_TelephoneTypeCode"
-																				codeListValue="facsimile">facsimile</cit:CI_TelephoneTypeCode>
-																		</cit:numberType>
-																	</cit:CI_Telephone>
-																</cit:phone>
-																<cit:address>
-																	<cit:CI_Address>
-																		<cit:deliveryPoint>
-																			<gco:CharacterString>GPO Box 378
-																			</gco:CharacterString>
-																		</cit:deliveryPoint>
-																		<cit:city>
-
-																			<gco:CharacterString>Canberra</gco:CharacterString>
-																		</cit:city>
-																		<cit:administrativeArea>
-																			<gco:CharacterString>ACT</gco:CharacterString>
-																		</cit:administrativeArea>
-																		<cit:postalCode>
-
-																			<gco:CharacterString>2601</gco:CharacterString>
-																		</cit:postalCode>
-																		<cit:country>
-
-																			<gco:CharacterString>Australia</gco:CharacterString>
-																		</cit:country>
-																		<cit:electronicMailAddress>
-
-																			<gco:CharacterString>clientservices@ga.gov.au
-																			</gco:CharacterString>
-																		</cit:electronicMailAddress>
-																	</cit:CI_Address>
-																</cit:address>
-															</cit:CI_Contact>
-														</cit:contactInfo>
-													</cit:CI_Organisation>
-												</cit:party>
-											</cit:CI_Responsibility>
-										</mrd:distributorContact>
-									</mrd:MD_Distributor>
-								</mrd:formatDistributor>
-							</mrd:MD_Format>
-						</mri:resourceFormat>
-					</snippet>
-				</template>
-			</field>
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:linkage" /> 
 		</section>
 	</tab>
 

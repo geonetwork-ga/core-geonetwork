@@ -11,6 +11,14 @@
 	<tab id="resourceDescription" default="true" mode="flat">
 		<section name=" ">
 			<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" />
+			
+			<field name="PID" 
+			xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation/cit:identifier[1]/mcc:MD_Identifier/mcc:code" />
+						
+			<field name="DOI" 
+			xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation/cit:identifier[2]/mcc:MD_Identifier/mcc:code" />
+			
+			
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/srv:SV_ServiceIdentification/mri:citation/cit:CI_Citation/cit:title" />
 			<field

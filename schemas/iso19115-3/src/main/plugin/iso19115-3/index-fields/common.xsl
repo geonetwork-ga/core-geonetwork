@@ -282,6 +282,49 @@
 	  <xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement/gex:EX_TemporalExtent/gex:extent/gml:TimePeriod/gml:endPosition">
         <Field  name="tempExtentEnd" string="{string(.)}" store="true" index="true"/>
       </xsl:for-each>
+	  
+	  <xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:verticalElement/gex:EX_VerticalExtent/gex:minimumValue">
+        <Field  name="vertExtentMin" string="{string(.)}" store="true" index="true"/>
+      </xsl:for-each>
+	  
+	  <xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:verticalElement/gex:EX_VerticalExtent/gex:maximumValue">
+        <Field  name="vertExtentMax" string="{string(.)}" store="true" index="true"/>
+      </xsl:for-each>
+	  
+	  <xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:verticalElement/gex:EX_VerticalExtent/gex:verticalCRSId/mrs:MD_ReferenceSystem/mrs:referenceSystemIdentifier/mcc:MD_Identifier/mcc:code">
+        <Field  name="vertExtentRef" string="{string(.)}" store="true" index="true"/>
+      </xsl:for-each>	  
+	  
+	  <xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier/mcc:MD_Identifier[mcc:codeSpace/gco:CharacterString='Digital Object Identifier']/mcc:code">
+      <Field name="DOI" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	  
+	   <xsl:for-each select="$metadata/mdb:parentMetadata/cit:CI_Citation/cit:title">
+      <Field name="parentTitle" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	
+	<xsl:for-each select="$metadata/mdb:parentMetadata/cit:CI_Citation/cit:identifier/mcc:MD_Identifier[mcc:description/gco:CharacterString='eCat ID']/mcc:code">
+      <Field name="parenteCatID" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	
+	<xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:title">
+      <Field name="storedFormat" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	
+	<xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:edition">
+      <Field name="FormatVersion" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	
+	<xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:linkage">
+      <Field name="linkLocation" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	
+	<xsl:for-each select="$metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:description">
+      <Field name="linkDesc" string="{string(.)}" store="true" index="true"/>
+    </xsl:for-each>
+	  
+	  
+	  
 	<!-- Martins additions end -->
 	<!-- Joseph additions start -->
 	<xsl:variable name="geoBoxExtents">
@@ -1001,9 +1044,8 @@
     <xsl:for-each select="$metadata/mdb:metadataIdentifier/mcc:MD_Identifier">
       <Field name="fileId" string="{string(mcc:code/gco:CharacterString)}" store="false" index="true"/>
     </xsl:for-each>
-
-
-
+	
+	
     <xsl:for-each select="
       $metadata/mdb:parentMetadata/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString|
       $metadata/mdb:parentMetadata/@uuidref">
@@ -1011,8 +1053,7 @@
     </xsl:for-each>
     <Field name="isChild" string="{exists($metadata/mdb:parentMetadata)}" store="true" index="true"/>
 
-
-
+	
     <xsl:for-each select="$metadata/mdb:contact/cit:CI_Responsibility/cit:party/cit:CI_Organisation">
       <xsl:variable name="orgName" select="string(cit:name/*)"/>
       <!--<xsl:copy-of select="gn-fn-iso19115-3:index-field('orgName', cit:name, $langId)"/>-->

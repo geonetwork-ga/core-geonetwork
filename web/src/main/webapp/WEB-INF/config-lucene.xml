@@ -192,8 +192,17 @@
 	  <field name="tempExtentBegin" tagName="tempExtentBegin"/>
 	  <field name="tempExtentEnd" tagName="tempExtentEnd"/>
 	  <field name="lineageStatement" tagName="lineageStatement"/>
-	  
-<!-- Martins additions start -->
+	  <field name="parentTitle" tagName="parentTitle"/>
+	  <field name="parenteCatID" tagName="parenteCatID"/>
+	  <field name="storedFormat" tagName="storedFormat"/>
+	  <field name="FormatVersion" tagName="FormatVersion"/>
+	  <field name="linkLocation" tagName="linkLocation"/>
+	  <field name="linkDesc" tagName="linkDesc"/>
+	  <field name="vertExtentMin" tagName="vertExtentMin"/>
+	  <field name="vertExtentMax" tagName="vertExtentMax"/>
+	  <field name="vertExtentRef" tagName="vertExtentRef"/>
+	  <field name="DOI" tagName="DOI"/>
+	<!-- Martins additions start -->
 
     </dumpFields>
   </search>
