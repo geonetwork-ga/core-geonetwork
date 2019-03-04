@@ -12,8 +12,17 @@
 		<section name=" ">
 			<!-- special template to render this field readonly - see layout-custom-fields.xsl -->
 			<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" />
+			
+			<field name="PID" 
+			xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[1]/mcc:MD_Identifier/mcc:code" />
+						
+			<field name="DOI" 
+			xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[2]/mcc:MD_Identifier/mcc:code" />
+			
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:title" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:linkage" /> 
 		</section>
 	</tab>
 
@@ -49,17 +58,11 @@
 		<section name=" ">
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:geographicElement" />
-			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
+						<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
 				in="/mdb:MD_Metadata" />
-		</section>
-	</tab>
-
-	<tab id="NLI" mode="flat">
-		<section name=" ">
-
-			<field
+		
+		
+		<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:purpose" />
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status" />
@@ -67,8 +70,8 @@
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:citedResponsibleParty"
 				or="citedResponsibleParty"
 				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:verticalElement/gex:EX_VerticalExtent" />
+		
+			<field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
 			<action type="add" name="verticalElement" or="verticalElement"
 				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
 				<template>
@@ -92,7 +95,7 @@
 													<gco:CharacterString>EPSG</gco:CharacterString>
 												</mcc:codeSpace>
 												<mcc:version>
-													<gco:CharacterString></gco:CharacterString>
+													<gco:CharacterString>8.6</gco:CharacterString>
 												</mcc:version>
 											</mcc:MD_Identifier>
 										</mrs:referenceSystemIdentifier>
@@ -103,8 +106,10 @@
 					</snippet>
 				</template>
 			</action>
-		</section>
+			</section>
 	</tab>
+	
+	
 	<!-- Elements that should not use the "flat" mode -->
 	<flatModeExceptions>
 		<for name="cit:date" />

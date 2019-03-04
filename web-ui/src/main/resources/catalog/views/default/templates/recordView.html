@@ -226,6 +226,15 @@
                 {{c}}</p>
             </td>
           </tr>
+		  
+		  <tr data-ng-if="mdView.current.record.resourceConstraints">
+            <th data-translate="">resourceConstraints</th>
+            <td>
+              <p data-ng-repeat="c in mdView.current.record.resourceConstraints track by $index">
+                {{c}}</p>
+            </td>
+          </tr>
+		  
 
           <tr data-ng-if="isArray(mdView.current.record.author)" data-ng-repeat="author in mdView.current.record.author">
             <th data-translate="">Author</th>
@@ -300,12 +309,34 @@
           </tr>
           <tr data-ng-if="mdView.current.record.status_text.length > 0">
             <th data-translate="">resourceStatus</th>
-            <td>
+			
+			<td>
               <ul>
                 <li data-ng-repeat="s in mdView.current.record.status_text">{{s}}</li>
               </ul>
             </td>
           </tr>
+		  
+		  <tr data-ng-repeat="storedFormat in mdView.current.record.storedFormat">
+            <th data-translate="">Stored Format</th>
+            <td>{{storedFormat}}</td>
+          </tr>  
+
+		  <tr data-ng-repeat="FormatVersion in mdView.current.record.FormatVersion">
+            <th data-translate="">Version of Stored Format</th>
+            <td>{{FormatVersion}}</td>
+          </tr> 
+		  
+		  <tr data-ng-if="mdView.current.record.linkLocation">
+            <th data-translate="">Link to Stored Format Location</th>
+            <td>{{mdView.current.record.linkLocation}}</td>
+          </tr>
+		  
+		  <tr data-ng-if="mdView.current.record.linkDesc">
+            <th data-translate="">Link Description</th>
+            <td>{{mdView.current.record.linkDesc}}</td>
+          </tr>
+		  
           </tbody>
         </table>
 
@@ -338,6 +369,22 @@
             <th data-translate="">Temporal Extent End Date</th>
             <td>{{mdView.current.record.tempExtentEnd}}</td>
           </tr>
+		  
+		  <tr data-ng-if="::mdView.current.record.vertExtentMin">
+            <th data-translate="">Vertical Extent Minimum Value</th>
+            <td>{{mdView.current.record.vertExtentMin}}</td>
+          </tr>
+		  
+		  <tr data-ng-if="::mdView.current.record.vertExtentMax">
+            <th data-translate="">Vertical Extent Maximum Value</th>
+            <td>{{mdView.current.record.vertExtentMax}}</td>
+          </tr>
+		  
+		  <tr data-ng-if="::mdView.current.record.vertExtentRef">
+            <th data-translate="">Vertical Coordinate Reference System </th>
+            <td>{{mdView.current.record.vertExtentRef}}</td>
+          </tr>
+		      
 		  
 		  <!--<tr>
 			<th data-translate="">Temporal Extent Begin Date</th>
@@ -462,6 +509,26 @@
              data-title="{{'siblings' | translate}}">
         </div>
 
+		<h2 data-ng-if="mdView.current.record.parenteCatID">Parent Information</h2>
+		
+		<table class="table table-striped">
+          <tbody>
+		
+		  <tr data-ng-if="mdView.current.record.parenteCatID">
+            <th data-translate="">Parent Record eCat ID</th>
+            <td>{{mdView.current.record.parenteCatID}}</td>
+          </tr>       
+
+          <tr data-ng-if="mdView.current.record.parentTitle">
+            <th data-translate="">Parent Record Title</th>
+            <td>{{mdView.current.record.parentTitle}}</td>
+          </tr>       
+		  
+		  
+		</tbody>
+        </table> 
+		  
+		
         <h2 data-translate="">metadataInformation</h2>
 
         <a class="btn btn-link"
@@ -531,6 +598,16 @@
             <th data-translate="">eCat Id</th>
             <td>{{mdView.current.record.eCatId}}</td>
           </tr>
+		 <!-- <tr>
+            <th data-translate="">Digital Object Identifier</th>
+            <td>{{mdView.current.record.DOI}}</td>
+          </tr> -->
+		  
+		  <tr data-ng-if="mdView.current.record.DOI">
+            <th data-translate="">Digital Object Identifier</th>
+            <td>{{mdView.current.record.DOI}}</td>
+          </tr> 
+		  
 
           <tr data-ng-repeat="standardName in mdView.current.record.standardName">
             <th data-translate="">Metadata Standard</th>

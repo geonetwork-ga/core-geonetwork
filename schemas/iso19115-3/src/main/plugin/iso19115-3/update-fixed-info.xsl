@@ -284,7 +284,7 @@
   </xsl:template>
 
 	<xsl:template
-		match="cit:CI_Citation/cit:identifier[mcc:MD_Identifier/mcc:code/gco:CharacterString = 'Link to be added by administrator']">
+		match="cit:CI_Citation/cit:identifier[mcc:MD_Identifier/mcc:codeSpace/gco:CharacterString = 'Geoscience Australia Persistent Identifier']">
 		<xsl:variable name="ecatId" select="/root/env/gaid" />
 		<xsl:variable name="codelistvalue" select="//mdb:metadataScope/mdb:MD_MetadataScope/mdb:resourceScope/mcc:MD_ScopeCode/@codeListValue" />
 		<xsl:variable name="pid"
@@ -297,7 +297,7 @@
 					</gco:CharacterString>
 				</mcc:code>
 				<mcc:codeSpace>
-					<gco:CharacterString>ga-dataSetURI</gco:CharacterString>
+					<gco:CharacterString>Geoscience Australia Persistent Identifier</gco:CharacterString>
 				</mcc:codeSpace>
 			</mcc:MD_Identifier>
 		</xsl:copy>
@@ -571,7 +571,7 @@
         <xsl:choose>
           <xsl:when test="not(string(@xlink:href)) or starts-with(@xlink:href, /root/env/siteURL)">
             <xsl:attribute name="xlink:href">
-              <xsl:value-of select="concat(/root/env/siteURL,'csw?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;outputSchema=http://standards.iso.org/iso/19115/-3/gmd&amp;elementSetName=full&amp;id=',@uuidref)"/>
+              <xsl:value-of select="concat(/root/env/siteURL,'csw?service=CSW&amp;request=GetRecordById&amp;version=2.0.2&amp;outputSchema=http://standards.iso.org/iso/19115/-3/mdb/1.0&amp;elementSetName=full&amp;id=',@uuidref)"/>
             </xsl:attribute>
           </xsl:when>
           <xsl:otherwise>

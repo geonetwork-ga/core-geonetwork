@@ -118,6 +118,10 @@
 	<!-- gaDatasetURI -->
 	<gaDatasetURI>GA Dataset URI</gaDatasetURI>
 	
+	<!-- Identifiers -->
+	<DOI>Digtial Object Identifier</DOI>
+	<PID>Persistent Identifier</PID>
+	
 	<!-- Service stuff -->
 	<serviceDescription>Description</serviceDescription>
 	<serviceType>Service Type</serviceType>

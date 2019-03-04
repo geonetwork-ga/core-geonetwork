@@ -14,6 +14,7 @@ Stylesheet used to remove a reference to a parent record.
 	
 	<xsl:param name="code"/>
 	<xsl:param name="type"/>
+	<xsl:param name="associationType"/>
 	
 	<!-- Do a copy of every nodes and attributes -->
 	<xsl:template match="@*|node()">
@@ -24,6 +25,6 @@ Stylesheet used to remove a reference to a parent record.
 
 	
 	<!-- Remove geonet:* elements. -->
-	<xsl:template match="gn:*|mri:associatedResource[mri:MD_AssociatedResource/mri:metadataReference/cit:CI_Citation/cit:identifier/mcc:MD_Identifier[(mcc:description/gco:CharacterString=$type)]/mcc:code/gco:CharacterString = $code]" priority="2" />
+	<xsl:template match="gn:*|mri:associatedResource[mri:MD_AssociatedResource[mri:metadataReference/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:description/gco:CharacterString=$type]/mri:metadataReference/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString = $code and mri:MD_AssociatedResource/mri:associationType/mri:DS_AssociationTypeCode/@codeListValue = $associationType]" priority="2" />
 		
 </xsl:stylesheet>

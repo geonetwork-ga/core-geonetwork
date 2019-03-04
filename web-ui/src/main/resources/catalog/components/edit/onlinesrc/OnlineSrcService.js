@@ -673,7 +673,8 @@
           var params = {
             uuid: gnCurrentEdit.uuid,
             code: onlinesrc.id,
-            type: onlinesrc.identifierDesc
+            type: onlinesrc.identifierDesc,
+            associationType: onlinesrc.associationType
           };
           runProcess(this,
               setParams('association-remove', params));
@@ -691,7 +692,8 @@
           var params = {
             uuid: gnCurrentEdit.uuid,
             code: onlinesrc.preCode,
-            type: onlinesrc.preType
+            type: onlinesrc.preType,
+            associationType:onlinesrc.preAssociation
           };
 
 

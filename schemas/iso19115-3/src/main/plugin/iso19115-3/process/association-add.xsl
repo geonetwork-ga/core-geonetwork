@@ -59,7 +59,7 @@ Stylesheet used to add a reference to a related record using aggregation info.
     </xsl:template>
     
     <xsl:template name="fill">
-       <xsl:if test="count(//mri:associatedResource/mri:MD_AssociatedResource[mri:metadataReference/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString = $code]) = 0">
+       <xsl:if test="count(//mri:associatedResource/mri:MD_AssociatedResource[mri:metadataReference/cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:code/gco:CharacterString = $code and mri:associationType/mri:DS_AssociationTypeCode/@codeListValue = $associationType]) = 0">
         <mri:associatedResource>
             <mri:MD_AssociatedResource>
                 <mri:associationType>

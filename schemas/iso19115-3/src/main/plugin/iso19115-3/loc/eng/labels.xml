@@ -2076,7 +2076,7 @@
     <description>Citation data for the resource(s)</description>
   </element>
   <element name="cit:citedResponsibleParty" id="367.0">
-    <label>Cited responsible party</label>
+    <label>Cited responsible party (Authors)</label>
     <description>Name and position information for an individual or organization
       that is
       responsible for the resource
@@ -3085,7 +3085,7 @@
     <_condition>Conditional / report not provided?</_condition>
   </element>
   <element name="cit:linkage" id="406.0">
-    <label>Linkage</label>
+    <label>Link to Source Data</label>
     <description>Location (address) for on-line access using a Uniform Resource
       Locator address
       or similar addressing scheme such as http://www.statkart.no/isotc211
