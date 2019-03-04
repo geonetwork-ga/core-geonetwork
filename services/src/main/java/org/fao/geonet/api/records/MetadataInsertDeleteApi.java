@@ -30,6 +30,7 @@ import static org.fao.geonet.api.ApiParams.API_PARAM_RECORD_UUIDS_OR_SELECTION;
 import static org.springframework.data.jpa.domain.Specifications.where;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.DirectoryStream;
@@ -58,6 +59,7 @@ import org.fao.geonet.api.ApiParams;
 import org.fao.geonet.api.ApiUtils;
 import org.fao.geonet.api.exception.ResourceNotFoundException;
 import org.fao.geonet.api.processing.report.SimpleMetadataProcessingReport;
+import org.fao.geonet.api.records.editing.EditUtils;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.constants.Params;
 import org.fao.geonet.domain.ISODate;
@@ -118,6 +120,8 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.stream.JsonReader;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -512,7 +516,7 @@ public class MetadataInsertDeleteApi {
         } else if (serverFolder != null) {
         	Path serverFolderPath = null;
         	if (serverFolder.startsWith("https") || serverFolder.startsWith("http")){
-        		serverFolderPath = amazonS3DownLoadPath(serverFolder);
+        		serverFolderPath = amazonS3DownLoadPath(serverFolder, ".xml");
             }else{
             	serverFolderPath = IO.toPath(serverFolder);
             }
@@ -1165,7 +1169,7 @@ public class MetadataInsertDeleteApi {
         return Pair.read(Integer.valueOf(id.get(0)), uuid);
     }
     
-    private Path amazonS3DownLoadPath(String url) throws Exception {
+    private Path amazonS3DownLoadPath(String url, String suffix) throws Exception {
 
     	AmazonS3URI s3uri = new AmazonS3URI(url);
 		AmazonS3 s3client = AmazonS3ClientBuilder.standard().withRegion(s3uri.getRegion()).build();
@@ -1173,7 +1177,7 @@ public class MetadataInsertDeleteApi {
 		S3ObjectInputStream content = s3client.getObject(s3uri.getBucket(), s3uri.getKey())
 				.getObjectContent();
 		
-		File f = File.createTempFile(s3uri.getKey(), ".xml");
+		File f = File.createTempFile("aws_s3", suffix);
 		FileUtils.copyInputStreamToFile(content, f);
 		
 		return f.toPath();
@@ -1184,21 +1188,13 @@ public class MetadataInsertDeleteApi {
 	@ResponseBody
 	public String getFiles(@RequestParam(required = false) String url, HttpServletRequest request)
 			throws Exception {
-		List<String> filenames = new ArrayList<>();
-		S3Operation op = new S3Operation();
-		List<String> s3ObjectNames = op.getBucketObjectNames(url);
-		for (String s3ObjectName : s3ObjectNames) {
-			if(s3ObjectName.contains("/")){
-				s3ObjectName = s3ObjectName.substring(s3ObjectName.lastIndexOf("/")+1);
-			}
-			if(StringUtils.isNotEmpty(s3ObjectName.trim())){
-				filenames.add(s3ObjectName);
-			}
-		}
-
-		String json = new Gson().toJson(filenames);
 		
-		return json;
+		Gson gson = new Gson();
+		Path p = amazonS3DownLoadPath(url, ".json");
+		try(JsonReader reader = new JsonReader(new FileReader(p.toFile()));){
+			JsonElement json = gson.fromJson(reader, JsonElement.class);
+			return gson.toJson(json);
+		}
 	}
 	
 	private Element getSearchParams(){

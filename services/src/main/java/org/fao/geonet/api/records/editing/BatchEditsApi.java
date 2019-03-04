@@ -31,14 +31,11 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -88,7 +85,6 @@ import org.fao.geonet.utils.Log;
 import org.fao.geonet.utils.Xml;
 import org.jdom.Document;
 import org.jdom.Element;
-import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.xpath.XPath;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,14 +104,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
-import com.amazonaws.services.ec2.AmazonEC2;
-import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;
-import com.amazonaws.services.ec2.model.DescribeTagsRequest;
-import com.amazonaws.services.ec2.model.DescribeTagsResult;
-import com.amazonaws.services.ec2.model.Filter;
 import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.AmazonS3URI;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.GetObjectRequest;
@@ -128,10 +117,10 @@ import com.amazonaws.services.s3.transfer.Transfer.TransferState;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
 import com.amazonaws.services.s3.transfer.TransferProgress;
-import com.amazonaws.util.EC2MetadataUtils;
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -158,7 +147,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 	AmazonS3URI s3uri = new AmazonS3URI(Geonet.BATCHEDIT_BACKUP_BUCKET);
 	List<Metadata> tempBackupData = new ArrayList<>();
 	Gson g = new Gson();
-	
+	String s3key = null;
 	double pct;
 	SimpleMetadataProcessingReport report = new SimpleMetadataProcessingReport();
 	
@@ -360,7 +349,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 		StringBuilder sb = new StringBuilder();
 		
 		try {
-			S3Object object = EditUtils.getS3Client(s3uri.getRegion()).getObject(new GetObjectRequest(s3uri.getBucket(), key + ".json"));
+			S3Object object = EditUtils.getS3Client().getObject(new GetObjectRequest(s3uri.getBucket(), key + ".json"));
 			InputStream objectData = object.getObjectContent();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(objectData));
 	        String line = null;
@@ -377,8 +366,6 @@ public class BatchEditsApi implements ApplicationContextAware {
 		return sb.toString();
 
 	}
-	
-	
 	
 	/**
 	 * The service updates records by uploading the csv file
@@ -439,8 +426,8 @@ public class BatchEditsApi implements ApplicationContextAware {
 		final BatchEditXpath bxpath = context.getBean(BatchEditXpath.class);
 		Map<String, XPath> xpathExpr = bxpath.getXPathExpr();
 		
-		final String s3key = dateTimeStr;
-		Log.debug(Geonet.SEARCH_ENGINE, "CSVRecord, BatchEditsApi --> s3key : " + s3key);
+		this.s3key = dateTimeStr;
+		
 		CSVParser parser = null;
 		try {
 			// Parse the csv file
@@ -567,13 +554,13 @@ public class BatchEditsApi implements ApplicationContextAware {
 		}
 
 		// create entry for this batch edit in s3 bucket
-		boolean isEntered = addEntry(report, s3key, settingRepo, desc);
+		boolean isEntered = addEntry(report, settingRepo, desc);
 		if(!isEntered){
 			report.addError(new Exception("Unable to create an entry for this batch edit operation. So manually has to recall from aws s3 location."));
 		}
 		
 		Log.debug(Geonet.SEARCH_ENGINE, "BatchEditAPI calling... startBackupOperation........");
-		startBackupOperation(s3key);
+		startBackupOperation();
 		
 	}
 
@@ -594,9 +581,9 @@ public class BatchEditsApi implements ApplicationContextAware {
 		return true;
 	}
 
-	public void startBackupOperation(String s3key){
+	public void startBackupOperation(){
 		
-		AmazonS3 s3client = EditUtils.getS3Client(s3uri.getRegion());
+		AmazonS3 s3client = EditUtils.getS3Client();
 		TransferManager xfer_mgr = TransferManagerBuilder
 				.standard()
 				.withS3Client(s3client)
@@ -617,9 +604,10 @@ public class BatchEditsApi implements ApplicationContextAware {
 		List<File> files = tempBackupData.stream().map(md -> {
 				
 				try {
-					Path path = Files.createTempFile(tempPath, md.getUuid(), ".xml"); 
-					File f = path.toFile();
-					f.deleteOnExit();
+//					Path path = Files.createTempFile(tempPath, md.getUuid(), ".xml"); 
+//					File f = path.toFile();
+//					f.deleteOnExit();
+					File f = new File(tempPath + File.pathSeparator + md.getUuid() + ".xml");
 					FileUtils.writeByteArrayToFile(f, md.getData().getBytes());
 					return f; 
 				} catch (IOException e) {
@@ -630,7 +618,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 		
 		
 		//MultipleFileUpload xfer = xfer_mgr.uploadFileList(s3uri.getBucket(), s3key, new File("."), files);
-		MultipleFileUpload xfer = xfer_mgr.uploadFileList(s3uri.getBucket(), s3key, tempPath.toFile(), files);
+		MultipleFileUpload xfer = xfer_mgr.uploadFileList(s3uri.getBucket(), null, tempPath.toFile(), files);
 		
 		do {
 		    try {
@@ -650,11 +638,18 @@ public class BatchEditsApi implements ApplicationContextAware {
         
         S3Operation op = new S3Operation();
         try {
-			List<String> filenames = op.getBucketObjectNames(Geonet.BATCHEDIT_BACKUP_BUCKET + s3key);
+        	Log.debug(Geonet.SEARCH_ENGINE, "BatchEditsApi.. acl setting readable objects");
+			List<String> filenames = op.getBucketObjectNames(s3uri.getURI().toString());
 			filenames.stream().forEach(fn -> {
 				SetObjectAclRequest req = new SetObjectAclRequest(s3uri.getBucket(), fn, CannedAccessControlList.PublicRead);
 				s3client.setObjectAcl(req);
 			});
+			
+			Log.debug(Geonet.SEARCH_ENGINE, "BatchEditsApi.. getting latest versions for objects from s3 bucket");
+			//Upload uuid with s3 version 
+			JsonArray obj = EditUtils.getVersion(s3uri);
+			uploadToS3Bucket(obj.toString(), Geonet.VERSION + this.s3key);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -689,6 +684,16 @@ public class BatchEditsApi implements ApplicationContextAware {
         return pct;
     }
 	
+	private void uploadToS3Bucket(String val, String _s3key) {
+		byte[] bytes = val.getBytes();
+		ObjectMetadata metadata = new ObjectMetadata();
+		metadata.setContentLength(bytes.length);
+		InputStream targetStream = new ByteArrayInputStream(bytes);
+		PutObjectRequest putObj = new PutObjectRequest(s3uri.getBucket(), _s3key + ".json",
+				targetStream, metadata).withCannedAcl(CannedAccessControlList.PublicRead);
+
+		EditUtils.getS3Client().putObject(putObj);
+	}
 	/**
 	 * Add batch update entry into database. Converts CustomReport into JSON and stores as StrigClob 
 	 * @param report
@@ -696,7 +701,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 	 * @param settingRepo
 	 * @return
 	 */
-	private boolean addEntry(SimpleMetadataProcessingReport report, String s3key, SettingRepository settingRepo, String desc){
+	private boolean addEntry(SimpleMetadataProcessingReport report, SettingRepository settingRepo, String desc){
 		
 		try{
 			Type listType = new TypeToken<List<CustomReport>>() {}.getType();
@@ -706,7 +711,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 			customReport.setErrorReport(report.getMetadataErrors());
 			customReport.setInfoReport(report.getMetadataInfos());
 			customReport.setProcessedRecords(report.getNumberOfRecordsProcessed());
-			customReport.setDateTime(s3key);
+			customReport.setDateTime(this.s3key);
 			customReport.setDesc(desc);
 			
 			target.add(customReport);
@@ -714,15 +719,7 @@ public class BatchEditsApi implements ApplicationContextAware {
 			
 			//Add Info and Error report to s3 bucket
 			String _report = g.toJson(target, listType);
-			byte[] bytes = _report.getBytes();
-			ObjectMetadata metadata = new ObjectMetadata();
-			metadata.setContentLength(bytes.length);
-			InputStream targetStream = new ByteArrayInputStream(bytes);
-
-			PutObjectRequest putObj = new PutObjectRequest(s3uri.getBucket(), s3key + ".json", targetStream, metadata)
-					.withCannedAcl(CannedAccessControlList.PublicRead);
-
-			EditUtils.getS3Client(s3uri.getRegion()).putObject(putObj);
+			uploadToS3Bucket(_report, this.s3key);
 			
 			
 			//Add description and and filename into DB, removes info and error report in order to minimize the content

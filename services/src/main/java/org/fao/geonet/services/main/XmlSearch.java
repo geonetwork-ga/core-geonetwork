@@ -90,7 +90,7 @@ public class XmlSearch implements Service {
 	        if(uuidEle != null){
 	        	String id = uuidEle.getValue();
 	        
-	        	if(!isUuid(id)){
+	        	if(!Util.isUuid(id)){
 	            	params.removeChild(Edit.Info.Elem.UUID);
 	            	params.addContent(new Element("eCatId").setText(id));
 	            }
@@ -142,12 +142,6 @@ public class XmlSearch implements Service {
         }
     }
     
-    public boolean isUuid(String uuid){
-    	String pattern = "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[0-9a-f]{12}";
-		Pattern r = Pattern.compile(pattern);
-		Matcher m = r.matcher(uuid);
-		return m.find();
-    }
 }
 
 //=============================================================================

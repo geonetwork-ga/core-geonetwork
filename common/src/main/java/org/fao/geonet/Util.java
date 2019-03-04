@@ -28,6 +28,8 @@ import java.io.StringWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.fao.geonet.exceptions.BadInputEx;
 import org.fao.geonet.exceptions.BadParameterEx;
@@ -288,6 +290,13 @@ public final class Util {
         }
     }
 
+    public static boolean isUuid(String uuid){
+    	String pattern = "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[0-9a-f]{12}";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(uuid);
+		return m.find();
+    }
+    
 }
 
 //=============================================================================

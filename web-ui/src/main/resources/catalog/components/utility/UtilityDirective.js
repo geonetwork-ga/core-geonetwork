@@ -227,9 +227,9 @@
 			};
 		  scope.recall = function(dateTime){
 			  if (confirm("Are you sure to recall selected batch edit?")) {
-			  var url = 'https://s3-ap-southeast-2.amazonaws.com/ga-ecat3-batchedit/'+dateTime;
+			  var url = 'https://s3-ap-southeast-2.amazonaws.com/ga-ecat3-batchedit/';
 			  
-			  gnMetadataManager.getFilesFromS3(url)
+			  gnMetadataManager.getFilesFromS3(url + 'version-'+dateTime+'.json')
 				.then(function(response) {
 						var filenames = response.data;
 						console.log('filenames.length ---> '+filenames.length);

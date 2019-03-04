@@ -153,7 +153,7 @@
          * @return {HttpPromise} Future object
          */
         importFromS3Bucket: function(urlParams, s3key) {
-          return $http.put('../api/records?' + urlParams + '&s3key='+s3key, {
+          return $http.put('../api/records?' + urlParams + '&s3key='+s3key.uuid+'?versionId='+s3key.versionId, {
             headers: {
               'Accept': 'application/json'
             }
@@ -178,7 +178,7 @@
 	            }
           });
         },
-        
+
         /**
            * @ngdoc method
            * @name gnMetadataManager#create

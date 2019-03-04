@@ -132,7 +132,7 @@
                   <xsl:apply-templates mode="get-iso19115-3-localized-string"
                       select="mrd:onLine/cit:CI_OnlineResource/cit:linkage"/>
               </url>
-              <function><xsl:value-of select="cit:function/*/@codeListValue"/></function>
+              <function><xsl:value-of select="mrd:onLine/cit:CI_OnlineResource/cit:function/*/@codeListValue"/></function>
               <applicationProfile><xsl:value-of select="mrd:onLine/cit:CI_OnlineResource/cit:applicationProfile/gco:CharacterString"/></applicationProfile>
               <description>
                   <xsl:apply-templates mode="get-iso19115-3-localized-string"
