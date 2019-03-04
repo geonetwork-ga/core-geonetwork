@@ -28,114 +28,136 @@ package org.fao.geonet.kernel.security.shibboleth;
  * @author ETj (etj at geo-solutions.it)
  */
 public class ShibbolethUserConfiguration {
-    private String usernameKey;
-    private String surnameKey;
-    private String firstnameKey;
-    private String profileKey;
-    private String groupKey;
-    private String emailKey;
+	private String usernameKey;
+	private String surnameKey;
+	private String firstnameKey;
+	private String profileKey;
+	private String groupKey;
+	private String emailKey;
+	private String positionKey;
+	private String divisionKey;
 
-    private String defaultGroup;
+	private String defaultGroup;
 
-    private boolean updateProfile;
-    private boolean updateGroup;
+	private boolean updateProfile;
+	private boolean updateGroup;
 
-    public String getUsernameKey() {
-        return usernameKey;
-    }
+	public String getUsernameKey() {
+		return usernameKey;
+	}
 
-    public void setUsernameKey(String usernameKey) {
-        this.usernameKey = usernameKey;
-    }
+	public void setUsernameKey(String usernameKey) {
+		this.usernameKey = usernameKey;
+	}
 
-    public String getSurnameKey() {
-        return surnameKey;
-    }
+	public String getSurnameKey() {
+		return surnameKey;
+	}
 
-    public void setSurnameKey(String surnameKey) {
-        if (surnameKey == null) {
-            surnameKey = "";
-        }
-        this.surnameKey = surnameKey;
-    }
+	public void setSurnameKey(String surnameKey) {
+		if (surnameKey == null) {
+			surnameKey = "";
+		}
+		this.surnameKey = surnameKey;
+	}
 
-    public String getFirstnameKey() {
-        return firstnameKey;
-    }
+	public String getFirstnameKey() {
+		return firstnameKey;
+	}
 
-    public void setFirstnameKey(String firstnameKey) {
-        if (firstnameKey == null) {
-            firstnameKey = "";
-        }
-        this.firstnameKey = firstnameKey;
-    }
+	public void setFirstnameKey(String firstnameKey) {
+		if (firstnameKey == null) {
+			firstnameKey = "";
+		}
+		this.firstnameKey = firstnameKey;
+	}
 
-    public String getProfileKey() {
-        return profileKey;
-    }
+	public String getProfileKey() {
+		return profileKey;
+	}
 
-    public void setProfileKey(String profileKey) {
-        if (profileKey == null) {
-            profileKey = "";
-        }
-        this.profileKey = profileKey;
-    }
+	public void setProfileKey(String profileKey) {
+		if (profileKey == null) {
+			profileKey = "";
+		}
+		this.profileKey = profileKey;
+	}
 
-    public String getGroupKey() {
-        return groupKey;
-    }
+	public String getGroupKey() {
+		return groupKey;
+	}
 
-    public void setGroupKey(String groupKey) {
-        if (groupKey == null) {
-            groupKey = "";
-        }
-        this.groupKey = groupKey;
-    }
+	public void setGroupKey(String groupKey) {
+		if (groupKey == null) {
+			groupKey = "";
+		}
+		this.groupKey = groupKey;
+	}
 
-    public String getDefaultGroup() {
-        return defaultGroup;
-    }
+	public String getPositionKey() {
+		return positionKey;
+	}
 
-    public void setDefaultGroup(String defaultGroup) {
-        if (defaultGroup == null) {
-            defaultGroup = "";
-        }
-        this.defaultGroup = defaultGroup;
-    }
+	public void setPositionKey(String positionKey) {
+		if(positionKey == null)
+			positionKey = "";
+		
+		this.positionKey = positionKey;
+	}
 
-    /**
-     * Tell if the profile should be updated whenever the user login.
-     *
-     * This info is needed when the identificatian provider provides no real mean to tell the user
-     * profile.
-     */
-    public boolean isUpdateProfile() {
-        return updateProfile;
-    }
+	public String getDivisionKey() {
+		return divisionKey;
+	}
 
-    public void setUpdateProfile(boolean updateProfile) {
-        this.updateProfile = updateProfile;
-    }
+	public void setDivisionKey(String divisionKey) {
+		if(divisionKey == null)
+			divisionKey = "";
+		
+		this.divisionKey = divisionKey;
+	}
 
-    public boolean isUpdateGroup() {
-        return updateGroup;
-    }
+	public String getDefaultGroup() {
+		return defaultGroup;
+	}
 
-    public void setUpdateGroup(boolean updateGroup) {
-        this.updateGroup = updateGroup;
-    }
+	public void setDefaultGroup(String defaultGroup) {
+		if (defaultGroup == null) {
+			defaultGroup = "";
+		}
+		this.defaultGroup = defaultGroup;
+	}
 
-    public String getEmailKey() {
-        return emailKey;
-    }
+	/**
+	 * Tell if the profile should be updated whenever the user login.
+	 *
+	 * This info is needed when the identificatian provider provides no real
+	 * mean to tell the user profile.
+	 */
+	public boolean isUpdateProfile() {
+		return updateProfile;
+	}
 
-    public void setEmailKey(String emailKey) {
-        if (emailKey == null) {
-            emailKey = "";
-        }
-        this.emailKey = emailKey;
-    }
-    
+	public void setUpdateProfile(boolean updateProfile) {
+		this.updateProfile = updateProfile;
+	}
+
+	public boolean isUpdateGroup() {
+		return updateGroup;
+	}
+
+	public void setUpdateGroup(boolean updateGroup) {
+		this.updateGroup = updateGroup;
+	}
+
+	public String getEmailKey() {
+		return emailKey;
+	}
+
+	public void setEmailKey(String emailKey) {
+		if (emailKey == null) {
+			emailKey = "";
+		}
+		this.emailKey = emailKey;
+	}
+
 }
-
-
