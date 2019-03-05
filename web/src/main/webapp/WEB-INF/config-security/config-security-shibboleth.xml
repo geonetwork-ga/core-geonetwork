@@ -59,6 +59,8 @@
     <property name="profileKey" value="${shibbolethConfiguration.profileKey}"/>
     <property name="emailKey"      value="${shibbolethConfiguration.emailKey}"/>
     <property name="groupKey" value="${shibbolethConfiguration.groupKey}"/>
+    <property name="positionKey"      value="${shibbolethConfiguration.positionKey}"/>
+    <property name="divisionKey" value="${shibbolethConfiguration.divisionKey}"/>
     <property name="updateGroup" value="${shibbolethConfiguration.updateGroup}"/>
     <property name="updateProfile" value="${shibbolethConfiguration.updateProfile}"/>
   </bean>
