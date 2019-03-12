@@ -99,12 +99,37 @@
           });
         }
       };
-
+      
+      function getType(typeValue, values){
+          var arr = [];
+          if(!angular.isArray(values)){ values = [values]; }
+          angular.forEach(values, function(val){
+            arr.push({ "@type":typeValue, "name": val });
+          });
+          return arr;
+        };
+        
       // Reset current formatter to open the next record
       // in default mode.
       $scope.$watch('mdView.current.record', function() {
         $scope.usingFormatter = false;
         $scope.currentFormatter = null;
+        
+        var record = $scope.mdView.current.record;
+        $scope.jsonId = {
+          "@context": "http:\/\/schema.org",
+          "@type": "Dataset",
+          "author": getType('Person', record.author),
+          "creator": getType('Person', record.author),
+          "datePublished": record.publicationDate,
+          "keywords": record.keyword,
+          "license": [record.legalConstraints,"CC-BY", "http:\/\/creativecommons.org\/licenses\/by\/4.0"],
+          "spatialCoverage":[],
+          "inLanguage": "en",
+          "name": record.title,
+          "description":record.abstract
+        };
+            
       });
 
       // Know from what path we come from
@@ -112,5 +137,21 @@
       $scope.$watch('gnMdViewObj.from', function(v) {
         $scope.fromView = v ? v.substring(1) : v;
       });
-    }]);
+    }]).directive('jsonld', ['$filter', '$sce', function($filter, $sce) {
+        return {
+            restrict: 'E',
+            template: function() {
+              return '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>';
+            },
+            scope: {
+              json: '=json'
+            },
+            link: function(scope, element, attrs) {
+              scope.onGetJson = function() {
+                return $sce.trustAsHtml($filter('json')(scope.json));
+              }
+            },
+            replace: true
+          };
+        }]);
 })();
