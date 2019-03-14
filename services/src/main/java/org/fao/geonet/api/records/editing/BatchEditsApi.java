@@ -539,13 +539,13 @@ public class BatchEditsApi implements ApplicationContextAware {
 							batchEditParam.getXpath(), propertyValue, true);
 				}
 
-				if (metadataChanged) {
+				//if (metadataChanged) {
 					Log.debug(Geonet.SEARCH_ENGINE, "BatchEditsApi --> updating Metadata: "  + record.getId());
 					dataMan.updateMetadata(serviceContext, record.getId() + "", metadata, false, false, true, "eng",
 							null, false);
 					report.addMetadataInfos(id, "Metadata updated, uuid: " + record.getUuid());
 					report.incrementProcessedRecords();
-				}
+				//}
 
 			} catch (Exception e) {
 				Log.error(Geonet.SEARCH_ENGINE, "Exception :" + e.getMessage());
