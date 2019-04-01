@@ -168,8 +168,15 @@
                 <gco:CharacterString>Geoscience Australia Community Metadata Profile of ISO 19115-1:2014</gco:CharacterString>
               </cit:title>
               <cit:edition>
-                <gco:CharacterString>Version 2.0, April 2015</gco:CharacterString>
+                <gco:CharacterString>Version 2.0, September 2018</gco:CharacterString>
               </cit:edition>
+              <cit:identifier>
+					<mcc:MD_Identifier>
+					   <mcc:code>
+						  <gco:CharacterString>http://pid.geoscience.gov.au/dataset/ga/<xsl:value-of select="/root/env/gaid" /></gco:CharacterString>
+					   </mcc:code>
+					</mcc:MD_Identifier>
+				 </cit:identifier>
             </cit:CI_Citation>
           </mdb:metadataProfile>
         </xsl:when>
@@ -187,23 +194,26 @@
 					<mdb:alternativeMetadataReference>
 						<cit:CI_Citation>
 							<cit:title>
-           			<gco:CharacterString>Geoscience Australia - short identifier for metadata record with uuid <xsl:value-of select="/root/env/uuid"/></gco:CharacterString>
+								<gco:CharacterString>Geoscience Australia Products Catalogue (eCat) – Short identifier for metadata record.</gco:CharacterString>
 							</cit:title>
-      				<cit:identifier>
-       					<mcc:MD_Identifier>
-         					<mcc:code>
-           					<gco:CharacterString><xsl:value-of select="/root/env/gaid"/></gco:CharacterString>
-         					</mcc:code>
-         					<mcc:codeSpace>
-           					<gco:CharacterString>eCatId</gco:CharacterString>
-         					</mcc:codeSpace>
-       					</mcc:MD_Identifier>
-      				</cit:identifier>
+							<cit:identifier>
+								<mcc:MD_Identifier>
+									<mcc:code>
+										<gco:CharacterString>
+											<xsl:value-of select="/root/env/gaid" />
+										</gco:CharacterString>
+									</mcc:code>
+									<mcc:codeSpace>
+										<gco:CharacterString>eCatId</gco:CharacterString>
+									</mcc:codeSpace>
+								</mcc:MD_Identifier>
+							</cit:identifier>
 						</cit:CI_Citation>
 					</mdb:alternativeMetadataReference>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:copy-of select="mdb:alternativeMetadataReference[cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:codeSpace/gco:CharacterString='eCatId']"/>
+					<xsl:copy-of
+						select="mdb:alternativeMetadataReference[cit:CI_Citation/cit:identifier/mcc:MD_Identifier/mcc:codeSpace/gco:CharacterString='eCatId']" />
 				</xsl:otherwise>
 			</xsl:choose>
      
@@ -213,7 +223,7 @@
       <xsl:apply-templates select="mdb:otherLocale"/>
       <xsl:apply-templates select="mdb:metadataLinkage"/>
 
-      <xsl:variable name="pointOfTruthUrl" select="concat($url, '/metadata/', $uuid)"/>
+      <xsl:variable name="pointOfTruthUrl" select="concat($url, 'catalog.search#/metadata/', $uuid)"/>
 
       <xsl:if test="$createMetadataLinkage and count(mdb:metadataLinkage/cit:CI_OnlineResource/cit:linkage/*[. = $pointOfTruthUrl]) = 0">
         <!-- TODO: This should only be updated for not harvested records ? -->
