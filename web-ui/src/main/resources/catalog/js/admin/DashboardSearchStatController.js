@@ -59,7 +59,7 @@
       $scope.dateFrom = firstDay;
       // The end of the temporal range
       $scope.dateTo = lastDay;
-      $scope.graphicType = 'MONTH';
+      $scope.graphicType = 'DAY';
 
 
 
