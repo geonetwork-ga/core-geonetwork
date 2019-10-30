@@ -206,6 +206,14 @@
       <param-name>monitoring-path</param-name>
       <param-value>/srv/eng/admin.console/performance</param-value>
     </init-param>
+    <init-param>
+      <param-name>system-actions-enabled</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>displayed-counters</param-name>
+      <param-value>http,error</param-value>
+    </init-param>
     <async-supported>true</async-supported>
   </filter>
   <filter-mapping>
