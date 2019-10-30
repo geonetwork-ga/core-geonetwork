@@ -46,15 +46,19 @@
       $scope.termsForSearchService = 'q';
       $scope.currentField = 'any';
 
+      var date = new Date();
+      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
       // The first search date
-      $scope.dateMin = null;
+      $scope.dateMin = firstDay;
       // The last search date
-      $scope.dateMax = null;
+      $scope.dateMax = lastDay;
 
       // The beginning of the temporal range
-      $scope.dateFrom = null;
+      $scope.dateFrom = firstDay;
       // The end of the temporal range
-      $scope.dateTo = null;
+      $scope.dateTo = lastDay;
       $scope.graphicType = 'MONTH';
 
 
