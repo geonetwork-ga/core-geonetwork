@@ -93,6 +93,9 @@
       function getSearchStatByDate() {
         var byType = true;
 
+        var WARNINGSIZE = 5000;
+        var ERRORSIZE = 100000;
+
         // Search by date statistics
         $http.get($scope.url +
                   'statistics-search-by-date?_content_type=json&' +
@@ -117,6 +120,14 @@
           }
 
           if (!data.requests) {
+            return;
+          }
+
+          var jsonSize = JSON.stringify(data).length;
+          if (jsonSize > WARNINGSIZE && jsonSize < ERRORSIZE) {
+            console.warn('Result is big, can take a while to draw the graph. SIZE=' + jsonSize);
+          } else if (jsonSize > ERRORSIZE) {
+            console.error('Amount of data is too big, cannot draw the graph. SIZE=' + jsonSize);
             return;
           }
 
