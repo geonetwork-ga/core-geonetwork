@@ -1,62 +1,66 @@
 <div class=" d-flex toggled" id="wrapper" data-ng-search-form="" data-runSearch="true" click-capture>
+  <div class="ecat-home-link">
+    <a data-gn-active-tb-item="catalog.search#/home" title="eCat Home Page">
+      <i class="fa fa-home fa-5" aria-hidden="true"></i>
+    </a>
+  </div>
+  <div id="adv-1" class="collapse">
+    <div class="row">
+      <div data-ng-include="'../../catalog/views/default/templates/AdvSearchForm.html'" />
+    </div>
+  </div>
   <div class="row">
-    <div class="col-sm-10">
+    <div class="col-md-2"></div>
+    <div class="col-sm-8 col-md-8 col-lg-7">
       <div class="new-filter">
-        <a data-gn-active-tb-item="catalog.search#/home" title="eCat Home Page">
-          <i class="fa fa-home fa-5" aria-hidden="true"></i>
-        </a>
-
         <div class="sb_container_outer">
           <div class="input-group gn-any-search-input">
-            <input type="search" class="form-control input-md" 
-                    id="gn-any-field" 
-                    data-ng-model="searchObj.params.any"
-                    data-ng-model-options="modelOptionsForm" 
-                    placeholder="{{'anyPlaceHolder' | translate}}"
-                    data-ng-keyup="$event.keyCode == 13 && triggerSearch()" 
-                    data-typeahead="address for address in getAnySuggestions($viewValue)" 
-                    data-typeahead-loading="anyLoading"
-                    class="form-control" 
-                    data-typeahead-min-length="1" 
-                    data-typeahead-focus-first="false" />
+            <input type="search" class="form-control input-md" id="gn-any-field" data-ng-model="searchObj.params.any"
+              data-ng-model-options="modelOptionsForm" placeholder="{{'anyPlaceHolder' | translate}}"
+              data-ng-keyup="$event.keyCode == 13 && triggerSearch()"
+              data-typeahead="address for address in getAnySuggestions($viewValue)" data-typeahead-loading="anyLoading"
+              class="form-control" data-typeahead-min-length="1" data-typeahead-focus-first="false" />
             <button type="button" class="btn-md btn-adv" data-toggle="collapse" data-target="#adv-1">Advanced</button>
             <button type="button" data-ng-click="triggerSearch()" class="btn btn-md">
               &nbsp;<i class="fa fa-search"></i>&nbsp;
             </button>
             <button type="button" data-ng-click="resetSearch(searchObj.defaultParams); resetSearch(searchObj.params)"
- class="btn btn-md"              title="Clear current search query, filters and sorts.">
+              class="btn btn-md" title="Clear current search query, filters and sorts.">
               &nbsp;<i class="fa fa-times"></i>&nbsp;
             </button>
           </div>
         </div>
-        <div id="adv-1" class="collapse">
-          <div class="row">
-            <div data-ng-include="'../../catalog/views/default/templates/AdvSearchForm.html'" />
-          </div>
-        </div>
-
+        
+      </div>
+    </div>
+    <div class="col-md-2 col-md-2 col-lg-2 pull-right">
+      <div data-ng-include="'../../catalog/templates/user-menu.html'" />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10">
+      <div data-ng-class="visible ? 'arr-right': 'arr-left'" class="hidden-xs hidden-sm">
+        <a href="" data-ng-click="visible=!visible;">
+          <i class="fa  fa-bars" aria-hidden="true">&nbsp;
+            <span data-ng-if="visible">HIDE</span>
+            <span data-ng-if="!visible">SHOW</span>
+          </i>
+        </a>
       </div>
 
-      <div data-ng-class="visible ? 'arr-right': 'arr-left'" class="hidden-xs hidden-sm">
-          <a href="" data-ng-click="visible=!visible;">
-              <i data-ng-if="visible" class="fa fa-long-arrow-left" aria-hidden="true" />
-              <i data-ng-if="!visible" class="fa  fa-long-arrow-right" aria-hidden="true" />
-          </a>
-      </div>      
-      
       <div class="content-wrapper">
         <div data-ng-show="searchResults.records.length > 0" class="bg-light border-right menu hidden-xs hidden-sm"
- ng-class="{'is-visible':visible}">
-          <div data-gn-facet-dimension-list="searchResults.dimension"  data-params="searchObj.params"
- data-facet-type="facetsSummaryType" data-current-facets="currentFacets">
+          ng-class="{'is-visible':visible}">
+          <div data-gn-facet-dimension-list="searchResults.dimension" data-params="searchObj.params"
+            data-facet-type="facetsSummaryType" data-current-facets="currentFacets">
           </div>
         </div>
 
         <div id="page-content-wrapper">
           <div class="container">
             <span class="loading fa fa-spinner fa-spin" data-ng-show="searching"></span>
-            <div class="row result-selection">
-              <div class="hidden-xs col-md-3">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
                 <div data-gn-selection-widget="" data-results="searchResults"></div>
               </div>
               <!--<div class="hidden-xs col-md-2">
@@ -64,16 +68,16 @@
                   data-ng-class="{'active': tpl.tooltip == states.activeItem}" data-ng-click="changeView($index)">
                   <i class="fa {{tpl.icon}}"></i> {{tpl.tooltip}}</button>
               </div>-->
-                <div class="col-md-3 pull-right">
+              <div class="col-xs-6 col-sm-6 col-md-6 col-lg-5">
                 <div data-sortby-combo="" data-params="searchObj.params" data-gn-sortby-values="searchObj.sortbyValues">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-sm-12 col-md-12 col-lg-4 page-sh">
                 <div data-gn-pagination="paginationInfo" data-hits-values="searchObj.hitsperpageValues"
                   data-enable-hot-keys="" data-enable-events=""></div>
-                </div>
               </div>
-            
+            </div>
+
             <div class="search-result-feedback text-center" ng-if="!searching && searchResults.count == 0">
               <p>No search results found...</p>
             </div>
@@ -85,47 +89,53 @@
                   <div class="container-fluid items">
                     <div class="row">
                       <div class="gn-md-title">
-                      <input gn-selection-md type="checkbox" ng-model="md['geonet:info'].selected"
-                        ng-change="change()" />
-                      <h3>
-                        <a data-ng-href="#/metadata/{{md.getUuid()}}" 
-                          title="{{md.title || md.defaultTitle}}" data-ng-click="openRecord($index, md, searchResults.records)">
-                          <span class="fa gn-icon-{{md.type[0]}}"></span>
-                          {{md.title || md.defaultTitle}}</a>
-                      </h3>
-                    </div>
+                        <input gn-selection-md type="checkbox" ng-model="md['geonet:info'].selected"
+                          ng-change="change()" />
+                        <h3>
+                          <a data-ng-href="#/metadata/{{md.getUuid()}}" title="{{md.title || md.defaultTitle}}"
+                            data-ng-click="openRecord($index, md, searchResults.records)">
+                            <span class="fa gn-icon-{{md.type[0]}}"></span>
+                            {{md.title || md.defaultTitle}}</a>
+                        </h3>
+                      </div>
                     </div>
                     <div class="row">
                       <div data-ng-if="md.mdStatus > 0 && isIntranet"
                         class="gn-status gn-status-{{ md.getWorkFlowStatus() }}-{{ md['geonet:info'].isPublishedToAll === 'true' ? 'External' : 'Internal' }}">
-                        {{ md['geonet:info'].isPublishedToAll === "true" ? "External" : "Internal" }} -                                                                                                                                                                         
+                        {{ md['geonet:info'].isPublishedToAll === "true" ? "External" : "Internal" }} -
                         <span>{{ md.getWorkFlowStatus() }} </span>
-                   </div>
-                    <div class="col-md-{{md.getThumbnails().list[0].url ? '10' : '12'}}">
-                      <p class="text-justify" dd-text-collapse dd-text-collapse-max-length="350"
-                        dd-text-collapse-text="{{md.abstract | replace: '&lt;p&gt;':' '}}"></p>
-                    </div>
+                      </div>
+                      <div class="col-md-{{md.getThumbnails().list[0].url ? '10' : '12'}}">
+                        <p class="text-justify" dd-text-collapse dd-text-collapse-max-length="350"
+                          dd-text-collapse-text="{{md.abstract | replace: '&lt;p&gt;':' '}}"></p>
+                      </div>
 
                       <div data-ng-if="md.getThumbnails().list[0].url">
                         <div class="gn-md-thumbnail col-md-2">
-                      <img class="gn-img-thumbnail" data-ng-src="{{md.getThumbnails().list[0].url}}"
+                          <img class="gn-img-thumbnail" data-ng-src="{{md.getThumbnails().list[0].url}}"
                             data-ng-if="md.getThumbnails().list[0].url" />
-                          </div>
-                          </div>
-                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div class="row">
-                        <div class="gn-md-info">
-                          <div><span>eCat ID:</span> {{ md.eCatId }} </div>
+                      <div class="gn-md-info">
+                        <div><span>eCat ID:</span> {{ md.eCatId }} </div>
 
                         <div data-ng-if="isIntranet && md.owner > 1">
                           <span>Owner: </span> {{ md.getOwnername() }}
                         </div>
-                    </div>
+                      </div>
                     </div>
                   </div>
                 </li>
               </ul>
+            </div>
+            <div class="row pull-right">
+              <div class="col-md-12">
+                <div data-gn-pagination="paginationInfo" data-hits-values="searchObj.hitsperpageValues"
+                  data-enable-hot-keys="" data-enable-events=""></div>
+              </div>
             </div>
           </div>
         </div>
@@ -133,9 +143,7 @@
 
     </div>
 
-    <div class="col-sm-2">
-        <div data-ng-include="'../../catalog/templates/user-menu.html'" />
-    </div>
+
   </div>
 
 </div>

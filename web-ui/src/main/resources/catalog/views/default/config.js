@@ -146,6 +146,9 @@
              * Sort by combo values configuration. The first one is the default.
              */
           searchSettings.sortbyValues = [{
+              sortBy: 'relevance',
+              sortOrder: ''
+            },{
   	        sortBy: 'publicationDateDesc',
   	        sortOrder: ''
             },{
@@ -155,18 +158,15 @@
   	        sortBy: 'eCatId',
   	        sortOrder: ''
             }, {
-              sortBy: 'relevance',
-              sortOrder: ''
-  	        }, {
   	        sortBy: 'titleAZ',
   	        sortOrder: 'reverse'
-  	        }, {
+            }/*, {
               sortBy: 'denominatorDesc',
               sortOrder: ''
             }, {
               sortBy: 'denominatorAsc',
               sortOrder: 'reverse'
-            }];
+            }*/];
 
           /* Default search by option */
           searchSettings.sortbyDefault = searchSettings.sortbyValues[0];

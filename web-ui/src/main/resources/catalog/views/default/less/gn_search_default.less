@@ -160,7 +160,7 @@ background-color: #A33F1F;
 /* ------ GA Branding theme - end ------ */
 
 .gn-sort-by {
-  float: right;
+  //float: right;
   .btn-group > button {
     border-color: #ccc !important;
     color: @ga-menu-backgorund-color !important;
@@ -660,6 +660,10 @@ html, body {
     }
 }
 
+.ecat-home-link{
+  position: absolute;
+  left: 10px;
+}
 @media (min-width : 769px) and (max-width : 1024px) { 
   
   .homepage-slide-color-black > .carousal-item {
@@ -869,22 +873,23 @@ button.searchbutton {
     width: 100% !important;
   }
 }
+
+#adv-1{
+  width: 90%;
+  background-color:#fff;
+  z-index:9999;
+  position: absolute;
+  margin-left: 5%;
+  //border-radius: 20px;
+  border: 2px solid @ga-color;
+  box-shadow: 4px 4px 20px @ga-color;   
+}
 .new-filter {
   font-size: 1rem;
   padding-left: 15px;
   transform-origin: 50% 50% 0px;
   width: 100%;
   display: inline-flex;
-  #adv-1{
-    width: 93%;
-    background-color:#fff;
-    z-index:9999;
-    position: absolute;
-    margin-left: 2%;
-    //border-radius: 20px;
-    border: 2px solid @ga-color;
-    box-shadow: 4px 4px 20px @ga-color;   
-  }
   p{
     font-size: 14px;
   }
@@ -909,8 +914,8 @@ button.searchbutton {
 }
 
 .sb_container_outer{
-  width: 68%;
-  margin-left: 22.5%;
+  width: 100%;
+  margin-left: 65px;
   margin-top: 5px;
   height: 36px;
   background-color: @ga-color-trans4;
@@ -998,8 +1003,10 @@ button.searchbutton {
 }
 
 .title-lg {
-  margin-top: 3rem;
-  font: 500 1.3em Helvetica, Arial, Verdana, sans-serif;
+  /*margin-top: 3rem;*/
+  font-size: 1.2em;
+  font-weight: 500;
+  padding-top:20px;
   text-transform: uppercase;
   a{
     color: @ga-color !important;
@@ -1007,6 +1014,11 @@ button.searchbutton {
   }
 }
 
+.user-info{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 .gn-logo-harvest {
   max-height: 69px;
   width:25px !important;
@@ -1051,7 +1063,7 @@ button.searchbutton {
 }
 
 .ecat-pagination{
-  float: right;
+  //float: right;
   margin-right: 20px;
   display: inline-flex;
   .pagination{
@@ -1195,7 +1207,6 @@ button.searchbutton {
   }
  
   .sb_container_outer {
-    width: 100% !important;
     margin-left: 0 !important;
   }
   .flipN, .flipP {
@@ -1256,10 +1267,6 @@ and (orientation : portrait) {
     width:0px;
   }
 
-  .sb_container_outer {
-    width: 100%;
-    margin-left: 9%;
-  }
   .flipN, .flipP {
     display: none;
   }
@@ -1288,7 +1295,7 @@ and (max-width : 1400px) {
   }
 
   ul.gn-resultview li.list-group-item {
-    padding-left: 5%;
+    //padding-left: 5%;
     width: 90%;
   }
   .result-selection {
@@ -1298,11 +1305,6 @@ and (max-width : 1400px) {
 
   .default-list-group {
     width: 88%;
-  }
-
-  .sb_container_outer {
-    width: 100%;
-    margin-left: 27%;
   }
 
 }
@@ -1316,7 +1318,7 @@ and (max-width : 1900px) {
   }
 
   ul.gn-resultview li.list-group-item {
-    padding-left: 5%;
+    //padding-left: 5%;
     width: 90%;
   }
   .result-selection {
@@ -1324,14 +1326,14 @@ and (max-width : 1900px) {
     margin-left: 4%;    
   }
 
-  .sb_container_outer {
-    width: 100%;
-    margin-left: 27%;
-  }
-
 }
 
-
+@media only screen and (max-width: 1200px) {
+  .page-sh{
+    padding-left: 65px;
+    padding-top: 10px;
+  }
+}
 /******************************************************************************/
 /************************** RecordView / Landing Page *************************/
 /******************************************************************************/
@@ -1498,6 +1500,7 @@ and (max-width : 1900px) {
 }
 
 .arr-right{
+  font-size: 11px;
   position: absolute;
   margin-top:15px;
   z-index: 9999;
@@ -1507,6 +1510,7 @@ and (max-width : 1900px) {
 }
 
 .arr-left{
+  font-size: 11px;
   position: absolute;
   margin-top:15px;
   a {

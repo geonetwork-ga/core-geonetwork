@@ -6,13 +6,13 @@
         <img class="gn-logo" data-ng-src="../../catalog/views/default/images/ga.header.logo.png" />
       </a>
       </div>
-      <div class="title-lg col-md-4">
-        <span class="title-lg">Data and Publications Search<span data-ng-if="user.isEditorOrMore()"> and Metadata Entry Tool</span></span>
-        <img data-ng-src="../../catalog/views/default/images/eCat_logo.jpg" data-ng-if="user.isEditorOrMore()"/>
-      </div>                  
-      <div class="col-md-3 col-lg-2 pull-right">
+      <div class="user-info">
         <div data-ng-include="'../../catalog/templates/userInfo.html'" />
       </div>
+      <div class="title-lg col-md-6">
+        <span>Data and Publications Search<span data-ng-if="user.isEditorOrMore()"> and Metadata Entry Tool</span></span>
+        <img data-ng-src="../../catalog/views/default/images/eCat_logo.jpg" data-ng-if="user.isEditorOrMore()"/>
+      </div>                        
 	  <div class="infoIcon">
         <a data-gn-active-tb-item="catalog.search#/about"><i class="fa fa-info-circle" style="font-size:25px;color:#45c2f0;float:right;"></i></a>
       </div>
