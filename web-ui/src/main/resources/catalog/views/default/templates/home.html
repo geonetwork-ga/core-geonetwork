@@ -1,15 +1,11 @@
 <!-- Carousel -->
 <div class="container">
-  <div class="home-container-outer" data-ng-search-form="" data-runSearch="true">
+  <div class="home-container-outer">
     <input type="search" class="form-control input-md" id="gn-any-field" data-ng-model="searchObj.params.any"
       data-ng-model-options="modelOptionsForm" 
       placeholder="Search..."
       data-ng-keyup="$event.keyCode == 13 && triggerSearch()" 
-      data-typeahead="address for address in getAnySuggestions($viewValue)" 
-      data-typeahead-loading="anyLoading"
-      class="form-control" 
-      data-typeahead-min-length="1" 
-      data-typeahead-focus-first="false" />
+      class="form-control" />
     <span>
       <button class="btn btn-lg searchbutton" type="button" data-ng-click="homeSearch()">
         <i class="fa fa-search"></i>
@@ -29,8 +25,8 @@
     <div class="main-text">
 
       <div class="col-md-12 text-center">
-        <div class="homepage-slide-color-black" data-ng-search-form="" data-runSearch="true">
-          <div class="hidden-xs hidden-sm"><h3 style="padding-top: 50px; font-size :28px"><b>Search Popular Catalogue Themes</b></h3></div>
+        <div class="homepage-slide-color-black">
+          <div class="hidden-xs hidden-sm"><h3 style="padding-top: 50px; font-size :28px"><b>Search Popular Catalog Themes</b></h3></div>
           <div class="col-xs-12 col-md-3 carousal-item">
             <h3><a href="" data-ng-click="searchHomePageItem('ga_publication')"><font color="#ffffff">Geoscience Australia Publications</font></a></h3>
             <p class="hidden-xs">This includes Geoscience Australia records, Professional opinions, Reports, Scientific papers, Promotional material and Presentations. </p>
