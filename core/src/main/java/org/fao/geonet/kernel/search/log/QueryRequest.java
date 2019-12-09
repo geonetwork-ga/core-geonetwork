@@ -26,6 +26,7 @@ package org.fao.geonet.kernel.search.log;
 import jeeves.server.context.ServiceContext;
 
 import org.fao.geonet.utils.Log;
+import org.apache.commons.lang.time.DateUtils;
 import org.fao.geonet.constants.Geonet;
 import org.fao.geonet.domain.ISODate;
 import org.fao.geonet.domain.statistic.LuceneQueryParamType;
@@ -38,6 +39,7 @@ import org.springframework.util.Assert;
 import javax.annotation.Nonnull;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -299,6 +301,7 @@ public class QueryRequest {
         request.setLuceneQuery(this.luceneQuery);
         request.setMetadataType(this.mdType.name());
         request.setRequestDate(new ISODate(this.date.getTime(), false));
+        request.setIndexRequestDate(new ISODate(DateUtils.round(this.date, Calendar.HOUR).getTime(), false));
         request.setService(this.service);
         request.setSimple(this.isSimpleQuery());
         request.setSortBy(this.sortBy);

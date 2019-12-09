@@ -70,7 +70,19 @@
       $scope.getAnySuggestions = function(val) {
         return suggestService.getAnySuggestions(val);
       };
+      $scope.isRecordIndexing = false;
+      checkIsIndexing();
+      function checkIsIndexing() {
+        // Check if indexing
+        $http.get('../api/site/indexing').then(function(res) {
+              $scope.isRecordIndexing = res.data;
+        });
+      }
 
+      $scope.checkIndexStatus = function(){
+        checkIsIndexing();       
+        $scope.$broadcast('resetSearch', $scope.searchObj.params);          
+      }
       $scope.keywordsOptions = {
         mode: 'remote',
         remote: {
