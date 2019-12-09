@@ -23,9 +23,13 @@
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:abstract" />
 			<field
+				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" />
+			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:purpose" />
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceMaintenance" />
 			<field xpath="/mdb:MD_Metadata/mdb:metadataScope" in="/mdb:MD_Metadata" />
 			<action type="add" name="metadataScope" or="metadataScope" in="/mdb:MD_Metadata">
 				<template>
@@ -75,39 +79,6 @@
 				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification" />
 		</section>
 	</tab>
-
-	<tab id="resourceMaintenance" mode="flat">
-		<section name=" ">
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceMaintenance" />
-		</section>
-	</tab>
-
-	<!-- <tab id="resourceSpatial" mode="flat">
-		<section name=" ">
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialResolution" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:spatialRepresentationType" />
-			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
-				in="/mdb:MD_Metadata" />
-		</section>
-	</tab> -->
-
-
-	<!-- constraints are not required for now.... -->
-	<!-- <tab id="constraints" mode="flat">
-		<section name="resourceConstraints">
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceConstraints"
-				or="resourceConstraints"
-				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification" />
-		</section>
-		<section name="metadataConstraints">
-			<field xpath="/mdb:MD_Metadata/mdb:metadataConstraints" or="metadataConstraints"
-				in="/mdb:MD_Metadata" />
-		</section>
-	</tab> -->
 
 	<tab id="contacts" mode="flat">
 		<section name=" ">
@@ -161,13 +132,6 @@
 					</snippet>
 				</template>
 			</action>
-		</section>
-	</tab>
-
-	<tab id="resourceLineageTab" mode="flat">
-		<section name=" ">
-			<field
-				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" /> 
 		</section>
 	</tab>
 
