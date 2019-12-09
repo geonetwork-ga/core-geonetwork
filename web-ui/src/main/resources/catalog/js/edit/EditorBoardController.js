@@ -53,7 +53,7 @@
         hitsperpageValues: gnSearchSettings.hitsperpageValues,
         selectionBucket: 'e101',
         params: {
-          sortBy: 'publicationDateDesc',
+          sortBy: 'changeDate',
           _isTemplate: 'y or n or s',
           resultType: $scope.facetsSummaryType,
           from: 1,

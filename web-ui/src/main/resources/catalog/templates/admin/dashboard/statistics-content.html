@@ -28,7 +28,9 @@
                 data-ng-search-form="" runSearch="true">
             <table class="table table-striped">
               <tr data-ng-repeat="md in searchResults.records">
+                <td>{{md.eCatId}}</td>
                 <td>{{md.title || md.defaultTitle}}</td>
+
                 <td class="text-right">{{md.popularity}}</td>
                 <td>
                   <a data-ng-href="../../?uuid={{md['geonet:info'].uuid}}">
@@ -37,6 +39,10 @@
                 </td>
               </tr>
             </table>
+            <button type="button" class="btn btn-small"
+                data-ng-click="csvExport([searchResults.records], $event)" data-translate=""
+        >csvExport
+        </button>
             <div data-gn-pagination="paginationInfo"></div>
           </form>
         </div>

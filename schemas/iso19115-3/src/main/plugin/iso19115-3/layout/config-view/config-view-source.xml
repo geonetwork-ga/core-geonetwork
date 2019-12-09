@@ -12,17 +12,31 @@
 		<section name=" ">
 			<!-- special template to render this field readonly - see layout-custom-fields.xsl -->
 			<field xpath="/mdb:MD_Metadata/mdb:alternativeMetadataReference" />
-			
 			<field name="PID" 
 			xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[1]/mcc:MD_Identifier/mcc:code" />
-						
-			<field name="DOI" 
-			xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:identifier[2]/mcc:MD_Identifier/mcc:code" />
-			
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:title" />
 			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:linkage" /> 
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:abstract" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:purpose" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status" />	
+			<field
+				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" />
+		</section>
+	</tab>
+
+		<tab id="resourceCitation" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:date"
+				or="date"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:citedResponsibleParty"
+				or="citedResponsibleParty"
+				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />		
 		</section>
 	</tab>
 
@@ -35,16 +49,8 @@
 		</section>
 	</tab>
 
-	<tab id="resourceMandatory" mode="flat">
+	<tab id="contacts" mode="flat">
 		<section name=" ">
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:abstract" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:resourceLineage/mrl:LI_Lineage/mrl:statement" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:date"
-				or="date"
-				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:pointOfContact"
 				or="pointOfContact"
@@ -54,23 +60,12 @@
 		</section>
 	</tab>
 
-	<tab id="resourceOptional" mode="flat">
+	<tab id="resourceExtents" mode="flat">
 		<section name=" ">
 			<field
 				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement" />
 						<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
 				in="/mdb:MD_Metadata" />
-		
-		
-		<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:purpose" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:status" />
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation/cit:citedResponsibleParty"
-				or="citedResponsibleParty"
-				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:citation/cit:CI_Citation" />
-		
 			<field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
 			<action type="add" name="verticalElement" or="verticalElement"
 				in="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent">
@@ -107,6 +102,13 @@
 				</template>
 			</action>
 			</section>
+	</tab>
+
+	<tab id="resourceFormat" mode="flat">
+		<section name=" ">
+			<field
+				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:resourceFormat/mrd:MD_Format/mrd:formatSpecificationCitation/cit:CI_Citation/cit:onlineResource/cit:CI_OnlineResource/cit:linkage" /> 
+		</section>
 	</tab>
 	
 	
