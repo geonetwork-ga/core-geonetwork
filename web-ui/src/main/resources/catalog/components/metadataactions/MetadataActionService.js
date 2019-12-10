@@ -51,10 +51,11 @@
     '$translate',
     '$q',
     '$http',
+	'$timeout',
     function($rootScope, $timeout, $location, gnHttp,
              gnMetadataManager, gnAlertService, gnSearchSettings,
              gnUtilityService, gnShareService, gnPopup, gnMdFormatter,
-             $translate, $q, $http) {
+             $translate, $q, $http, $timeout) {
 
       var windowName = 'geonetwork';
       var windowOption = '';

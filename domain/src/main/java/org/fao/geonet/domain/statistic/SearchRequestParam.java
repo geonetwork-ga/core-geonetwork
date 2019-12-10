@@ -35,9 +35,7 @@ import javax.persistence.*;
  */
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "Params",
-       indexes = { @Index(name = "idx_params_termfield", columnList = "termfield", unique = false),
-                   @Index(name = "idx_params_termtext", columnList = "termtext", unique = false) })
+@Table(name = "Params")
 @EntityListeners(SearchRequestParamEntityListenerManager.class)
 @SequenceGenerator(name = SearchRequestParam.ID_SEQ_NAME, initialValue = 100, allocationSize = 1)
 public class SearchRequestParam {

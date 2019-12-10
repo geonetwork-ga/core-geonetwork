@@ -199,33 +199,33 @@
 	<async-supported>true</async-supported>
   </filter>
 
-  <filter>
-    <filter-name>javamelody</filter-name>
-    <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-    <init-param>
-      <param-name>monitoring-path</param-name>
-      <param-value>/srv/eng/admin.console/performance</param-value>
-    </init-param>
-    <init-param>
-      <param-name>system-actions-enabled</param-name>
-      <param-value>false</param-value>
-    </init-param>
-    <init-param>
-      <param-name>displayed-counters</param-name>
-      <param-value>http,error</param-value>
-    </init-param>
-    <async-supported>true</async-supported>
-  </filter>
-  <filter-mapping>
-    <filter-name>javamelody</filter-name>
-    <url-pattern>/srv/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>ASYNC</dispatcher>
-  </filter-mapping>
-  <listener>
-    <listener-class>net.bull.javamelody.SessionListener</listener-class>
+  <filter>	
+    <filter-name>javamelody</filter-name>	
+    <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>	
+    <init-param>	
+      <param-name>monitoring-path</param-name>	
+      <param-value>/srv/eng/admin.console/performance</param-value>	
+    </init-param>	
+    <init-param>	
+      <param-name>system-actions-enabled</param-name>	
+      <param-value>false</param-value>	
+    </init-param>	
+    <init-param>	
+      <param-name>displayed-counters</param-name>	
+      <param-value>http,error</param-value>	
+    </init-param>	
+    <async-supported>true</async-supported>	
+  </filter>	
+  <filter-mapping>	
+    <filter-name>javamelody</filter-name>	
+    <url-pattern>/srv/*</url-pattern>	
+    <dispatcher>REQUEST</dispatcher>	
+    <dispatcher>ASYNC</dispatcher>	
+  </filter-mapping>	
+  <listener>	
+    <listener-class>net.bull.javamelody.SessionListener</listener-class>	
   </listener>
-
+  
   <filter-mapping>
     <filter-name>MetricsRegistryInitializerFilter</filter-name>
     <url-pattern>/*</url-pattern>

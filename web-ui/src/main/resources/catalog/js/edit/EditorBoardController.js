@@ -46,6 +46,7 @@
     function($scope, $location, $rootScope, $translate, $q,
         gnSearchSettings, gnMetadataActions, gnGlobalSettings) {
       $scope.onlyMyRecord = false;
+      $scope.showWidget = true;
       $scope.modelOptions = angular.copy(gnGlobalSettings.modelOptions);
       $scope.defaultSearchObj = {
         permalink: false,

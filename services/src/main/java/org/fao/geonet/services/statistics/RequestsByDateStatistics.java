@@ -22,9 +22,9 @@
 //==============================================================================
 package org.fao.geonet.services.statistics;
 
-import java.nio.file.Path;
-import java.util.Hashtable;
-import java.util.List;
+import jeeves.constants.Jeeves;
+import jeeves.server.ServiceConfig;
+import jeeves.server.context.ServiceContext;
 
 import org.fao.geonet.Util;
 import org.fao.geonet.domain.ISODate;
@@ -36,9 +36,9 @@ import org.fao.geonet.repository.statistic.SearchRequestRepository;
 import org.fao.geonet.services.NotInReadOnlyModeService;
 import org.jdom.Element;
 
-import jeeves.constants.Jeeves;
-import jeeves.server.ServiceConfig;
-import jeeves.server.context.ServiceContext;
+import java.nio.file.Path;
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  * Service to get the db-stored requests information group by a date (year, month, day)
@@ -85,21 +85,9 @@ public class RequestsByDateStatistics extends NotInReadOnlyModeService {
         Element elResp = new Element(Jeeves.Elem.RESPONSE);
         final SearchRequestRepository requestRepository = context.getBean(SearchRequestRepository.class);
 
-        final ISODate oldestRequestDate = requestRepository.getOldestRequestDate();
-        final ISODate mostRecentRequestDate = requestRepository.getMostRecentRequestDate();
-
         try {
-
-            if(dateFromParam != null && !dateFromParam.equalsIgnoreCase("null")) {
-                dateFrom = new ISODate(dateFromParam);
-            } else {
-                dateFrom = oldestRequestDate;
-            }
-            if(dateToParam != null && !dateToParam.equalsIgnoreCase("null")) {
-                dateTo = new ISODate(dateToParam);
-            } else {
-                dateTo = mostRecentRequestDate;
-            }
+            dateFrom = new ISODate(dateFromParam);
+            dateTo = new ISODate(dateToParam);
 
             // TODO : if ByServiceType
             if (byType) {
@@ -121,25 +109,27 @@ public class RequestsByDateStatistics extends NotInReadOnlyModeService {
             elResp.setAttribute("error", e.getMessage());
         }
 
+        final ISODate oldestRequestDate = requestRepository.getOldestRequestDate();
         elResp.addContent(new Element("dateMin").setText(oldestRequestDate.getDateAndTime()));
+        final ISODate mostRecentRequestDate = requestRepository.getMostRecentRequestDate();
         elResp.addContent(new Element("dateMax").setText(mostRecentRequestDate.getDateAndTime()));
 
         return elResp;
     }
 
     public Element buildQuery(SearchRequestRepository requestRepository, String service, ISODate dateFrom,
-            ISODate dateTo, String graphicType) {
+                              ISODate dateTo, String graphicType) {
 
         DateInterval dateInterval = this.queryFragments.get(graphicType);
         final List<Pair<DateInterval, Integer>> requestDateToRequestCountBetween = requestRepository
-                .getRequestDateToRequestCountBetween(dateInterval, dateFrom, dateTo, SearchRequestSpecs.hasService(service));
+            .getRequestDateToRequestCountBetween(dateInterval, dateFrom, dateTo, SearchRequestSpecs.hasService(service));
 
         Element results = new Element("requests");
         for (Pair<DateInterval, Integer> entry : requestDateToRequestCountBetween) {
             results.addContent(new Element("record")
-                    .addContent(new Element("number").setText("" + entry.two()))
-                    .addContent(new Element("reqdate").setText(entry.one().getDateString()))
-                    );
+                .addContent(new Element("number").setText("" + entry.two()))
+                .addContent(new Element("reqdate").setText(entry.one().getDateString()))
+            );
         }
 
         return results;

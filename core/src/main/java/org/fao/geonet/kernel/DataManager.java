@@ -2722,6 +2722,18 @@ public class DataManager implements ApplicationEventPublisherAware {
     }
 
     /**
+     * 
+     * Set status to draft to enable workflow while importing records.
+     */
+    public void activateWorkflow(ServiceContext context, String newId) throws Exception {
+       
+    	setStatus(context, Integer.valueOf(newId),
+                Integer.valueOf(Params.Status.DRAFT),
+                new ISODate(), String.format("Workflow automatically enabled for record while importing"));
+        
+    }
+    
+    /**
      * If groupOwner match regular expression defined in setting metadata/workflow/draftWhenInGroup,
      * then set status to draft to enable workflow.
      */
