@@ -161,7 +161,7 @@ public class AccessManager {
             hs.add(ReservedGroup.intranet.getId());
 
         // get other groups
-        if (usrSess.isAuthenticated()) {
+        if (usrSess!= null && usrSess.isAuthenticated()) {
             // add (-1) GUEST group
             hs.add(ReservedGroup.guest.getId());
 

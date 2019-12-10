@@ -39,7 +39,7 @@
       <li><a href="" ng-click="viewSelectionOnly()">
         <i class="fa fa-check"></i>&nbsp;<span translate>viewSelectionOnly</span></a></li>
       <li class="divider" data-ng-if="user.isConnected()"></li>
-      <li ng-if="user.isEditorOrMore()">
+      <li ng-if="user.isUserAdminOrMore()">
         <a href="" ng-click="mdService.openPrivilegesBatchPanel(getCatScope(), searchResults.selectionBucket)">
         <i class="fa fa-key"></i>&nbsp;<span translate>updatePrivileges</span></a></li>
       <li ng-if="v.service === 'catalog.edit' && user.isEditorOrMore()">
@@ -57,15 +57,15 @@
       <li ng-if="user.isUserAdminOrMore()">
         <a href="" data-ng-click="mdService.openTransferOwnership(undefined, searchResults.selectionBucket, getCatScope())">
           <i class="fa fa-user"></i>&nbsp;<span translate>transferOwnership</span></a></li>
-      <li class="divider" data-ng-if="user.isConnected()"></li>
-      <li ng-if="user.isEditorOrMore()">
+      <li class="divider" data-ng-if="showWidget || user.isUserAdminOrMore()"></li>
+      <li ng-if="showWidget || user.isUserAdminOrMore()">
         <a href="" ng-click="mdService.openCategoriesBatchPanel(searchResults.selectionBucket, getCatScope())">
           <i class="fa fa-tags"></i>&nbsp;<span translate>updateCategories</span></a></li>
-      <li ng-if="user.isEditorOrMore()">
+      <li ng-if="showWidget || user.isUserAdminOrMore()">
         <a href="" ng-click="mdService.validateMd(undefined, searchResults.selectionBucket)"
            data-gn-confirm-click="{{'validateSelectedRecordConfirm' | translate:searchResults}}">
           <i class="fa fa-check"></i>&nbsp;<span translate>validate</span></a></li>
-      <li ng-if="user.isEditorOrMore()">
+      <li ng-if="showWidget || user.isUserAdminOrMore()">
         <a href="" ng-click="mdService.deleteMd(undefined, searchResults.selectionBucket)"
            data-gn-confirm-click="{{'deleteSelectedRecordConfirm' | translate:searchResults}}">
           <i class="fa fa-times"></i>&nbsp;<span translate>delete</span></a></li>
