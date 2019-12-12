@@ -46,16 +46,20 @@
       $scope.termsForSearchService = 'q';
       $scope.currentField = 'any';
 
+      var date = new Date();
+      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
       // The first search date
-      $scope.dateMin = null;
+      $scope.dateMin = firstDay;
       // The last search date
-      $scope.dateMax = null;
+      $scope.dateMax = lastDay;
 
       // The beginning of the temporal range
-      $scope.dateFrom = null;
+      $scope.dateFrom = firstDay;
       // The end of the temporal range
-      $scope.dateTo = null;
-      $scope.graphicType = 'MONTH';
+      $scope.dateTo = lastDay;
+      $scope.graphicType = 'DAY';
 
 
 
@@ -78,16 +82,19 @@
               // TODO
             });
 
-        $http.get('statistics-search-ip?_content_type=json')
+        /*$http.get('statistics-search-ip?_content_type=json')
             .success(function(data) {
               $scope.statistics.search.ip = data;
             }).error(function(data) {
               // TODO
-            });
+            });*/
       };
 
       function getSearchStatByDate() {
         var byType = true;
+
+        var WARNINGSIZE = 5000;
+        var ERRORSIZE = 100000;
 
         // Search by date statistics
         $http.get($scope.url +
@@ -113,6 +120,14 @@
           }
 
           if (!data.requests) {
+            return;
+          }
+
+          var jsonSize = JSON.stringify(data).length;
+          if (jsonSize > WARNINGSIZE && jsonSize < ERRORSIZE) {
+            console.warn('Result is big, can take a while to draw the graph. SIZE=' + jsonSize);
+          } else if (jsonSize > ERRORSIZE) {
+            console.error('Amount of data is too big, cannot draw the graph. SIZE=' + jsonSize);
             return;
           }
 

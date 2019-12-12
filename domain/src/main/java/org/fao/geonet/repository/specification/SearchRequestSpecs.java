@@ -50,7 +50,7 @@ public final class SearchRequestSpecs {
         return new Specification<SearchRequest>() {
             @Override
             public Predicate toPredicate(Root<SearchRequest> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                final Path<ISODate> requestDatePath = root.get(SearchRequest_.requestDate);
+                final Path<ISODate> requestDatePath = root.get(SearchRequest_.indexRequestDate);
                 final Predicate greaterThanToDate = cb.greaterThanOrEqualTo(requestDatePath, from);
                 return greaterThanToDate;
             }
@@ -67,7 +67,7 @@ public final class SearchRequestSpecs {
         return new Specification<SearchRequest>() {
             @Override
             public Predicate toPredicate(Root<SearchRequest> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                final Path<ISODate> requestDatePath = root.get(SearchRequest_.requestDate);
+                final Path<ISODate> requestDatePath = root.get(SearchRequest_.indexRequestDate);
                 final Predicate lessThanToDate = cb.lessThanOrEqualTo(requestDatePath, to);
                 return lessThanToDate;
             }

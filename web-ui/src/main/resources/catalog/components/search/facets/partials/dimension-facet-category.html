@@ -6,6 +6,7 @@
             data-ng-checked="isInFilter(c)"
             data-ng-click="filter(c, $event)"/>&nbsp;
             <span class="fa gn-icon-{{c['@value']}}"></span>&nbsp;<span class="gn-facet-label" data-ng-class="" data-ng-class="{'gn-facet-active': isSelected}">{{(c['@label'] || c['@value']) | characters:25}}</span>&nbsp;
+            <span data-ng-if="isSelected" class="pull-right" style="padding-right: 5px"><i class="fa fa-times"></i></span>
             <!--<span class="badge badge-secondary badge-pill">({{c['@count']}})</span> -->
     </label>
     </li>

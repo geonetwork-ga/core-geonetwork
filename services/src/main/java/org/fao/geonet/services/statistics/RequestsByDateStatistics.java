@@ -22,9 +22,9 @@
 //==============================================================================
 package org.fao.geonet.services.statistics;
 
-import jeeves.constants.Jeeves;
-import jeeves.server.ServiceConfig;
-import jeeves.server.context.ServiceContext;
+import java.nio.file.Path;
+import java.util.Hashtable;
+import java.util.List;
 
 import org.fao.geonet.Util;
 import org.fao.geonet.domain.ISODate;
@@ -36,9 +36,9 @@ import org.fao.geonet.repository.statistic.SearchRequestRepository;
 import org.fao.geonet.services.NotInReadOnlyModeService;
 import org.jdom.Element;
 
-import java.nio.file.Path;
-import java.util.Hashtable;
-import java.util.List;
+import jeeves.constants.Jeeves;
+import jeeves.server.ServiceConfig;
+import jeeves.server.context.ServiceContext;
 
 /**
  * Service to get the db-stored requests information group by a date (year, month, day)
@@ -85,9 +85,21 @@ public class RequestsByDateStatistics extends NotInReadOnlyModeService {
         Element elResp = new Element(Jeeves.Elem.RESPONSE);
         final SearchRequestRepository requestRepository = context.getBean(SearchRequestRepository.class);
 
+        final ISODate oldestRequestDate = requestRepository.getOldestRequestDate();
+        final ISODate mostRecentRequestDate = requestRepository.getMostRecentRequestDate();
+
         try {
-            dateFrom = new ISODate(dateFromParam);
-            dateTo = new ISODate(dateToParam);
+
+            if(dateFromParam != null && !dateFromParam.equalsIgnoreCase("null")) {
+                dateFrom = new ISODate(dateFromParam);
+            } else {
+                dateFrom = oldestRequestDate;
+            }
+            if(dateToParam != null && !dateToParam.equalsIgnoreCase("null")) {
+                dateTo = new ISODate(dateToParam);
+            } else {
+                dateTo = mostRecentRequestDate;
+            }
 
             // TODO : if ByServiceType
             if (byType) {
@@ -109,9 +121,7 @@ public class RequestsByDateStatistics extends NotInReadOnlyModeService {
             elResp.setAttribute("error", e.getMessage());
         }
 
-        final ISODate oldestRequestDate = requestRepository.getOldestRequestDate();
         elResp.addContent(new Element("dateMin").setText(oldestRequestDate.getDateAndTime()));
-        final ISODate mostRecentRequestDate = requestRepository.getMostRecentRequestDate();
         elResp.addContent(new Element("dateMax").setText(mostRecentRequestDate.getDateAndTime()));
 
         return elResp;
