@@ -36,10 +36,15 @@
           <i class="fa gn-icon-{{mdView.current.record.type[0]}}" />
           {{mdView.current.record.title || mdView.current.record.defaultTitle}}
         </h1>
-        <ul>
+        <ul style="line-height: 1.9">
           <li data-ng-repeat="auth in getAsArray(mdView.current.record.author) track by $index" class="tt-cursor"
             title="{{'clickToFilterOn' | translate}} {{auth}}">
             <a href="" data-ng-click="search({'author': auth})"><i data-ng-if="$index > 0"> | </i>{{auth}}</a>
+          </li>
+          <br>
+          <li data-ng-if="mdView.current.record.coAuthor" data-ng-repeat="auth in getAsArray(mdView.current.record.coAuthor) track by $index" class="tt-cursor"
+            title="{{'clickToFilterOn' | translate}} {{auth}}">
+            <a href="" data-ng-click="search({'author': auth})"><i data-ng-if="$index > 0"> | </i>{{auth}}</a><span title="Co-Author">*</span>
           </li>
         </ul>
         <div class="subheader">Abstract</div>

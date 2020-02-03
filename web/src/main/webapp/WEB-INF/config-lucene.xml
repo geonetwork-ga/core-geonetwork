@@ -143,6 +143,7 @@
       <field name="keywordGroup" tagName="keywordGroup"/>
       <field name="parentUuid" tagName="parentId"/>
       <field name="type" tagName="type"/>
+      <field name="mdScopeId" tagName="mdScopeId"/>
       <field name="identifier" tagName="identifier"/>
       <field name="image" tagName="image"/>
       <field name="link" tagName="link"/>

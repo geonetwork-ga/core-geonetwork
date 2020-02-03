@@ -98,10 +98,10 @@ public class SearchRequestRepositoryImpl implements SearchRequestRepositoryCusto
 
         final Root<SearchRequest> requestRoot = cbQuery.from(SearchRequest.class);
 
-        final Path<ISODate> requestDate = requestRoot.get(SearchRequest_.requestDate);
-        final Expression<String> requestDateByType = cb.substring(requestDate.get(ISODate_.dateAndTime), 1, dateInterval.getSubstringEnd());
+        final Path<ISODate> indexRequestDate = requestRoot.get(SearchRequest_.indexRequestDate);
+        final Expression<String> requestDateByType = cb.substring(indexRequestDate.get(ISODate_.dateAndTime), 1, dateInterval.getSubstringEnd());
 
-        Predicate whereClause = cb.and(cb.lessThanOrEqualTo(requestDate, to), cb.greaterThanOrEqualTo(requestDate, from));
+        Predicate whereClause = cb.and(cb.lessThanOrEqualTo(indexRequestDate, to), cb.greaterThanOrEqualTo(indexRequestDate, from));
         if (spec != null) {
             whereClause = cb.and(whereClause, spec.toPredicate(requestRoot, cbQuery, cb));
         }

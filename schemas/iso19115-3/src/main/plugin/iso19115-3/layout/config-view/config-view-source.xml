@@ -62,9 +62,7 @@
 
 	<tab id="resourceExtents" mode="flat">
 		<section name=" ">
-			<field
-				xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent/gex:EX_Extent/gex:temporalElement" />
-						<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
+			<field xpath="/mdb:MD_Metadata/mdb:referenceSystemInfo" or="referenceSystemInfo"
 				in="/mdb:MD_Metadata" />
 			<field xpath="/mdb:MD_Metadata/mdb:identificationInfo/mri:MD_DataIdentification/mri:extent" />
 			<action type="add" name="verticalElement" or="verticalElement"

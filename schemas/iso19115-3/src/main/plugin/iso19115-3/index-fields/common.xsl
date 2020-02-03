@@ -260,6 +260,11 @@
 		   <Field name="legalConstraints" string="{string(mco:otherConstraints/gco:CharacterString)}" store="true" index="true"/>
 	</xsl:for-each>
 
+	<!-- Metadata scope id -->
+	<xsl:for-each select="$metadata/mdb:metadataScope/mdb:MD_MetadataScope/@id">
+    	<Field name="mdScopeId" string="{string(.)}" store="true" index="true"/>
+  	</xsl:for-each>
+  
  	<!-- Martins additions start -->
 	
 	
