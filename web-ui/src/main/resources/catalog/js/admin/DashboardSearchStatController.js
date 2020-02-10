@@ -46,20 +46,16 @@
       $scope.termsForSearchService = 'q';
       $scope.currentField = 'any';
 
-      var date = new Date();
-      var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-      var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
       // The first search date
-      $scope.dateMin = firstDay;
+      $scope.dateMin = null;
       // The last search date
-      $scope.dateMax = lastDay;
+      $scope.dateMax = null;
 
       // The beginning of the temporal range
-      $scope.dateFrom = firstDay;
+      $scope.dateFrom = null;
       // The end of the temporal range
-      $scope.dateTo = lastDay;
-      $scope.graphicType = 'DAY';
+      $scope.dateTo = null;
+      $scope.graphicType = 'MONTH';
 
 
 
@@ -93,9 +89,6 @@
       function getSearchStatByDate() {
         var byType = true;
 
-        var WARNINGSIZE = 5000;
-        var ERRORSIZE = 100000;
-
         // Search by date statistics
         $http.get($scope.url +
                   'statistics-search-by-date?_content_type=json&' +
@@ -120,14 +113,6 @@
           }
 
           if (!data.requests) {
-            return;
-          }
-
-          var jsonSize = JSON.stringify(data).length;
-          if (jsonSize > WARNINGSIZE && jsonSize < ERRORSIZE) {
-            console.warn('Result is big, can take a while to draw the graph. SIZE=' + jsonSize);
-          } else if (jsonSize > ERRORSIZE) {
-            console.error('Amount of data is too big, cannot draw the graph. SIZE=' + jsonSize);
             return;
           }
 
