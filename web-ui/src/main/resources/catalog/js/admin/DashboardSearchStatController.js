@@ -78,12 +78,12 @@
               // TODO
             });
 
-        /*$http.get('statistics-search-ip?_content_type=json')
+        $http.get('statistics-search-ip?_content_type=json')
             .success(function(data) {
               $scope.statistics.search.ip = data;
             }).error(function(data) {
               // TODO
-            });*/
+            });
       };
 
       function getSearchStatByDate() {
